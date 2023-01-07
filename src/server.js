@@ -8,7 +8,9 @@ const initWebRoutes = require("./routes/web")
 // import initWebRoutes from "./routes/web";
 
 
-import bodyParser from "body-parser";
+// import bodyParser from "body-parser";
+const bodyParser = require("body-parser")
+
 // const Parse = require('parse/node')
 // // // const express = require('express')
 // const APP_ID="57QeEwR8Jc0rC5Fg6yXyTpCGzpn8zijeHSHqHBNQ"
