@@ -1,0 +1,33 @@
+{
+  "name": "jisr-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node src/server.js",
+    "dev": "nodemon --exec npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zakhoudache/Jisr-Messenger-App.git"
+  },
+  "author": "Houdache zakaria",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zakhoudache/Jisr-Messenger-App/issues"
+  },
+  "homepage": "https://github.com/zakhoudache/Jisr-Messenger-App#readme",
+  "dependencies": {
+    "@babel/node": "^7.20.7",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "parse": "^3.5.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2"
+  }
+}

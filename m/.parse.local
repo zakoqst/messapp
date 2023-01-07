@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "_default": {
+      "link": "jisr2"
+    },
+    "jisr2": {
+      "applicationId": "57QeEwR8Jc0rC5Fg6yXyTpCGzpn8zijeHSHqHBNQ"
+    }
+  }
+}
