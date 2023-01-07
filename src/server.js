@@ -1,7 +1,10 @@
-require("dotenv").config();
-import express from "express";
-import configViewEngine from "./config/viewEngine.mjs";
-import initWebRoutes from "./routes/web.mjs";
+const dotenv =require("dotenv").config();
+const express =require("express")
+// import express from "express";
+// import configViewEngine from "./config/viewEngine";
+const configViewEngine = require("./config/viewEngine")
+const initWebRoutes = require("./routes/web")
+// import initWebRoutes from "./routes/web";
 
 
 // import bodyParser from "body-parser";
