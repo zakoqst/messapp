@@ -1,6 +1,6 @@
-const { config } = require("dotenv");
-
-require("dotenv").config();
+// const { config } = require("dotenv");
+const dotenv =require("dotenv").config();
+// require("dotenv").config();
 // import homepageService from "../services/homepageService";
 // import chatbotService from "../services/chatbotService";
 // import templateMessage from "../services/templateMessage";
