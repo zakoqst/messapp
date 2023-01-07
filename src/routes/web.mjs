@@ -1,5 +1,5 @@
 import express from "express";
-import homepageController from "../controllers/homepageController.mjs";
+import homepageController from "../controllers/homepageController";
 
 let router = express.Router();
 
