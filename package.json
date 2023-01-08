@@ -3,8 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  
-  
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec babel-node src/server.js",
@@ -22,6 +20,7 @@
   "homepage": "https://github.com/zakhoudache/Jisr-Messenger-App#readme",
   "dependencies": {
     "@babel/node": "^7.20.7",
+    "body-parser": "^1.20.1",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "esm": "^3.2.25",
