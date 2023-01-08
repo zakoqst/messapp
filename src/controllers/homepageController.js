@@ -1,11 +1,13 @@
 // const { config } = require("dotenv");
 const dotenv =require("dotenv").config();
+const request = require("request");
 // require("dotenv").config();
 // import homepageService from "../services/homepageService";
 // import chatbotService from "../services/chatbotService";
 // import templateMessage from "../services/templateMessage";
 
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 console.log(MY_VERIFY_TOKEN)
 
 let getHomePage = (req, res) => {
@@ -89,22 +91,26 @@ let postWebhook = (req, res) => {
     }
 };
 
+
+
+
+
 let handleMessage = async (sender_psid, received_message) => {
     //check the incoming message is a quick reply?
-    if (received_message && received_message.quick_reply && received_message.quick_reply.payload) {
-        let payload = received_message.quick_reply.payload;
-        if (payload === "CATEGORIES") {
-            await chatbotService.sendCategories(sender_psid);
+    // if (received_message && received_message.quick_reply && received_message.quick_reply.payload) {
+    //     let payload = received_message.quick_reply.payload;
+    //     if (payload === "CATEGORIES") {
+    //         await chatbotService.sendCategories(sender_psid);
 
-        } else if (payload === "LOOKUP_ORDER") {
-            await chatbotService.sendLookupOrder(sender_psid);
+    //     } else if (payload === "LOOKUP_ORDER") {
+    //         await chatbotService.sendLookupOrder(sender_psid);
 
-        } else if (payload === "TALK_AGENT") {
-            await chatbotService.requestTalkToAgent(sender_psid);
-        }
+    //     } else if (payload === "TALK_AGENT") {
+    //         await chatbotService.requestTalkToAgent(sender_psid);
+    //     }
 
-        return;
-    }
+    //     return;
+    // }
 
 
     let response;
@@ -148,6 +154,47 @@ let handleMessage = async (sender_psid, received_message) => {
     // Sends the response message
     await chatbotService.sendMessage(sender_psid, response);
 };
+
+let handlePostback= (sender_psid, received_postback)=> {
+    let response;
+    
+    // Get the payload for the postback
+    let payload = received_postback.payload;
+  
+    // Set the response based on the postback payload
+    if (payload === 'yes') {
+      response = { "text": "Thanks!" }
+    } else if (payload === 'no') {
+      response = { "text": "Oops, try sending another image." }
+    }
+    // Send the message to acknowledge the postback
+    callSendAPI(sender_psid, response);
+  };
+
+  let callSendAPI=(sender_psid, response) => {
+
+            // Construct the message body
+        let request_body = {
+        "recipient": {
+            "id": sender_psid
+        },
+        "message": response
+        }
+
+        // Send the HTTP request to the Messenger Platform
+        request({
+        "uri": "https://graph.facebook.com/v7.0/me/messages",
+        "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+        }, (err, res, body) => {
+        if (!err) {
+            console.log('message sent!')
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+        }); 
+}
 
 module.exports = {
     getHomePage: getHomePage,
