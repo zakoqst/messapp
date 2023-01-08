@@ -1,6 +1,7 @@
 // const { config } = require("dotenv");
 const dotenv =require("dotenv").config();
 const request = require("request");
+const homepageService = require("../services/homepageService");
 // require("dotenv").config();
 // import homepageService from "../services/homepageService";
 // import chatbotService from "../services/chatbotService";
@@ -171,7 +172,7 @@ let handlePostback= (sender_psid, received_postback)=> {
     callSendAPI(sender_psid, response);
   };
 
-  
+
 
 let callSendAPI=(sender_psid, response) => {
 
@@ -198,11 +199,20 @@ let callSendAPI=(sender_psid, response) => {
     }); 
 }
 
+let handleSetupProfile = async(req,res)=>{
+    try {
+       await homepageService.handleSetupProfileAPI();
+        return res.redirect("/");
+    } catch (e) {
+        console.log(e);
+    }
+};
+
 module.exports = {
     getHomePage: getHomePage,
     getWebhook: getWebhook,
     postWebhook: postWebhook,
-    // handleSetupProfile: handleSetupProfile,
+    handleSetupProfile: handleSetupProfile,
     // getSetupProfilePage: getSetupProfilePage,
     // getInfoOrderPage: getInfoOrderPage,
     // setInfoOrder: setInfoOrder
