@@ -9,10 +9,10 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 let handleSetupProfileAPI = (sender_psid) => {
     return new Promise((resolve, reject) => {
         try {
-            let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?access_token=${PAGE_ACCESS_TOKEN}`
+            // let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?access_token=${PAGE_ACCESS_TOKEN}`
             // let url = `https://graph.facebook.com/v6.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`;
-            // let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?psid=${sender_psid}&access_token=${PAGE_ACCESS_TOKEN}`
-           
+            let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?psid=${sender_psid}&access_token=${PAGE_ACCESS_TOKEN}`
+            console.log(sender_psid);
             let request_body = {
                 "get_started": {
                     "payload": "GET_STARTED"
@@ -47,7 +47,7 @@ let handleSetupProfileAPI = (sender_psid) => {
                 
 
                     "whitelisted_domains" : [
-                    "https://tech-shop-haryphamdev.herokuapp.com/"
+                    "https://jisr-messenger-app.onrender.com/"
                 ]
                 
             
