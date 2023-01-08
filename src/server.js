@@ -24,7 +24,7 @@ const bodyParser = require("body-parser")
 // const appartementQuery = new Parse.Query(Appartement);
 
 // // // const appp = express();
-let app = express();
+const app = express();
 // app.get('/',(req,res)=>{
 
 //     appartementQuery.find()

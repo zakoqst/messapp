@@ -209,7 +209,7 @@ let handleSetupProfile = async(req,res)=>{
 };
 
 let getSetupProfilePage = (req, res) => {
-    return res.render("profile.ejs");
+    return res.render("homepage.ejs");
 };
 
 

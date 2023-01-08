@@ -23,3 +23,7 @@ git init
 git add .
 git commit -m "init project"
 git push origin master
+
+privacy policy=https://www.freeprivacypolicy.com/live/07f52fa4-80f1-45ff-aff1-3b251c55d282
+
+https://graph.facebook.com/v15.0/me/messenger_profile?access_token=<PAGE_ACCESS_TOKEN>
