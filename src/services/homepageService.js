@@ -6,7 +6,7 @@ const request = require("request");
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-let handleSetupProfileAPI = () => {
+let handleSetupProfileAPI = (sender_psid) => {
     return new Promise((resolve, reject) => {
         try {
             let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?access_token=${PAGE_ACCESS_TOKEN}`
