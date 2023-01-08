@@ -208,12 +208,17 @@ let handleSetupProfile = async(req,res)=>{
     }
 };
 
+let getSetupProfilePage = (req, res) => {
+    return res.render("profile.ejs");
+};
+
+
 module.exports = {
     getHomePage: getHomePage,
     getWebhook: getWebhook,
     postWebhook: postWebhook,
     handleSetupProfile: handleSetupProfile,
-    // getSetupProfilePage: getSetupProfilePage,
+    getSetupProfilePage: getSetupProfilePage,
     // getInfoOrderPage: getInfoOrderPage,
     // setInfoOrder: setInfoOrder
 
