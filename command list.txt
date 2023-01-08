@@ -18,3 +18,8 @@ JAVASCRIPT KEY = WqGAtQtmSxDfelKaCn5T02XCPDjmd9Zpf3PFhKQc
 npm install parse
 
 git init
+
+
+git add .
+git commit -m "init project"
+git push origin master
