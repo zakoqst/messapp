@@ -92,26 +92,22 @@ let postWebhook = (req, res) => {
     }
 };
 
-
-
-
-
 let handleMessage = async (sender_psid, received_message) => {
     //check the incoming message is a quick reply?
-    // if (received_message && received_message.quick_reply && received_message.quick_reply.payload) {
-    //     let payload = received_message.quick_reply.payload;
-    //     if (payload === "CATEGORIES") {
-    //         await chatbotService.sendCategories(sender_psid);
+    if (received_message && received_message.quick_reply && received_message.quick_reply.payload) {
+        let payload = received_message.quick_reply.payload;
+        if (payload === "CATEGORIES") {
+            await chatbotService.sendCategories(sender_psid);
 
-    //     } else if (payload === "LOOKUP_ORDER") {
-    //         await chatbotService.sendLookupOrder(sender_psid);
+        } else if (payload === "LOOKUP_ORDER") {
+            await chatbotService.sendLookupOrder(sender_psid);
 
-    //     } else if (payload === "TALK_AGENT") {
-    //         await chatbotService.requestTalkToAgent(sender_psid);
-    //     }
+        } else if (payload === "TALK_AGENT") {
+            await chatbotService.requestTalkToAgent(sender_psid);
+        }
 
-    //     return;
-    // }
+        return;
+    }
 
 
     let response;
@@ -179,7 +175,7 @@ let handlePostback= async (sender_psid, received_postback)=> {
 
     }
 
-    // await chatbotService.sendMessage(sender_psid,response);
+    await chatbotService.sendMessage(sender_psid,response);
   
   };
 
