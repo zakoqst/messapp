@@ -167,7 +167,8 @@ let handlePostback= async (sender_psid, received_postback)=> {
             response = {"text":"ggggggg"};
             break;
         case "GET_STARTED":
-            await chatbotService.sendMessageWelcomeNewUser(sender_psid);
+            let username = await homepageService.getFacebookUsername(sender_psid);
+            response ={"text": `dfdssss, ${username}`}
            
             break;
         default:
@@ -175,9 +176,40 @@ let handlePostback= async (sender_psid, received_postback)=> {
 
     }
 
-    await chatbotService.sendMessage(sender_psid,response);
+    await callSendAPI(sender_psid,response);
+    await callSendAPI(sender_psid,response);
   
   };
+
+let callSendAPI=async(sender_psid, response) => {
+
+    await homepageService.markMessageRead(sender_psid);
+    await homepageService.sendTypingOn(sender_psid);
+
+        // Construct the message body
+    let request_body = {
+        "recipient": {
+            "id": sender_psid
+        },
+        "message": response
+    }
+
+    // Send the HTTP request to the Messenger Platform
+    request({
+        "uri": "https://graph.facebook.com/v6.0/me/messages",
+        "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+        }, (err, res, body) => {
+        if (!err) {
+            console.log('message sent!')
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+    }); 
+}
+
+
 
 let handleSetupProfile = async(req,res)=>{
     try {
