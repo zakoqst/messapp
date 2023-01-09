@@ -30,7 +30,7 @@ let handleSetupProfileAPI = (sender_psid) => {
                         "call_to_actions": [
                             {
                                 "type": "postback",
-                                "title": "Talk to an agent",
+                                "title": "تحدث مع عميل",
                                 "payload": "CARE_HELP"
                             },
                             {

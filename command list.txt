@@ -27,3 +27,7 @@ git push origin master
 privacy policy=https://www.freeprivacypolicy.com/live/07f52fa4-80f1-45ff-aff1-3b251c55d282
 
 https://graph.facebook.com/v15.0/me/messenger_profile?access_token=<PAGE_ACCESS_TOKEN>
+
+curl -X GET "https://graph.facebook.com/v15.0/me/messenger_profile?fields=whitelisted_domains,greeting&access_token=EAATrmhCRFboBAKJ2ylYoz5q0mOCT0mg1DJYIpHUh2DvWDUnILR0ZBEcPEE1BQGoQZCd2ZBnpr3ZByC2XW9fTWeU7zQ8WYJDlVngfG5XoYg4HbRJKrmXIotZBLcBoKQhFN9WYRmbi0Ghobf1nyL3uzmDWF6PIjBGZAJR2YZAiPLqStBBPqkteiLMmnJGkLszypBXmthG6cLNuQZDZD"
+
+https://jisr-messenger-app.onrender.com
