@@ -156,17 +156,39 @@ let handleMessage = (sender_psid, received_message) => {
     callSendAPI(sender_psid, response);
 };
 
-let handlePostback= (sender_psid, received_postback)=> {
+let handlePostback= async (sender_psid, received_postback)=> {
     let response;
     
     // Get the payload for the postback
     let payload = received_postback.payload;
   
     // Set the response based on the postback payload
-    if (payload === 'yes') {
-      response = { "text": "Thanks!" }
-    } else if (payload === 'no') {
-      response = { "text": "Oops, try sending another image." }
+    switch (payload) {
+        case "GET_STARTED":
+        case "RESTART_CONVERSATION":
+            await chatbotService.sendMessageWelcomeNewUser(sender_psid);
+            break;
+        case "TALK_AGENT":
+            await chatbotService.requestTalkToAgent(sender_psid);
+            break;
+        case "SHOW_HEADPHONES":
+            await chatbotService.showHeadphones(sender_psid);
+            break;
+        case "SHOW_TV":
+            await chatbotService.showTVs(sender_psid);
+            break;
+        case "SHOW_PLAYSTATION":
+            await chatbotService.showPlaystation(sender_psid);
+            break;
+        case "BACK_TO_CATEGORIES":
+            await chatbotService.backToCategories(sender_psid);
+            break;
+        case "BACK_TO_MAIN_MENU":
+            await chatbotService.backToMainMenu(sender_psid);
+            break;
+        default:
+            console.log("run default switch case")
+
     }
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
