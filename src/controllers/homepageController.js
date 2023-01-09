@@ -160,7 +160,7 @@ let handlePostback= async (sender_psid, received_postback)=> {
   
     // Set the response based on the postback payload
     switch (payload) {
-        case "تحدث مع عميل":
+        case "GET_STARTED":
             response ={"text":"thanks"};
             break;
         case "no":
