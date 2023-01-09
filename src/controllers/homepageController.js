@@ -168,7 +168,7 @@ let handlePostback= async (sender_psid, received_postback)=> {
             break;
         case "GET_STARTED":
             let username = await homepageService.getFacebookUsername(sender_psid);
-            response ={"text": `dfdssss, ${username}`}
+            response ={"text": `dfdssss, ${username}`};
            
             break;
         default:
@@ -176,8 +176,8 @@ let handlePostback= async (sender_psid, received_postback)=> {
 
     }
 
-    await callSendAPI(sender_psid,response);
-    await callSendAPI(sender_psid,response);
+    callSendAPI(sender_psid,response);
+    // await callSendAPI(sender_psid,response);
   
   };
 

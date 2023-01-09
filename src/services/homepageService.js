@@ -100,7 +100,7 @@ let getFacebookUsername = (sender_psid) => {
     });
 };
 
-let sendTypingOn = async(sender_psid) => {
+let sendTypingOn = (sender_psid) => {
     return new Promise((resolve, reject) => {
         try {
             let request_body = {
