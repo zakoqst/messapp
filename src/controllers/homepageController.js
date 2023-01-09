@@ -160,7 +160,7 @@ let handlePostback= async (sender_psid, received_postback)=> {
   
     // Set the response based on the postback payload
     switch (payload) {
-        case "GET_STARTED":
+        case "YES":
             response ={"text":"thanks"};
             break;
         case "no":
@@ -169,7 +169,7 @@ let handlePostback= async (sender_psid, received_postback)=> {
         case "GET_STARTED":
             let username = await homepageService.getFacebookUsername(sender_psid);
             response ={"text": `dfdssss, ${username}`};
-           
+            console.log(`${username}`)
             break;
         default:
             console.log("run default switch case")
