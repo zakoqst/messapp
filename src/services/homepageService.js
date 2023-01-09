@@ -17,12 +17,12 @@ let handleSetupProfileAPI = (sender_psid) => {
             console.log(sender_psid);
             let request_body = {
                 "إبدأ": {
-                    "payload": "GET_STARTED"
+                    "payload": "PPP"
                 },
 
             
 
-                "psid": `${sender_psid}`,
+                "psid": sender_psid,
                 "persistent_menu": [
                     {
                         "locale": "default",
