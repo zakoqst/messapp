@@ -173,19 +173,18 @@ let handlePostback= async (sender_psid, received_postback)=> {
             break;
         case "GET_STARTED":
             await chatbotService.sendMessageWelcomeNewUser(sender_psid);
-            let username = await homepageService.getFacebookUsername(sender_psid);
-            response = {"text":`Hi there. ${username}`};
+           
             break;
         default:
             console.log("run default switch case")
 
     }
     // Send the message to acknowledge the postback
-    await callSendAPI(sender_psid, response);
-    await callSendAPI(sender_psid, response);
-    await callSendAPI(sender_psid, response);
-    await callSendAPI(sender_psid, response);
-    await callSendAPI(sender_psid, response);
+    // await callSendAPI(sender_psid, response);
+    // await callSendAPI(sender_psid, response);
+    // await callSendAPI(sender_psid, response);
+    // await callSendAPI(sender_psid, response);
+    // await callSendAPI(sender_psid, response);
   };
 
 
