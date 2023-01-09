@@ -16,8 +16,8 @@ let handleSetupProfileAPI = (sender_psid) => {
             // let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?psid=${sender_psid}&access_token=${PAGE_ACCESS_TOKEN}`
             console.log(sender_psid);
             let request_body = {
-                "get_started": {
-                    "payload": "إبدأ"
+                "إبدأ": {
+                    "payload": "GET_STARTED"
                 },
 
             
@@ -100,7 +100,7 @@ let getFacebookUsername = (sender_psid) => {
     });
 };
 
-let sendTypingOn = (sender_psid) => {
+let sendTypingOn = async(sender_psid) => {
     return new Promise((resolve, reject) => {
         try {
             let request_body = {
