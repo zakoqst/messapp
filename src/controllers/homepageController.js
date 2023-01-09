@@ -2,7 +2,7 @@
 const dotenv =require("dotenv").config();
 const request = require("request");
 const homepageService = require("../services/homepageService");
-// const chatbotService = require("../services/chatbotService");
+const chatbotService = require("../services/chatbotService");
 // require("dotenv").config();
 // import homepageService from "../services/homepageService";
 // import chatbotService from "../services/chatbotService";
@@ -97,7 +97,7 @@ let postWebhook = (req, res) => {
 
 
 
-let handleMessage = (sender_psid, received_message) => {
+let handleMessage = async (sender_psid, received_message) => {
     //check the incoming message is a quick reply?
     // if (received_message && received_message.quick_reply && received_message.quick_reply.payload) {
     //     let payload = received_message.quick_reply.payload;
@@ -154,7 +154,7 @@ let handleMessage = (sender_psid, received_message) => {
     }
 
     // Sends the response message
-    callSendAPI(sender_psid, response);
+    await chatbotService.sendMessage(sender_psid, response);
 };
 
 let handlePostback= async (sender_psid, received_postback)=> {
@@ -172,6 +172,7 @@ let handlePostback= async (sender_psid, received_postback)=> {
             response = {"text":"ggggggg"};
             break;
         case "GET_STARTED":
+            await chatbotService.sendMessageWelcomeNewUser(sender_psid);
             let username = await homepageService.getFacebookUsername(sender_psid);
             response = {"text":`Hi there. ${username}`};
             break;
@@ -189,32 +190,32 @@ let handlePostback= async (sender_psid, received_postback)=> {
 
 
 
-let callSendAPI= async (sender_psid, response) => {
+// let callSendAPI= async (sender_psid, response) => {
 
-    await homepageService.markMessageRead(sender_psid);
-    await homepageService.sendTypingOn(sender_psid);
-        // Construct the message body
-    let request_body = {
-    "recipient": {
-        "id": sender_psid
-    },
-    "message": response
-    }
+//     await homepageService.markMessageRead(sender_psid);
+//     await homepageService.sendTypingOn(sender_psid);
+//         // Construct the message body
+//     let request_body = {
+//     "recipient": {
+//         "id": sender_psid
+//     },
+//     "message": response
+//     }
 
-    // Send the HTTP request to the Messenger Platform
-    request({
-    "uri": "https://graph.facebook.com/v7.0/me/messages",
-    "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
-    "method": "POST",
-    "json": request_body
-    }, (err, res, body) => {
-    if (!err) {
-        console.log('message sent!')
-    } else {
-        console.error("Unable to send message:" + err);
-    }
-    }); 
-}
+//     // Send the HTTP request to the Messenger Platform
+//     request({
+//     "uri": "https://graph.facebook.com/v7.0/me/messages",
+//     "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
+//     "method": "POST",
+//     "json": request_body
+//     }, (err, res, body) => {
+//     if (!err) {
+//         console.log('message sent!')
+//     } else {
+//         console.error("Unable to send message:" + err);
+//     }
+//     }); 
+// }
 
 let handleSetupProfile = async(req,res)=>{
     try {
