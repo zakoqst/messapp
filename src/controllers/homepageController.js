@@ -159,17 +159,27 @@ let handlePostback= async (sender_psid, received_postback)=> {
     let payload = received_postback.payload;
   
     // Set the response based on the postback payload
+    // switch (payload) {
+    //     case "YES":
+    //         response ={"text":"thanks"};
+    //         break;
+    //     case "no":
+    //         response = {"text":"ggggggg"};
+    //         break;
+    //     case "GET_STARTED":
+    //         let username = await chatbotService.getFacebookUsername(sender_psid);
+    //         response ={"text": `dfdssss, ${username}`};
+    //         console.log(`${username}`)
+    //         break;
+    //     default:
+    //         console.log("run default switch case")
+
+    // }
+
     switch (payload) {
-        case "YES":
-            response ={"text":"thanks"};
-            break;
-        case "no":
-            response = {"text":"ggggggg"};
-            break;
         case "GET_STARTED":
-            let username = await chatbotService.getFacebookUsername(sender_psid);
-            response ={"text": `dfdssss, ${username}`};
-            console.log(`${username}`)
+        case "RESTART_CONVERSATION":
+            await chatbotService.sendMessageWelcomeNewUser(sender_psid);
             break;
         default:
             console.log("run default switch case")
