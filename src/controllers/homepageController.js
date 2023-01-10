@@ -248,52 +248,52 @@ let getSetupProfilePage = (req, res) => {
     return res.render("profile.ejs");
 };
 
-// let getInfoOrderPage = (req, res) => {
-//     let facebookAppId = process.env.FACEBOOK_APP_ID;
-//     return res.render("infoOrder.ejs", {
-//         facebookAppId: facebookAppId
-//     });
-// };
+let getInfoOrderPage = (req, res) => {
+    let facebookAppId = process.env.FACEBOOK_APP_ID;
+    return res.render("infoOrder.ejs", {
+        facebookAppId: facebookAppId
+    });
+};
 
 
-// let setInfoOrder = async (req, res) => {
-//     try {
-//         let customerName = "";
-//         if (req.body.customerName === "") {
-//             customerName = "Empty";
-//         } else customerName = req.body.customerName;
+let setInfoOrder = async (req, res) => {
+    try {
+        let customerName = "";
+        if (req.body.customerName === "") {
+            customerName = "Empty";
+        } else customerName = req.body.customerName;
 
-//         // I demo response with sample text
-//         // you can check database for customer order's status
+        // I demo response with sample text
+        // you can check database for customer order's status
 
-//         let response1 = {
-//             "text": `---Info about your lookup order---
-//             \nCustomer name: ${customerName}
-//             \nEmail address: ${req.body.email}
-//             \nOrder number: ${req.body.orderNumber}
-//             `
-//         };
+        let response1 = {
+            "text": `---Info about your lookup order---
+            \nCustomer name: ${customerName}
+            \nEmail address: ${req.body.email}
+            \nOrder number: ${req.body.orderNumber}
+            `
+        };
 
-//         let response2 = templateMessage.setInfoOrderTemplate();
+        let response2 = templateMessage.setInfoOrderTemplate();
 
-//         await chatbotService.sendMessage(req.body.psid, response1);
-//         await chatbotService.sendMessage(req.body.psid, response2);
+        await chatbotService.sendMessage(req.body.psid, response1);
+        await chatbotService.sendMessage(req.body.psid, response2);
 
-//         return res.status(200).json({
-//             message: "ok"
-//         });
-//     } catch (e) {
-//         console.log(e);
-//     }
-// };
+        return res.status(200).json({
+            message: "ok"
+        });
+    } catch (e) {
+        console.log(e);
+    }
+};
 module.exports = {
     getHomePage: getHomePage,
     getWebhook: getWebhook,
     postWebhook: postWebhook,
     handleSetupProfile: handleSetupProfile,
     getSetupProfilePage: getSetupProfilePage,
-    // getInfoOrderPage: getInfoOrderPage,
-    // setInfoOrder: setInfoOrder
+    getInfoOrderPage: getInfoOrderPage,
+    setInfoOrder: setInfoOrder
 
 };
 

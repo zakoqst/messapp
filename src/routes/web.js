@@ -13,8 +13,8 @@ let initWebRoutes = (app)=> {
     router.post("/set-up-profile", homepageController.handleSetupProfile);
     router.get("/set-up-profile", homepageController.getSetupProfilePage);
 
-    // router.get("/info-order", homepageController.getInfoOrderPage);
-    // router.post("/set-info-order", homepageController.setInfoOrder);
+    router.get("/info-order", homepageController.getInfoOrderPage);
+    router.post("/set-info-order", homepageController.setInfoOrder);
 
 
     return app.use("/",router);
