@@ -1,6 +1,7 @@
 const dotenv =require("dotenv").config();
 const request = require("request");
 const homepageService = require("../services/homepageService");
+const templateMessage = require("../services/templateMessage");
 // import request from "request";
 // import homepageService from "./homepageService";
 // import templateMessage from "./templateMessage";
@@ -80,7 +81,7 @@ let sendMessage = (sender_psid, response) => {
 
             // Send the HTTP request to the Messenger Platform
             request({
-                "uri": "https://graph.facebook.com/v6.0/me/messages",
+                "uri": "https://graph.facebook.com/v7.0/me/messages",
                 "qs": { "access_token": PAGE_ACCESS_TOKEN },
                 "method": "POST",
                 "json": request_body
