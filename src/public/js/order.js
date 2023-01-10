@@ -50,6 +50,8 @@ function validateInputFields() {
 function handleClickButtonFindOrder(){
     $("#btnFindOrder").on("click", function(e) {
         let check = validateInputFields();
+
+        console.log(check);
         let data = {
             psid: $("#psid").val(),
             customerName: $("#customerName").val(),
