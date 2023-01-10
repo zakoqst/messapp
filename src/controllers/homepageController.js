@@ -195,10 +195,7 @@ let handlePostback= async (sender_psid, received_postback)=> {
     // }
 
     // callSendAPI(sender_psid,response);
-    await callSendAPI(sender_psid,response);
-    await callSendAPI(sender_psid,response);
-    await callSendAPI(sender_psid,response);
-  
+
   };
 
 let callSendAPI=async(sender_psid, response) => {
