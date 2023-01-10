@@ -17,7 +17,7 @@ let handleSetupProfileAPI = () => {
             // console.log(sender_psid);
             let request_body = {
                 "get_started": {
-                    "payload": "GET_STARTED_PAYLOAD"
+                    "payload": "GET_STARTED"
                 },
 
             
