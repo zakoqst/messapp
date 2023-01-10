@@ -10,7 +10,7 @@ let handleSetupProfileAPI = () => {
     return new Promise((resolve, reject) => {
         try {
             // let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?access_token=${PAGE_ACCESS_TOKEN}&v=15.0`
-            let url = `https://graph.facebook.com/v7.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}&v=7.0`
+            let url = `https://graph.facebook.com/v15.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}&v=15.0`
             // let url = `https://graph.facebook.com/v6.0/me?fields=id,name&access_token=${PAGE_ACCESS_TOKEN}&v=7.0`;
             // let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?psid=${sender_psid}&access_token=${PAGE_ACCESS_TOKEN}&v=15.0`
             // let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?psid=${sender_psid}&access_token=${PAGE_ACCESS_TOKEN}`
@@ -63,7 +63,7 @@ let handleSetupProfileAPI = () => {
                 "json": request_body
             }, (err, res, body) => {         
                 if (!err) {
-                    console.log(body)
+                    // console.log(body)
                     resolve("Done!")
                 } else {
                     reject("Unable to send message:" + err);

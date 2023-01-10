@@ -144,7 +144,7 @@ let handleMessage = async (sender_psid, received_message) => {
                             {
                                 "type": "postback",
                                 "title": "Get started",
-                                "payload": "GET_STARTED",
+                                "payload": "Get started",
                             }
                         ],
                     }]
@@ -193,8 +193,10 @@ let handlePostback= async (sender_psid, received_postback)=> {
 
     // }
 
-    callSendAPI(sender_psid,response);
-    // await callSendAPI(sender_psid,response);
+    // callSendAPI(sender_psid,response);
+    await callSendAPI(sender_psid,response);
+    await callSendAPI(sender_psid,response);
+    await callSendAPI(sender_psid,response);
   
   };
 
