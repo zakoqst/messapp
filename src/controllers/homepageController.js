@@ -175,7 +175,7 @@ let handlePostback= async (sender_psid, received_postback)=> {
         case "GET_STARTED":
             let username = await homepageService.getFacebookUsername(sender_psid);
             // response ={"text": `dfdssss, ${username}`};
-            response ={"text": "bonjour"};
+            response ={"text": `${username}`};
             console.log(`${username}`)
             break;
         default:
