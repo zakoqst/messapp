@@ -10,7 +10,7 @@ let handleSetupProfileAPI = () => {
     return new Promise((resolve, reject) => {
         try {
             // let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?access_token=${PAGE_ACCESS_TOKEN}&v=15.0`
-            let url = `https://graph.facebook.com/v15.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}&v=15.0`
+            let url = `https://graph.facebook.com/v7.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}&v=7.0`
             // let url = `https://graph.facebook.com/v6.0/me?fields=id,name&access_token=${PAGE_ACCESS_TOKEN}&v=7.0`;
             // let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?psid=${sender_psid}&access_token=${PAGE_ACCESS_TOKEN}&v=15.0`
             // let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?psid=${sender_psid}&access_token=${PAGE_ACCESS_TOKEN}`
@@ -30,12 +30,12 @@ let handleSetupProfileAPI = () => {
                         "call_to_actions": [
                             {
                                 "type": "postback",
-                                "title": "تحدث مع عميل",
+                                "title": "Talk to an agent",
                                 "payload": "CARE_HELP"
                             },
                             {
                                 "type": "postback",
-                                "title": "Outfit suggestions",
+                                "title": "Restart this conversation",
                                 "payload": "CURATION"
                             },
                             {
