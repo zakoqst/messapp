@@ -14,7 +14,7 @@ let handleSetupProfileAPI = () => {
             // let url = `https://graph.facebook.com/v6.0/me?fields=id,name&access_token=${PAGE_ACCESS_TOKEN}&v=7.0`;
             // let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?psid=${sender_psid}&access_token=${PAGE_ACCESS_TOKEN}&v=15.0`
             // let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?psid=${sender_psid}&access_token=${PAGE_ACCESS_TOKEN}`
-            console.log(sender_psid);
+            // console.log(sender_psid);
             let request_body = {
                 "get_started": {
                     "payload": "GET_STARTED_PAYLOAD"
