@@ -162,6 +162,8 @@ let handlePostback= async (sender_psid, received_postback)=> {
     // Set the response based on the postback payload
     switch (payload) {
         case "GET_STARTED":
+            await chatbotService.sendMessageWelcomeNewUser(sender_psid);
+            break;
         case "RESTART_CONVERSATION":
             await chatbotService.sendMessageWelcomeNewUser(sender_psid);
             break;

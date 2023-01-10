@@ -10,7 +10,7 @@ let handleSetupProfileAPI = () => {
     return new Promise((resolve, reject) => {
         try {
             // let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?access_token=${PAGE_ACCESS_TOKEN}&v=15.0`
-            let url = `https://graph.facebook.com/v7.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}&v=7.0`
+            let url = `https://graph.facebook.com/v15.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}&v=15.0`
             // let url = `https://graph.facebook.com/v6.0/me?fields=id,name&access_token=${PAGE_ACCESS_TOKEN}&v=7.0`;
             // let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?psid=${sender_psid}&access_token=${PAGE_ACCESS_TOKEN}&v=15.0`
             // let url = `https://graph.facebook.com/v15.0/me/custom_user_settings?psid=${sender_psid}&access_token=${PAGE_ACCESS_TOKEN}`
@@ -31,19 +31,32 @@ let handleSetupProfileAPI = () => {
                             {
                                 "type": "postback",
                                 "title": "Talk to an agent",
-                                "payload": "CARE_HELP"
+                                "payload": "TALK_AGENT"
                             },
                             {
                                 "type": "postback",
                                 "title": "Restart this conversation",
-                                "payload": "CURATION"
-                            },
-                            {
-                                "type": "web_url",
-                                "title": "Shop now",
-                                "url": "https://www.originalcoastclothing.com/",
-                                "webview_height_ratio": "full"
+                                "payload": "RESTART_CONVERSATION"
                             }
+                            // {
+                            //     "type": "nested",
+                            //     "title": "More info",
+                            //     "call_to_actions": [
+                            //         {
+                            //             "type": "web_url",
+                            //             "title": "View Facebook Fan Page",
+                            //             "url": "https://www.facebook.com/haryphamdev",
+                            //             "webview_height_ratio": "full"
+                            //         },
+                            //         {
+                            //             "type": "web_url",
+                            //             "title": "View Youtube channel",
+                            //             "url": "https://bit.ly/subscribe-haryphamdev",
+                            //             "webview_height_ratio": "full"
+                            //         },
+                            //     ]
+                                
+                            // }
                         ]
                     }
                 ],
