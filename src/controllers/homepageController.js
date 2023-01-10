@@ -3,6 +3,7 @@ const dotenv =require("dotenv").config();
 const request = require("request");
 const homepageService = require("../services/homepageService");
 const chatbotService = require("../services/chatbotService");
+const templateMessage = require("../services/templateMessage");
 // require("dotenv").config();
 // import homepageService from "../services/homepageService";
 // import chatbotService from "../services/chatbotService";
@@ -140,11 +141,6 @@ let handleMessage = async (sender_psid, received_message) => {
                                 "type": "postback",
                                 "title": "No!",
                                 "payload": "no",
-                            },
-                            {
-                                "type": "postback",
-                                "title": "Get started",
-                                "payload": "Get started",
                             }
                         ],
                     }]
@@ -166,29 +162,29 @@ let handlePostback= async (sender_psid, received_postback)=> {
     // Set the response based on the postback payload
     switch (payload) {
         case "GET_STARTED":
-            case "RESTART_CONVERSATION":
-                await chatbotService.sendMessageWelcomeNewUser(sender_psid);
-                break;
-            case "TALK_AGENT":
-                await chatbotService.requestTalkToAgent(sender_psid);
-                break;
-            case "SHOW_HEADPHONES":
-                await chatbotService.showHeadphones(sender_psid);
-                break;
-            case "SHOW_TV":
-                await chatbotService.showTVs(sender_psid);
-                break;
-            case "SHOW_PLAYSTATION":
-                await chatbotService.showPlaystation(sender_psid);
-                break;
-            case "BACK_TO_CATEGORIES":
-                await chatbotService.backToCategories(sender_psid);
-                break;
-            case "BACK_TO_MAIN_MENU":
-                await chatbotService.backToMainMenu(sender_psid);
-                break;
-            default:
-                console.log("run default switch case")
+        case "RESTART_CONVERSATION":
+            await chatbotService.sendMessageWelcomeNewUser(sender_psid);
+            break;
+        case "TALK_AGENT":
+            await chatbotService.requestTalkToAgent(sender_psid);
+            break;
+        case "SHOW_HEADPHONES":
+            await chatbotService.showHeadphones(sender_psid);
+            break;
+        case "SHOW_TV":
+            await chatbotService.showTVs(sender_psid);
+            break;
+        case "SHOW_PLAYSTATION":
+            await chatbotService.showPlaystation(sender_psid);
+            break;
+        case "BACK_TO_CATEGORIES":
+            await chatbotService.backToCategories(sender_psid);
+            break;
+        case "BACK_TO_MAIN_MENU":
+            await chatbotService.backToMainMenu(sender_psid);
+            break;
+        default:
+            console.log("run default switch case")
     
 
     }
