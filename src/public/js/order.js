@@ -12,6 +12,7 @@ window.extAsyncInit = function() {
 
     MessengerExtensions.getContext(facebookAppId,
         function success(thread_context){
+            
             // success
             //set psid to input
             $("#psid").val(thread_context.psid);
@@ -23,7 +24,7 @@ window.extAsyncInit = function() {
         }
     );
 };
-
+console.log(facebookAppId);
 //validate inputs
 function validateInputFields() {
     const EMAIL_REG = /[a-zA-Z][a-zA-Z0-9_\.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}/g;
@@ -51,14 +52,15 @@ function handleClickButtonFindOrder(){
     $("#btnFindOrder").on("click", function(e) {
         let check = validateInputFields();
 
-        console.log(check);
+        
         let data = {
             psid: $("#psid").val(),
             customerName: $("#customerName").val(),
             email: $("#email").val(),
-            orderNumber: $("#orderNumber").val()
+            orderNumber: $("#orderNumber").val(),
+            
         };
-
+        console.log(check);
         if(!check) {
             //close webview
             MessengerExtensions.requestCloseBrowser(function success() {
@@ -67,6 +69,7 @@ function handleClickButtonFindOrder(){
                 // an error occurred
                 console.log(err);
             });
+            console.log(check);
 
             //send data to node.js server
             $.ajax({
