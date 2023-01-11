@@ -133,13 +133,13 @@ function submitForm() {
 
         function handleClickButtonFindOrder(){
             event.preventDefault();
-         $("#btnFindOrder").on("click", function(e) {
+         document.getElementById("btnFindOrder").on("click", function(e) {
         let check = submitForm();
         let data = {
-            psid: $("#psid").val(),
-            customerName: $("#customerName").val(),
-            email: $("#email").val(),
-            orderNumber: $("#orderNumber").val()
+            psid: document.getElementById("psid").value,
+            customerName: document.getElementById("customerName").value,
+            email: document.getElementById("email").value,
+            orderNumber: document.getElementById("orderNumber").value
         };
 
         if(!check) {
