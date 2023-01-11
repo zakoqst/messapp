@@ -21,22 +21,49 @@
         }(document, 'script', 'Messenger'));
 
 
-        window.extAsyncInit = function() {
-        // the Messenger Extensions JS SDK is done loading
 
-            MessengerExtensions.getContext(facebookAppId,
-                function success(thread_context){
-                    // success
-                    //set psid to input
-                    $("#psid").val(thread_context.psid);
-                    handleClickButtonFindOrder();
-                    },
-                    function error(err){
-                    // error
-                    console.log(err);
-                }
-        );
+
+        window.extAsyncInit = function() {
+            // the Messenger Extensions JS SDK is done loading
+            initializeMessengerExtensions();
         };
+
+        function initializeMessengerExtensions() {
+            MessengerExtensions.getContext(facebookAppId, onThreadContextSuccess, onThreadContextError);
+        }
+
+        function onThreadContextSuccess(thread_context) {
+            // success
+            //set psid to input
+            document.getElementById("psid").value = thread_context.psid;
+            handleClickButtonFindOrder();
+        }
+
+        function onThreadContextError(err) {
+            // error
+            console.log(err);
+        }
+
+
+
+
+
+        // window.extAsyncInit = function() {
+        // // the Messenger Extensions JS SDK is done loading
+
+        //     MessengerExtensions.getContext(facebookAppId,
+        //         function success(thread_context){
+        //             // success
+        //             //set psid to input
+        //             $("#psid").val(thread_context.psid);
+        //             handleClickButtonFindOrder();
+        //             },
+        //             function error(err){
+        //             // error
+        //             console.log(err,"rr");
+        //         }
+        // );
+        // };
 
 
     
@@ -99,6 +126,7 @@
 //     return false;
 // }
 
+
 function submitForm() {
             event.preventDefault();
 
@@ -131,10 +159,63 @@ function submitForm() {
             // ...
         }
 
-        function handleClickButtonFindOrder(){
-            event.preventDefault();
-         document.getElementById("btnFindOrder").on("click", function(e) {
-        let check = submitForm();
+
+
+//         function handleClickButtonFindOrder(){
+//                 event.preventDefault();
+//                 document.getElementById("btnFindOrder").on("click", function(e) {
+//                 let check = submitForm();
+//                 let data = {
+//                     psid: document.getElementById("psid").value,
+//                     customerName: document.getElementById("customerName").value,
+//                     email: document.getElementById("email").value,
+//                     orderNumber: document.getElementById("orderNumber").value
+//                 };
+
+//                 if(!check) {
+//                     //close webview
+//                     MessengerExtensions.requestCloseBrowser(function success() {
+//                         // webview closed
+//                     }, function error(err) {
+//                         // an error occurred
+//                         console.log(err);
+//                     });
+
+//                     //send data to node.js server
+//                     $.ajax({
+//                         url: `${window.location.origin}/set-info-order`,
+//                         method: "POST",
+//                         data: data,
+//                         success: function(data) {
+//                             console.log(data);
+//                         },
+//                         error: function(error) {
+//                             console.log(error);
+//                         }
+//                     })
+//                 }
+//                 console.log(check);
+//             });
+// }
+
+
+
+
+
+
+
+
+function handleClickButtonFindOrder() {
+    // Prevent form submission
+    event.preventDefault();
+
+    // Get button element
+    let button = document.getElementById("btnFindOrder");
+
+    // Add click event listener to button
+    button.addEventListener("click", function() {
+        // Gather data from input fields
+        // let check = submitForm();
         let data = {
             psid: document.getElementById("psid").value,
             customerName: document.getElementById("customerName").value,
@@ -142,31 +223,52 @@ function submitForm() {
             orderNumber: document.getElementById("orderNumber").value
         };
 
-        if(!check) {
-            //close webview
-            MessengerExtensions.requestCloseBrowser(function success() {
-                // webview closed
-            }, function error(err) {
-                // an error occurred
-                console.log(err);
-            });
+        // Validate data here
 
-            //send data to node.js server
-            $.ajax({
-                url: `${window.location.origin}/set-info-order`,
-                method: "POST",
-                data: data,
-                success: function(data) {
-                    console.log(data);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            })
+        if (isValid) {
+            // Send data to server
+            sendDataToServer(data);
+            // Close webview
+            closeWebview();
+        } else {
+            // Show error message or do something else if validation fails
         }
-        console.log(check);
     });
 }
+
+function sendDataToServer(data) {
+    $.ajax({
+        url: `${window.location.origin}/set-info-order`,
+        method: "POST",
+        data: data,
+        success: function(response) {
+            console.log(response);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+function closeWebview() {
+    MessengerExtensions.requestCloseBrowser(function success() {
+        // webview closed
+    }, function error(err) {
+        console.log(err);
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
     </script>
     <script src="/js/order.js"></script>
