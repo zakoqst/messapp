@@ -33,6 +33,7 @@ function validateInputFields() {
 
     if (!email.val().match(EMAIL_REG)) {
         email.addClass("is-invalid");
+        console.log(email);
         return true;
     } else {
         email.removeClass("is-invalid");
@@ -47,6 +48,7 @@ function validateInputFields() {
 
     return false;
 }
+
 
 function handleClickButtonFindOrder(){
     $("#btnFindOrder").on("click", function(e) {
@@ -86,3 +88,4 @@ function handleClickButtonFindOrder(){
         }
     });
 }
+console.log(check);
