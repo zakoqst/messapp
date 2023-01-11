@@ -99,48 +99,81 @@ function validateInputFields() {
     return false;
 }
 
+function submitForm() {
+            event.preventDefault();
+
+            // validation
+            let isValid = true;
+            let email = document.getElementById("email").value;
+            let orderNumber = document.getElementById("orderNumber").value;
+            if (!email) {
+                document.getElementById("email-error").innerHTML = "Please fill out your email address.";
+                isValid = false;
+            }
+            if (!orderNumber) {
+                document.getElementById("orderNumber-error").innerHTML = "Please fill out your order number.";
+                isValid = false;
+            }
+            if (!isValid) {
+                return;
+            }
+            document.getElementById("email-error").innerHTML = "";
+            document.getElementById("orderNumber-error").innerHTML = "";
+            
+            // sanitize data
+            email = email.trim();
+            orderNumber = orderNumber.trim();
+            
+            // send data to server
+            // ...
+
+            // handling result from server
+            // ...
+        }
     </script>
     <script src="/js/order.js"></script>
 
 </head>
+
+
+
 <body>
-<div class="container fix-height">
-    <div class="row">
-        <div class="col-12">
-            <div class="text-center mt-3">
-                <span class="title">Order lookup</span>
+    <div class="container fix-height">
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center mt-3">
+                    <span class="title">Order lookup</span>
+                </div>
+                <form id="order-lookup-form" onsubmit="submitForm()">
+                    <div class="form-group">
+                        <label for="customerName">Customer:</label>
+                        <input type="text" id="customerName" class="form-control" placeholder="Name...">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address:</label>
+                        <input type="email" id="email" class="form-control" placeholder="Email address..." required>
+                        <div class="invalid-feedback" id="email-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="orderNumber">Order number:</label>
+                        <input type="text" id="orderNumber" class="form-control" placeholder="Order number..." required>
+                        <div class="invalid-feedback" id="orderNumber-error"></div>
+                    </div>
+                    <button class="btn btn-primary" type="submit" id="btnFindOrder"> FIND ORDER </button>
+                </form>
             </div>
-            <input type="text" id="psid" hidden>
-            <div class="form-group">
-                <label for="customerName">Customer:</label>
-                <input type="text" id="customerName" class="form-control" placeholder="Name...">
-            </div>
-            <div class="form-group">
-                <label for="email">Email address (<span style="color: red">*</span>):</label>
-                <input type="email" id="email" class="form-control" placeholder="Email address...">
-                <div class="invalid-feedback">Please fill out your email address.</div>
-            </div>
-            <div class="form-group">
-                <label for="orderNumber">Order number (<span style="color: red">*</span>):</label>
-                <input type="text" id="orderNumber" class="form-control" placeholder="Order number...">
-                <div class="invalid-feedback">Please fill out your order number.</div>
-            </div>
-            <button class="btn btn-primary" id="btnFindOrder"> FIND ORDER </button>
-        </div>
-
-    </div>
-
-</div>
-<footer>
-    <div class="text-center">
-        <div class="">
-            <span class="mr-3">	&copy; Chatbot Tutorial</span>
-            <span class="ml-3">
-                Powered by <a href="https://bit.ly/subscribe-haryphamdev" target="_blank">HaryPhamDev</a>
-            </span>
         </div>
     </div>
-</footer>
+    <footer>
+        <div class="text-center">
+            <div class="">
+                <span class="mr-3">&copy; Chatbot Tutorial</span>
+                <span class="ml-3">
+                    Powered by <a href="https://bit.ly/subscribe-haryphamdev" target="_blank">HaryPhamDev</a>
+                </span>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>
