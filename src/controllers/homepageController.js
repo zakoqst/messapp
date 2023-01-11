@@ -282,6 +282,7 @@ let setInfoOrder = async (req, res) => {
         return res.status(200).json({
             message: "ok"
         });
+        console.log("eeeeeeeeeeeeeeeee")
     } catch (e) {
         console.log(e);
     }
