@@ -255,17 +255,17 @@ let getInfoOrderPage = (req, res) => {
     });
 };
 
-let handlePostInfoOrderPage = (req, res) => {
-    console.log('data form webview');
-    console.log('psid :', req.body.psid);
-    console.log('customerName :', req.body.customerName);
+// let handlePostInfoOrderPage = (req, res) => {
+//     console.log('data form webview');
+//     console.log('psid :', req.body.psid);
+//     console.log('customerName :', req.body.customerName);
     
 
 
-}
+// }
 let setInfoOrder = async (req, res) => {
     try {
-        let customerName = "";
+        let customerName = "5";
         if (req.body.customerName === "") {
             customerName = "Empty";
         } else customerName = req.body.customerName;
@@ -302,7 +302,7 @@ module.exports = {
     getSetupProfilePage: getSetupProfilePage,
     getInfoOrderPage: getInfoOrderPage,
     setInfoOrder: setInfoOrder,
-    handlePostInfoOrderPage: handlePostInfoOrderPage
+    // handlePostInfoOrderPage: handlePostInfoOrderPage
 
 };
 

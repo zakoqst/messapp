@@ -75,10 +75,11 @@
 
             MessengerExtensions.getContext(facebookAppId,
                 function success(thread_context){
-                    
+                    let usePSID = thread_context.psid;
                     // success
                     //set psid to input
-                    $("#psid").val(thread_context.psid);
+                    document.getElementById("psid").value =usePSID;
+                    // $("#psid").val(thread_context.psid);
                     handleClickButtonFindOrder();
                     },
                     function error(err){
@@ -91,41 +92,41 @@
 
 
     
-//     function handleClickButtonFindOrder(){
-//          $("#btnFindOrder").on("click", function(e) {
-//         let check = validateInputFields();
-//         let data = {
-//             psid: $("#psid").val(),
-//             customerName: $("#customerName").val(),
-//             email: $("#email").val(),
-//             orderNumber: $("#orderNumber").val()
-//         };
+    function handleClickButtonFindOrder(){
+         $("#btnFindOrder").on("click", function(e) {
+        let check = validateInputFields();
+        let data = {
+            psid: $("#psid").val(),
+            customerName: $("#customerName").val(),
+            email: $("#email").val(),
+            orderNumber: $("#orderNumber").val()
+        };
 
-//         if(!check) {
-//             //close webview
-//             MessengerExtensions.requestCloseBrowser(function success() {
-//                 // webview closed
-//             }, function error(err) {
-//                 // an error occurred
-//                 console.log(err);
-//             });
+        if(!check) {
+            //close webview
+            MessengerExtensions.requestCloseBrowser(function success() {
+                // webview closed
+            }, function error(err) {
+                // an error occurred
+                console.log(err);
+            });
 
-//             //send data to node.js server
-//             $.ajax({
-//                 url: `${window.location.origin}/set-info-order`,
-//                 method: "POST",
-//                 data: data,
-//                 success: function(data) {
-//                     console.log(data);
-//                 },
-//                 error: function(error) {
-//                     console.log(error);
-//                 }
-//             })
-//         }
-//         console.log(check);
-//     });
-// }
+            //send data to node.js server
+            $.ajax({
+                url: `${window.location.origin}/set-info-order`,
+                method: "POST",
+                data: data,
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            })
+        }
+        console.log(check);
+    });
+}
 
 
 function validateInputFields() {
@@ -187,47 +188,52 @@ function validateInputFields() {
 
 
         function handleClickButtonFindOrder(){
-                // event.preventDefault();
-                $("#btnFindOrder").on("click", function(e) {
+                event.preventDefault();
+                $("#btnFindOrder").on("click", function() {
+
         let check = validateInputFields();
         let data = {
-            psid: $("#psid").val(),
-            customerName: $("#customerName").val(),
-            email: $("#email").val(),
-            orderNumber: $("#orderNumber").val()
+            // psid: $("#psid").val(),
+            // customerName: $("#customerName").val(),
+            // email: $("#email").val(),
+            // orderNumber: $("#orderNumber").val()
                 // document.getElementById("btnFindOrder").on("click", function(e) {
                 // let check = submitForm();
                 // let data = {
-                //     psid: document.getElementById("psid").value,
-                //     customerName: document.getElementById("customerName").value,
-                //     email: document.getElementById("email").value,
-                //     orderNumber: document.getElementById("orderNumber").value
+                    psid: document.getElementById("psid").value,
+                    customerName: document.getElementById("customerName").value,
+                    email: document.getElementById("email").value,
+                    orderNumber: document.getElementById("orderNumber").value
                 };
 
-                if(!check) {
-                    console.log(check);
+                // if(!check) {
+                    // console.log(check);
                     //close webview
-                    MessengerExtensions.requestCloseBrowser(function success() {
-                        // webview closed
-                    }, function error(err) {
-                        // an error occurred
-                        console.log(err);
-                    });
-
-                    //send data to node.js server
                     $.ajax({
                         url: `${window.location.origin}/set-info-order`,
                         method: "POST",
                         data: data,
                         success: function(data) {
-                            console.log(data,"tttt");
+
+                            MessengerExtensions.requestCloseBrowser(function success() {
+                        // webview closed
+                    }, function error(err) {
+                        alert('alert---', data)
+                        // an error occurred
+                        console.log(err);
+                    });
+                            alert('alert+++', data)
                         },
                         error: function(error) {
                             console.log(error,"oooo");
                         }
                     },
                     )
-                }
+              
+
+                    //send data to node.js server
+                    
+                // }
                 
             });
 }
@@ -273,27 +279,27 @@ function validateInputFields() {
 //     });
 // }
 
-function sendDataToServer(data) {
-    $.ajax({
-        url: `${window.location.origin}/set-info-order`,
-        method: "POST",
-        data: data,
-        success: function(response) {
-            console.log(response);
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
-}
+// function sendDataToServer(data) {
+//     $.ajax({
+//         url: `${window.location.origin}/set-info-order`,
+//         method: "POST",
+//         data: data,
+//         success: function(response) {
+//             console.log(response);
+//         },
+//         error: function(error) {
+//             console.log(error);
+//         }
+//     });
+// }
 
-function closeWebview() {
-    MessengerExtensions.requestCloseBrowser(function success() {
-        // webview closed
-    }, function error(err) {
-        console.log(err,"dfgh");
-    });
-}
+// function closeWebview() {
+//     MessengerExtensions.requestCloseBrowser(function success() {
+//         // webview closed
+//     }, function error(err) {
+//         console.log(err,"dfgh");
+//     });
+// }
 
 
 
@@ -315,14 +321,43 @@ function closeWebview() {
 
 
 <body>
+
     <div class="container fix-height">
         <div class="row">
             <div class="col-12">
                 <div class="text-center mt-3">
                     <span class="title">Order lookup</span>
                 </div>
+                <input type="text" id="psid" hidden>
+                <div class="form-group">
+                    <label for="customerName">Customer:</label>
+                    <input type="text" id="customerName" class="form-control" placeholder="Name...">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address (<span style="color: red">*</span>):</label>
+                    <input type="email" id="email" class="form-control" placeholder="Email address...">
+                    <div class="invalid-feedback">Please fill out your email address.</div>
+                </div>
+                <div class="form-group">
+                    <label for="orderNumber">Order number (<span style="color: red">*</span>):</label>
+                    <input type="text" id="orderNumber" class="form-control" placeholder="Order number...">
+                    <div class="invalid-feedback">Please fill out your order number.</div>
+                </div>
+                <button class="btn btn-primary" id="btnFindOrder"> FIND ORDER </button>
+            </div>
+    
+        </div>
+    
+    </div>
+    
+    <!-- <div class="container fix-height">
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center mt-3">
+                    <span class="title">Order lookup</span>
+                </div>
                 <form id="order-lookup-form" onsubmit="submitForm()">
-                    <input type="text" id="psid" hidden>
+                    <input class="form-control" id="psid" hidden>
                     <div class="form-group">
                         <label for="customerName">Customer:</label>
                         <input type="text" id="customerName" class="form-control" placeholder="Name...">
@@ -341,7 +376,7 @@ function closeWebview() {
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
     <footer>
         <div class="text-center">
             <div class="">
