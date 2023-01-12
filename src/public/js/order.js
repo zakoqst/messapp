@@ -44,15 +44,15 @@ function handleClickButtonFindOrder(){
 
 
 
-
-// webview closed
-}, function error(err) {
-// an error occurred
-console.log(err);
-});
-} else {
-console.log("SDK not loaded yet, cannot close webview.")
-}
+                window.close();
+                // webview closed
+                }, function error(err) {
+                // an error occurred
+                console.log(err);
+                });
+                } else {
+                console.log("SDK not loaded yet, cannot close webview.")
+                }
 
         //send data to node.js server
         $.ajax({
