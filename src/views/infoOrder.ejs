@@ -19,7 +19,7 @@
         //     // Do something when element is not present
         // }
         // let facebookAppId = `<%= facebookAppId %>`
-        let facebookAppId = 1384946842277306
+        let facebookAppId = "1384946842277306"
         console.log(facebookAppId);
         // console.log(facebookAppId);
         // let facebookAppId =document.getElementById("<%= facebookAppId %>").value;
@@ -187,17 +187,25 @@ function validateInputFields() {
 
 
         function handleClickButtonFindOrder(){
-                event.preventDefault();
-                document.getElementById("btnFindOrder").on("click", function(e) {
-                let check = submitForm();
-                let data = {
-                    psid: document.getElementById("psid").value,
-                    customerName: document.getElementById("customerName").value,
-                    email: document.getElementById("email").value,
-                    orderNumber: document.getElementById("orderNumber").value
+                // event.preventDefault();
+                $("#btnFindOrder").on("click", function(e) {
+        let check = validateInputFields();
+        let data = {
+            psid: $("#psid").val(),
+            customerName: $("#customerName").val(),
+            email: $("#email").val(),
+            orderNumber: $("#orderNumber").val()
+                // document.getElementById("btnFindOrder").on("click", function(e) {
+                // let check = submitForm();
+                // let data = {
+                //     psid: document.getElementById("psid").value,
+                //     customerName: document.getElementById("customerName").value,
+                //     email: document.getElementById("email").value,
+                //     orderNumber: document.getElementById("orderNumber").value
                 };
 
                 if(!check) {
+                    console.log(check);
                     //close webview
                     MessengerExtensions.requestCloseBrowser(function success() {
                         // webview closed
@@ -212,14 +220,15 @@ function validateInputFields() {
                         method: "POST",
                         data: data,
                         success: function(data) {
-                            console.log(data);
+                            console.log(data,"tttt");
                         },
                         error: function(error) {
-                            console.log(error);
+                            console.log(error,"oooo");
                         }
-                    })
+                    },
+                    )
                 }
-                console.log(check);
+                
             });
 }
 
@@ -313,6 +322,7 @@ function closeWebview() {
                     <span class="title">Order lookup</span>
                 </div>
                 <form id="order-lookup-form" onsubmit="submitForm()">
+                    <input type="text" id="psid" hidden>
                     <div class="form-group">
                         <label for="customerName">Customer:</label>
                         <input type="text" id="customerName" class="form-control" placeholder="Name...">
