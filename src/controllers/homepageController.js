@@ -255,7 +255,14 @@ let getInfoOrderPage = (req, res) => {
     });
 };
 
+let handlePostInfoOrderPage = (req, res) => {
+    console.log('data form webview');
+    console.log('psid :', req.body.psid);
+    console.log('customerName :', req.body.customerName);
+    
 
+
+}
 let setInfoOrder = async (req, res) => {
     try {
         let customerName = "";
@@ -278,11 +285,11 @@ let setInfoOrder = async (req, res) => {
 
         await chatbotService.sendMessage(req.body.psid, response1);
         await chatbotService.sendMessage(req.body.psid, response2);
-
+        
         return res.status(200).json({
             message: "ok"
         });
-        console.log("eeeeeeeeeeeeeeeee")
+        
     } catch (e) {
         console.log(e);
     }
@@ -294,7 +301,8 @@ module.exports = {
     handleSetupProfile: handleSetupProfile,
     getSetupProfilePage: getSetupProfilePage,
     getInfoOrderPage: getInfoOrderPage,
-    setInfoOrder: setInfoOrder
+    setInfoOrder: setInfoOrder,
+    handlePostInfoOrderPage: handlePostInfoOrderPage
 
 };
 
