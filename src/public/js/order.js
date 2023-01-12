@@ -1,5 +1,9 @@
 let sdkLoaded = false;
-
+(function () {
+    window.addEventListener('iticksInit', async function () {
+        IticksMessengerExtensions.requestCloseBrowser()
+    })
+})();
 //load FB SDK
 (function(d, s, id){
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -9,22 +13,44 @@ let sdkLoaded = false;
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'Messenger'));
 
-window.extAsyncInit = function() {
-    // the Messenger Extensions JS SDK is done loading
-    sdkLoaded = true;
-    MessengerExtensions.getContext(facebookAppId,
-        function success(thread_context){
-            // success
-            //set psid to input
-            $("#psid").val(thread_context.psid);
-            handleClickButtonFindOrder();
-        },
-        function error(err){
-            // error
-            console.log(err);
+
+window.extAsyncInit = function () {
+    var event = new CustomEvent('iticksInit');
+    window.IticksMessengerExtensions = {
+        /** close the webview and return the user to the conversation in Messenger. */
+        requestCloseBrowser() {
+            MessengerExtensions.requestCloseBrowser(function success() {
+                // webview closed
+            }, function error(err) {
+                // an error occurred
+                document.write(err);
+                console.log("error", err);
+                //window.close();
+            });
         }
-    );
+    };
+    /** dispact custom iticksInit event  */
+    window.dispatchEvent(event);
 };
+
+
+
+// window.extAsyncInit = function() {
+//     // the Messenger Extensions JS SDK is done loading
+//     sdkLoaded = true;
+//     MessengerExtensions.getContext(facebookAppId,
+//         function success(thread_context){
+//             // success
+//             //set psid to input
+//             $("#psid").val(thread_context.psid);
+//             handleClickButtonFindOrder();
+//         },
+//         function error(err){
+//             // error
+//             console.log(err);
+//         }
+//     );
+// };
 
 function handleClickButtonFindOrder(){
     $("#btnFindOrder").on("click", function(e) {
