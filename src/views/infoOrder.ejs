@@ -18,7 +18,8 @@
         //     console.log("n");
         //     // Do something when element is not present
         // }
-        let facebookAppId = `<%= facebookAppId %>`
+        // let facebookAppId = `<%= facebookAppId %>`
+        let facebookAppId = 1384946842277306
         console.log(facebookAppId);
         // console.log(facebookAppId);
         // let facebookAppId =document.getElementById("<%= facebookAppId %>").value;
@@ -55,13 +56,14 @@
         // function onThreadContextSuccess(thread_context) {
         //     // success
         //     //set psid to input
-        //     thread_context.psid=document.getElementById("psid").value;
+        //     $("#psid").val(thread_context.psid);
+        //     // thread_context.psid=document.getElementById("psid").value;
         //     handleClickButtonFindOrder();
         // }
-        // console.log(thread_context);
+        // // console.log(thread_context);
         // function onThreadContextError(err) {
         //     // error
-        //     console.log(err);
+        //     console.log($("#psid").val(thread_context.psid));
         // }
 
 
@@ -73,6 +75,7 @@
 
             MessengerExtensions.getContext(facebookAppId,
                 function success(thread_context){
+                    
                     // success
                     //set psid to input
                     $("#psid").val(thread_context.psid);
@@ -81,6 +84,7 @@
                     function error(err){
                     // error
                     console.log(err,"rr");
+                    // console.log(thread_context);
                 }
         );
         };
@@ -124,140 +128,141 @@
 // }
 
 
-// function validateInputFields() {
-//     const EMAIL_REG = /[a-zA-Z][a-zA-Z0-9_\.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}/g;
-//     let email = $("#email");
-//     let orderNumber = $("#orderNumber");
+function validateInputFields() {
+    const EMAIL_REG = /[a-zA-Z][a-zA-Z0-9_\.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}/g;
+    let email = $("#email");
+    let orderNumber = $("#orderNumber");
 
-//     if (!email.val().match(EMAIL_REG)) {
-//         email.addClass("is-invalid");
-//         return true;
-//     } else {
-//         email.removeClass("is-invalid");
-//     }
+    if (!email.val().match(EMAIL_REG)) {
+        email.addClass("is-invalid");
+        return true;
+    } else {
+        email.removeClass("is-invalid");
+    }
 
-//     if (orderNumber.val() === "") {
-//         orderNumber.addClass("is-invalid");
-//         return true;
-//     } else {
-//         orderNumber.removeClass("is-invalid");
-//     }
+    if (orderNumber.val() === "") {
+        orderNumber.addClass("is-invalid");
+        return true;
+    } else {
+        orderNumber.removeClass("is-invalid");
+    }
 
-//     return false;
-// }
-
-
-function submitForm() {
-            event.preventDefault();
-
-            // validation
-            let isValid = true;
-            let email = document.getElementById("email").value;
-            let orderNumber = document.getElementById("orderNumber").value;
-            if (!email) {
-                document.getElementById("email-error").innerHTML = "Please fill out your email address.";
-                isValid = false;
-            }
-            if (!orderNumber) {
-                document.getElementById("orderNumber-error").innerHTML = "Please fill out your order number.";
-                isValid = false;
-            }
-            if (!isValid) {
-                return;
-            }
-            document.getElementById("email-error").innerHTML = "";
-            document.getElementById("orderNumber-error").innerHTML = "";
-            
-            // sanitize data
-            email = email.trim();
-            orderNumber = orderNumber.trim();
-            
-            // send data to server
-            // ...
-
-            // handling result from server
-            // ...
-        }
-
-
-
-//         function handleClickButtonFindOrder(){
-//                 event.preventDefault();
-//                 document.getElementById("btnFindOrder").on("click", function(e) {
-//                 let check = submitForm();
-//                 let data = {
-//                     psid: document.getElementById("psid").value,
-//                     customerName: document.getElementById("customerName").value,
-//                     email: document.getElementById("email").value,
-//                     orderNumber: document.getElementById("orderNumber").value
-//                 };
-
-//                 if(!check) {
-//                     //close webview
-//                     MessengerExtensions.requestCloseBrowser(function success() {
-//                         // webview closed
-//                     }, function error(err) {
-//                         // an error occurred
-//                         console.log(err);
-//                     });
-
-//                     //send data to node.js server
-//                     $.ajax({
-//                         url: `${window.location.origin}/set-info-order`,
-//                         method: "POST",
-//                         data: data,
-//                         success: function(data) {
-//                             console.log(data);
-//                         },
-//                         error: function(error) {
-//                             console.log(error);
-//                         }
-//                     })
-//                 }
-//                 console.log(check);
-//             });
-// }
-
-
-
-
-
-
-
-
-function handleClickButtonFindOrder() {
-    // Prevent form submission
-    event.preventDefault();
-
-    // Get button element
-    let button = document.getElementById("btnFindOrder");
-
-    // Add click event listener to button
-    button.addEventListener("click", function() {
-        // Gather data from input fields
-        // let check = submitForm();
-        let data = {
-            psid: document.getElementById("psid").value,
-            customerName: document.getElementById("customerName").value,
-            email: document.getElementById("email").value,
-            orderNumber: document.getElementById("orderNumber").value
-        };
-
-        // Validate data here
-
-        if (isValid) {
-            console.log("valid");
-            // Send data to server
-            sendDataToServer(data);
-            // Close webview
-            closeWebview();
-        } else {
-            console.log("invalid");
-            // Show error message or do something else if validation fails
-        }
-
-    });
+    return false;
 }
+
+
+// function submitForm() {
+//             event.preventDefault();
+
+//             // validation
+//             let isValid = true;
+//             let email = document.getElementById("email").value;
+//             let orderNumber = document.getElementById("orderNumber").value;
+//             if (!email) {
+//                 document.getElementById("email-error").innerHTML = "Please fill out your email addr.";
+//                 // console.log("inv");
+//                 isValid = false;
+//             }
+//             if (!orderNumber) {
+//                 document.getElementById("orderNumber-error").innerHTML = "Please fill out your order number.";
+//                 isValid = false;
+//             }
+//             if (!isValid) {
+//                 return;
+//             }
+//             document.getElementById("email-error").innerHTML = "";
+//             document.getElementById("orderNumber-error").innerHTML = "";
+            
+//             // sanitize data
+//             email = email.trim();
+//             orderNumber = orderNumber.trim();
+            
+//             // send data to server
+//             // ...
+
+//             // handling result from server
+//             // ...
+//         }
+
+
+
+        function handleClickButtonFindOrder(){
+                event.preventDefault();
+                document.getElementById("btnFindOrder").on("click", function(e) {
+                let check = submitForm();
+                let data = {
+                    psid: document.getElementById("psid").value,
+                    customerName: document.getElementById("customerName").value,
+                    email: document.getElementById("email").value,
+                    orderNumber: document.getElementById("orderNumber").value
+                };
+
+                if(!check) {
+                    //close webview
+                    MessengerExtensions.requestCloseBrowser(function success() {
+                        // webview closed
+                    }, function error(err) {
+                        // an error occurred
+                        console.log(err);
+                    });
+
+                    //send data to node.js server
+                    $.ajax({
+                        url: `${window.location.origin}/set-info-order`,
+                        method: "POST",
+                        data: data,
+                        success: function(data) {
+                            console.log(data);
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    })
+                }
+                console.log(check);
+            });
+}
+
+
+
+
+
+
+
+
+// function handleClickButtonFindOrder() {
+//     // Prevent form submission
+//     event.preventDefault();
+
+//     // Get button element
+//     let button = document.getElementById("btnFindOrder");
+
+//     // Add click event listener to button
+//     button.addEventListener("click", function() {
+//         // Gather data from input fields
+//         // let check = submitForm();
+//         let data = {
+//             psid: document.getElementById("psid").value,
+//             customerName: document.getElementById("customerName").value,
+//             email: document.getElementById("email").value,
+//             orderNumber: document.getElementById("orderNumber").value
+//         };
+
+//         // Validate data here
+
+//         if (isValid) {
+//             console.log("valid");
+//             // Send data to server
+//             sendDataToServer(data);
+//             // Close webview
+//             closeWebview();
+//         } else {
+//             console.log("invalid");
+//             // Show error message or do something else if validation fails
+//         }
+
+//     });
+// }
 
 function sendDataToServer(data) {
     $.ajax({
@@ -277,7 +282,7 @@ function closeWebview() {
     MessengerExtensions.requestCloseBrowser(function success() {
         // webview closed
     }, function error(err) {
-        console.log(err);
+        console.log(err,"dfgh");
     });
 }
 
