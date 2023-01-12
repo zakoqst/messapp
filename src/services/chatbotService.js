@@ -52,6 +52,11 @@ let sendMessageWelcomeNewUser = (sender_psid) => {
                         "title": "Talk to an agent",
                         "payload": "TALK_AGENT",
                     },
+                    {
+                        "content_type": "text",
+                        "title": "Talk to an agent",
+                        "payload": "TALK_AGENT",
+                    },
                 ]
             };
 
@@ -115,7 +120,8 @@ let requestTalkToAgent = (sender_psid) => {
         } catch (e) {
             reject(e);
         }
-    });
+    }
+    );
 };
 
 let passThreadControl = (sender_psid, app) => {

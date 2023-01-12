@@ -10,8 +10,27 @@
     <!-- Load custom Javascript and CSS-->
     <link rel="stylesheet" href="/css/style.css">
     <script>
-        let facebookAppId = "%= facebookAppId %";
+
+        // if(document.getElementById("facebookAppId")) {
+        //     const facebookAppId = document.getElementById("facebookAppId").value;
+        //     console.log("p");
+        // } else {
+        //     console.log("n");
+        //     // Do something when element is not present
+        // }
+        let facebookAppId = `<%= facebookAppId %>`
+        console.log(facebookAppId);
+        // console.log(facebookAppId);
+        // let facebookAppId =document.getElementById("<%= facebookAppId %>").value;
+        // let orderNumber = document.getElementById("orderNumber").value;
+
         //load FB SDK
+
+
+
+
+
+
         (function(d, s, id){
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) {return;}
@@ -23,47 +42,48 @@
 
 
 
-        window.extAsyncInit = function() {
-            // the Messenger Extensions JS SDK is done loading
-            initializeMessengerExtensions();
-        };
-
-        function initializeMessengerExtensions() {
-            MessengerExtensions.getContext(facebookAppId, onThreadContextSuccess, onThreadContextError);
-        }
-
-        function onThreadContextSuccess(thread_context) {
-            // success
-            //set psid to input
-            document.getElementById("psid").value = thread_context.psid;
-            handleClickButtonFindOrder();
-        }
-
-        function onThreadContextError(err) {
-            // error
-            console.log(err);
-        }
-
-
-
-
-
         // window.extAsyncInit = function() {
-        // // the Messenger Extensions JS SDK is done loading
-
-        //     MessengerExtensions.getContext(facebookAppId,
-        //         function success(thread_context){
-        //             // success
-        //             //set psid to input
-        //             $("#psid").val(thread_context.psid);
-        //             handleClickButtonFindOrder();
-        //             },
-        //             function error(err){
-        //             // error
-        //             console.log(err,"rr");
-        //         }
-        // );
+        //     // the Messenger Extensions JS SDK is done loading
+        //     initializeMessengerExtensions();
         // };
+
+        // function initializeMessengerExtensions() {
+        //     MessengerExtensions.getContext(facebookAppId, onThreadContextSuccess, onThreadContextError);
+        //     console.log(facebookAppId);
+        // }
+        // console.log(facebookAppId);
+        // function onThreadContextSuccess(thread_context) {
+        //     // success
+        //     //set psid to input
+        //     thread_context.psid=document.getElementById("psid").value;
+        //     handleClickButtonFindOrder();
+        // }
+        // console.log(thread_context);
+        // function onThreadContextError(err) {
+        //     // error
+        //     console.log(err);
+        // }
+
+
+
+
+
+        window.extAsyncInit = function() {
+        // the Messenger Extensions JS SDK is done loading
+
+            MessengerExtensions.getContext(facebookAppId,
+                function success(thread_context){
+                    // success
+                    //set psid to input
+                    $("#psid").val(thread_context.psid);
+                    handleClickButtonFindOrder();
+                    },
+                    function error(err){
+                    // error
+                    console.log(err,"rr");
+                }
+        );
+        };
 
 
     
@@ -226,13 +246,16 @@ function handleClickButtonFindOrder() {
         // Validate data here
 
         if (isValid) {
+            console.log("valid");
             // Send data to server
             sendDataToServer(data);
             // Close webview
             closeWebview();
         } else {
+            console.log("invalid");
             // Show error message or do something else if validation fails
         }
+
     });
 }
 
