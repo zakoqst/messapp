@@ -61,7 +61,9 @@ let handleSetupProfileAPI = () => {
                     }
                 ],
                 "whitelisted_domains": [
-                    "https://jisr-messenger-app.onrender.com/"
+                    "https://jisr-messenger-app.onrender.com/",
+                    "https://jisr-messenger-app.onrender.com/info-order",
+                    "http://localhost:8080/info-order"
                 ]
             
         
