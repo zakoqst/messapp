@@ -1,5 +1,7 @@
-import express from "express";
-import homepageController from "../controllers/homepageController";
+const express =require("express")
+// import express from "express";
+const homepageController =require("../controllers/homepageController")
+// import homepageController from "../controllers/homepageController";
 
 let router = express.Router();
 
