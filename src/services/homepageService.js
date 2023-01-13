@@ -9,7 +9,9 @@ let handleGetStartedButton = () => {
     let response1 = {
                         "text": "Hi zack! Welcome to Jisr Service Zakaria, where you will find what you need."
                     };
-
+                    resolve("done");                
+    return response1;
+    
     // let response = {
     //     "attachment": {
     //         "type": "template",
@@ -45,14 +47,14 @@ let handleGetStartedButton = () => {
     //         }
     //     }
     // };
-    resolve("done");
-    return response1;
+    
+    
  
             } catch (e) {
                 reject(e);
             }
         });
-    // return response1;
+    
 
 }
 
