@@ -147,8 +147,8 @@ let handlePostback = (sender_psid, received_postback) => {
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'GET_STARTED') {
-        response = {"text": "Hello zack"}
-        // response = homepageService.handleGetStartedButton();
+        // response = {"text": "Hello zack"}
+        response = homepageService.handleGetStartedButton();
     } else if (payload === 'RESTART_CONVERSATION') {
         response = homepageService.handleGetStartedButton();
     }
