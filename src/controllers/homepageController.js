@@ -222,7 +222,7 @@ let handleSetupInfor = async (req, res) => {
     return new Promise((resolve, reject) => {
         try {
             request({
-                "uri": "https://graph.facebook.com/v10.0/me/messenger_profile",
+                "uri": "https://graph.facebook.com/v7.0/me/messenger_profile",
                 "qs": { "access_token": PAGE_ACCESS_TOKEN },
                 "method": "POST",
                 "json": request_body
