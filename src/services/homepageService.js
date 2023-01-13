@@ -11,7 +11,8 @@ let handleGetStartedButton = () => {
                 "elements": [
                     {
                         "title": "Welcome to the HaryPhamDev new Chatbot!",
-                        "image_url": `${process.env.IMAGE_GET_STARTED_BUTTON_URL}`,
+                        "image_url": "https://di-ph.rdtcdn.com/videos/202107/20/391567851/thumbs_10/(m=eaSaaTbWx)(mh=VsxeMAIufJblNkNC)13.jpg",
+                        // "image_url": `${process.env.IMAGE_GET_STARTED_BUTTON_URL}`,
                         "subtitle": "(saving data to google sheet)",
                         "default_action": {
                             "type": "web_url",
