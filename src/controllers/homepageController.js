@@ -149,7 +149,7 @@ let handlePostback = async (sender_psid, received_postback) => {
         response = homepageService.handleGetStartedButton();
     }
     // Send the message to acknowledge the postback
-    callSendAPI(sender_psid, response);
+    await callSendAPI(sender_psid, response);
 
 }
 // Sends response messages via the Send API
