@@ -126,49 +126,46 @@ let handleMessage = (sender_psid, received_message) => {
 };
 
 
-let handlePostback= async (sender_psid, received_postback)=> {
+
+
+
+// Handles messaging_postbacks events
+let handlePostback = async (sender_psid, received_postback) => {
     let response;
-    
+
     // Get the payload for the postback
     let payload = received_postback.payload;
-  
     // Set the response based on the postback payload
-    switch (payload) {
-        case "GET_STARTED":
-            response = {"text": "Hello zack"}
-            // await homepageService.handleGetStartedButton();;
-            // break;
-        case "RESTART_CONVERSATION":
-            awaithomepageService.handleGetStartedButton();;
-            break;
-        default:
-            console.log("run default switch case")
-    
-
+    if (payload === 'yes') {
+        response = { "text": "Thanks!" }
+    } else if (payload === 'no') {
+        response = { "text": "Oops, try sending another image." }
+    } else if (payload === 'GET_STARTED') {
+        response = {"text": "Hello zack"}
+        // response= homepageService.handleGetStartedButton();
+        console.log(response);
+         
+    } else if (payload === 'RESTART_CONVERSATION') {
+        response = homepageService.handleGetStartedButton();
     }
+    // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
 
-
-
-  };
-
-
-
-
-  let callSendAPI=(sender_psid, response) => {
-
-        // Construct the message body
+}
+// Sends response messages via the Send API
+let callSendAPI = (sender_psid, response) => {
+    // Construct the message body
     let request_body = {
         "recipient": {
             "id": sender_psid
         },
-         "message": response
-    }
+        "message": response
+    };
 
     // Send the HTTP request to the Messenger Platform
     request({
-        "uri": "https://graph.facebook.com/v10.0/me/messages",
-        "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
+        "uri": "https://graph.facebook.com/v6.0/me/messages",
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
         "method": "POST",
         "json": request_body
     }, (err, res, body) => {
@@ -176,62 +173,12 @@ let handlePostback= async (sender_psid, received_postback)=> {
             console.log('message sent!')
         } else {
             console.error("Unable to send message:" + err);
+            console.log('check error send messages 1111111111111')
+            console.log(res)
+            console.log('check error send messages 22222222222')
         }
-        }); 
-}
-
-
-
-// Handles messaging_postbacks events
-// let handlePostback = async (sender_psid, received_postback) => {
-//     let response;
-
-//     // Get the payload for the postback
-//     let payload = received_postback.payload;
-//     // Set the response based on the postback payload
-//     if (payload === 'yes') {
-//         response = { "text": "Thanks!" }
-//     } else if (payload === 'no') {
-//         response = { "text": "Oops, try sending another image." }
-//     } else if (payload === 'GET_STARTED') {
-//         // response = {"text": "Hello zack"}
-//         response= homepageService.handleGetStartedButton();
-//         console.log(response);
-         
-//     } else if (payload === 'RESTART_CONVERSATION') {
-//         response = homepageService.handleGetStartedButton();
-//     }
-//     // Send the message to acknowledge the postback
-//     callSendAPI(sender_psid, response);
-
-// }
-// Sends response messages via the Send API
-// let callSendAPI = (sender_psid, response) => {
-//     // Construct the message body
-//     let request_body = {
-//         "recipient": {
-//             "id": sender_psid
-//         },
-//         "message": response
-//     };
-
-//     // Send the HTTP request to the Messenger Platform
-//     request({
-//         "uri": "https://graph.facebook.com/v6.0/me/messages",
-//         "qs": { "access_token": PAGE_ACCESS_TOKEN },
-//         "method": "POST",
-//         "json": request_body
-//     }, (err, res, body) => {
-//         if (!err) {
-//             console.log('message sent!')
-//         } else {
-//             console.error("Unable to send message:" + err);
-//             console.log('check error send messages 1111111111111')
-//             console.log(res)
-//             console.log('check error send messages 22222222222')
-//         }
-//     });
-// };
+    });
+};
 
 let handleSetupInfor = async (req, res) => {
     //call the facebook api
