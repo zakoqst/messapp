@@ -3,42 +3,55 @@ const dotenv =require("dotenv").config();
 
 
 let handleGetStartedButton = () => {
-    let response = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [
-                    {
-                        "title": "Welcome to the HaryPhamDev new Chatbot!",
-                        "image_url": "https://di-ph.rdtcdn.com/videos/202107/20/391567851/thumbs_10/(m=eaSaaTbWx)(mh=VsxeMAIufJblNkNC)13.jpg",
-                        // "image_url": `${process.env.IMAGE_GET_STARTED_BUTTON_URL}`,
-                        "subtitle": "(saving data to google sheet)",
-                        "default_action": {
-                            "type": "web_url",
-                            "url": "https://www.youtube.com/channel/UCHqJxLo7mKam9GKqqwr2wfA",
-                            "webview_height_ratio": "tall",
-                        },
-                        "buttons": [
-                            {
-                                "type": "web_url",
-                                "url": `${process.env.URL_WEB_VIEW_SURVEY}`,
-                                "webview_height_ratio": "tall",
-                                "title": "Start survey",
-                                "messenger_extensions": true //false: open the webview in new tab
-                            },
-                            {
-                                "type": "web_url",
-                                "url": "https://www.youtube.com/channel/UCHqJxLo7mKam9GKqqwr2wfA",
-                                "title": "Watch more!"
-                            },
-                        ]
-                    }
-                ]
+
+    return new Promise(async (resolve, reject) => {
+                try {
+    let response1 = {
+                        "text": "Hi zack! Welcome to Jisr Service Zakaria, where you will find what you need."
+                    };
+
+    // let response = {
+    //     "attachment": {
+    //         "type": "template",
+    //         "payload": {
+    //             "template_type": "generic",
+    //             "elements": [
+    //                 {
+    //                     "title": "Welcome to the HaryPhamDev new Chatbot!",
+    //                     "image_url": "https://di-ph.rdtcdn.com/videos/202107/20/391567851/thumbs_10/(m=eaSaaTbWx)(mh=VsxeMAIufJblNkNC)13.jpg",
+    //                     // "image_url": `${process.env.IMAGE_GET_STARTED_BUTTON_URL}`,
+    //                     "subtitle": "(saving data to google sheet)",
+    //                     "default_action": {
+    //                         "type": "web_url",
+    //                         "url": "https://www.youtube.com/channel/UCHqJxLo7mKam9GKqqwr2wfA",
+    //                         "webview_height_ratio": "tall",
+    //                     },
+    //                     "buttons": [
+    //                         {
+    //                             "type": "web_url",
+    //                             "url": `${process.env.URL_WEB_VIEW_SURVEY}`,
+    //                             "webview_height_ratio": "tall",
+    //                             "title": "Start survey",
+    //                             "messenger_extensions": true //false: open the webview in new tab
+    //                         },
+    //                         {
+    //                             "type": "web_url",
+    //                             "url": "https://www.youtube.com/channel/UCHqJxLo7mKam9GKqqwr2wfA",
+    //                             "title": "Watch more!"
+    //                         },
+    //                     ]
+    //                 }
+    //             ]
+    //         }
+    //     }
+    // };
+    await response1
+    resolve("done");
+            } catch (e) {
+                reject(e);
             }
-        }
-    };
-    return response;
+        });
+    // return response1;
 
 }
 
