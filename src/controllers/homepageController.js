@@ -126,7 +126,7 @@ let handleMessage = (sender_psid, received_message) => {
 };
 
 // Handles messaging_postbacks events
-let handlePostback = (sender_psid, received_postback) => {
+let handlePostback = async (sender_psid, received_postback) => {
     let response;
 
     // Get the payload for the postback
@@ -148,7 +148,8 @@ let handlePostback = (sender_psid, received_postback) => {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'GET_STARTED') {
         // response = {"text": "Hello zack"}
-        response = homepageService.handleGetStartedButton();
+         await homepageService.handleGetStartedButton();
+         
     } else if (payload === 'RESTART_CONVERSATION') {
         response = homepageService.handleGetStartedButton();
     }
@@ -216,14 +217,14 @@ let handleSetupInfor = async (req, res) => {
                 ]
             }
         ],
-        // "whitelisted_domains": [
-        //     "https://jisr-messenger-app.onrender.com", //link to your Heroku app
-        // ]
+        "whitelisted_domains": [
+            "https://jisr-messenger-app.onrender.com", //link to your Heroku app
+        ]
     };
     return new Promise((resolve, reject) => {
         try {
             request({
-                "uri": "https://graph.facebook.com/v7.0/me/messenger_profile",
+                "uri": "https://graph.facebook.com/v6.0/me/messenger_profile",
                 "qs": { "access_token": PAGE_ACCESS_TOKEN },
                 "method": "POST",
                 "json": request_body
