@@ -147,7 +147,8 @@ let handlePostback = (sender_psid, received_postback) => {
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'GET_STARTED') {
-        response = homepageService.handleGetStartedButton();
+        response = {"text": "Hello zack"}
+        // response = homepageService.handleGetStartedButton();
     } else if (payload === 'RESTART_CONVERSATION') {
         response = homepageService.handleGetStartedButton();
     }
@@ -215,9 +216,9 @@ let handleSetupInfor = async (req, res) => {
                 ]
             }
         ],
-        "whitelisted_domains": [
-            "https://jisr-messenger-app.onrender.com", //link to your Heroku app
-        ]
+        // "whitelisted_domains": [
+        //     "https://jisr-messenger-app.onrender.com", //link to your Heroku app
+        // ]
     };
     return new Promise((resolve, reject) => {
         try {
