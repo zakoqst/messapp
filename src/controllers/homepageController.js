@@ -135,8 +135,9 @@ let handlePostback= async (sender_psid, received_postback)=> {
     // Set the response based on the postback payload
     switch (payload) {
         case "GET_STARTED":
-            await homepageService.handleGetStartedButton();;
-            break;
+            response = {"text": "Hello zack"}
+            // await homepageService.handleGetStartedButton();;
+            // break;
         case "RESTART_CONVERSATION":
             awaithomepageService.handleGetStartedButton();;
             break;
@@ -166,7 +167,7 @@ let handlePostback= async (sender_psid, received_postback)=> {
 
     // Send the HTTP request to the Messenger Platform
     request({
-        "uri": "https://graph.facebook.com/v6.0/me/messages",
+        "uri": "https://graph.facebook.com/v10.0/me/messages",
         "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
         "method": "POST",
         "json": request_body
