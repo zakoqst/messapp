@@ -126,12 +126,21 @@ let handleMessage = (sender_psid, received_message) => {
 };
 
 // Handles messaging_postbacks events
-let handlePostback =async (sender_psid, received_postback) => {
+let handlePostback = (sender_psid, received_postback) => {
     let response;
 
     // Get the payload for the postback
     let payload = received_postback.payload;
-
+    // switch (payload) {
+    //     case "GET_STARTED":
+    //         await homepageService.handleGetStartedButton(); 
+    //         break;
+    //     case "RESTART_CONVERSATION":
+    //         await homepageService.handleGetStartedButton();
+    //         break;
+    //     default:
+    //         console.log("run default switch case")
+    //     };
     // Set the response based on the postback payload
     if (payload === 'yes') {
         response = { "text": "Thanks!" }
@@ -144,8 +153,8 @@ let handlePostback =async (sender_psid, received_postback) => {
     }
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
-};
 
+}
 // Sends response messages via the Send API
 let callSendAPI = (sender_psid, response) => {
     // Construct the message body
