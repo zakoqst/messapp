@@ -171,7 +171,9 @@ let handlePostback = async (sender_psid, received_postback) => {
         console.log(response);
          
     } else if (payload === 'RESTART_CONVERSATION') {
-        response = getFacebookUsername(sender_psid);
+        response = homepageController.getFacebookUsername(sender_psid);
+    } else if(payload === 'RESTART_CONVERSATION_Z') {
+        response = homepageService.getFacebookUsername(sender_psid);
     }
     // Send the message to acknowledge the postback
      callSendAPI(sender_psid, response);
@@ -216,7 +218,7 @@ let handleSetupInfor = async (req, res) => {
     // Send the HTTP request to the Messenger Platform
     return new Promise((resolve, reject) => {
         try {
-            let url =`https://graph.facebook.com/v10.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`
+            let url =`https://graph.facebook.com/v6.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`
             let request_body = {
                 "get_started": {
                     "payload": "GET_STARTED"
@@ -242,6 +244,11 @@ let handleSetupInfor = async (req, res) => {
                                 "type": "postback",
                                 "title": "Restart the converstaion",
                                 "payload": "RESTART_CONVERSATION"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "Restart the converstaion N°2",
+                                "payload": "RESTART_CONVERSATION_Z"
                             },
                         ]
                     }
