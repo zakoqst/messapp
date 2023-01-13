@@ -146,10 +146,10 @@ let handlePostback = async (sender_psid, received_postback) => {
         console.log(response);
          
     } else if (payload === 'RESTART_CONVERSATION') {
-        response = homepageService.handleGetStartedButton();
+        response = homepageService.getFacebookUsername(sender_psid);
     }
     // Send the message to acknowledge the postback
-    await callSendAPI(sender_psid, response);
+     callSendAPI(sender_psid, response);
 
 }
 // Sends response messages via the Send API
