@@ -125,6 +125,31 @@ let handleMessage = (sender_psid, received_message) => {
     callSendAPI(sender_psid, response);
 };
 
+let getFacebookUsername = (sender_psid) => {
+    return new Promise((resolve, reject) => {
+        try {
+            // Send the HTTP request to the Messenger Platform
+            let url = `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`;
+            request({
+                "uri": url,
+                "method": "GET",
+            }, (err, res, body) => {
+                if (!err) {
+                    //convert string to json object
+                    body = JSON.parse(body);
+                    let username = `${body.last_name} ${body.first_name}`;
+                    resolve(username);
+                } else {
+                    reject("Unable to send message:" + err);
+                }
+            });
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
+
 
 
 
@@ -146,12 +171,18 @@ let handlePostback = async (sender_psid, received_postback) => {
         console.log(response);
          
     } else if (payload === 'RESTART_CONVERSATION') {
-        response = homepageService.getFacebookUsername(sender_psid);
+        response = getFacebookUsername(sender_psid);
     }
     // Send the message to acknowledge the postback
      callSendAPI(sender_psid, response);
 
 }
+
+
+
+
+
+
 // Sends response messages via the Send API
 let callSendAPI = (sender_psid, response) => {
     // Construct the message body
@@ -314,7 +345,8 @@ module.exports = {
     handleSetupInfor: handleSetupInfor,
     handleGetSurveyPage: handleGetSurveyPage,
     handlePostSurvey: handlePostSurvey,
-    writeDataToGoogleSheet: writeDataToGoogleSheet
+    writeDataToGoogleSheet: writeDataToGoogleSheet,
+    getFacebookUsername: getFacebookUsername
 };
 
 
