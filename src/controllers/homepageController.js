@@ -148,7 +148,7 @@ let handlePostback = async (sender_psid, received_postback) => {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'GET_STARTED') {
         // response = {"text": "Hello zack"}
-         await homepageService.handleGetStartedButton();
+        response= await homepageService.handleGetStartedButton();
          
     } else if (payload === 'RESTART_CONVERSATION') {
         response = homepageService.handleGetStartedButton();
