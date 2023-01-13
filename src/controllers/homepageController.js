@@ -235,56 +235,58 @@ let handlePostback= async (sender_psid, received_postback)=> {
 let handleSetupInfor = async (req, res) => {
     //call the facebook api
     // Send the HTTP request to the Messenger Platform
-    let request_body = {
-        "get_started": {
-            "payload": "GET_STARTED"
-        },
-        "persistent_menu": [
-            {
-                "locale": "default",
-                "composer_input_disabled": false,
-                "call_to_actions": [
-                    {
-                        "type": "web_url",
-                        "title": "My youtube channel",
-                        "url": "https://www.youtube.com/channel/UCHqJxLo7mKam9GKqqwr2wfA",
-                        "webview_height_ratio": "full"
-                    },
-                    {
-                        "type": "web_url",
-                        "title": "Source code this chatbot",
-                        "url": "https://www.github.com/haryphamdev",
-                        "webview_height_ratio": "full"
-                    },
-                    {
-                        "type": "postback",
-                        "title": "Restart the converstaion",
-                        "payload": "RESTART_CONVERSATION"
-                    },
-                ]
-            }
-        ],
-        "whitelisted_domains": [
-            "https://jisr-messenger-app.onrender.com", //link to your Heroku app
-        ]
-    };
     return new Promise((resolve, reject) => {
         try {
-            request({
-                "uri": "https://graph.facebook.com/v6.0/me/messenger_profile",
-                "qs": { "access_token": PAGE_ACCESS_TOKEN },
-                "method": "POST",
-                "json": request_body
-            }, (err, response, body) => {
-                console.log('-------------------------------------------------------')
-                console.log('Logs setup persistent menu & get started button: ', response)
-                console.log('-------------------------------------------------------')
-                if (!err) {
-                    return res.send('Setup done!')
-                } else {
-                    return res.send('Something wrongs with setup, please check logs...')
-                }
-            });
+            let url =`https://graph.facebook.com/v6.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`
+            let request_body = {
+                "get_started": {
+                    "payload": "GET_STARTED"
+                },
+                "persistent_menu": [
+                    {
+                        "locale": "default",
+                        "composer_input_disabled": false,
+                        "call_to_actions": [
+                            {
+                                "type": "web_url",
+                                "title": "My youtube channel",
+                                "url": "https://www.youtube.com/channel/UCHqJxLo7mKam9GKqqwr2wfA",
+                                "webview_height_ratio": "full"
+                            },
+                            {
+                                "type": "web_url",
+                                "title": "Source code this chatbot",
+                                "url": "https://www.github.com/haryphamdev",
+                                "webview_height_ratio": "full"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "Restart the converstaion",
+                                "payload": "RESTART_CONVERSATION"
+                            },
+                        ]
+                    }
+                ],
+                "whitelisted_domains": [
+                    "https://jisr-messenger-app.onrender.com", //link to your Heroku app
+                ]
+            };
+
+                    request({
+                        "uri": url,
+                        // "qs": { "access_token": PAGE_ACCESS_TOKEN },
+                        "method": "POST",
+                        "json": request_body
+                    }, (err, response, body) => {
+                        console.log('-------------------------------------------------------')
+                        console.log('Logs setup persistent menu & get started button: ', response)
+                        console.log('-------------------------------------------------------')
+                        if (!err) {
+                            return res.send('Setup done!')
+                        } else {
+                            return res.send('Something wrongs with setup, please check logs...')
+                        }
+                    });
         } catch (e) {
             reject(e);
         }
