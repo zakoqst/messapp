@@ -1,104 +1,128 @@
-const dotenv =require("dotenv").config();
-// require('dotenv').config();
+// const dotenv =require("dotenv").config();
+// // require('dotenv').config();
 
 
-let handleGetStartedButton = () => {
 
-    return new Promise(async (resolve, reject) => {
-                try {
-    let response1 = {
-                        "text": "Hi zack! Welcome to Jisr Service Zakaria, where you will find what you need."
-                    };
-                    resolve("done");                
-    return response1;
+// let getFacebookUsername = (sender_psid) => {
+//     return new Promise((resolve, reject) => {
+//         try {
+//             // Send the HTTP request to the Messenger Platform
+//             let url = `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`;
+//             request({
+//                 "uri": url,
+//                 "method": "GET",
+//             }, (err, res, body) => {
+//                 if (!err) {
+//                     //convert string to json object
+//                     body = JSON.parse(body);
+//                     let username = `${body.last_name} ${body.first_name}`;
+//                     resolve(username);
+//                 } else {
+//                     reject("Unable to send message:" + err);
+//                 }
+//             });
+//         } catch (e) {
+//             reject(e);
+//         }
+//     });
+// };
+
+
+// let handleGetStartedButton = () => {
+
+//     return new Promise(async (resolve, reject) => {
+//                 try {
+//     let response1 = {
+//                         "text": "Hi zack! Welcome to Jisr Service Zakaria, where you will find what you need."
+//                     };
+//                     resolve("done");                
+//     return response1;
     
-    // let response = {
-    //     "attachment": {
-    //         "type": "template",
-    //         "payload": {
-    //             "template_type": "generic",
-    //             "elements": [
-    //                 {
-    //                     "title": "Welcome to the HaryPhamDev new Chatbot!",
-    //                     "image_url": "https://di-ph.rdtcdn.com/videos/202107/20/391567851/thumbs_10/(m=eaSaaTbWx)(mh=VsxeMAIufJblNkNC)13.jpg",
-    //                     // "image_url": `${process.env.IMAGE_GET_STARTED_BUTTON_URL}`,
-    //                     "subtitle": "(saving data to google sheet)",
-    //                     "default_action": {
-    //                         "type": "web_url",
-    //                         "url": "https://www.youtube.com/channel/UCHqJxLo7mKam9GKqqwr2wfA",
-    //                         "webview_height_ratio": "tall",
-    //                     },
-    //                     "buttons": [
-    //                         {
-    //                             "type": "web_url",
-    //                             "url": `${process.env.URL_WEB_VIEW_SURVEY}`,
-    //                             "webview_height_ratio": "tall",
-    //                             "title": "Start survey",
-    //                             "messenger_extensions": true //false: open the webview in new tab
-    //                         },
-    //                         {
-    //                             "type": "web_url",
-    //                             "url": "https://www.youtube.com/channel/UCHqJxLo7mKam9GKqqwr2wfA",
-    //                             "title": "Watch more!"
-    //                         },
-    //                     ]
-    //                 }
-    //             ]
-    //         }
-    //     }
-    // };
+//     // let response = {
+//     //     "attachment": {
+//     //         "type": "template",
+//     //         "payload": {
+//     //             "template_type": "generic",
+//     //             "elements": [
+//     //                 {
+//     //                     "title": "Welcome to the HaryPhamDev new Chatbot!",
+//     //                     "image_url": "https://di-ph.rdtcdn.com/videos/202107/20/391567851/thumbs_10/(m=eaSaaTbWx)(mh=VsxeMAIufJblNkNC)13.jpg",
+//     //                     // "image_url": `${process.env.IMAGE_GET_STARTED_BUTTON_URL}`,
+//     //                     "subtitle": "(saving data to google sheet)",
+//     //                     "default_action": {
+//     //                         "type": "web_url",
+//     //                         "url": "https://www.youtube.com/channel/UCHqJxLo7mKam9GKqqwr2wfA",
+//     //                         "webview_height_ratio": "tall",
+//     //                     },
+//     //                     "buttons": [
+//     //                         {
+//     //                             "type": "web_url",
+//     //                             "url": `${process.env.URL_WEB_VIEW_SURVEY}`,
+//     //                             "webview_height_ratio": "tall",
+//     //                             "title": "Start survey",
+//     //                             "messenger_extensions": true //false: open the webview in new tab
+//     //                         },
+//     //                         {
+//     //                             "type": "web_url",
+//     //                             "url": "https://www.youtube.com/channel/UCHqJxLo7mKam9GKqqwr2wfA",
+//     //                             "title": "Watch more!"
+//     //                         },
+//     //                     ]
+//     //                 }
+//     //             ]
+//     //         }
+//     //     }
+//     // };
     
     
  
-            } catch (e) {
-                reject(e);
-            }
-        });
+//             } catch (e) {
+//                 reject(e);
+//             }
+//         });
     
 
-}
+// }
 
-let getButtonMessageTemplate = () => {
-    let response = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "button",
-                "text": "What do you want to do next?",
-                "buttons": [
-                    {
-                        "type": "web_url",
-                        "url": "https://docs.google.com/spreadsheets/d/1xI6gppm13aAPATpbC1AIx6Ahj_cqIQrEHF25uU1Ye6k/edit?usp=sharing",
-                        "title": "View Data 😁"
-                    },
-                    {
-                        "type": "web_url",
-                        "url": `${process.env.URL_WEB_VIEW_SURVEY}`,
-                        "webview_height_ratio": "tall",
-                        "title": "Try again!",
-                        "messenger_extensions": true //false: open the webview in new tab
-                    },
+// let getButtonMessageTemplate = () => {
+//     let response = {
+//         "attachment": {
+//             "type": "template",
+//             "payload": {
+//                 "template_type": "button",
+//                 "text": "What do you want to do next?",
+//                 "buttons": [
+//                     {
+//                         "type": "web_url",
+//                         "url": "https://docs.google.com/spreadsheets/d/1xI6gppm13aAPATpbC1AIx6Ahj_cqIQrEHF25uU1Ye6k/edit?usp=sharing",
+//                         "title": "View Data 😁"
+//                     },
+//                     {
+//                         "type": "web_url",
+//                         "url": `${process.env.URL_WEB_VIEW_SURVEY}`,
+//                         "webview_height_ratio": "tall",
+//                         "title": "Try again!",
+//                         "messenger_extensions": true //false: open the webview in new tab
+//                     },
 
-                ]
-            }
-        }
-    }
+//                 ]
+//             }
+//         }
+//     }
 
-    return response;
-}
-module.exports = {
-    handleGetStartedButton: handleGetStartedButton,
-    getButtonMessageTemplate: getButtonMessageTemplate
-};
-
-
-
+//     return response;
+// }
+// module.exports = {
+//     handleGetStartedButton: handleGetStartedButton,
+//     getButtonMessageTemplate: getButtonMessageTemplate,
+//     getFacebookUsername: getFacebookUsername
+// };
 
 
 
 
 
-
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -106,7 +130,10 @@ module.exports = {
 
 
 
-/* // require("dotenv").config();
+
+
+
+ // require("dotenv").config();
 // import request from "request";
 
 const dotenv =require("dotenv").config();
@@ -288,4 +315,4 @@ module.exports = {
     markMessageRead: markMessageRead,
     sendTypingOn: sendTypingOn
 };
-  */
+  
