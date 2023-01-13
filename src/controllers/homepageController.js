@@ -149,6 +149,7 @@ let handlePostback = async (sender_psid, received_postback) => {
     } else if (payload === 'GET_STARTED') {
         // response = {"text": "Hello zack"}
         response= homepageService.handleGetStartedButton();
+        console.log(response);
          
     } else if (payload === 'RESTART_CONVERSATION') {
         response = homepageService.handleGetStartedButton();
