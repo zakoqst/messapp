@@ -237,7 +237,7 @@ let handleSetupInfor = async (req, res) => {
     // Send the HTTP request to the Messenger Platform
     return new Promise((resolve, reject) => {
         try {
-            let url =`https://graph.facebook.com/v6.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`
+            let url =`https://graph.facebook.com/v10.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`
             let request_body = {
                 "get_started": {
                     "payload": "GET_STARTED"
@@ -268,7 +268,7 @@ let handleSetupInfor = async (req, res) => {
                     }
                 ],
                 "whitelisted_domains": [
-                    "https://jisr-messenger-app.onrender.com", //link to your Heroku app
+                    "https://jisr-messenger-app.onrender.com/", //link to your Heroku app
                 ]
             };
 
