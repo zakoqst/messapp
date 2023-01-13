@@ -45,8 +45,9 @@ let handleGetStartedButton = () => {
     //         }
     //     }
     // };
-    await response1
     resolve("done");
+    return response1;
+ 
             } catch (e) {
                 reject(e);
             }
