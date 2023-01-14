@@ -158,9 +158,13 @@ let handleMessage = async (sender_psid, received_message) => {
             }
         }
     }
-
-    // Sends the response message
+try {
     await chatbotService.sendMessage(sender_psid, response);
+} catch (error) {
+    
+}
+    // Sends the response message
+    
 };
 
 // Handles messaging_postbacks events
