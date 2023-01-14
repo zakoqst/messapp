@@ -241,7 +241,7 @@ let setInfoOrder = async (req, res) => {
         await chatbotService.sendMessage(req.body.psid, response2);
 
         return res.status(200).json({
-            message: "ok"
+            message: "okk"
         });
     } catch (e) {
         console.log(e);
