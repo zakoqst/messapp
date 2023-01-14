@@ -158,11 +158,9 @@ let handleMessage = async (sender_psid, received_message) => {
             }
         }
     }
-try {
-    await chatbotService.sendMessage(sender_psid, response);
-} catch (error) {
-    
-}
+
+    chatbotService.sendMessage(sender_psid, response);
+
     // Sends the response message
     
 };
