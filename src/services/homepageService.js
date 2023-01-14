@@ -11,7 +11,7 @@ let handleSetupProfileAPI = () => {
         try {
             let url = `https://graph.facebook.com/v6.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`;
             let request_body = {
-                "مرحبا": {
+                "get_started": {
                     "payload": "GET_STARTED"
                 },
                 "persistent_menu": [
