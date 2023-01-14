@@ -9,7 +9,7 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 let handleSetupProfileAPI = () => {
     return new Promise((resolve, reject) => {
         try {
-            let url = `https://graph.facebook.com/v6.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}&v=6.0`;
+            let url = `https://graph.facebook.com/v8.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}&v=8.0`;
             let request_body = {
                 "get_started": {
                     "payload": "GET_STARTED"
@@ -29,24 +29,24 @@ let handleSetupProfileAPI = () => {
                                 "title": "Restart this conversation",
                                 "payload": "RESTART_CONVERSATION"
                             },
-                            {
-                                "type": "nested",
-                                "title": "More info",
-                                "call_to_actions": [
-                                    {
-                                        "type": "web_url",
-                                        "title": "View Facebook Fan Page",
-                                        "url": "https://www.facebook.com/haryphamdev",
-                                        "webview_height_ratio": "full"
-                                    },
-                                    {
-                                        "type": "web_url",
-                                        "title": "View Youtube channel",
-                                        "url": "https://bit.ly/subscribe-haryphamdev",
-                                        "webview_height_ratio": "full"
-                                    },
-                                ]
-                            }
+                            // {
+                            //     "type": "nested",
+                            //     "title": "More info",
+                            //     "call_to_actions": [
+                            //         {
+                            //             "type": "web_url",
+                            //             "title": "View Facebook Fan Page",
+                            //             "url": "https://www.facebook.com/haryphamdev",
+                            //             "webview_height_ratio": "full"
+                            //         },
+                            //         {
+                            //             "type": "web_url",
+                            //             "title": "View Youtube channel",
+                            //             "url": "https://bit.ly/subscribe-haryphamdev",
+                            //             "webview_height_ratio": "full"
+                            //         },
+                            //     ]
+                            // }
                         ]
                     }
                 ],
@@ -107,7 +107,7 @@ let sendTypingOn = (sender_psid) => {
                 "sender_action": "typing_on"
             };
 
-            let url = `https://graph.facebook.com/v6.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`;
+            let url = `https://graph.facebook.com/v8.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`;
             request({
                 "uri": url,
                 "method": "POST",
@@ -137,7 +137,7 @@ let markMessageRead = (sender_psid) => {
                 "sender_action": "mark_seen"
             };
 
-            let url = `https://graph.facebook.com/v6.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`;
+            let url = `https://graph.facebook.com/v8.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`;
             request({
                 "uri": url,
                 "method": "POST",
