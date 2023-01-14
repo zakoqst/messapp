@@ -28,6 +28,6 @@ privacy policy=https://www.freeprivacypolicy.com/live/07f52fa4-80f1-45ff-aff1-3b
 
 https://graph.facebook.com/v15.0/me/messenger_profile?access_token=<PAGE_ACCESS_TOKEN>
 
-curl -X GET "https://graph.facebook.com/v15.0/me/messenger_profile?fields=whitelisted_domains,greeting&access_token=EAATrmhCRFboBAKJ2ylYoz5q0mOCT0mg1DJYIpHUh2DvWDUnILR0ZBEcPEE1BQGoQZCd2ZBnpr3ZByC2XW9fTWeU7zQ8WYJDlVngfG5XoYg4HbRJKrmXIotZBLcBoKQhFN9WYRmbi0Ghobf1nyL3uzmDWF6PIjBGZAJR2YZAiPLqStBBPqkteiLMmnJGkLszypBXmthG6cLNuQZDZD"
+curl -X GET "https://graph.facebook.com/v15.0/me/messenger_profile?fields=whitelisted_domains,greeting&access_token=EAATrmhCRFboBAA4HgyAlM5spUaMMjh6J4SmAET1xBS24j8ZBUbSZBA9RCuBmp5nVio7HpdWPRwjXeFRE8ZCyD7rTOkDoAtpmE2WZCRrAeIED81kLGBXV5XEtTXhwcsruXYWk6enHl3AiPdSQUgER3ZAmjcwCajiGruZA9xt9PwAekWMDuhbsBP5UlNk0UIQRtjTIKGp3gZBHQZDZD"
 
 https://jisr-messenger-app.onrender.com
