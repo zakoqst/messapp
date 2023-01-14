@@ -159,10 +159,8 @@ let handleMessage = async (sender_psid, received_message) => {
         }
     }
 
-    chatbotService.sendMessage(sender_psid, response);
-
     // Sends the response message
-    
+    await chatbotService.sendMessage(sender_psid, response);
 };
 
 // Handles messaging_postbacks events
@@ -173,12 +171,6 @@ let handlePostback = async (sender_psid, received_postback) => {
     // Set the response based on the postback payload
     switch (payload) {
         case "GET_STARTED":
-            // await chatbotService.sendMessageWelcomeNewUser(sender_psid);
-            
-            await chatbotService.getFacebookUsername(sender_psid);
-
-            // response= {"text":"zack"}
-            break;
         case "RESTART_CONVERSATION":
             await chatbotService.sendMessageWelcomeNewUser(sender_psid);
             break;
@@ -250,7 +242,7 @@ let setInfoOrder = async (req, res) => {
         await chatbotService.sendMessage(req.body.psid, response2);
 
         return res.status(200).json({
-            message: "okk"
+            message: "ok"
         });
     } catch (e) {
         console.log(e);
