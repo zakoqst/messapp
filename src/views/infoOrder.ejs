@@ -7,359 +7,54 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- Load custom Javascript and CSS -->
+    <!-- Load custom Javascript and CSS-->
     <link rel="stylesheet" href="/css/style.css">
     <script>
-
-        if(document.getElementById("facebookAppId")) {
-            const facebookAppId = document.getElementById("facebookAppId").value;
-            console.log("p");
-        } else {
-            console.log("n");
-            // Do something when element is not present
-        }
-        // let facebookAppId = `<%= facebookAppId %>`
-        let facebookAppId = "1384946842277306"
-        // console.log(facebookAppId);
-        // console.log(facebookAppId);
-        // let facebookAppId =document.getElementById("<%= facebookAppId %>").value;
-        // let orderNumber = document.getElementById("orderNumber").value;
-
-        //load FB SDK
-
-
-
-
-
-
-        // (function(d, s, id){
-        //     var js, fjs = d.getElementsByTagName(s)[0];
-        //     if (d.getElementById(id)) {return;}
-        //     js = d.createElement(s); js.id = id;
-        //     js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
-        //     fjs.parentNode.insertBefore(js, fjs);
-        // }(document, 'script', 'Messenger'));
-
-
-
-
-        // window.extAsyncInit = function() {
-        //     // the Messenger Extensions JS SDK is done loading
-        //     initializeMessengerExtensions();
-        // };
-
-        // function initializeMessengerExtensions() {
-        //     MessengerExtensions.getContext(facebookAppId, onThreadContextSuccess, onThreadContextError);
-        //     console.log(facebookAppId);
-        // }
-        // console.log(facebookAppId);
-        // function onThreadContextSuccess(thread_context) {
-        //     // success
-        //     //set psid to input
-        //     $("#psid").val(thread_context.psid);
-        //     // thread_context.psid=document.getElementById("psid").value;
-        //     handleClickButtonFindOrder();
-        // }
-        // // console.log(thread_context);
-        // function onThreadContextError(err) {
-        //     // error
-        //     console.log($("#psid").val(thread_context.psid));
-        // }
-
-
-
-
-
-        // window.extAsyncInit = function() {
-        // // the Messenger Extensions JS SDK is done loading
-
-        //     MessengerExtensions.getContext(facebookAppId,
-        //         function success(thread_context){
-        //             let usePSID = thread_context.psid;
-        //             // success
-        //             //set psid to input
-        //             document.getElementById("psid").value =usePSID;
-        //             // $("#psid").val(thread_context.psid);
-        //             handleClickButtonFindOrder();
-        //         },
-        //             function error(err){
-        //             // error
-        //             console.log(err,"rr");
-        //             // console.log(thread_context);
-        //         }
-        //     );
-
-        // document.getElementById("btnFindOrder").addEventListener('click', function(e){} 
-        //     MessengerExtensions.requestCloseBrowser(function success() {
-        //             // webview closed
-                    
-        //         function handleClickButtonFindOrder(){
-        //             // $("#btnFindOrder").on("click", function(e) {
-        //                 // let check = validateInputFields();
-        //                 let data = {
-        //                     psid: $("#psid").val(),
-        //                     customerName: $("#customerName").val(),
-        //                     email: $("#email").val(),
-        //                     orderNumber: $("#orderNumber").val()
-        //                 };
-
-        
-
-        //                 //send data to node.js server
-        //                 fetch({
-        //                     url: `${window.location.origin}/set-info-order`,
-        //                     method: "POST",
-        //                     data: data,
-        //                     success: function(data) {
-        //                         console.log(data);
-        //                         },
-        //                     error: function(error) {
-        //                         console.log(error);
-        //                         }
-        //                     })
-                
-                
-        //             // });
-        //         }
-
-        //     }, function error(err) {
-        //             // an error occurred
-        //             console.log(err);
-        //         });
-        
-        // };
-
-
-    
-
-
-
-// function validateInputFields() {
-//     const EMAIL_REG = /[a-zA-Z][a-zA-Z0-9_\.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}/g;
-//     let email = $("#email");
-//     let orderNumber = $("#orderNumber");
-
-//     if (!email.val().match(EMAIL_REG)) {
-//         email.addClass("is-invalid");
-//         return true;
-//     } else {
-//         email.removeClass("is-invalid");
-//     }
-
-//     if (orderNumber.val() === "") {
-//         orderNumber.addClass("is-invalid");
-//         return true;
-//     } else {
-//         orderNumber.removeClass("is-invalid");
-//     }
-
-//     return false;
-// }
-
-
-
-
-
-//         function handleClickButtonFindOrder(){
-//                 event.preventDefault();
-//                 $("#btnFindOrder").on("click", function() {
-
-//         let check = validateInputFields();
-//         let data = {
-//             // psid: $("#psid").val(),
-//             // customerName: $("#customerName").val(),
-//             // email: $("#email").val(),
-//             // orderNumber: $("#orderNumber").val()
-//                 // document.getElementById("btnFindOrder").on("click", function(e) {
-//                 // let check = submitForm();
-//                 // let data = {
-//                     psid: document.getElementById("psid").value,
-//                     customerName: document.getElementById("customerName").value,
-//                     email: document.getElementById("email").value,
-//                     orderNumber: document.getElementById("orderNumber").value
-//                 };
-
-//                 // if(!check) {
-//                     // console.log(check);
-//                     //close webview
-//                     $.ajax({
-//                         url: `${window.location.origin}/set-info-order`,
-//                         method: "POST",
-//                         data: data,
-//                         success: function(data) {
-
-//                             MessengerExtensions.requestCloseBrowser(function success() {
-//                         // webview closed
-//                     }, function error(err) {
-//                         alert('alert---', data)
-//                         // an error occurred
-//                         console.log(err);
-//                     });
-//                             alert('alert+++', data)
-//                         },
-//                         error: function(error) {
-//                             console.log(error,"oooo");
-//                         }
-//                     },
-//                     )
-              
-
-//                     //send data to node.js server
-                    
-//                 // }
-                
-//             });
-// }
-
-
-
-
-
-
-
-
-// function handleClickButtonFindOrder() {
-//     // Prevent form submission
-//     event.preventDefault();
-
-//     // Get button element
-//     let button = document.getElementById("btnFindOrder");
-
-//     // Add click event listener to button
-//     button.addEventListener("click", function() {
-//         // Gather data from input fields
-//         // let check = submitForm();
-//         let data = {
-//             psid: document.getElementById("psid").value,
-//             customerName: document.getElementById("customerName").value,
-//             email: document.getElementById("email").value,
-//             orderNumber: document.getElementById("orderNumber").value
-//         };
-
-//         // Validate data here
-
-//         if (isValid) {
-//             console.log("valid");
-//             // Send data to server
-//             sendDataToServer(data);
-//             // Close webview
-//             closeWebview();
-//         } else {
-//             console.log("invalid");
-//             // Show error message or do something else if validation fails
-//         }
-
-//     });
-// }
-
-// function sendDataToServer(data) {
-//     $.ajax({
-//         url: `${window.location.origin}/set-info-order`,
-//         method: "POST",
-//         data: data,
-//         success: function(response) {
-//             console.log(response);
-//         },
-//         error: function(error) {
-//             console.log(error);
-//         }
-//     });
-// }
-
-// function closeWebview() {
-//     MessengerExtensions.requestCloseBrowser(function success() {
-//         // webview closed
-//     }, function error(err) {
-//         console.log(err,"dfgh");
-//     });
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-   </script>
+        let facebookAppId = "<%= facebookAppId %>"
+    </script>
     <script src="/js/order.js"></script>
 
- </head>
-
-
-
- <body>
-     <div class="container fix-height">
-         <div class="row">
-             <div class="col-12">
-                 <div class="text-center mt-3">
-                     <span class="title">Order lookup</span>
-                 </div>
-                 <form id="order-lookup-form" onsubmit="submitForm()"></form>
-                 <input type="text" id="psid" hidden> 
+</head>
+<body>
+<div class="container fix-height">
+    <div class="row">
+        <div class="col-12">
+            <div class="text-center mt-3">
+                <span class="title">Order lookup</span>
+            </div>
+            <input type="text" id="psid" hidden>
             <div class="form-group">
-                     <label for="customerName">Customer:</label>
-                     <input type="text" id="customerName" class="form-control" placeholder="Name...">
-                 </div>
-                 <div class="form-group">
-                     <label for="email">Email address (<span style="color: red">*</span>):</label>
-                     <input type="email" id="email" class="form-control" placeholder="Email address...">
-                        <div class="invalid-feedback">Please fill out your email address.</div>
-                 </div>
-                 <div class="form-group">
-                     <label for="orderNumber">Order number (<span style="color: red">*</span>):</label>
-                     <input type="text" id="orderNumber" class="form-control" placeholder="Order number...">
-                     <div class="invalid-feedback">Please fill out your order number.</div>
-                </div>
-                 <button class="btn btn-primary" id="btnFindOrder"> FIND ORDER </button>
-             </form>
-             </div>
-    
-       </div>
-    
-     </div> 
-    <!-- <div class="container fix-height">
-        <div class="row">
-            <div class="col-12">
-                <div class="text-center mt-3">
-                    <span class="title">Order lookup</span>
-                </div>
-                <form id="order-lookup-form" onsubmit="submitForm()">
-                    <input class="form-control" id="psid" hidden>
-                    <div class="form-group">
-                        <label for="customerName">Customer:</label>
-                        <input type="text" id="customerName" class="form-control" placeholder="Name...">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email address:</label>
-                        <input type="email" id="email" class="form-control" placeholder="Email address..." required>
-                        <div class="invalid-feedback" id="email-error"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="orderNumber">Order number:</label>
-                        <input type="text" id="orderNumber" class="form-control" placeholder="Order number..." required>
-                        <div class="invalid-feedback" id="orderNumber-error"></div>
-                    </div>
-                    <button class="btn btn-primary" type="submit" id="btnFindOrder"> FIND ORDER </button>
-                </form>
+                <label for="customerName">Customer:</label>
+                <input type="text" id="customerName" class="form-control" placeholder="Name...">
             </div>
-        </div>
-    </div> -->
-     <footer>
-        <div class="text-center">
-            <div class="">
-                <span class="mr-3">&copy; Chatbot Tutorial</span>
-                <span class="ml-3">
-                    Powered by <a href="https://bit.ly/subscribe-haryphamdev" target="_blank">HaryPhamDev</a>
-                </span>
+            <div class="form-group">
+                <label for="email">Email address (<span style="color: red">*</span>):</label>
+                <input type="email" id="email" class="form-control" placeholder="Email address...">
+                <div class="invalid-feedback">Please fill out your email address.</div>
             </div>
+            <div class="form-group">
+                <label for="orderNumber">Order number (<span style="color: red">*</span>):</label>
+                <input type="text" id="orderNumber" class="form-control" placeholder="Order number...">
+                <div class="invalid-feedback">Please fill out your order number.</div>
+            </div>
+            <button class="btn btn-primary" id="btnFindOrder"> FIND ORDER </button>
         </div>
-    </footer>
+
+    </div>
+
+</div>
+<footer>
+    <div class="text-center">
+        <div class="">
+            <span class="mr-3">	&copy; Chatbot Tutorial</span>
+            <span class="ml-3">
+                Powered by <a href="https://bit.ly/subscribe-haryphamdev" target="_blank">HaryPhamDev</a>
+            </span>
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>
+Footer
+© 2023 GitHub, Inc.
