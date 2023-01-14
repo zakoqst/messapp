@@ -24,7 +24,7 @@ const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 
 let getHomePage = (req, res) => {
     let facebookAppId = process.env.FACEBOOK_APP_ID;
-    return res.render("survey.ejs", {
+    return res.render("homepage.ejs", {
         facebookAppId: facebookAppId
     })
 };
