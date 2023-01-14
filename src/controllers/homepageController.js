@@ -176,7 +176,10 @@ let handlePostback = async (sender_psid, received_postback) => {
     switch (payload) {
         case "GET_STARTED":
             // await chatbotService.sendMessageWelcomeNewUser(sender_psid);
-            response= {"text":`${sender_psid}`}
+            
+            await chatbotService.getFacebookUsername(sender_psid);
+
+            // response= {"text":"zack"}
             break;
         case "RESTART_CONVERSATION":
             await chatbotService.sendMessageWelcomeNewUser(sender_psid);
