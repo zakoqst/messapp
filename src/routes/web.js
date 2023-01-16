@@ -45,10 +45,10 @@ let initWebRoutes = (app)=> {
     router.get("/webhook", homepageController.getWebhook);
     router.post("/webhook", homepageController.postWebhook);
     router.post("/set-up-profile", homepageController.handleSetupProfile);
-        // router.post('/setup', homepageController.handleSetupInfor); //set up the persistent menu & get started button
+        router.post('/setup', homepageController.handleSetupInfor); //set up the persistent menu & get started button
     router.get("/set-up-profile", homepageController.getSetupProfilePage);
     // router.get('/get-survey', homepageController.handleGetSurveyPage); //webview
-    router.post('/post-survey', homepageController.handlePostSurvey);
+    // router.post('/post-survey', homepageController.handlePostSurvey);
     
     router.get("/info-order", homepageController.getInfoOrderPage);
     router.post("/set-info-order", homepageController.setInfoOrder);
