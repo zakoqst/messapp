@@ -1,13 +1,13 @@
 const dotenv =require("dotenv").config();
-const express =require("express")
+const express =require("express");
 // require('dotenv').config();
 // import express from "express";
-const configViewEngine = require("./config/viewEngine")
-const initWebRoutes = require("./routes/web")
+const configViewEngine = require("./config/viewEngine");
+const initWebRoutes = require("./routes/web");
 
 // import configViewEngine from "./config/viewEngine_1";
 // import initWebRoutes from "./routes/web_1";
-const bodyParser =require("body-parser")
+const bodyParser =require("body-parser");
 // import bodyParser from "body-parser";
 
 let app = express();
