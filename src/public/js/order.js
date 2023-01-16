@@ -31,6 +31,7 @@ function validateInputFields() {
     let orderNumber = $("#orderNumber");
 
     if (!email.val().match(EMAIL_REG)) {
+        alert('Email and Order Number are required!');
         email.addClass("is-invalid");
         return true;
     } else {
@@ -68,6 +69,7 @@ function handleClickButtonFindOrder(){
 
             //send data to node.js server
             $.ajax({
+                alert:`${ alert('Email and Order Number are required!')}`,
                 url: `${window.location.origin}/set-info-order`,
                 method: "POST",
                 data: data,
@@ -78,6 +80,7 @@ function handleClickButtonFindOrder(){
                     console.log(error);
                 }
             })
+            window.close();
         // }
     });
 }
