@@ -48,3 +48,5 @@ https://graph.facebook.com/v15.0/me/messenger_profile?access_token=<PAGE_ACCESS_
 curl -X GET "https://graph.facebook.com/v15.0/me/messenger_profile?fields=whitelisted_domains,greeting&access_token=EAATrmhCRFboBAA4HgyAlM5spUaMMjh6J4SmAET1xBS24j8ZBUbSZBA9RCuBmp5nVio7HpdWPRwjXeFRE8ZCyD7rTOkDoAtpmE2WZCRrAeIED81kLGBXV5XEtTXhwcsruXYWk6enHl3AiPdSQUgER3ZAmjcwCajiGruZA9xt9PwAekWMDuhbsBP5UlNk0UIQRtjTIKGp3gZBHQZDZD"
 
 https://jisr-messenger-app.onrender.com
+
+https://m.facebook.com/?tbua=1

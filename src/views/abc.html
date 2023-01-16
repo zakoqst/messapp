@@ -7,7 +7,8 @@
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Document</title>
-
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script> 
         let facebookAppId =  1384946842277306 
     </script>
@@ -15,8 +16,73 @@
     <script src="/src/controllers/homepageController.js"></script>
 </head>
 <body>
+  <style>
+
+.form-control{
+    width: 76%;
+    background-color: #f9f9f9;
+    border-radius:5px;
+    box-shadow: 0 0 10px 0 #d9d9d9;
+    padding:10px;
+    transition: all 0.3s ease-in-out;
+    margin-left:60px;
+    margin-right:60px;
+  }
+  .form-group{
+    margin-bottom:20px;
+  }
+  .form-control:focus{
+    background-color: #fff;
+    box-shadow: 0 0 10px 0 #8bc34a;
+    outline: none;
+  }
+  #find_order_btn{
+    background-color: #8bc34a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: all 0.3s ease-in-out;
+    margin-left:20px;
+    margin-right:20px;
+  }
+  #find_order_btn:hover{
+    background-color: #689f38;
+    cursor: pointer;
+  }
+  .title {
+    font-weight: 600;
+    font-size: 30px;
+}
+
+    /*Custom CSS styles*/
+    /* .form-control{
+      background-color: #f9f9f9;
+      border-radius:5px;
+      box-shadow: 0 0 10px 0 #d9d9d9;
+      padding:10px;
+      transition: all 0.3s ease-in-out;
+    }
+    .form-control:focus{
+      background-color: #fff;
+      box-shadow: 0 0 10px 0 #8bc34a;
+      outline: none;
+    }
+    #find_order_btn{
+      background-color: #8bc34a;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      transition: all 0.3s ease-in-out;
+    }
+    #find_order_btn:hover{
+      background-color: #689f38;
+      cursor: pointer;
+    } */
+  </style>
     
-    <style>
+    <!-- <style>
         form {
           width: 80%;
           margin: 0 auto;
@@ -53,10 +119,29 @@
       
         input[type="submit"]:hover {
           background-color: #45a049;
-        }
+        } -->
       </style>
+  <div class="text-center mt-3">
+    <span class="title">Order lookup</span>
+</div>
+<form>
+  <div class="form-group">
+    <label for="customer">Customer:</label>
+    <input type="text" id="customer" name="customer" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="order_number">Order Number:</label>
+    <input type="text" id="order_number" name="order_number" required class="form-control">
+  </div>
+  <button type="button" id="find_order_btn" onclick="handleClickButtonFindOrder()" class="btn btn-primary">Find Order</button>
+</form>
+
       
-      <form>
+      <!-- <form>
         <label for="customer">Customer:</label>
         <input type="text" id="customer" name="customer">
       
@@ -68,7 +153,7 @@
         
         <button type="button" id="find_order_btn" onclick="handleClickButtonFindOrder()">Find Order</button>
       </form>
-      
+       -->
       <script>
         (function(d, s, id){
             var js, fjs = d.getElementsByTagName(s)[0];

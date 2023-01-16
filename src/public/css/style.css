@@ -1,4 +1,4 @@
-/*stick footer to bottom */
+/* stick footer to bottom
 body {
     display: flex;
     flex-direction: column;
@@ -54,4 +54,41 @@ a, a:hover, a:focus {
 
   input[type="submit"]:hover {
     background-color: #45a049;
+  } */
+
+  .form-control{
+    width: 76%;
+    background-color: #f9f9f9;
+    border-radius:5px;
+    box-shadow: 0 0 10px 0 #d9d9d9;
+    padding:10px;
+    transition: all 0.3s ease-in-out;
+    margin-left:60px;
+    margin-right:60px;
   }
+  .form-group{
+    margin-bottom:20px;
+  }
+  .form-control:focus{
+    background-color: #fff;
+    box-shadow: 0 0 10px 0 #8bc34a;
+    outline: none;
+  }
+  #find_order_btn{
+    background-color: #8bc34a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: all 0.3s ease-in-out;
+    margin-left:20px;
+    margin-right:20px;
+  }
+  #find_order_btn:hover{
+    background-color: #689f38;
+    cursor: pointer;
+  }
+  .title {
+    font-weight: 600;
+    font-size: 30px;
+}
