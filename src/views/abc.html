@@ -109,10 +109,11 @@
             
             MessengerExtensions.requestCloseBrowser(function success() {
               // webview closed
+              window.close();
             }, function error(err) {
               console.log(err);
             });
-
+            alert(data);
              $.ajax({
                 alert:`${ alert(data)}`,
               
@@ -127,7 +128,7 @@
                     console.log(error);
                 }
             })
-            window.close();
+            
           }
         }
       </script>
