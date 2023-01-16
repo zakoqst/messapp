@@ -114,12 +114,13 @@
             });
 
              $.ajax({
+                alert:`${ alert(data)}`,
               
                 url: `${window.location.origin}`,
                 method: "POST",
                 data:data,
                 success: function(data) {
-                    alert:`${ alert(data)}`,
+                    
                     console.log(data);
                 },
                 error: function(error) {
