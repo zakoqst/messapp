@@ -236,13 +236,15 @@ let setInfoOrder = async (req, res) => {
         // I demo response with sample text
         // you can check database for customer order's status
 
-        let response1 = {
-            "text": `---Info about your lookup order---
-            \nCustomer name: ${customerName}
-            \nEmail address: ${req.body.email}
-            \nOrder number: ${req.body.orderNumber}
-            `
-        };
+        let response1= { "text": `Customer name: ${customerName}`}
+
+        // let response1 = {
+        //     "text": `---Info about your lookup order---
+        //     \nCustomer name: ${customerName}
+        //     \nEmail address: ${req.body.email}
+        //     \nOrder number: ${req.body.orderNumber}
+        //     `
+        // };
 
         let response2 = templateMessage.setInfoOrderTemplate();
 
@@ -253,6 +255,7 @@ let setInfoOrder = async (req, res) => {
             message: "ok"
         });
     } catch (e) {
+        reject(e);
         console.log(e);
     }
 };
