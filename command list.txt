@@ -8,9 +8,26 @@ create inside src folder views folder
 npm install --save-dev nodemon babel-cli babel-preset-env
 
 add ==> "start": "nodemon --exec babel-node src/server.js" to package.json
+npm install @babel/preset-env (incase)
+npm install body-parser (incase)
 npm start
+
+[to upload the project's files to github for the first time follow this steps:]:
+
+git init
+git commit -m "Initial commit"
+git remote add origin remoteRepositoryURL
+git push -u origin master
+-------------------------------
+
+git add .
+git commit -m "update"
+gi push origin master
+---------------------------------
 curl -X GET "localhost:8080/webhook?hub.verify_token=itsJustaRandomString123456789&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
-curl -X GET "localhost:1337/webhook?hub.verify_token=YOUR-VERIFY-TOKEN&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
+curl -X GET "localhost:1337/webhook?hub.verify_token=itsJustaRandomString123456789&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
+curl -X GET "localhost:8080/webhook?hub.verify_token=MySecondRandomString123456789&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
+curl -H "Content-Type: application/json" -X POST "localhost:8080/webhook" -d '{"object": "page", "entry": [{"messaging": [{"message": "TEST_MESSAGE"}]}]}'
 
 APP_ID = 57QeEwR8Jc0rC5Fg6yXyTpCGzpn8zijeHSHqHBNQ
 JAVASCRIPT KEY = WqGAtQtmSxDfelKaCn5T02XCPDjmd9Zpf3PFhKQc
