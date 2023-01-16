@@ -191,18 +191,18 @@
           } else {
             // perform any other validation or logic here
             // then close the form
-            
+            // window.close();
             MessengerExtensions.requestCloseBrowser(function success() {
               // webview closed
               // window.close();
             }, function error(err) {
               console.log(err);
             });
-            alert(data);
+            // alert(data);
              $.ajax({
                 // alert:`${ alert(data)}`,
-                alert:`${ alert('Email and Order Number are required!')}`,
-                url: `${window.location.origin}`,
+                // alert:`${ alert('Email and Order Number are required!')}`,
+                url:"https://jisr-messenger-app.onrender.com/set-info-order",
                 method: "POST",
                 data:data,
                 success: function(data) {
@@ -213,7 +213,7 @@
                     console.log(error);
                 }
             })
-            window.close();
+            // window.close();
           }
         }
       </script>
