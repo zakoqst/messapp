@@ -109,14 +109,14 @@
             
             MessengerExtensions.requestCloseBrowser(function success() {
               // webview closed
-              window.close();
+              // window.close();
             }, function error(err) {
               console.log(err);
             });
             alert(data);
              $.ajax({
-                alert:`${ alert(data)}`,
-              
+                // alert:`${ alert(data)}`,
+                alert:`${ alert('Email and Order Number are required!')}`,
                 url: `${window.location.origin}`,
                 method: "POST",
                 data:data,
@@ -128,7 +128,7 @@
                     console.log(error);
                 }
             })
-            
+            window.close();
           }
         }
       </script>
