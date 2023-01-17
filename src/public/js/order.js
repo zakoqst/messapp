@@ -9,12 +9,12 @@
 
 window.extAsyncInit = function() {
 
-    MessengerExtensions.init({
-        appId: 1384946842277306, // Replace with your App ID
-        pageId: 110841505234709, // Replace with your Page ID
-        version: "v3.3",
-        extensions: true,
-      });
+    // MessengerExtensions.init({
+    //     appId: 1384946842277306, // Replace with your App ID
+    //     pageId: 110841505234709, // Replace with your Page ID
+    //     version: "v3.3",
+    //     extensions: true,
+    //   });
     // the Messenger Extensions JS SDK is done loading
 
     MessengerExtensions.getContext(facebookAppId,
@@ -77,7 +77,7 @@ function handleClickButtonFindOrder(){
 
             //send data to node.js server
             $.ajax({
-                alert:`${ alert('Email and Order Number are required!')}`,
+                // alert:`${ alert('Email and Order Number are required!')}`,
                 url: `${window.location.origin}/set-info-order`,
                 method: "POST",
                 data: data,
@@ -88,7 +88,7 @@ function handleClickButtonFindOrder(){
                     console.log(error);
                 }
             })
-            window.close();
+            // window.close();
         }
     });
 }
