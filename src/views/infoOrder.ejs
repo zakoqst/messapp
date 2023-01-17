@@ -17,7 +17,28 @@
 
 </head>
 <body>
-<div class="container fix-height">
+    <form>
+        <div class="text-center mt-3">
+            <span class="title">Order lookup</span>
+        </div>
+        <div class="form-group">
+          <label for="customer">Customer:</label>
+          <input type="text" id="customer" name="customer" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="order_number">Order Number:</label>
+          <input type="text" id="order_number" name="order_number" required class="form-control">
+        </div>
+        <!-- <button class ="form-group" type="button" id="find_order_btn" onclick="handleClickButtonFindOrder()" class="btn btn-primary">Find Order</button> -->
+        <button id="close-btn" onclick="closeWebview()">Close</button>
+      
+      
+      </form>
+<!-- <div class="container fix-height">
     <div class="row">
         <div class="col-12">
             <div class="text-center mt-3">
@@ -39,12 +60,13 @@
                 <div class="invalid-feedback">Please fill out your order number.</div>
             </div>
             <button class="btn btn-primary" id="btnFindOrder" onClick="handleClickButtonFindOrder()"> FIND ORDER </button>
+            <button class="btn btn-primary" id="close-btn" onClick="closeWebview()">Close</button>
             <button id="close-btn" onclick="closeWebview()">Close</button>
         </div>
 
     </div>
 
-</div>
+</div> -->
 <footer>
     <div class="text-center">
         <div class="">

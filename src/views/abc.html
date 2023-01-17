@@ -116,6 +116,21 @@ window.webContents.on('did-finish-load', () => {
             if(!check) {
               const currentWebview = webContents.getFocusedWebContents();
               currentWebview.close();
+              
+
+              $.ajax({
+                    // alert:`${ alert('Email and Order Number are required!')}`,
+                    url: `${window.location.origin}/set-info-order`,
+                    method: "POST",
+                    data: data,
+                    success: function(data) {
+                        console.log(data);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                })
+                
 
               // closeWebview();
                 // MessengerExtensions.requestCloseBrowser(function success() {
@@ -170,7 +185,7 @@ window.webContents.on('did-finish-load', () => {
     border-radius: 5px;
     padding: 10px 20px;
     transition: all 0.3s ease-in-out;
-    margin-left:-10px;
+    margin-left:20px;
     margin-right:20px;
 
   }

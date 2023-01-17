@@ -57,17 +57,18 @@ a, a:hover, a:focus {
   } */
 
   .form-control{
-    width: 76%;
+    width: 56%;
     background-color: #f9f9f9;
     border-radius:5px;
     box-shadow: 0 0 10px 0 #d9d9d9;
     padding:10px;
     transition: all 0.3s ease-in-out;
     margin-left:60px;
-    margin-right:60px;
+    margin-right:20px;
   }
   .form-group{
     margin-bottom:20px;
+    margin-left:190px;
   }
   .form-control:focus{
     background-color: #fff;
@@ -95,7 +96,7 @@ a, a:hover, a:focus {
     border-radius: 5px;
     padding: 10px 20px;
     transition: all 0.3s ease-in-out;
-    margin-left:-10px;
+    margin-left:20px;
     margin-right:20px;
 
   }
