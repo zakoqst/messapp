@@ -1,3 +1,5 @@
+// const { BrowserWindow } = require('electron');
+const { webContents } = require('electron');
 //load FB SDK
 (function(d, s, id){
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -22,7 +24,8 @@ window.extAsyncInit = function() {
             // success
             //set psid to input
             $("#psid").val(thread_context.psid);
-            handleClickButtonFindOrder();
+            // handleClickButtonFindOrder();
+            closeWebview();
         },
         function error(err){
             // error
@@ -55,28 +58,26 @@ function validateInputFields() {
     return false;
 }
 
-function handleClickButtonFindOrder(){
-    $("#btnFindOrder").on("click", function(e) {
-        let check = validateInputFields();
-        let data = {
-            psid: $("#psid").val(),
-            customerName: $("#customerName").val(),
-            email: $("#email").val(),
-            orderNumber: $("#orderNumber").val()
-        };
 
+
+
+// Wait for the window to be ready
+// window.webContents.on('did-finish-load', () => {
+//     let window = new BrowserWindow();
+//     // Access the webContents property here
+//     let webContents = window.webContents;
+// });
+
+  function closeWebview() {
+    const currentWebview = webContents.getFocusedWebContents();
+    let check = false;
+            let data={
+                    customer : document.getElementById('customer').value,
+                    email : document.getElementById('email').value,
+                    order_number :document.getElementById('order_number').value
+             };
         if(!check) {
-            //close webview
-            MessengerExtensions.requestCloseBrowser(function success() {
-                // webview closed
-                windows.close();
-            }, function error(err) {
-                // an error occurred
-                console.log(err);
-            });
-
-            //send data to node.js server
-            $.ajax({
+             $.ajax({
                 // alert:`${ alert('Email and Order Number are required!')}`,
                 url: `${window.location.origin}/set-info-order`,
                 method: "POST",
@@ -88,7 +89,48 @@ function handleClickButtonFindOrder(){
                     console.log(error);
                 }
             })
-            // window.close();
         }
-    });
-}
+    // alert(data);
+      
+    //   currentWebview.close();
+
+  }
+
+
+// function handleClickButtonFindOrder(){
+//     $("#btnFindOrder").on("click", function(e) {
+//         let check = validateInputFields();
+//         let data = {
+//             psid: $("#psid").val(),
+//             customerName: $("#customerName").val(),
+//             email: $("#email").val(),
+//             orderNumber: $("#orderNumber").val()
+//         };
+
+//         if(!check) {
+//             //close webview
+//             MessengerExtensions.requestCloseBrowser(function success() {
+//                 // webview closed
+//                 windows.close();
+//             }, function error(err) {
+//                 // an error occurred
+//                 console.log(err);
+//             });
+
+//             //send data to node.js server
+//             $.ajax({
+//                 // alert:`${ alert('Email and Order Number are required!')}`,
+//                 url: `${window.location.origin}/set-info-order`,
+//                 method: "POST",
+//                 data: data,
+//                 success: function(data) {
+//                     console.log(data);
+//                 },
+//                 error: function(error) {
+//                     console.log(error);
+//                 }
+//             })
+//             // window.close();
+//         }
+//     });
+// }

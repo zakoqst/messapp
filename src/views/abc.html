@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="//connect.facebook.com/en_US/messenger.Extensions.js"></script>
     <script> 
-        let facebookAppId = "<%= facebookAppId %>"
+        let facebookAppId = 1384946842277306 
         
         </script>
     <!-- <script src="/js/order.js"></script> -->
@@ -20,21 +20,22 @@
 </head>
 <body>
   <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId            : 1384946842277306,
-      autoLogAppEvents : true,
-      xfbml            : true,
-      version          : 'v15.0'
-    });
-  };
-  window.extAsyncInit = function() {
-          MessengerExtensions.init({
-      appId: 1384946842277306, // Replace with your App ID
-      pageId: 110841505234709, // Replace with your Page ID
-      version: "v3.3",
-      extensions: true,
-    });
+  // window.fbAsyncInit = function() {
+  //   FB.init({
+  //     appId            : 1384946842277306,
+  //     autoLogAppEvents : true,
+  //     xfbml            : true,
+  //     version          : 'v15.0'
+  //   });
+  // };
+ 
+    //       MessengerExtensions.init({
+    //   appId: 1384946842277306, // Replace with your App ID
+    //   pageId: 110841505234709, // Replace with your Page ID
+    //   version: "v3.3",
+    //   extensions: true,
+    // });
+
     (function(d, s, id){
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) {return;}
@@ -42,6 +43,11 @@
             js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'Messenger'));
+    
+        const { BrowserWindow } = require('electron');
+        const { webContents } = require('electron');
+
+        window.extAsyncInit = function() {
         MessengerExtensions.getContext(facebookAppId,
                 function success(thread_context){
                     // success
@@ -49,6 +55,7 @@
                     console.log(thread_context);
                     $("#psid").val(thread_context.psid);
                     handleClickButtonFindOrder();
+                    closeWebview();
                 },
                 function error(err){
                     // error
@@ -56,7 +63,71 @@
                 }
             );
   };
-   
+
+  // let window = new BrowserWindow();
+
+// Wait for the window to be ready
+window.webContents.on('did-finish-load', () => {
+    // Access the webContents property here
+    let webContents = window.webContents;
+});
+  function closeWebview() {
+
+    let check = false;
+            let data={
+                    customer : document.getElementById('customer').value,
+                    email : document.getElementById('email').value,
+                    order_number :document.getElementById('order_number').value
+             };
+
+             $.ajax({
+                // alert:`${ alert('Email and Order Number are required!')}`,
+                url: `${window.location.origin}/set-info-order`,
+                method: "POST",
+                data: data,
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            })
+    alert(data);
+      const currentWebview = webContents.getFocusedWebContents();
+      currentWebview.close();
+
+  }
+
+
+  function handleClickButtonFindOrder() {
+            let check = false;
+            let data={
+                    customer : document.getElementById('customer').value,
+                    email : document.getElementById('email').value,
+                    order_number :document.getElementById('order_number').value
+             };
+
+          // if (!email || !order_number) {
+          //   alert('Email and Order Number are required!');
+          // } else { }
+            if(!check) {
+              const currentWebview = webContents.getFocusedWebContents();
+              currentWebview.close();
+
+              // closeWebview();
+                // MessengerExtensions.requestCloseBrowser(function success() {
+
+                // }, function error(err) {
+                //   console.log(err);
+                // });
+
+            }
+            // perform any other validation or logic here
+            // then close the form
+            // window.close();
+  
+ 
+        }
 </script>
   <style>
 
@@ -72,6 +143,7 @@
   }
   .form-group{
     margin-bottom:20px;
+    margin-left:20px;
   }
   .form-control:focus{
     background-color: #fff;
@@ -88,6 +160,21 @@
     margin-left:20px;
     margin-right:20px;
   }
+  #close-btn{
+    background-color: #8bc34a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: all 0.3s ease-in-out;
+    margin-left:-10px;
+    margin-right:20px;
+
+  }
+  #close-btn:hover{
+    background-color: #689f38;
+    cursor: pointer;
+  }
   #find_order_btn:hover{
     background-color: #689f38;
     cursor: pointer;
@@ -97,71 +184,9 @@
     font-size: 30px;
 }
 
-    /*Custom CSS styles*/
-    /* .form-control{
-      background-color: #f9f9f9;
-      border-radius:5px;
-      box-shadow: 0 0 10px 0 #d9d9d9;
-      padding:10px;
-      transition: all 0.3s ease-in-out;
-    }
-    .form-control:focus{
-      background-color: #fff;
-      box-shadow: 0 0 10px 0 #8bc34a;
-      outline: none;
-    }
-    #find_order_btn{
-      background-color: #8bc34a;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 20px;
-      transition: all 0.3s ease-in-out;
-    }
-    #find_order_btn:hover{
-      background-color: #689f38;
-      cursor: pointer;
-    } */
+  
   </style>
     
-    <!-- <style>
-        form {
-          width: 80%;
-          margin: 0 auto;
-          padding: 20px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-        }
-      
-        label {
-          font-size: 1.2em;
-          font-weight: bold;
-          margin-bottom: 5px;
-          display: block;
-        }
-      
-        input {
-          width: 100%;
-          padding: 12px 20px;
-          margin: 8px 0;
-          box-sizing: border-box;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-        }
-      
-        input[type="submit"] {
-          background-color: #4CAF50;
-          color: white;
-          padding: 14px 20px;
-          margin: 8px 0;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-        }
-      
-        input[type="submit"]:hover {
-          background-color: #45a049;
-        } -->
       </style>
   <div class="text-center mt-3">
     <span class="title">Order lookup</span>
@@ -179,27 +204,13 @@
     <label for="order_number">Order Number:</label>
     <input type="text" id="order_number" name="order_number" required class="form-control">
   </div>
-  <button type="button" id="find_order_btn" onclick="handleClickButtonFindOrder()" class="btn btn-primary">Find Order</button>
+  <button class ="form-group" type="button" id="find_order_btn" onclick="handleClickButtonFindOrder()" class="btn btn-primary">Find Order</button>
+  <button id="close-btn" onclick="closeWebview()">Close</button>
 
 
 </form>
 
       
-      <!-- <form>
-        <label for="customer">Customer:</label>
-        <input type="text" id="customer" name="customer">
-      
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-      
-        <label for="order_number">Order Number:</label>
-        <input type="text" id="order_number" name="order_number" required>
-        
-        <button type="button" id="find_order_btn" onclick="handleClickButtonFindOrder()">Find Order</button>
-      </form>
-       -->
-      
-
       <script>
 
 
@@ -215,23 +226,7 @@
             
 
 
-        function handleClickButtonFindOrder() {
-            let data={
-                    customer : document.getElementById('customer').value,
-                    email : document.getElementById('email').value,
-                    order_number :document.getElementById('order_number').value
-             };
-          if (!email || !order_number) {
-            alert('Email and Order Number are required!');
-          } else {
-            // perform any other validation or logic here
-            // then close the form
-            // window.close();
-    MessengerExtensions.requestCloseBrowser(function success() {
-      window.close();
-    }, function error(err) {
-      console.log(err);
-    });
+
             // alert(data);
             //  $.ajax({
             //     // alert:`${ alert(data)}`,
@@ -248,8 +243,7 @@
             //     }
             // })
             // window.close();
-          }
-        }
+      
       </script>
       
 </body>

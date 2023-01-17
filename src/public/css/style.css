@@ -88,6 +88,21 @@ a, a:hover, a:focus {
     background-color: #689f38;
     cursor: pointer;
   }
+  #close-btn{
+    background-color: #8bc34a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: all 0.3s ease-in-out;
+    margin-left:-10px;
+    margin-right:20px;
+
+  }
+  #close-btn:hover{
+    background-color: #689f38;
+    cursor: pointer;
+  }
   .title {
     font-weight: 600;
     font-size: 30px;
