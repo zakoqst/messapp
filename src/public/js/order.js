@@ -58,7 +58,7 @@ function handleClickButtonFindOrder(){
             orderNumber: $("#orderNumber").val()
         };
 
-        // if(!check) {
+        if(!check) {
             //close webview
             MessengerExtensions.requestCloseBrowser(function success() {
                 // webview closed
@@ -81,6 +81,6 @@ function handleClickButtonFindOrder(){
                 }
             })
             window.close();
-        // }
+        }
     });
 }
