@@ -69,6 +69,7 @@ function handleClickButtonFindOrder(){
             //close webview
             MessengerExtensions.requestCloseBrowser(function success() {
                 // webview closed
+                windows.close();
             }, function error(err) {
                 // an error occurred
                 console.log(err);
