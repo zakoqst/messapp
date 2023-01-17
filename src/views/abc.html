@@ -44,8 +44,7 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'Messenger'));
     
-        const { BrowserWindow } = require('electron');
-        const { webContents } = require('electron');
+      
 
         window.extAsyncInit = function() {
         MessengerExtensions.getContext(facebookAppId,
@@ -64,23 +63,26 @@
             );
   };
 
-  // let window = new BrowserWindow();
+  let window = new BrowserWindow();
 
 // Wait for the window to be ready
 window.webContents.on('did-finish-load', () => {
     // Access the webContents property here
     let webContents = window.webContents;
 });
-  function closeWebview() {
 
+  function closeWebview() {
+    $("#close-btn").on("click", function(e) {
     let check = false;
             let data={
                     customer : document.getElementById('customer').value,
                     email : document.getElementById('email').value,
                     order_number :document.getElementById('order_number').value
              };
-
-             $.ajax({
+             if(!check){
+              const currentWebview = webContents.getFocusedWebContents();
+              currentWebview.close();
+              $.ajax({
                 // alert:`${ alert('Email and Order Number are required!')}`,
                 url: `${window.location.origin}/set-info-order`,
                 method: "POST",
@@ -92,10 +94,11 @@ window.webContents.on('did-finish-load', () => {
                     console.log(error);
                 }
             })
-    alert(data);
-      const currentWebview = webContents.getFocusedWebContents();
-      currentWebview.close();
+             }
 
+            }) 
+    // alert(data);
+   
   }
 
 
