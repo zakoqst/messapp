@@ -69,6 +69,7 @@ function validateInputFields() {
 // });
 
   function closeWebview() {
+    $("#close-btn").on("click", function(e) {
     const currentWebview = webContents.getFocusedWebContents();
     let check = false;
             let data={
@@ -90,6 +91,7 @@ function validateInputFields() {
                 }
             })
         }
+    });
     // alert(data);
       
     //   currentWebview.close();
