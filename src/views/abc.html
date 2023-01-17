@@ -6,16 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <title>Document</title>
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="//connect.facebook.com/en_US/messenger.Extensions.js"></script>
     <script> 
-        let facebookAppId =  1384946842277306 
-    </script>
-    <script src="/js/order.js"></script>
-    <script src="/src/controllers/homepageController.js"></script>
+        let facebookAppId = "<%= facebookAppId %>"
+        
+        </script>
+    <!-- <script src="/js/order.js"></script> -->
+    <!-- <script src="/src/controllers/homepageController.js"></script> -->
 </head>
 <body>
+  <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : 1384946842277306,
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v15.0'
+    });
+  };
+  window.extAsyncInit = function() {
+          MessengerExtensions.init({
+      appId: 1384946842277306, // Replace with your App ID
+      pageId: 110841505234709, // Replace with your Page ID
+      version: "v3.3",
+      extensions: true,
+    });
+    (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'Messenger'));
+        MessengerExtensions.getContext(facebookAppId,
+                function success(thread_context){
+                    // success
+                    //set psid to input
+                    console.log(thread_context);
+                    $("#psid").val(thread_context.psid);
+                    handleClickButtonFindOrder();
+                },
+                function error(err){
+                    // error
+                    console.log(err);
+                }
+            );
+  };
+   
+</script>
   <style>
 
 .form-control{
@@ -138,6 +180,8 @@
     <input type="text" id="order_number" name="order_number" required class="form-control">
   </div>
   <button type="button" id="find_order_btn" onclick="handleClickButtonFindOrder()" class="btn btn-primary">Find Order</button>
+
+
 </form>
 
       
@@ -154,31 +198,22 @@
         <button type="button" id="find_order_btn" onclick="handleClickButtonFindOrder()">Find Order</button>
       </form>
        -->
-      <script>
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'Messenger'));
+      
 
-        window.extAsyncInit = function() {
+      <script>
+
+
+  //       window.extAsyncInit = function() {
+  //   // Initialize the Messenger Extensions SDK
+   
+  // };
+        
+
+
             // the Messenger Extensions JS SDK is done loading
 
-            MessengerExtensions.getContext(facebookAppId,
-                function success(thread_context){
-                    // success
-                    //set psid to input
-                    $("#psid").val(thread_context.psid);
-                    handleClickButtonFindOrder();
-                },
-                function error(err){
-                    // error
-                    console.log(err);
-                }
-            );
-};
+            
+
 
         function handleClickButtonFindOrder() {
             let data={
@@ -192,27 +227,26 @@
             // perform any other validation or logic here
             // then close the form
             // window.close();
-            MessengerExtensions.requestCloseBrowser(function success() {
-              // webview closed
-              // window.close();
-            }, function error(err) {
-              console.log(err);
-            });
+    MessengerExtensions.requestCloseBrowser(function success() {
+      window.close();
+    }, function error(err) {
+      console.log(err);
+    });
             // alert(data);
-             $.ajax({
-                // alert:`${ alert(data)}`,
-                // alert:`${ alert('Email and Order Number are required!')}`,
-                url:"https://jisr-messenger-app.onrender.com/set-info-order",
-                method: "POST",
-                data:data,
-                success: function(data) {
+            //  $.ajax({
+            //     // alert:`${ alert(data)}`,
+            //     // alert:`${ alert('Email and Order Number are required!')}`,
+            //     url: `${data}`,
+            //     method: "POST",
+            //     data:data,
+            //     success: function(data) {
                     
-                    console.log(data);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            })
+            //         console.log(data);
+            //     },
+            //     error: function(error) {
+            //         console.log(error);
+            //     }
+            // })
             // window.close();
           }
         }

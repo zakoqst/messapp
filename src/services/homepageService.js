@@ -51,7 +51,8 @@ let handleSetupProfileAPI = () => {
                     }
                 ],
                 "whitelisted_domains": [
-                    "https://jisr-messenger-app.onrender.com"
+                    "https://jisr-messenger-app.onrender.com",
+                    "https://www.facebook.com/"
                 ]
             };
             // Send the HTTP request to the Messenger Platform
