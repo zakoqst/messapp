@@ -1,4 +1,4 @@
-(function(d, s, id){
+window.onload =(function(d, s, id){
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) {return;}
     js = d.createElement(s); js.id = id;
@@ -25,7 +25,7 @@ MessengerExtensions.getContext(facebookAppId,
     );
 };
 
-let window = new BrowserWindow();
+// let window = new BrowserWindow();
 
 // Wait for the window to be ready
 window.webContents.on('did-finish-load', () => {
@@ -33,10 +33,34 @@ window.webContents.on('did-finish-load', () => {
 let webContents = window.webContents;
 });
 
+function validateInputFields() {
+    const EMAIL_REG = /[a-zA-Z][a-zA-Z0-9_\.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}/g;
+    let email = $("#email");
+    let order_number = $("#orderNumber");
+
+    if (!email.val().match(EMAIL_REG)) {
+        email.addClass("is-invalid");
+        return true;
+    } else {
+        email.removeClass("is-invalid");
+    }
+
+    if (order_number.val() === "") {
+        order_number.addClass("is-invalid");
+        return true;
+    } else {
+        order_number.removeClass("is-invalid");
+    }
+
+    return false;
+}
+
+
 function closeWebview() {
 $("#close-btn").on("click", function(e) {
-let check = false;
+let check = validateInputFields();
     let data={
+            psid: document.getElementById('psid').value,
             customer : document.getElementById('customer').value,
             email : document.getElementById('email').value,
             order_number :document.getElementById('order_number').value
