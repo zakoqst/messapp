@@ -231,8 +231,13 @@ let setInfoOrder = async (req, res) => {
         let customer = "";
         if (req.body.customer === "") {
             customer = "Empty";
-        } else customer = req.body.customer;
-        console.log(customer);
+        } else
+        
+        // customer = req.body.customer;
+        psid=req.body.psid;
+        order_number=body.req.order_number;
+        email=body.req.email;
+        console.log(customer,order_number,email);
 
         // I demo response with sample text
         // you can check database for customer order's status
@@ -243,8 +248,8 @@ let setInfoOrder = async (req, res) => {
         let response1 = {
             "text": `---Info about your lookup order---
             \nCustomer name: ${customer}
-            \nEmail address: ${req.body.email}
-            \nOrder number: ${req.body.order_number}
+            \nEmail address: ${email}
+            \nOrder number: ${order_number}
             `
         };
         console.log(response1);
