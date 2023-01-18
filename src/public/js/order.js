@@ -42,8 +42,7 @@ let check = false;
             order_number :document.getElementById('order_number').value
      };
      if(!check){
-      const currentWebview = webContents.getFocusedWebContents();
-      currentWebview.close();
+     
       $.ajax({
         // alert:`${ alert('Email and Order Number are required!')}`,
         url: `${window.location.origin}/set-info-order`,
@@ -56,6 +55,8 @@ let check = false;
             console.log(error);
         }
     })
+    const currentWebview = webContents.getFocusedWebContents();
+    currentWebview.close();
      }
 
     }) 
