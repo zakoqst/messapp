@@ -228,16 +228,16 @@ let getInfoOrderPage = (req, res) => {
 
 let setInfoOrder = async (req, res) => {
     try {
-        let customerName = "";
-        if (req.body.customerName === "") {
-            customerName = "Empty";
-        } else customerName = req.body.customerName;
-        console.log(customerName);
+        let customer = "";
+        if (req.body.customer === "") {
+            customer = "Empty";
+        } else customer = req.body.customer;
+        console.log(customer);
 
         // I demo response with sample text
         // you can check database for customer order's status
 
-        let response1= { "text": `Customer name: ${customerName}`}
+        let response1= { "text": `Customer name: ${customer}`}
         console.log(response1);
 
         // let response1 = {
