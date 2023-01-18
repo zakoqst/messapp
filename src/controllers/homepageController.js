@@ -263,7 +263,7 @@ let setInfoOrder = async (req, res) => {
             message: "ok"
         });
     } catch (e) {
-        reject(e);
+        // reject(ER);
         console.log(e);
     }
 };
