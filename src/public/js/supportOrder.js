@@ -39,7 +39,7 @@ function handleClickButtonFindOrder() {
              alert(JSON.stringify(data));
              console.log(data);
              if(!check){
-             
+                closeWebview();
               $.ajax({
                 // alert:`${ alert('Email and Order Number are required!')}`,
                 url: `${window.location.origin}/set-info-order`,
@@ -53,13 +53,13 @@ function handleClickButtonFindOrder() {
                 }
             })
             
-            MessengerExtensions.requestCloseBrowser(function success() {
-                                // webview closed
-                                // windows.close();
-                            }, function error(err) {
-                                // an error occurred
-                                console.log(err);
-                            });                // 
+            // MessengerExtensions.requestCloseBrowser(function success() {
+            //                     // webview closed
+            //                     // windows.close();
+            //                 }, function error(err) {
+            //                     // an error occurred
+            //                     console.log(err);
+            //                 });                // 
             // let webContents = window.webContents;
             // const currentWebview = webContents.getFocusedWebContents();
             // currentWebview.close();

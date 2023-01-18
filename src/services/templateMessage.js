@@ -182,7 +182,7 @@ let sendLookupOrderTemplate = () =>{
                         "url": `${process.env.URL_WEB_VIEW_ORDER}`,
                         "title": "Set info",
                         "webview_height_ratio": "tall",
-                        "messenger_extensions": true //false: open the webview in new tab
+                        "messenger_extensions": false //false: open the webview in new tab
                     },
                     {
                         "type": "postback",
