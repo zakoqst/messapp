@@ -161,7 +161,8 @@ let handleMessage = async (sender_psid, received_message) => {
 
     // Sends the response message
     try {
-        await chatbotService.sendMessage(sender_psid, response);;
+        // await chatbotService.sendMessage(sender_psid, response);
+        callSendAPI(sender_psid, response);
      
     } catch (e) {
         console.log(e);
@@ -228,15 +229,16 @@ let getInfoOrderPage = (req, res) => {
 
 let setInfoOrder = async (req, res) => {
     try {
-        let customer = "";
-        if (req.body.customer === "") {
-            customer = "Empty";
-        } else customer = req.body.customer;
+        let customer = req.body.customer;
+        let psid=req.body.psid;
+        let order_number=req.body.order_number;
+        let email=req.body.email;
+        // let customer = "";
+        // if (req.body.customer === "") {
+        //     customer = "Empty";
+        // } else customer = req.body.customer;
         
-        customer = req.body.customer;
-        psid=req.body.psid;
-        order_number=req.body.order_number;
-        email=req.body.email;
+    
         console.log(customer,order_number,email);
 
         // I demo response with sample text
@@ -244,7 +246,9 @@ let setInfoOrder = async (req, res) => {
 
         // let response1= { "text": `Customer name: ${customer}`}
         
+     
 
+     
         let response1 = {
             "text": `---Info about your lookup order---
             \nPSID: ${req.body.psid}
@@ -254,11 +258,13 @@ let setInfoOrder = async (req, res) => {
             `
         };
         console.log(response1);
-
+      
         let response2 = templateMessage.setInfoOrderTemplate();
 
-        await chatbotService.sendMessage(req.body.psid, {text:response1});
-        await chatbotService.sendMessage(req.body.psid, response2);
+        await callSendAPI(psid,{text:response1})
+        await callSendAPI(psid,{text:response2})
+        // await chatbotService.sendMessage(req.body.psid, {text:response1});
+        // await chatbotService.sendMessage(req.body.psid, response2);
 
         return res.status(200).json({
             message: "ok"
