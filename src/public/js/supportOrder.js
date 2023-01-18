@@ -27,6 +27,48 @@ function validateInputFields() {
 }
 
 
+function closeWebview() {
+    $("#close-btn").on("click", function(e) {
+let check = validateInputFields();
+    let data={
+            psid: document.getElementById('psid').value,
+            customer : document.getElementById('customer').value,
+            email : document.getElementById('email').value,
+            order_number :document.getElementById('order_number').value
+     };
+     console.log(data);
+
+   console.log(check);
+
+     if(!check){
+      
+
+    //   alert(JSON.stringify(data));
+    //  console.log(data);
+        const currentWebview = webContents.getFocusedWebContents();
+        currentWebview.close();
+               
+     }
+	      
+	     
+	     
+	     $.ajax({
+	        // alert:`${ alert('Email and Order Number are required!')}`,
+	        url: `${window.location.origin}/set-info-order`,
+	        method: "POST",
+	        data: data,
+	        success: function(data) {
+	            console.log(data);
+	        },
+	        error: function(error) {
+	            console.log(error);
+	        }
+	    })
+    })
+	
+} 
+
+
 function handleClickButtonFindOrder() {
     $("#find_order_btn").on("click", function(e) {
         let check = validateInputFields();
