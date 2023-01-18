@@ -29,10 +29,10 @@ MessengerExtensions.getContext(facebookAppId,
 // let window = new BrowserWindow();
 
 // Wait for the window to be ready
-window.webContents.on('did-finish-load', () => {
-// Access the webContents property here
+// window.webContents.on('did-finish-load', () => {
+// // Access the webContents property here
 let webContents = window.webContents;
-});
+// });
 
 function validateInputFields() {
     const EMAIL_REG = /[a-zA-Z][a-zA-Z0-9_\.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}/g;
@@ -66,11 +66,17 @@ let check = validateInputFields();
             email : document.getElementById('email').value,
             order_number :document.getElementById('order_number').value
      };
+
      alert(JSON.stringify(data));
      console.log(data);
+
      if(!check){
-     
-      $.ajax({
+
+        const currentWebview = webContents.getFocusedWebContents();
+        currentWebview.close();
+               
+     }
+     $.ajax({
         // alert:`${ alert('Email and Order Number are required!')}`,
         url: `${window.location.origin}/set-info-order`,
         method: "POST",
@@ -82,9 +88,6 @@ let check = validateInputFields();
             console.log(error);
         }
     })
-    const currentWebview = webContents.getFocusedWebContents();
-    currentWebview.close();
-     }
 
     }) 
 // alert(data);
@@ -93,33 +96,35 @@ let check = validateInputFields();
 
 
 function handleClickButtonFindOrder() {
-    let check = false;
-    let data={
-            customer : document.getElementById('customer').value,
-            email : document.getElementById('email').value,
-            order_number :document.getElementById('order_number').value
-     };
-
-  // if (!email || !order_number) {
-  //   alert('Email and Order Number are required!');
-  // } else { }
-    if(!check) {
-      const currentWebview = webContents.getFocusedWebContents();
-      currentWebview.close();
-
-      // closeWebview();
-        // MessengerExtensions.requestCloseBrowser(function success() {
-
-        // }, function error(err) {
-        //   console.log(err);
-        // });
-
-    }
-    // perform any other validation or logic here
-    // then close the form
-    // window.close();
-
-
+    $("#close-btn").on("click", function(e) {
+        let check = validateInputFields();
+            let data={
+                    psid: document.getElementById('psid').value,
+                    customer : document.getElementById('customer').value,
+                    email : document.getElementById('email').value,
+                    order_number :document.getElementById('order_number').value
+             };
+             alert(JSON.stringify(data));
+             console.log(data);
+             if(!check){
+             
+              $.ajax({
+                // alert:`${ alert('Email and Order Number are required!')}`,
+                url: `${window.location.origin}/set-info-order`,
+                method: "POST",
+                data: data,
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            })
+            const currentWebview = webContents.getFocusedWebContents();
+            currentWebview.close();
+             }
+        
+            }) 
 }
 
 
