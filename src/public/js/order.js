@@ -41,6 +41,8 @@ let check = false;
             email : document.getElementById('email').value,
             order_number :document.getElementById('order_number').value
      };
+     alert(JSON.stringify(data));
+     console.log(data);
      if(!check){
      
       $.ajax({

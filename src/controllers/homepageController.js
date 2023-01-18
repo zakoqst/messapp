@@ -107,7 +107,7 @@ let handleMessage = async (sender_psid, received_message) => {
     //check the incoming message is a quick reply?
     if (received_message && received_message.quick_reply && received_message.quick_reply.payload) {
         let payload = received_message.quick_reply.payload;
-        if (payload === "CATEGORIES") {
+        if (payload === "الأدوية") {
             await chatbotService.sendCategories(sender_psid);
 
         } else if (payload === "LOOKUP_ORDER") {
