@@ -14,10 +14,12 @@
         let facebookAppId = "<%= facebookAppId %>"
     </script>
     <script src="/js/order.js"></script>
+    <script src="/js/supportOrder.js"></script>
 
 </head>
 <body>
     <form>
+        <input type="text" id="psid" hidden>
         <div class="text-center mt-3">
             <span class="title">Order lookup</span>
         </div>
@@ -33,7 +35,7 @@
           <label for="order_number">Order Number:</label>
           <input type="text" id="order_number" name="order_number" required class="form-control">
         </div>
-        <!-- <button class ="form-group" type="button" id="find_order_btn" onclick="handleClickButtonFindOrder()" class="btn btn-primary">Find Order</button> -->
+        <button class ="form-group" type="button" id="find_order_btn" onclick="handleClickButtonFindOrder()" class="btn btn-primary">Find Order</button>
         <button id="close-btn" onclick="closeWebview()">Close</button>
       
       

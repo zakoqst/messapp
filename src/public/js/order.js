@@ -1,4 +1,7 @@
-window.onload =(function(d, s, id){
+// const supportOrder = require("./supportOrder");
+
+// const { BrowserWindow } = require('electron');
+(function(d, s, id){
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) {return;}
     js = d.createElement(s); js.id = id;
@@ -16,8 +19,9 @@ MessengerExtensions.getContext(facebookAppId,
             console.log(thread_context);
             document.getElementById('psid').value(thread_context.psid);
             // $("#psid").val(thread_context.psid);
-            // handleClickButtonFindOrder();
-            closeWebview();
+            // console.log(thread_context);
+            supportOrder.handleClickButtonFindOrder();
+            // closeWebview();
         },
         function error(err){
             // error
@@ -25,107 +29,107 @@ MessengerExtensions.getContext(facebookAppId,
         }
     );
 };
-
+let webContents = window.webContents;
 // let window = new BrowserWindow();
 
 // Wait for the window to be ready
 // window.webContents.on('did-finish-load', () => {
 // // Access the webContents property here
-let webContents = window.webContents;
+// let webContents = window.webContents;
 // });
 
-function validateInputFields() {
-    const EMAIL_REG = /[a-zA-Z][a-zA-Z0-9_\.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}/g;
-    let email = $("#email");
-    let order_number = $("#orderNumber");
+// function validateInputFields() {
+//     const EMAIL_REG = /[a-zA-Z][a-zA-Z0-9_\.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}/g;
+//     let email = $("#email");
+//     let order_number = $("#orderNumber");
 
-    if (!email.val().match(EMAIL_REG)) {
-        email.addClass("is-invalid");
-        return true;
-    } else {
-        email.removeClass("is-invalid");
-    }
+//     if (!email.val().match(EMAIL_REG)) {
+//         email.addClass("is-invalid");
+//         return true;
+//     } else {
+//         email.removeClass("is-invalid");
+//     }
 
-    if (order_number.val() === "") {
-        order_number.addClass("is-invalid");
-        return true;
-    } else {
-        order_number.removeClass("is-invalid");
-    }
+//     if (order_number.val() === "") {
+//         order_number.addClass("is-invalid");
+//         return true;
+//     } else {
+//         order_number.removeClass("is-invalid");
+//     }
 
-    return false;
-}
+//     return false;
+// }
 
 
-function closeWebview() {
-$("#close-btn").on("click", function(e) {
-let check = validateInputFields();
-    let data={
-            psid: document.getElementById('psid').value,
-            customer : document.getElementById('customer').value,
-            email : document.getElementById('email').value,
-            order_number :document.getElementById('order_number').value
-     };
+// function closeWebview() {
+// $("#close-btn").on("click", function(e) {
+// let check = validateInputFields();
+//     let data={
+//             psid: document.getElementById('psid').value,
+//             customer : document.getElementById('customer').value,
+//             email : document.getElementById('email').value,
+//             order_number :document.getElementById('order_number').value
+//      };
 
-     alert(JSON.stringify(data));
-     console.log(data);
+//      alert(JSON.stringify(data));
+//      console.log(data);
 
-     if(!check){
+//      if(!check){
 
-        const currentWebview = webContents.getFocusedWebContents();
-        currentWebview.close();
+//         const currentWebview = webContents.getFocusedWebContents();
+//         currentWebview.close();
                
-     }
-     $.ajax({
-        // alert:`${ alert('Email and Order Number are required!')}`,
-        url: `${window.location.origin}/set-info-order`,
-        method: "POST",
-        data: data,
-        success: function(data) {
-            console.log(data);
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    })
+//      }
+//      $.ajax({
+//         // alert:`${ alert('Email and Order Number are required!')}`,
+//         url: `${window.location.origin}/set-info-order`,
+//         method: "POST",
+//         data: data,
+//         success: function(data) {
+//             console.log(data);
+//         },
+//         error: function(error) {
+//             console.log(error);
+//         }
+//     })
 
-    }) 
-// alert(data);
+//     }) 
+// // alert(data);
 
-}
+// }
 
 
-function handleClickButtonFindOrder() {
-    $("#close-btn").on("click", function(e) {
-        let check = validateInputFields();
-            let data={
-                    psid: document.getElementById('psid').value,
-                    customer : document.getElementById('customer').value,
-                    email : document.getElementById('email').value,
-                    order_number :document.getElementById('order_number').value
-             };
-             alert(JSON.stringify(data));
-             console.log(data);
-             if(!check){
+// function handleClickButtonFindOrder() {
+//     $("#find_order_btn").on("click", function(e) {
+//         let check = validateInputFields();
+//             let data={
+//                     psid: document.getElementById('psid').value,
+//                     customer : document.getElementById('customer').value,
+//                     email : document.getElementById('email').value,
+//                     order_number :document.getElementById('order_number').value
+//              };
+//              alert(JSON.stringify(data));
+//              console.log(data);
+//              if(!check){
              
-              $.ajax({
-                // alert:`${ alert('Email and Order Number are required!')}`,
-                url: `${window.location.origin}/set-info-order`,
-                method: "POST",
-                data: data,
-                success: function(data) {
-                    console.log(data);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            })
-            const currentWebview = webContents.getFocusedWebContents();
-            currentWebview.close();
-             }
+//               $.ajax({
+//                 // alert:`${ alert('Email and Order Number are required!')}`,
+//                 url: `${window.location.origin}/set-info-order`,
+//                 method: "POST",
+//                 data: data,
+//                 success: function(data) {
+//                     console.log(data);
+//                 },
+//                 error: function(error) {
+//                     console.log(error);
+//                 }
+//             })
+//             const currentWebview = webContents.getFocusedWebContents();
+//             currentWebview.close();
+//              }
         
-            }) 
-}
+//             }) 
+// }
 
 
 
@@ -198,37 +202,42 @@ function handleClickButtonFindOrder() {
 
 // }
 
-
 // function handleClickButtonFindOrder() {
-//     let check = false;
-//     let data={
-//             customer : document.getElementById('customer').value,
-//             email : document.getElementById('email').value,
-//             order_number :document.getElementById('order_number').value
-//      };
+//     $("#btnFindOrder").on("click", function(e) {
+//             let check = false;
+//             let data={
+//                     customer : document.getElementById('customer').value,
+//                     email : document.getElementById('email').value,
+//                     order_number :document.getElementById('order_number').value
+//              };
+   
 
-//   // if (!email || !order_number) {
-//   //   alert('Email and Order Number are required!');
-//   // } else { }
-//     if(!check) {
-//       const currentWebview = webContents.getFocusedWebContents();
-//       currentWebview.close();
+//    console.log(check);
 
-//       // closeWebview();
-//         // MessengerExtensions.requestCloseBrowser(function success() {
+//           // if (!email || !order_number) {
+//           //   alert('Email and Order Number are required!');
+//           // } else { }
+//             if(!check) {
+//               const currentWebview = webContents.getFocusedWebContents();
+//               currentWebview.close();
+              
 
-//         // }, function error(err) {
-//         //   console.log(err);
-//         // });
-
-//     }
-//     // perform any other validation or logic here
-//     // then close the form
-//     // window.close();
-
-
-// }
-
+//               $.ajax({
+//                     // alert:`${ alert('Email and Order Number are required!')}`,
+//                     url: `${window.location.origin}/set-info-order`,
+//                     method: "POST",
+//                     data: data,
+//                     success: function(data) {
+//                         console.log(data);
+//                     },
+//                     error: function(error) {
+//                         console.log(error);
+//                     }
+//                 })
+    
+//               }
+//             }
+//     )}
 
 
 
@@ -377,3 +386,7 @@ function handleClickButtonFindOrder() {
 // // //         }
 // // //     });
 // // // }
+// module.exports={
+
+//     closeWebview:closeWebview
+// }

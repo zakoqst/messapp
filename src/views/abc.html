@@ -52,9 +52,10 @@
                     // success
                     //set psid to input
                     console.log(thread_context);
+                    // document.getElementById('psid').value(thread_context.psid);
                     $("#psid").val(thread_context.psid);
                     handleClickButtonFindOrder();
-                    closeWebview();
+                    // closeWebview();
                 },
                 function error(err){
                     // error
@@ -63,60 +64,147 @@
             );
   };
 
-  let window = new BrowserWindow();
+  // let window = new BrowserWindow();
 
 // Wait for the window to be ready
-window.webContents.on('did-finish-load', () => {
+// window.webContents.on('did-finish-load', () => {
     // Access the webContents property here
     let webContents = window.webContents;
-});
+// });
 
+
+function validateInputFields() {
+    const EMAIL_REG = /[a-zA-Z][a-zA-Z0-9_\.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}/g;
+    let email = $("#email");
+    let order_number = $("#orderNumber");
+
+    if (!email.val().match(EMAIL_REG)) {
+        email.addClass("is-invalid");
+        return true;
+    } else {
+        email.removeClass("is-invalid");
+    }
+
+    if (order_number.val() === "") {
+        order_number.addClass("is-invalid");
+        return true;
+    } else {
+        order_number.removeClass("is-invalid");
+    }
+
+    return false;
+}
+
+
+
+// let newDiv = document.createElement("div");
+
+// // Set the content of the new element
+// newDiv.innerHTML = data;
+
+// // Add the new element to the body of the HTML document
+// document.body.appendChild(newDiv);
   function closeWebview() {
     $("#close-btn").on("click", function(e) {
-    let check = false;
-            let data={
-                    customer : document.getElementById('customer').value,
-                    email : document.getElementById('email').value,
-                    order_number :document.getElementById('order_number').value
-             };
-             if(!check){
-              const currentWebview = webContents.getFocusedWebContents();
-              currentWebview.close();
-              $.ajax({
-                // alert:`${ alert('Email and Order Number are required!')}`,
-                url: `${window.location.origin}/set-info-order`,
-                method: "POST",
-                data: data,
-                success: function(data) {
-                    console.log(data);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            })
-             }
+let check = validateInputFields();
+    let data={
+            psid: document.getElementById('psid').value,
+            customer : document.getElementById('customer').value,
+            email : document.getElementById('email').value,
+            order_number :document.getElementById('order_number').value
+     };
+     console.log(data);
 
-            }) 
-    // alert(data);
+   console.log(check);
+
+     if(!check){
+      
+
+    //   alert(JSON.stringify(data));
+    //  console.log(data);
+        const currentWebview = webContents.getFocusedWebContents();
+        currentWebview.close();
+               
+     }else {
+      console.log("nn");
+     }
+     $.ajax({
+        // alert:`${ alert('Email and Order Number are required!')}`,
+        url: `${window.location.origin}/set-info-order`,
+        method: "POST",
+        data: data,
+        success: function(data) {
+            console.log(data);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    })
+  
+
+    }) 
+
+// alert(data);
+
+    // $("#close-btn").on("click", function(e) {
+    // let check = false;
+    //         let data={
+    //                 customer : document.getElementById('customer').value,
+    //                 email : document.getElementById('email').value,
+    //                 order_number :document.getElementById('order_number').value
+    //          };
+    //          if(!check){
+    //           const currentWebview = webContents.getFocusedWebContents();
+    //           currentWebview.close();
+    //           $.ajax({
+    //             // alert:`${ alert('Email and Order Number are required!')}`,
+    //             url: `${window.location.origin}/set-info-order`,
+    //             method: "POST",
+    //             data: data,
+    //             success: function(data) {
+    //                 console.log(data);
+    //             },
+    //             error: function(error) {
+    //                 console.log(error);
+    //             }
+    //         })
+    //          }
+
+    //         }) 
+    // // alert(data);
    
   }
 
-
+  
   function handleClickButtonFindOrder() {
+    $("#find_order_btn").on("click", function(e) {
             let check = false;
             let data={
+              // psid: document.getElementById('psid').value,
+              psid: $("#psid").val(),
                     customer : document.getElementById('customer').value,
                     email : document.getElementById('email').value,
                     order_number :document.getElementById('order_number').value
              };
+            //  let window;
+            //  const webContents = window.webContents;
 
+  
+   
+let newDiv = document.createElement("div");
+
+// Set the content of the new element
+newDiv.innerHTML = JSON.stringify(data.psid);
+
+// Add the new element to the body of the HTML document
+document.body.appendChild(newDiv);
           // if (!email || !order_number) {
           //   alert('Email and Order Number are required!');
           // } else { }
             if(!check) {
-              const currentWebview = webContents.getFocusedWebContents();
-              currentWebview.close();
-              
+              // const currentWebview = webContents.getFocusedWebContents();
+              // currentWebview.close();
+              closeWebview();
 
               $.ajax({
                     // alert:`${ alert('Email and Order Number are required!')}`,
@@ -130,22 +218,26 @@ window.webContents.on('did-finish-load', () => {
                         console.log(error);
                     }
                 })
-                
-
-              // closeWebview();
-                // MessengerExtensions.requestCloseBrowser(function success() {
-
-                // }, function error(err) {
-                //   console.log(err);
-                // });
-
+    
+              }
             }
-            // perform any other validation or logic here
-            // then close the form
-            // window.close();
+
+    
+
+  //             // closeWebview();
+  //               // MessengerExtensions.requestCloseBrowser(function success() {
+
+  //               // }, function error(err) {
+  //               //   console.log(err);
+  //               // });
+
+  //           }
+  //           // perform any other validation or logic here
+  //           // then close the form
+  //           // window.close();
   
  
-        }
+       ) }
 </script>
   <style>
 
@@ -210,6 +302,7 @@ window.webContents.on('did-finish-load', () => {
     <span class="title">Order lookup</span>
 </div>
 <form>
+  <input type="text" id="psid" hidden>
   <div class="form-group">
     <label for="customer">Customer:</label>
     <input type="text" id="customer" name="customer" class="form-control">
