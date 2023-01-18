@@ -51,7 +51,7 @@ let initWebRoutes = (app)=> {
     // router.post('/post-survey', homepageController.handlePostSurvey);
     
     router.get("/info-order", homepageController.getInfoOrderPage);
-    router.post("/set-info-order", homepageController.setInfoOrder);
+    router.post('/set-info-order', homepageController.setInfoOrder);
 
 
     return app.use("/",router);

@@ -71,13 +71,7 @@ function handleClickButtonFindOrder() {
              alert(JSON.stringify(data));
              console.log(data);
              if(!check){
-                MessengerExtensions.requestCloseBrowser(function success() {
-                    // webview closed
-                    // windows.close();
-                }, function error(e) {
-                    // an error occurred
-                    console.log(e);
-                });  
+              
                 // closeWebview();
               $.ajax({
                 // alert:`${ alert('Email and Order Number are required!')}`,
@@ -85,10 +79,19 @@ function handleClickButtonFindOrder() {
                 method: "POST",
                 data: data,
                 success: function(data) {
-                    console.log(data);
+                    alert('success response from node js server',data)  ;
+                    MessengerExtensions.requestCloseBrowser(function success() {
+                        // webview closed
+                        // windows.close();
+                    }, function error(e) {
+                        alert('err submit post webview')
+                        // an error occurred
+                        console.log('err submit post webview',e);
+                    }); 
+                 
                 },
                 error: function(error) {
-                    console.log(error);
+                    console.log('error response from node js server',error);
                 }
             })
             
