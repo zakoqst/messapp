@@ -21,6 +21,43 @@
 
 </head>
 <body>
+    <script>
+
+            (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'Messenger'));
+
+
+
+            window.extAsyncInit = function() {
+            MessengerExtensions.getContext(facebookAppId,
+                    function success(thread_context){
+                        // success
+                        //set psid to input
+                        console.log(thread_context);
+                        // document.getElementById('psid').value(thread_context.psid);
+                        // $("#psid").val(thread_context.psid);
+                        let userPSID = thread_context.psid;
+                        document.getElementById("psid").value = userPSID;
+                        alert(psid);
+                        // console.log(thread_context);
+                    handleClickButtonFindOrder();
+                        // supportOrder.closeWebview();
+                        // closeWebview();
+                    },
+                    function error(err){
+                        // error
+                        alert("Messenger Extension Error: " + err);
+                        // console.log(err);
+                    }
+                );
+            };
+
+    </script>
     <!-- <script type="module" src="lib.js" ></script> -->
     <form>
         <input type="text" id="psid" hidden>
