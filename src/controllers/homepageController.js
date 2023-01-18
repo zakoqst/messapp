@@ -250,8 +250,8 @@ let setInfoOrder = async (req, res) => {
 
         let response2 = templateMessage.setInfoOrderTemplate();
 
-        await chatbotService.sendMessage(req.body.psid, response1);
-        await chatbotService.sendMessage(req.body.psid, response2);
+        await this.chatbotService.sendMessage(req.body.psid, response1);
+        await this.chatbotService.sendMessage(req.body.psid, response2);
 
         return res.status(200).json({
             message: "ok"
