@@ -1,6 +1,6 @@
 // const supportOrder = require("./supportOrder");
 
-const supportOrder = require("./supportOrder");
+const supportOrder = require("../js/supportOrder");
 
 // const { BrowserWindow } = require('electron');
 (function(d, s, id){
