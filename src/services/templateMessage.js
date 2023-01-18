@@ -201,8 +201,8 @@ let backToMainMenuTemplate = ()=>{
         "quick_replies": [
             {
                 "content_type": "text",
-                "title": "Categories",
-                "payload": "CATEGORIES",
+                "title": "أدوية",
+                "payload": "الأدوية",
             },
             {
                 "content_type": "text",
