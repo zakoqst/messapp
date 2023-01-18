@@ -231,12 +231,12 @@ let setInfoOrder = async (req, res) => {
         let customer = "";
         if (req.body.customer === "") {
             customer = "Empty";
-        } else
+        } else customer = req.body.customer;
         
         // customer = req.body.customer;
-        psid=req.body.psid;
-        order_number=req.body.order_number;
-        email=req.body.email;
+        // psid=req.body.psid;
+        // order_number=req.body.order_number;
+        // email=req.body.email;
         console.log(psid,customer,order_number,email);
 
         // I demo response with sample text
@@ -247,16 +247,17 @@ let setInfoOrder = async (req, res) => {
 
         let response1 = {
             "text": `---Info about your lookup order---
+            \nPSID: ${req.body.psid}
             \nCustomer name: ${customer}
-            \nEmail address: ${email}
-            \nOrder number: ${order_number}
+            \nEmail address: ${req.body.email}
+            \nOrder number: ${req.body.order_number}
             `
         };
         console.log(response1);
 
         let response2 = templateMessage.setInfoOrderTemplate();
 
-        await chatbotService.sendMessage(req.body.psid, response1);
+        await chatbotService.sendMessage(req.body.psid, {text:response1});
         await chatbotService.sendMessage(req.body.psid, response2);
 
         return res.status(200).json({

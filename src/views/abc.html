@@ -62,15 +62,15 @@
                     //set psid to input
                     console.log(thread_context);
                     // document.getElementById('psid').value(thread_context.psid);
-                    // $("#psid").val(thread_context.psid);
-                    let userPSID = thread_context.psid;
-                    document.getElementById("psid").value = userPSID;
+                    $("#psid").val(thread_context.psid);
+                    // let userPSID = thread_context.psid;
+                    // document.getElementById("psid").value = userPSID;
                     handleClickButtonFindOrder();
                     // closeWebview();
                 },
                 function error(err){
                     // error
-                    console.log(err);
+                    alert("Messenger Extension Error: " + err);
                 }
             );
   };
@@ -203,8 +203,8 @@ function validateInputFields() {
     $("#find_order_btn").on("click", function(e) {
             let check = false;
             let data={
-              // psid: document.getElementById('psid').value,
-              psid: $("#psid").val(),
+              psid: document.getElementById('psid').value,
+              // psid: $("#psid").val(),
                     customer : document.getElementById('customer').value,
                     email : document.getElementById('email').value,
                     order_number :document.getElementById('order_number').value
@@ -230,13 +230,7 @@ function validateInputFields() {
               // currentWebview.close();
               // closeWebview();
               // window.close();
-                       //close webview
-            MessengerExtensions.requestCloseBrowser(function success() {
-                // webview closed
-            }, function error(err) {
-                // an error occurred
-                console.log(err);
-            });
+      
               // closeW();
               // console.log(closeW());
               $.ajax({
@@ -245,10 +239,20 @@ function validateInputFields() {
                     method: "POST",
                     data: data,
                     success: function(data) {
+                      alert('success response from node js server',data)  ;
+                                       //close webview
+                        MessengerExtensions.requestCloseBrowser(function success() {
+                            // webview closed
+                        }, function error(err) {
+                        alert('err submit post webview')
+                        // an error occurred
+                        console.log('err submit post webview',e);
+                        });
                         console.log(data);
                     },
                     error: function(error) {
-                        console.log(error);
+                      console.log('error response from node js server',error);
+                        // console.log(error);
                     }
                 })
     
