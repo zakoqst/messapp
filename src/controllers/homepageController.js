@@ -237,7 +237,7 @@ let setInfoOrder = async (req, res) => {
         // psid=req.body.psid;
         // order_number=req.body.order_number;
         // email=req.body.email;
-        console.log(psid,customer,order_number,email);
+        console.log(customer,order_number,email);
 
         // I demo response with sample text
         // you can check database for customer order's status
