@@ -14,8 +14,9 @@ MessengerExtensions.getContext(facebookAppId,
             // success
             //set psid to input
             console.log(thread_context);
-            $("#psid").val(thread_context.psid);
-            handleClickButtonFindOrder();
+            document.getElementById('psid').value(thread_context.psid);
+            // $("#psid").val(thread_context.psid);
+            // handleClickButtonFindOrder();
             closeWebview();
         },
         function error(err){
