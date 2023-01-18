@@ -13,11 +13,15 @@
     <script>
         let facebookAppId = "<%= facebookAppId %>"
     </script>
-    <script src="/js/order.js"></script>
-    <script src="/js/supportOrder.js"></script>
+    <script type="text/javascript" src="/js/order.js" ></script>
+    <script type="text/javascript" src="/js/supportOrder.js"></script>
+    <script data-main="scripts/main" src="scripts/require.js"></script>
+    
+c
 
 </head>
 <body>
+    <script type="module" src="lib.js" ></script>
     <form>
         <input type="text" id="psid" hidden>
         <div class="text-center mt-3">
