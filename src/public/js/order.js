@@ -10,7 +10,7 @@
 }(document, 'script', 'Messenger'));
 
 
-(e)
+
 window.extAsyncInit = function() {
 MessengerExtensions.getContext(facebookAppId,
         function success(thread_context){
