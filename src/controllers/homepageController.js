@@ -235,8 +235,8 @@ let setInfoOrder = async (req, res) => {
         
         // customer = req.body.customer;
         psid=req.body.psid;
-        order_number=body.req.order_number;
-        email=body.req.email;
+        order_number=req.body.order_number;
+        email=req.body.email;
         console.log(customer,order_number,email);
 
         // I demo response with sample text
