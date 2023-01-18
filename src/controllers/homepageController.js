@@ -238,6 +238,7 @@ let setInfoOrder = async (req, res) => {
         // you can check database for customer order's status
 
         let response1= { "text": `Customer name: ${customerName}`}
+        console.log(response1);
 
         // let response1 = {
         //     "text": `---Info about your lookup order---
