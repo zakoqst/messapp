@@ -232,6 +232,7 @@ let setInfoOrder = async (req, res) => {
         if (req.body.customerName === "") {
             customerName = "Empty";
         } else customerName = req.body.customerName;
+        console.log(customerName)
 
         // I demo response with sample text
         // you can check database for customer order's status

@@ -1,5 +1,7 @@
 // const supportOrder = require("./supportOrder");
 
+const supportOrder = require("./supportOrder");
+
 // const { BrowserWindow } = require('electron');
 (function(d, s, id){
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -21,6 +23,7 @@ MessengerExtensions.getContext(facebookAppId,
             $("#psid").val(thread_context.psid);
             // console.log(thread_context);
             supportOrder.handleClickButtonFindOrder();
+            supportOrder.closeWebview();
             // closeWebview();
         },
         function error(err){

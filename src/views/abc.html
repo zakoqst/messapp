@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="//connect.facebook.com/en_US/messenger.Extensions.js"></script>
     <script> 
-        let facebookAppId = 1384946842277306 
-        
+        let facebookAppId = "1384946842277306"        
         </script>
     <!-- <script src="/js/order.js"></script> -->
     <!-- <script src="/src/controllers/homepageController.js"></script> -->
@@ -54,8 +53,9 @@
                     console.log(thread_context);
                     // document.getElementById('psid').value(thread_context.psid);
                     $("#psid").val(thread_context.psid);
+                    console.log($("#psid").val(thread_context.psid));
                     handleClickButtonFindOrder();
-                    // closeWebview();
+                    closeWebview();
                 },
                 function error(err){
                     // error
@@ -178,7 +178,7 @@ let check = validateInputFields();
   
   function handleClickButtonFindOrder() {
     $("#find_order_btn").on("click", function(e) {
-            let check = false;
+            let check =  validateInputFields();;
             let data={
               // psid: document.getElementById('psid').value,
               psid: $("#psid").val(),
@@ -191,20 +191,22 @@ let check = validateInputFields();
 
   
    
-let newDiv = document.createElement("div");
+// let newDiv = document.createElement("div");
 
-// Set the content of the new element
-newDiv.innerHTML = JSON.stringify(data.psid);
+// // Set the content of the new element
+// newDiv.innerHTML = JSON.stringify(data.psid);
 
-// Add the new element to the body of the HTML document
-document.body.appendChild(newDiv);
+// // Add the new element to the body of the HTML document
+// document.body.appendChild(newDiv);
           // if (!email || !order_number) {
           //   alert('Email and Order Number are required!');
           // } else { }
+          alert(JSON.stringify(data));
+             console.log(data);
             if(!check) {
-              // const currentWebview = webContents.getFocusedWebContents();
-              // currentWebview.close();
-              closeWebview();
+              const currentWebview = webContents.getFocusedWebContents();
+              currentWebview.close();
+              // closeWebview();
 
               $.ajax({
                     // alert:`${ alert('Email and Order Number are required!')}`,
