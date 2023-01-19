@@ -57,3 +57,9 @@ curl -X POST -H "Content-Type: application/json" -d '{
     "https://jisr-messenger-app.onrender.com/"
   ]
 }' "https://graph.facebook.com/v15.0/me/messenger_profile?access_token=EAATrmhCRFboBAA4HgyAlM5spUaMMjh6J4SmAET1xBS24j8ZBUbSZBA9RCuBmp5nVio7HpdWPRwjXeFRE8ZCyD7rTOkDoAtpmE2WZCRrAeIED81kLGBXV5XEtTXhwcsruXYWk6enHl3AiPdSQUgER3ZAmjcwCajiGruZA9xt9PwAekWMDuhbsBP5UlNk0UIQRtjTIKGp3gZBHQZDZD"
+
+
+
+curl -X POST -H "Content-Type: application/json" -d '{
+  "get_started": {"payload": "GET_STARTE"}
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAATrmhCRFboBAA4HgyAlM5spUaMMjh6J4SmAET1xBS24j8ZBUbSZBA9RCuBmp5nVio7HpdWPRwjXeFRE8ZCyD7rTOkDoAtpmE2WZCRrAeIED81kLGBXV5XEtTXhwcsruXYWk6enHl3AiPdSQUgER3ZAmjcwCajiGruZA9xt9PwAekWMDuhbsBP5UlNk0UIQRtjTIKGp3gZBHQZDZD"
