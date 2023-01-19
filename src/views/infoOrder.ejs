@@ -34,6 +34,8 @@
 
 
             window.extAsyncInit = function() {
+                var isSupported = MessengerExtensions.isInExtension(); 
+                    alert(isSupported);
             MessengerExtensions.getContext(facebookAppId,
                     function success(thread_context){
                         // success
@@ -51,7 +53,8 @@
                     },
                     function error(err){
                         // error
-                        alert("Messenger Extension Error: " + err);
+                        alert(isSupported);
+                        alert("Messenger Extension Erropor: " + err);
                         // console.log(err);
                     }
                 );
