@@ -7,8 +7,8 @@
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://connect.facebook.net/en_US/messenger.Extensions.js"></script>
-    <script src="/src/views/MessengerExtenssion.js"></script>
+<!--     <script src="https://connect.facebook.net/en_US/messenger.Extensions.js"></script> -->
+<!--     <script src="/src/views/MessengerExtenssion.js"></script> -->
     <!-- Load custom Javascript and CSS-->
     <link rel="stylesheet" href="/css/style.css">
     <script>
@@ -22,45 +22,45 @@
 
 </head>
 <body>
+  <script> 
+    window.fbMessengerPlugins = window.fbMessengerPlugins || {
+        init: function () {
+          FB.init({
+            appId            : '1384946842277306',
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v2.10'
+          });
+        }, callable: []
+      };
+      window.fbAsyncInit = window.fbAsyncInit || function () {
+        window.fbMessengerPlugins.callable.forEach(function (item) { item(); });
+        window.fbMessengerPlugins.init();
+      };
+      setTimeout(function () {
+        (function (d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) { return; }
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+      }, 0);
+  
+  </script>
+  
+  
     <script>
-
-            (function(d, s, id){
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) {return;}
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'Messenger'));
-
-
-
-            window.extAsyncInit = function() {
-                var isSupported = MessengerExtensions.isInExtension(); 
-                    alert(isSupported);
-            MessengerExtensions.getContext(facebookAppId,
-                    function success(thread_context){
-                        // success
-                        //set psid to input
-                        console.log(thread_context);
-                        // document.getElementById('psid').value(thread_context.psid);
-                        // $("#psid").val(thread_context.psid);
-                        let userPSID = thread_context.psid;
-                        document.getElementById("psid").value = userPSID;
-                        // alert(psid);
-                        // console.log(thread_context);
-                    handleClickButtonFindOrder();
-                        // supportOrder.closeWebview();
-                        // closeWebview();
-                    },
-                    function error(err){
-                        // error
-                        alert(isSupported);
-                        alert("Messenger Extension Erropor: " + err);
-                        // console.log(err);
-                    }
-                );
-            };
-
+       // Code copied from Facebook to load and initialise Messenger extensions
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'Messenger'));
+      
     </script>
     <!-- <script type="module" src="lib.js" ></script> -->
     <form>
@@ -80,40 +80,12 @@
           <label for="order_number">Order Number:</label>
           <input type="text" id="order_number" name="order_number" required class="form-control">
         </div>
-        <button class ="form-group" type="button" id="find_order_btn" onclick="handleClickButtonFindOrder()" class="btn btn-primary">Find Order</button>
+        <button id="find_order_btn" onclick="handleClickButtonFindOrder()">Find Order</button>
         <!-- <button id="close-btn" onclick="closeWebview()">Close</button> -->
       
       
       </form>
-<!-- <div class="container fix-height">
-    <div class="row">
-        <div class="col-12">
-            <div class="text-center mt-3">
-                <span class="title">Order lookup</span>
-            </div>
-            <input type="text" id="psid" hidden>
-            <div class="form-group">
-                <label for="customerName">Customer:</label>
-                <input type="text" id="customerName" class="form-control" placeholder="Name...">
-            </div>
-            <div class="form-group">
-                <label for="email">Email address (<span style="color: red">*</span>):</label>
-                <input type="email" id="email" class="form-control" placeholder="Email address...">
-                <div class="invalid-feedback">Please fill out your email address.</div>
-            </div>
-            <div class="form-group">
-                <label for="orderNumber">Order number (<span style="color: red">*</span>):</label>
-                <input type="text" id="orderNumber" class="form-control" placeholder="Order number...">
-                <div class="invalid-feedback">Please fill out your order number.</div>
-            </div>
-            <button class="btn btn-primary" id="btnFindOrder" onClick="handleClickButtonFindOrder()"> FIND ORDER </button>
-            <button class="btn btn-primary" id="close-btn" onClick="closeWebview()">Close</button>
-            <button id="close-btn" onclick="closeWebview()">Close</button>
-        </div>
 
-    </div>
-
-</div> -->
 <footer>
     <div class="text-center">
         <div class="">
@@ -124,6 +96,29 @@
         </div>
     </div>
 </footer>
-
+  <script>
+      window.extAsyncInit = function() {
+        console.log('Messenger extensions are ready');
+        
+        // Handle button click
+        $('#find_order_btn').submit(function(event) {
+          console.log('Submit pressed');
+          
+          event.preventDefault();
+          
+          const formData = $('#find_order_btn').serialize();
+          
+          $.post('/set-info-order', formData, function (data) {
+            MessengerExtensions.requestCloseBrowser(function () {
+              console.log('Window will be closed');
+            }, function (error) {
+              console.log('There is an error');
+              console.log(error);
+            });
+          });
+        });
+        
+      }
+    </script>    
 </body>
 </html>
