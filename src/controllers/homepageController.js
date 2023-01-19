@@ -107,7 +107,7 @@ let handleMessage = async (sender_psid, received_message) => {
     //check the incoming message is a quick reply?
     if (received_message && received_message.quick_reply && received_message.quick_reply.payload) {
         let payload = received_message.quick_reply.payload;
-        if (payload === "الأدوية") {
+        if (payload === "CATEGORIES") {
             await chatbotService.sendCategories(sender_psid);
 
         } else if (payload === "LOOKUP_ORDER") {
@@ -160,40 +160,40 @@ let handleMessage = async (sender_psid, received_message) => {
     }
 
     // Sends the response message
-    try {
-        // await chatbotService.sendMessage(sender_psid, response);
-        callSendAPI(sender_psid, response);
+    // try {
+        await chatbotService.sendMessage(sender_psid, response);
+    //     callSendAPI(sender_psid, response);
      
-    } catch (e) {
-        console.log(e);
-    }
+    // } catch (e) {
+    //     console.log(e);
+    // }
     
 
     
 };
 
-let callSendAPI = (sender_psid, response) => {
-    // Construct the message body
-    let request_body = {
-        "recipient": {
-            "id": sender_psid
-        },
-        "message": response
-    };
-    // Send the HTTP request to the Messenger Platform
-    request({
-        "uri": "https://graph.facebook.com/v15.0/me/messages",
-        "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
-        "method": "POST",
-        "json": request_body
-    }, (err, res, body) => {
-        if (!err) {
-            console.log('message sent!')
-        } else {
-            console.error("Unable to send message:" + err);
-        }
-    });
-};
+// let callSendAPI = (sender_psid, response) => {
+//     // Construct the message body
+//     let request_body = {
+//         "recipient": {
+//             "id": sender_psid
+//         },
+//         "message": response
+//     };
+//     // Send the HTTP request to the Messenger Platform
+//     request({
+//         "uri": "https://graph.facebook.com/v15.0/me/messages",
+//         "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
+//         "method": "POST",
+//         "json": request_body
+//     }, (err, res, body) => {
+//         if (!err) {
+//             console.log('message sent!')
+//         } else {
+//             console.error("Unable to send message:" + err);
+//         }
+//     });
+// };
 // Handles messaging_postbacks events
 let handlePostback = async (sender_psid, received_postback) => {
     // Get the payload for the postback

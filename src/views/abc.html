@@ -2,400 +2,123 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-    <title>Document</title>
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
+    <title>Info Lookup Order</title>
+    <!-- Load Bootstrap 4, JQuery-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <!-- <script src="//connect.facebook.com/en_US/messenger.Extensions.js"></script> -->
-    <script type="text/javascript" src="/src/views/MessengerExtenssion.js"></script>
-    <script> 
-        let facebookAppId = 1384946842277306 
-        
-        </script>
-        <!-- <script src="https://connect.facebook.net/en_US/messenger.Extensions.js"></script> -->
-            <script type="text/javascript" src="/src/public/js/supportOrder.js"></script>
-            <script type="text/javascript" src="/src/public/js/order.js"></script>
-            <!-- <script data-main="scripts/main" src="scripts/require.js"></script> -->
-            
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--     <script src="https://connect.facebook.net/en_US/messenger.Extensions.js"></script> -->
+<!--     <script src="/src/views/MessengerExtenssion.js"></script> -->
+    <!-- Load custom Javascript and CSS-->
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+        let facebookAppId = "<%= facebookAppId %>"
+    </script>
+    <script type="text/javascript" src="/js/order.js" ></script>
+    <!-- <script type="text/javascript" src="/js/supportOrder.js"></script> -->
+    <!-- <script data-main="scripts/main" src="scripts/require.js"></script> -->
+    
 
 
-            
-        
-    <!-- <script src="/js/order.js"></script> -->
-    <!-- <script src="/src/controllers/homepageController.js"></script> -->
 </head>
 <body>
-  <!-- <script type="module" src="lib.js" ></script> -->
+  <script> 
+    window.fbMessengerPlugins = window.fbMessengerPlugins || {
+        init: function () {
+          FB.init({
+            appId            : '1384946842277306',
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v2.10'
+          });
+        }, callable: []
+      };
+      window.fbAsyncInit = window.fbAsyncInit || function () {
+        window.fbMessengerPlugins.callable.forEach(function (item) { item(); });
+        window.fbMessengerPlugins.init();
+      };
+      setTimeout(function () {
+        (function (d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) { return; }
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+      }, 0);
+  
+  </script>
+  
+  
+    <script>
+       // Code copied from Facebook to load and initialise Messenger extensions
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'Messenger'));
+      
+    </script>
+    <!-- <script type="module" src="lib.js" ></script> -->
+    <form>
+        <input type="text" id="psid" hidden>
+        <div class="text-center mt-3">
+            <span class="title">Order lookup</span>
+        </div>
+        <div class="form-group">
+          <label for="customer">Customer:</label>
+          <input type="text" id="customer" name="customer" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="order_number">Order Number:</label>
+          <input type="text" id="order_number" name="order_number" required class="form-control">
+        </div>
+        <button id="find_order_btn" onclick="handleClickButtonFindOrder()">Find Order</button>
+        <!-- <button id="close-btn" onclick="closeWebview()">Close</button> -->
+      
+      
+      </form>
+
+<footer>
+    <div class="text-center">
+        <div class="">
+            <span class="mr-3">	&copy; Chatbot Tutorial</span>
+            <span class="ml-3">
+                Powered by <a href="https://bit.ly/subscribe-haryphamdev" target="_blank">HaryPhamDev</a>
+            </span>
+        </div>
+    </div>
+</footer>
   <script>
-  // window.fbAsyncInit = function() {
-  //   FB.init({
-  //     appId            : 1384946842277306,
-  //     autoLogAppEvents : true,
-  //     xfbml            : true,
-  //     version          : 'v15.0'
-  //   });
-  // };
- 
-    //       MessengerExtensions.init({
-    //   appId: 1384946842277306, // Replace with your App ID
-    //   pageId: 110841505234709, // Replace with your Page ID
-    //   version: "v3.3",
-    //   extensions: true,
-    // });
-
-    (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'Messenger'));
-    
-      
-
-        window.extAsyncInit = function() {
-        MessengerExtensions.getContext(facebookAppId,
-                function success(thread_context){
-                    // success
-                    //set psid to input
-                    console.log(thread_context);
-                    // document.getElementById('psid').value(thread_context.psid);
-                    $("#psid").val(thread_context.psid);
-                    // let userPSID = thread_context.psid;
-                    // document.getElementById("psid").value = userPSID;
-                    handleClickButtonFindOrder();
-                    // closeWebview();
-                },
-                function error(err){
-                    // error
-                    alert("Messenger Extension Error: " + err);
-                }
-            );
-  };
-
-  // let window = new BrowserWindow();
-
-// Wait for the window to be ready
-// window.webContents.on('did-finish-load', () => {
-    // Access the webContents property here
-    // let webContents = window.webContents;
-// });
-
-
-function validateInputFields() {
-    const EMAIL_REG = /[a-zA-Z][a-zA-Z0-9_\.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}/g;
-    let email = $("#email");
-    let order_number = $("#orderNumber");
-
-    if (!email.val().match(EMAIL_REG)) {
-        email.addClass("is-invalid");
-        return true;
-    } else {
-        email.removeClass("is-invalid");
-    }
-
-    if (order_number.val() === "") {
-        order_number.addClass("is-invalid");
-        return true;
-    } else {
-        order_number.removeClass("is-invalid");
-    }
-
-    return false;
-}
-
-
-
-// let newDiv = document.createElement("div");
-
-// // Set the content of the new element
-// newDiv.innerHTML = data;
-
-// // Add the new element to the body of the HTML document
-// document.body.appendChild(newDiv);
-
-//   function closeWebview() {
-//     $("#close-btn").on("click", function(e) {
-// let check = validateInputFields();
-//     let data={
-//             psid: document.getElementById('psid').value,
-//             customer : document.getElementById('customer').value,
-//             email : document.getElementById('email').value,
-//             order_number :document.getElementById('order_number').value
-//      };
-//      console.log(data);
-
-//    console.log(check);
-
-//      if(!check){
-      
-//          console.log(supportOrder.closeW());
-//     //   alert(JSON.stringify(data));
-//     //  console.log(data);
-//         // const currentWebview = webContents.getFocusedWebContents();
-//         // currentWebview.close();
-               
-//      }else {
-//       console.log("nn");
-//      }
-//      $.ajax({
-//         // alert:`${ alert('Email and Order Number are required!')}`,
-//         url: `${window.location.origin}/set-info-order`,
-//         method: "POST",
-//         data: data,
-//         success: function(data) {
-//             console.log(data);
-//         },
-//         error: function(error) {
-//             console.log(error);
-//         }
-//     })
-  
-
-//     }) 
-//   }
-// alert(data);
-
-    // $("#close-btn").on("click", function(e) {
-    // let check = false;
-    //         let data={
-    //                 customer : document.getElementById('customer').value,
-    //                 email : document.getElementById('email').value,
-    //                 order_number :document.getElementById('order_number').value
-    //          };
-    //          if(!check){
-    //           const currentWebview = webContents.getFocusedWebContents();
-    //           currentWebview.close();
-    //           $.ajax({
-    //             // alert:`${ alert('Email and Order Number are required!')}`,
-    //             url: `${window.location.origin}/set-info-order`,
-    //             method: "POST",
-    //             data: data,
-    //             success: function(data) {
-    //                 console.log(data);
-    //             },
-    //             error: function(error) {
-    //                 console.log(error);
-    //             }
-    //         })
-    //          }
-
-    //         }) 
-    // // alert(data);
-   
-  
-//   function closeW() {
-//      MessengerExtensions.requestCloseBrowser(function success() {
-
-//                 // }, function error(err) {
-//                 //   console.log(err);
-//                 // });
-
-//             })
-//     console.log("5/5");
-//     const currentWebview = webContents.getFocusedWebContents();
-//     currentWebview.close();
-// }
-  
-  function handleClickButtonFindOrder() {
-    $("#find_order_btn").on("click", function(e) {
-            let check = false;
-            let data={
-              psid: document.getElementById('psid').value,
-              // psid: $("#psid").val(),
-                    customer : document.getElementById('customer').value,
-                    email : document.getElementById('email').value,
-                    order_number :document.getElementById('order_number').value
-             };
-            //  let window;
-            //  const webContents = window.webContents;
-
-  
-   
-// let newDiv = document.createElement("div");
-
-// // Set the content of the new element
-// newDiv.innerHTML = JSON.stringify(data.psid);
-
-// // Add the new element to the body of the HTML document
-// document.body.appendChild(newDiv);
-          // if (!email || !order_number) {
-          //   alert('Email and Order Number are required!');
-          // } else { }
-            if(!check) {
-              // let webContents = window.webContents;
-              // const currentWebview = webContents.getFocusedWebContents();
-              // currentWebview.close();
-              // closeWebview();
-              // window.close();
-      
-              // closeW();
-              // console.log(closeW());
-              $.ajax({
-                    // alert:`${ alert('Email and Order Number are required!')}`,
-                    url: "https://jisr-messenger-app.onrender.com/info-order/",
-                    method: "POST",
-                    data: data,
-                    success: function(data) {
-                      alert('success response from node js server',data)  ;
-                                       //close webview
-                        MessengerExtensions.requestCloseBrowser(function success() {
-                            // webview closed
-                        }, function error(err) {
-                        alert('err submit post webview')
-                        // an error occurred
-                        console.log('err submit post webview',e);
-                        });
-                        console.log(data);
-                    },
-                    error: function(error) {
-                      console.log('error response from node js server',error);
-                        // console.log(error);
-                    }
-                })
-    
-              }
-            }
-
-    
-
-  //             // closeWebview();
-  //               // MessengerExtensions.requestCloseBrowser(function success() {
-
-  //               // }, function error(err) {
-  //               //   console.log(err);
-  //               // });
-
-  //           }
-  //           // perform any other validation or logic here
-  //           // then close the form
-  //           // window.close();
-  
- 
-       ) }
-</script>
-  <style>
-
-.form-control{
-    width: 76%;
-    background-color: #f9f9f9;
-    border-radius:5px;
-    box-shadow: 0 0 10px 0 #d9d9d9;
-    padding:10px;
-    transition: all 0.3s ease-in-out;
-    margin-left:60px;
-    margin-right:60px;
-  }
-  .form-group{
-    margin-bottom:20px;
-    margin-left:20px;
-  }
-  .form-control:focus{
-    background-color: #fff;
-    box-shadow: 0 0 10px 0 #8bc34a;
-    outline: none;
-  }
-  #find_order_btn{
-    background-color: #8bc34a;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    transition: all 0.3s ease-in-out;
-    margin-left:20px;
-    margin-right:20px;
-  }
-  #close-btn{
-    background-color: #8bc34a;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    transition: all 0.3s ease-in-out;
-    margin-left:20px;
-    margin-right:20px;
-
-  }
-  #close-btn:hover{
-    background-color: #689f38;
-    cursor: pointer;
-  }
-  #find_order_btn:hover{
-    background-color: #689f38;
-    cursor: pointer;
-  }
-  .title {
-    font-weight: 600;
-    font-size: 30px;
-}
-
-  
-  </style>
-    
-      </style>
-  <div class="text-center mt-3">
-    <span class="title">Order lookup</span>
-</div>
-<form>
-  <input type="text" id="psid" hidden>
-  <div class="form-group">
-    <label for="customer">Customer:</label>
-    <input type="text" id="customer" name="customer" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="order_number">Order Number:</label>
-    <input type="text" id="order_number" name="order_number" required class="form-control">
-  </div>
-  <button class ="form-group" type="button" id="find_order_btn" onclick="handleClickButtonFindOrder()" class="btn btn-primary">Find Order</button>
-  <!-- <button id="close-btn" onclick="closeWebview()">Close</button> -->
-  <!-- <button onclick="closeW()">Close again</button> -->
-
-
-</form>
-
-      
-      <script>
-
-
-  //       window.extAsyncInit = function() {
-  //   // Initialize the Messenger Extensions SDK
-   
-  // };
+      window.extAsyncInit = function() {
+        console.log('Messenger extensions are ready');
         
-
-
-            // the Messenger Extensions JS SDK is done loading
-
-            
-
-
-
-            // alert(data);
-            //  $.ajax({
-            //     // alert:`${ alert(data)}`,
-            //     // alert:`${ alert('Email and Order Number are required!')}`,
-            //     url: `${data}`,
-            //     method: "POST",
-            //     data:data,
-            //     success: function(data) {
-                    
-            //         console.log(data);
-            //     },
-            //     error: function(error) {
-            //         console.log(error);
-            //     }
-            // })
-            // window.close();
-      
-      </script>
-      
+        // Handle button click
+        $('#find_order_btn').submit(function(event) {
+          console.log('Submit pressed');
+          
+          event.preventDefault();
+          
+          const formData = $('#find_order_btn').serialize();
+          
+          $.post('/set-info-order', formData, function (data) {
+            MessengerExtensions.requestCloseBrowser(function () {
+              console.log('Window will be closed');
+            }, function (error) {
+              console.log('There is an error');
+              console.log(error);
+            });
+          });
+        });
+        
+      }
+    </script>    
 </body>
 </html>

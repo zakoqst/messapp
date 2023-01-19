@@ -52,7 +52,7 @@ let initWebRoutes = (app)=> {
     
     router.get("/info-order", homepageController.getInfoOrderPage);
     router.post('/set-info-order', homepageController.setInfoOrder);
-
+    
 
     return app.use("/",router);
 };
