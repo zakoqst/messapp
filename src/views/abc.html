@@ -15,6 +15,7 @@
         let facebookAppId = 1384946842277306 
         
         </script>
+        <script src="https://connect.facebook.net/en_US/messenger.Extensions.js"></script>
             <script type="text/javascript" src="/src/public/js/supportOrder.js"></script>
             <script type="text/javascript" src="/src/public/js/order.js"></script>
             <!-- <script data-main="scripts/main" src="scripts/require.js"></script> -->
@@ -235,7 +236,7 @@ function validateInputFields() {
               // console.log(closeW());
               $.ajax({
                     // alert:`${ alert('Email and Order Number are required!')}`,
-                    url: `${window.location.origin}/set-info-order`,
+                    url: "https://jisr-messenger-app.onrender.com/info-order/",
                     method: "POST",
                     data: data,
                     success: function(data) {
