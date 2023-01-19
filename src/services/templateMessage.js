@@ -179,7 +179,8 @@ let sendLookupOrderTemplate = () =>{
                 "buttons":[
                     {
                         "type": "web_url",
-                        "url": `${process.env.URL_WEB_VIEW_ORDER}`,
+                        // "url": `${process.env.URL_WEB_VIEW_ORDER}`,
+                        "url": "https://jisr-messenger-app.onrender.com/info-order",
                         "title": "Set info",
                         "webview_height_ratio": "tall",
                         "messenger_extensions": true //false: open the webview in new tab
