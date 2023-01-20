@@ -63,7 +63,7 @@
       
     </script>
     <!-- <script type="module" src="lib.js" ></script> -->
-    <form>
+    <form id="preferencesForm">
         <input type="text" id="psid" hidden>
         <div class="text-center mt-3">
             <span class="title">Order lookup</span>
@@ -82,6 +82,7 @@
         </div>
         <button type = "submit" id="find_order_btn" onclick="handleClickButtonFindOrder()">Find Order</button>
         <!-- <button id="close-btn" onclick="closeWebview()">Close</button> -->
+        <button type="submit">Submit</button>
       
       
       </form>
@@ -99,8 +100,38 @@
   <script>
       window.extAsyncInit = function() {
         console.log('Messenger extensions are ready');
-        function handleClickButtonFindOrder() {
-          $("#find_order_btn").on("click", function(e) {
+
+        MessengerExtensions.getContext(facebookAppId,
+        function success(thread_context){
+            // success
+            //set psid to input
+            console.log(thread_context);
+            // document.getElementById('psid').value(thread_context.psid);
+            // $("#psid").val(thread_context.psid);
+            let userPSID = thread_context.psid;
+            document.getElementById("psid").value = userPSID;
+            alert(psid);
+            // console.log(thread_context);
+           handleClickButtonFindOrder();
+            // supportOrder.closeWebview();
+            // closeWebview();
+        },
+        function error(err){
+            // error
+            alert("Messenger Extension Error: " + err);
+            // console.log(err);
+        }
+    );
+
+
+
+        // function handleClickButtonFindOrder() {
+          $("#preferencesForm").submit( function(event) {
+            let userPSID = thread_context.psid;
+            document.getElementById("psid").value = userPSID;
+            alert(psid);
+            console.log('Submit pressed');
+              // event.preventDefault();
               // let check = validateInputFields();
                   let data={
                           psid: document.getElementById('psid').value,
@@ -110,40 +141,50 @@
                   };
                   alert(JSON.stringify(data));
                   console.log(data);
-                  // if(!check){
-                    // closeWebview();
-                    $.ajax({
-                      // alert:`${ alert('Email and Order Number are required!')}`,
-                      url: `${window.location.origin}/set-info-order`,
-                      method: "POST",
-                      data: data,
-                      success: function(data) {
-                          alert('success response from node js server',data)  ;
-                          MessengerExtensions.requestCloseBrowser(function () {
-                              console.log('Window will be closed');
-                            }, function (error) {
-                              console.log('There is an error');
-                              console.log(error);
-                            });
-                          // MessengerExtensions.requestCloseBrowser(function success() {
-                          //     // webview closed
-                          //     // windows.close();
-                          // }, function error(e) {
-                          //     alert('err submit post webview')
-                          //     // an error occurred
-                          //     console.log('err submit post webview',e);
-                          // }); 
+
+                    $.post(`${window.location.origin}/set-info-order`, data, function (data) {
+            MessengerExtensions.requestCloseBrowser(function () {
+              console.log('Window will be closed');
+            }, function (error) {
+              console.log('There is an error');
+              console.log(error);
+            });
+          });
+        });
+                    // if(!check){
+                  //   // closeWebview();
+                  //   $.ajax({
+                  //     // alert:`${ alert('Email and Order Number are required!')}`,
+                  //     url: `${window.location.origin}/set-info-order`,
+                  //     method: "POST",
+                  //     data: data,
+                  //     success: function(data) {
+                  //         alert('success response from node js server',data)  ;
+                  //         MessengerExtensions.requestCloseBrowser(function () {
+                  //             console.log('Window will be closed');
+                  //           }, function (error) {
+                  //             console.log('There is an error');
+                  //             console.log(error);
+                  //           });
+                  //         // MessengerExtensions.requestCloseBrowser(function success() {
+                  //         //     // webview closed
+                  //         //     // windows.close();
+                  //         // }, function error(e) {
+                  //         //     alert('err submit post webview')
+                  //         //     // an error occurred
+                  //         //     console.log('err submit post webview',e);
+                  //         // }); 
                       
-                      },
-                      error: function(error) {
-                          console.log('error response from node js server',error);
-                      }
-                  })
+                  //     },
+                  //     error: function(error) {
+                  //         console.log('error response from node js server',error);
+                  //     }
+                  // })
               
-                  // }else {console.log('lllllllllllll');}
+                  // // }else {console.log('lllllllllllll');}
               
-                  }) 
-}
+                  // }) 
+// }
         // // Handle button click
         // $('#find_order_btn').submit(function(event) {
         //   console.log('Submit pressed');
