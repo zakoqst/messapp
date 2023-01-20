@@ -51,6 +51,11 @@ let sendMessageWelcomeNewUser = (sender_psid) => {
                         "title": "Talk to an agent",
                         "payload": "TALK_AGENT",
                     },
+                    {
+                        "content_type": "text",
+                        "title": "Lookup Survey",
+                        "payload": "LOOKUP_SURVEY",
+                    },
                 ]
             };
 
