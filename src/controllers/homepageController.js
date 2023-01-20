@@ -115,8 +115,9 @@ let handleMessage = async (sender_psid, received_message) => {
 
         } else if (payload === "TALK_AGENT") {
             await chatbotService.requestTalkToAgent(sender_psid);
+        } else if (payload === "LOOKUP_SURVEY") {
+            await chatbotService.requestTalkToAgent(sender_psid);
         }
-
         return;
     }
 
