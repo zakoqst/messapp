@@ -18,13 +18,14 @@ git init
 git commit -m "Initial commit"
 git remote add origin remoteRepositoryURL
 git push -u origin master
+
 -------------------------------
 
 git add .
 git commit -m "update"
 gi push origin master
 ---------------------------------
-curl -X GET "localhost:8080/webhook?hub.verify_token=itsJustaRandomString123456789&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
+curl -X GET "localhost:8080/webhook?hub.verify_token=itsJustaRandomString123456&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
 curl -X GET "localhost:1337/webhook?hub.verify_token=itsJustaRandomString123456789&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
 curl -X GET "localhost:8080/webhook?hub.verify_token=MySecondRandomString123456789&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
 curl -H "Content-Type: application/json" -X POST "localhost:8080/webhook" -d '{"object": "page", "entry": [{"messaging": [{"message": "TEST_MESSAGE"}]}]}'
