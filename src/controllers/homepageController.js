@@ -114,25 +114,25 @@ let handleMessage = async (sender_psid, received_message) => {
     //check the incoming message is a quick reply?
     if (received_message && received_message.quick_reply && received_message.quick_reply.payload) {
         let payload = received_message.quick_reply.payload;
-        // if (payload === "CATEGORIES") {
-        //     await chatbotService.sendCategories(sender_psid);
+        if (payload === "CATEGORIES") {
+            await chatbotService.sendCategories(sender_psid);
 
-        // } else if (payload === "LOOKUP_ORDER") {
-        //     await chatbotService.sendLookupOrder(sender_psid);
+        } else if (payload === "LOOKUP_ORDER") {
+            await chatbotService.sendLookupOrder(sender_psid);
 
-        // } else if (payload === "TALK_AGENT") {
-        //     await chatbotService.requestTalkToAgent(sender_psid);
-        // } else if (payload === "LOOKUP_SURVEY") {
-        //     await chatbotService.requestTalkToAgent(sender_psid);
+        } else if (payload === "TALK_AGENT") {
+            await chatbotService.requestTalkToAgent(sender_psid);
+        } else if (payload === "LOOKUP_SURVEY") {
+            await chatbotService.requestTalkToAgent(sender_psid);
         // }
-        if (payload.toLowerCase() === 'yes') {
-            response = { "text": "Thanks!" };
-            callSendAPI(sender_psid, response);
-            console.log("Matched yes");
-          } else if (payload.toLowerCase() === 'no') {
-            response = { "text": "Oops, try sending another image." };
-            callSendAPI(sender_psid, response);  
-            console.log("Matched no");
+        // if (payload.toLowerCase() === 'yes') {
+        //     response = { "text": "Thanks!" };
+        //     callSendAPI(sender_psid, response);
+        //     console.log("Matched yes");
+        //   } else if (payload.toLowerCase() === 'no') {
+        //     response = { "text": "Oops, try sending another image." };
+        //     callSendAPI(sender_psid, response);  
+        //     console.log("Matched no");
           }
         
         return;

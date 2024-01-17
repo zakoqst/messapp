@@ -64,116 +64,123 @@ let getWebhook = (req, res) => {
         }
     }
 };
-function handleMessage(sender_psid, received_message) {
-    let response;
 
-    console.log("Received message:", received_message);
 
-    // Check if the message contains text
-    if (received_message.text) {
-        console.log("Message contains text:", received_message.text);
+  
+// function handleMessage(sender_psid, received_message) {
+//     let response;
 
-        // Simple text-based logic instead of NLP
-        const messageText = received_message.text.toLowerCase();
-        console.log("Processed message text:", messageText);
+//     console.log("Received message:", received_message);
 
-        if (messageText.includes("hello") || messageText.includes("hi")) {
-            response = { "text": "Hi there! How can I help you today?" };
-        } else if (messageText.includes("thank you") || messageText.includes("thanks")) {
-            response = { "text": "You're welcome! Let me know if there's anything else I can do for you." };
-        } else if (messageText.includes("bye")) {
-            response = { "text": "Goodbye! Have a great day!" };
-        } else {
-            // Default response for unhandled messages
-            response = { "text": "I'm not sure how to respond to that. Can you try asking something else?" };
-        }
-    } else if (received_message.attachments) {
-        // Handle message with attachment
-        console.log("Message contains attachments:", received_message.attachments);
+//     // Check if the message contains text
+//     if (received_message.text) {
+//         console.log("Message contains text:", received_message.text);
 
-        let attachment_url = received_message.attachments[0].payload.url;
-        response = {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": "generic",
-                    "elements": [{
-                        "title": "Is this the right picture?",
-                        "subtitle": "Tap a button to answer.",
-                        "image_url": attachment_url,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "Yes!",
-                                "payload": "yes",
-                            },
-                            {
-                                "type": "postback",
-                                "title": "No!",
-                                "payload": "no",
-                            }
-                        ],
-                    }]
-                }
-            }
-        };
-    } else {
-        // Log if no text or attachment is found in the message
-        console.log("Message does not contain text or attachments.");
-    }
+//         // Simple text-based logic instead of NLP
+//         const messageText = received_message.text.toLowerCase();
+//         console.log("Processed message text:", messageText);
+
+//         if (messageText.includes("hello") || messageText.includes("hi")) {
+//             response = { "text": "Hi there! How can I help you today?" };
+//         } else if (messageText.includes("thank you") || messageText.includes("thanks")) {
+//             response = { "text": "You're welcome! Let me know if there's anything else I can do for you." };
+//         } else if (messageText.includes("bye")) {
+//             response = { "text": "Goodbye! Have a great day!" };
+//         } else {
+//             // Default response for unhandled messages
+//             response = { "text": "I'm not sure how to respond to that. Can you try asking something else?" };
+//         }
+//     } else if (received_message.attachments) {
+//         // Handle message with attachment
+//         console.log("Message contains attachments:", received_message.attachments);
+
+//         let attachment_url = received_message.attachments[0].payload.url;
+//         response = {
+//             "attachment": {
+//                 "type": "template",
+//                 "payload": {
+//                     "template_type": "generic",
+//                     "elements": [{
+//                         "title": "Is this the right picture?",
+//                         "subtitle": "Tap a button to answer.",
+//                         "image_url": attachment_url,
+//                         "buttons": [
+//                             {
+//                                 "type": "postback",
+//                                 "title": "Yes!",
+//                                 "payload": "yes",
+//                             },
+//                             {
+//                                 "type": "postback",
+//                                 "title": "No!",
+//                                 "payload": "no",
+//                             }
+//                         ],
+//                     }]
+//                 }
+//             }
+//         };
+//     } else {
+//         // Log if no text or attachment is found in the message
+//         console.log("Message does not contain text or attachments.");
+//     }
     
-    // Log the response that will be sent
-    console.log("Response to be sent:", response);
+//     // Log the response that will be sent
+//     console.log("Response to be sent:", response);
 
-    // Send the response message
-    callSendAPI(sender_psid, response);    
-}
+//     // Send the response message
+//     callSendAPI(sender_psid, response);    
+// }
 
 
 
 // Function to handle postback events
+
 function handlePostback(sender_psid, received_postback) {
     let response;
-    // let payload = received_postback.payload;
-    let payload = received_postback.payload;
-   // Set the response based on the postback payload
-   if (payload.toLowerCase() === 'yes') {
-    response = { "text": "Thanks!" };
-    callSendAPI(sender_psid, response);
-    console.log("Matched yes");
-  } else if (payload.toLowerCase() === 'no') {
-    response = { "text": "Oops, try sending another image." };
-    callSendAPI(sender_psid, response);  
-    console.log("Matched no");
-  }
 
+    // Get the payload for the postback
+    let payload = received_postback.payload;
+
+    // Set the response based on the postback payload
+    if (payload === 'yes') {
+        response = { "text": "Thanks!" }
+    } else if (payload === 'no') {
+        response = { "text": "Oops, try sending another image." }
+    }
     // Send the message to acknowledge the postback
+    callSendAPI(sender_psid, response);
 }
 
-// Function to send response messages via the Send API
+
+
+
+
+
 function callSendAPI(sender_psid, response) {
+    // Construct the message body
     let request_body = {
         "recipient": {
             "id": sender_psid
         },
-        "message": response
+        "message": { "text": response }
     };
 
+    // Send the HTTP request to the Messenger Platform
     request({
-        uri: `https://graph.facebook.com/V2.6/me/messages?access_token=`+ process.env.PAGE_ACCESS_TOKEN,
-        
-        method: "POST",
-        json: true,
-        body: request_body 
-        
+        "uri": "https://graph.facebook.com/v7.0/me/messages",
+        "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
     }, (err, res, body) => {
         if (!err) {
-            console.log('message sent! ', body );
+            console.log('message sent!');
         } else {
             console.error("Unable to send message:" + err);
         }
-    }); 
+    });
 }
+
 
 // Function to extract the first trait of an entity
 function firstTrait(nlp, name) {
@@ -182,17 +189,25 @@ function firstTrait(nlp, name) {
 
 
 
-//NLP
 
-// Function to handle messages for specific reactions
-function handleMessageWithReaction(sender_psid, message) {
-    if (message && message.attachments && message.attachments[0].payload) {
+
+
+
+
+
+
+
+function handleMessage(sender_psid, message) {
+    //handle message for react, like press like button
+    // id like button: sticker_id 369239263222822
+
+    if( message && message.attachments && message.attachments[0].payload){
         callSendAPI(sender_psid, "Thank you for watching my video !!!");
         callSendAPIWithTemplate(sender_psid);
         return;
     }
 
-    const entitiesArr = ["wit$greetings", "wit$thanks", "wit$bye"];
+    let entitiesArr = [ "wit$greetings", "wit$thanks", "wit$bye" ];
     let entityChosen = "";
     entitiesArr.forEach((name) => {
         let entity = firstTrait(message.nlp, name);
@@ -201,23 +216,31 @@ function handleMessageWithReaction(sender_psid, message) {
         }
     });
 
-    switch (entityChosen) {
-        case "wit$greetings":
-            callSendAPI(sender_psid, 'Hi there! This bot is created by Hary Pham. Watch more videos on HaryPhamDev Channel!');
-            break;
-        case "wit$thanks":
-            callSendAPI(sender_psid, `You're welcome!`);
-            break;
-        case "wit$bye":
-            callSendAPI(sender_psid, 'bye-bye!');
-            break;
-        default:
-            callSendAPI(sender_psid, `The bot is needed more training, try to say "thanks a lot" or "hi" to the bot`);
+    if(entityChosen === ""){
+        //default
+        callSendAPI(sender_psid,`The bot is needed more training, try to say "thanks a lot" or "hi" to the bot` );
+    }else{
+       if(entityChosen === "wit$greetings"){
+           //send greetings message
+           callSendAPI(sender_psid,'Hi there! This bot is created by Hary Pham. Watch more videos on HaryPhamDev Channel!');
+       }
+       if(entityChosen === "wit$thanks"){
+           //send thanks message
+           callSendAPI(sender_psid,`You 're welcome!`);
+       }
+        if(entityChosen === "wit$bye"){
+            //send bye message
+            callSendAPI(sender_psid,'bye-bye!');
+        }
     }
 }
 
-// Function to send a template message
+
+
+
 let callSendAPIWithTemplate = (sender_psid) => {
+    // document fb message template
+    // https://developers.facebook.com/docs/messenger-platform/send-messages/templates
     let body = {
         "recipient": {
             "id": sender_psid
@@ -247,19 +270,20 @@ let callSendAPIWithTemplate = (sender_psid) => {
     };
 
     request({
-        "uri": `https://graph.facebook.com/V6.0/me/messages`,
-        "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
+        "uri": "https://graph.facebook.com/v6.0/me/messages",
+        "qs": { "access_token": process.env.FB_PAGE_TOKEN },
         "method": "POST",
         "json": body
     }, (err, res, body) => {
         if (!err) {
-            console.log('Template message sent!');
+            // console.log('message sent!')
         } else {
             console.error("Unable to send message:" + err);
         }
     });
 };
 
+// Function to send a template message
 module.exports = {
   postWebhook: postWebhook,
   getWebhook: getWebhook

@@ -1,4 +1,6 @@
-const dotenv =require("dotenv").config();
+// const dotenv =require("dotenv").config();
+require("dotenv").config();
+
 const request = require("request");
 // // require('dotenv').config();
 
@@ -51,7 +53,7 @@ let handleSetupProfileAPI = () => {
                     }
                 ],
                 "whitelisted_domains": [
-                    "https://jisr-messenger-app.onrender.com/info-order",
+                    "https://https://messenger-app-7fl9.onrender.com/info-order",
                     "https://www.facebook.com/"
                 ]
             };
