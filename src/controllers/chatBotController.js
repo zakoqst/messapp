@@ -160,13 +160,15 @@ function callSendAPI(sender_psid, response) {
     };
 
     request({
-        "uri": `https://graph.facebook.com/V2.6/me/messages`,
-        "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
-        "method": "POST",
-        "json": request_body
+        uri: `https://graph.facebook.com/V2.6/me/messages?access_token=`+ process.env.PAGE_ACCESS_TOKEN,
+        
+        method: "POST",
+        json: true,
+        body: request_body 
+        
     }, (err, res, body) => {
         if (!err) {
-            console.log('message sent!');
+            console.log('message sent! ', body );
         } else {
             console.error("Unable to send message:" + err);
         }
