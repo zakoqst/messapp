@@ -65,57 +65,57 @@ let getWebhook = (req, res) => {
     }
 };
 
-function handleMessage(sender_psid, received_message) {
-    let response;
+// function handleMessage(sender_psid, received_message) {
+//     let response;
 
-    // Check if the message contains text
-    if (received_message.text) {
-        // Simple text-based logic instead of NLP
-        const messageText = received_message.text.toLowerCase();
+//     // Check if the message contains text
+//     if (received_message.text) {
+//         // Simple text-based logic instead of NLP
+//         const messageText = received_message.text.toLowerCase();
 
-        if (messageText.includes("hello") || messageText.includes("hi")) {
-            response = { "text": "Hi there! How can I help you today?" };
-        } else if (messageText.includes("thank you") || messageText.includes("thanks")) {
-            response = { "text": "You're welcome! Let me know if there's anything else I can do for you." };
-        } else if (messageText.includes("bye")) {
-            response = { "text": "Goodbye! Have a great day!" };
-        } else {
-            // Default response for unhandled messages
-            response = { "text": "I'm not sure how to respond to that. Can you try asking something else?" };
-        }
-    } else if (received_message.attachments) {
-        // Handle message with attachment
-        let attachment_url = received_message.attachments[0].payload.url;
-        response = {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": "generic",
-                    "elements": [{
-                        "title": "Is this the right picture?",
-                        "subtitle": "Tap a button to answer.",
-                        "image_url": attachment_url,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "Yes!",
-                                "payload": "yes",
-                            },
-                            {
-                                "type": "postback",
-                                "title": "No!",
-                                "payload": "no",
-                            }
-                        ],
-                    }]
-                }
-            }
-        };
-    } 
+//         if (messageText.includes("hello") || messageText.includes("hi")) {
+//             response = { "text": "Hi there! How can I help you today?" };
+//         } else if (messageText.includes("thank you") || messageText.includes("thanks")) {
+//             response = { "text": "You're welcome! Let me know if there's anything else I can do for you." };
+//         } else if (messageText.includes("bye")) {
+//             response = { "text": "Goodbye! Have a great day!" };
+//         } else {
+//             // Default response for unhandled messages
+//             response = { "text": "I'm not sure how to respond to that. Can you try asking something else?" };
+//         }
+//     } else if (received_message.attachments) {
+//         // Handle message with attachment
+//         let attachment_url = received_message.attachments[0].payload.url;
+//         response = {
+//             "attachment": {
+//                 "type": "template",
+//                 "payload": {
+//                     "template_type": "generic",
+//                     "elements": [{
+//                         "title": "Is this the right picture?",
+//                         "subtitle": "Tap a button to answer.",
+//                         "image_url": attachment_url,
+//                         "buttons": [
+//                             {
+//                                 "type": "postback",
+//                                 "title": "Yes!",
+//                                 "payload": "yes",
+//                             },
+//                             {
+//                                 "type": "postback",
+//                                 "title": "No!",
+//                                 "payload": "no",
+//                             }
+//                         ],
+//                     }]
+//                 }
+//             }
+//         };
+//     } 
     
-    // Send the response message
-    callSendAPI(sender_psid, response);    
-}
+//     // Send the response message
+//     callSendAPI(sender_psid, response);    
+// }
 
 
 // Function to handle postback events
@@ -147,7 +147,7 @@ function callSendAPI(sender_psid, response) {
     };
 
     request({
-        "uri": `https://graph.facebook.com/${process.env.FB_API_VERSION}/me/messages`,
+        "uri": `https://graph.facebook.com/V7.0/me/messages`,
         "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
         "method": "POST",
         "json": request_body
@@ -169,37 +169,37 @@ function firstTrait(nlp, name) {
 
 //NLP
 
-// // Function to handle messages for specific reactions
-// function handleMessageWithReaction(sender_psid, message) {
-//     if (message && message.attachments && message.attachments[0].payload) {
-//         callSendAPI(sender_psid, "Thank you for watching my video !!!");
-//         callSendAPIWithTemplate(sender_psid);
-//         return;
-//     }
+// Function to handle messages for specific reactions
+function handleMessageWithReaction(sender_psid, message) {
+    if (message && message.attachments && message.attachments[0].payload) {
+        callSendAPI(sender_psid, "Thank you for watching my video !!!");
+        callSendAPIWithTemplate(sender_psid);
+        return;
+    }
 
-//     const entitiesArr = ["wit$greetings", "wit$thanks", "wit$bye"];
-//     let entityChosen = "";
-//     entitiesArr.forEach((name) => {
-//         let entity = firstTrait(message.nlp, name);
-//         if (entity && entity.confidence > 0.8) {
-//             entityChosen = name;
-//         }
-//     });
+    const entitiesArr = ["wit$greetings", "wit$thanks", "wit$bye"];
+    let entityChosen = "";
+    entitiesArr.forEach((name) => {
+        let entity = firstTrait(message.nlp, name);
+        if (entity && entity.confidence > 0.8) {
+            entityChosen = name;
+        }
+    });
 
-//     switch (entityChosen) {
-//         case "wit$greetings":
-//             callSendAPI(sender_psid, 'Hi there! This bot is created by Hary Pham. Watch more videos on HaryPhamDev Channel!');
-//             break;
-//         case "wit$thanks":
-//             callSendAPI(sender_psid, `You're welcome!`);
-//             break;
-//         case "wit$bye":
-//             callSendAPI(sender_psid, 'bye-bye!');
-//             break;
-//         default:
-//             callSendAPI(sender_psid, `The bot is needed more training, try to say "thanks a lot" or "hi" to the bot`);
-//     }
-// }
+    switch (entityChosen) {
+        case "wit$greetings":
+            callSendAPI(sender_psid, 'Hi there! This bot is created by Hary Pham. Watch more videos on HaryPhamDev Channel!');
+            break;
+        case "wit$thanks":
+            callSendAPI(sender_psid, `You're welcome!`);
+            break;
+        case "wit$bye":
+            callSendAPI(sender_psid, 'bye-bye!');
+            break;
+        default:
+            callSendAPI(sender_psid, `The bot is needed more training, try to say "thanks a lot" or "hi" to the bot`);
+    }
+}
 
 // Function to send a template message
 let callSendAPIWithTemplate = (sender_psid) => {
@@ -232,7 +232,7 @@ let callSendAPIWithTemplate = (sender_psid) => {
     };
 
     request({
-        "uri": `https://graph.facebook.com/${process.env.FB_API_VERSION}/me/messages`,
+        "uri": `https://graph.facebook.com/V6.0/me/messages`,
         "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
         "method": "POST",
         "json": body
