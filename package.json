@@ -8,7 +8,6 @@
     "start": "node src/server.js",
     "dev": "nodemon --exec babel-node src/server.js"
   },
-  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zakhoudache/Jisr-Messenger-App.git"
@@ -38,6 +37,7 @@
     "@babel/cli": "^7.20.7",
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
+    "netlify-cli": "^17.14.0",
     "supabase": "^1.131.4"
   }
 }

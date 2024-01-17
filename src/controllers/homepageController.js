@@ -15,6 +15,8 @@ const request = require("request");
 const homepageService = require("../services/homepageService");
 const chatbotService = require("../services/chatbotService");
 const templateMessage = require("../services/templateMessage");
+const path = require('path');
+
 // const bodyParser = require("body-parser");
 // require("dotenv").config();
 // import homepageService from "../services/homepageService";
@@ -25,9 +27,14 @@ const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 
 let getHomePage = (req, res) => {
     let facebookAppId = process.env.FACEBOOK_APP_ID;
-    return res.render("homepage.ejs", {
-        facebookAppId: facebookAppId
-    })
+        // Construct the path to your HTML file
+        const filePath = path.join(__dirname, 'abc.html');
+    
+        return res.sendFile(filePath);
+    // return res.sendFile("/Jisr_App_Messenger/src/views/abc.html")
+    // return res.render("homepage.ejs", {
+    //     facebookAppId: facebookAppId
+    // })
 };
 
 let getWebhook = (req, res) => {
