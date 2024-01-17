@@ -127,10 +127,11 @@ function handlePostback(sender_psid, received_postback) {
    if (payload.toLowerCase() === 'yes') {
     response = { "text": "Thanks!" };
     callSendAPI(sender_psid, response);
+    console.log("Matched yes");
   } else if (payload.toLowerCase() === 'no') {
     response = { "text": "Oops, try sending another image." };
     callSendAPI(sender_psid, response);  
-    console.log(callSendAPI(sender_psid, response));
+    console.log("Matched no");
   }
 
     // Send the message to acknowledge the postback
