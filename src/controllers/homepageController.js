@@ -162,12 +162,12 @@ let handleMessage = async (sender_psid, received_message) => {
                         "buttons": [
                             {
                                 "type": "postback",
-                                "title": "Yes!",
+                                "title": "yes",
                                 "payload": "yes",
                             },
                             {
                                 "type": "postback",
-                                "title": "No!",
+                                "title": "no",
                                 "payload": "no",
                             }
                         ],

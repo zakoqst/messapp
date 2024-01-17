@@ -80,7 +80,8 @@ let sendMessage = (sender_psid, response) => {
                 "recipient": {
                     "id": sender_psid
                 },
-                "message": response
+                "message": response,
+                "location":"chatBotService.js"
             };
 
             // Send the HTTP request to the Messenger Platform
