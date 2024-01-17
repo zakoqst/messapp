@@ -28,13 +28,13 @@ const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 let getHomePage = (req, res) => {
     let facebookAppId = process.env.FACEBOOK_APP_ID;
         // Construct the path to your HTML file
-        const filePath = path.join(__dirname, 'abc.html');
+        // const filePath = path.join(__dirname, 'abc.html');
     
-        return res.sendFile(filePath);
+        // return res.sendFile(filePath);
     // return res.sendFile("/Jisr_App_Messenger/src/views/abc.html")
-    // return res.render("homepage.ejs", {
-    //     facebookAppId: facebookAppId
-    // })
+    return res.render("homepage.ejs", {
+        facebookAppId: facebookAppId
+    })
 };
 
 let getWebhook = (req, res) => {
