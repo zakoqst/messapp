@@ -118,9 +118,9 @@ function handlePostback(sender_psid, received_postback) {
     let payload = received_postback.payload;
   
     // Set the response based on the postback payload
-    if (payload === 'yes!') {
+    if (payload === 'yes') {
       response = { "text": "Thanks!" }
-    } else if (payload === 'no!') {
+    } else if (payload === 'no') {
       response = { "text": "Oops, try sending another image." }
     }
     // Send the message to acknowledge the postback
@@ -138,7 +138,7 @@ function callSendAPI(sender_psid, response) {
   
     // Send the HTTP request to the Messenger Platform
     request({
-      "uri": "https://graph.facebook.com/v6.0/me/messages",
+      "uri": "https://graph.facebook.com/v7.0/me/messages",
       "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
       "method": "POST",
       "json": request_body
