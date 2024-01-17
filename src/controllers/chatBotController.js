@@ -64,18 +64,27 @@ let getWebhook = (req, res) => {
         }
     }
 };
-// Function to handle incoming messages
+
 function handleMessage(sender_psid, received_message) {
     let response;
 
     // Check if the message contains text
-    if (received_message.text) {    
-        // Create payload for a basic text message
-        response = {
-            "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
-        };
+    if (received_message.text) {
+        // Simple text-based logic instead of NLP
+        const messageText = received_message.text.toLowerCase();
+
+        if (messageText.includes("hello") || messageText.includes("hi")) {
+            response = { "text": "Hi there! How can I help you today?" };
+        } else if (messageText.includes("thank you") || messageText.includes("thanks")) {
+            response = { "text": "You're welcome! Let me know if there's anything else I can do for you." };
+        } else if (messageText.includes("bye")) {
+            response = { "text": "Goodbye! Have a great day!" };
+        } else {
+            // Default response for unhandled messages
+            response = { "text": "I'm not sure how to respond to that. Can you try asking something else?" };
+        }
     } else if (received_message.attachments) {
-        // Get the URL of the message attachment
+        // Handle message with attachment
         let attachment_url = received_message.attachments[0].payload.url;
         response = {
             "attachment": {
@@ -107,6 +116,7 @@ function handleMessage(sender_psid, received_message) {
     // Send the response message
     callSendAPI(sender_psid, response);    
 }
+
 
 // Function to handle postback events
 function handlePostback(sender_psid, received_postback) {
