@@ -143,10 +143,25 @@ function handlePostback(sender_psid, received_postback) {
     let payload = received_postback.payload;
 
     // Set the response based on the postback payload
-    if (payload === 'yes') {
-        response = { "text": "Thanks!" }
-    } else if (payload === 'no') {
-        response = { "text": "Oops, try sending another image." }
+    switch (payload) {
+        case 'yes':
+            response = { "text": "Thanks!" };
+            callSendAPI(sender_psid, response);
+            console.log("Matched yes");
+            break;
+
+        case 'no':
+            response = { "text": "Oops, try sending another image." };
+            callSendAPI(sender_psid, response);
+            console.log("Matched no");
+            break;
+
+        // ... include other cases here ...
+
+        default:
+            console.log("Unknown payload: " + payload);
+            // Handle default case or log an error
+            break;
     }
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
