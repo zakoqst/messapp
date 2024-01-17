@@ -121,8 +121,8 @@ function handleMessage(sender_psid, received_message) {
 // Function to handle postback events
 function handlePostback(sender_psid, received_postback) {
     let response;
-    let payload = received_postback.payload;
-
+    // let payload = received_postback.payload;
+    let payload = received_postback.postback.payload;
    // Set the response based on the postback payload
 if (payload.toLowerCase() === 'yes') {
     response = { "text": "Thanks!" };
