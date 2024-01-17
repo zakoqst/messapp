@@ -64,65 +64,78 @@ let getWebhook = (req, res) => {
         }
     }
 };
+function handleMessage(sender_psid, received_message) {
+    let response;
 
-// function handleMessage(sender_psid, received_message) {
-//     let response;
+    console.log("Received message:", received_message);
 
-//     // Check if the message contains text
-//     if (received_message.text) {
-//         // Simple text-based logic instead of NLP
-//         const messageText = received_message.text.toLowerCase();
+    // Check if the message contains text
+    if (received_message.text) {
+        console.log("Message contains text:", received_message.text);
 
-//         if (messageText.includes("hello") || messageText.includes("hi")) {
-//             response = { "text": "Hi there! How can I help you today?" };
-//         } else if (messageText.includes("thank you") || messageText.includes("thanks")) {
-//             response = { "text": "You're welcome! Let me know if there's anything else I can do for you." };
-//         } else if (messageText.includes("bye")) {
-//             response = { "text": "Goodbye! Have a great day!" };
-//         } else {
-//             // Default response for unhandled messages
-//             response = { "text": "I'm not sure how to respond to that. Can you try asking something else?" };
-//         }
-//     } else if (received_message.attachments) {
-//         // Handle message with attachment
-//         let attachment_url = received_message.attachments[0].payload.url;
-//         response = {
-//             "attachment": {
-//                 "type": "template",
-//                 "payload": {
-//                     "template_type": "generic",
-//                     "elements": [{
-//                         "title": "Is this the right picture?",
-//                         "subtitle": "Tap a button to answer.",
-//                         "image_url": attachment_url,
-//                         "buttons": [
-//                             {
-//                                 "type": "postback",
-//                                 "title": "Yes!",
-//                                 "payload": "yes",
-//                             },
-//                             {
-//                                 "type": "postback",
-//                                 "title": "No!",
-//                                 "payload": "no",
-//                             }
-//                         ],
-//                     }]
-//                 }
-//             }
-//         };
-//     } 
+        // Simple text-based logic instead of NLP
+        const messageText = received_message.text.toLowerCase();
+        console.log("Processed message text:", messageText);
+
+        if (messageText.includes("hello") || messageText.includes("hi")) {
+            response = { "text": "Hi there! How can I help you today?" };
+        } else if (messageText.includes("thank you") || messageText.includes("thanks")) {
+            response = { "text": "You're welcome! Let me know if there's anything else I can do for you." };
+        } else if (messageText.includes("bye")) {
+            response = { "text": "Goodbye! Have a great day!" };
+        } else {
+            // Default response for unhandled messages
+            response = { "text": "I'm not sure how to respond to that. Can you try asking something else?" };
+        }
+    } else if (received_message.attachments) {
+        // Handle message with attachment
+        console.log("Message contains attachments:", received_message.attachments);
+
+        let attachment_url = received_message.attachments[0].payload.url;
+        response = {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "generic",
+                    "elements": [{
+                        "title": "Is this the right picture?",
+                        "subtitle": "Tap a button to answer.",
+                        "image_url": attachment_url,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "Yes!",
+                                "payload": "yes",
+                            },
+                            {
+                                "type": "postback",
+                                "title": "No!",
+                                "payload": "no",
+                            }
+                        ],
+                    }]
+                }
+            }
+        };
+    } else {
+        // Log if no text or attachment is found in the message
+        console.log("Message does not contain text or attachments.");
+    }
     
-//     // Send the response message
-//     callSendAPI(sender_psid, response);    
-// }
+    // Log the response that will be sent
+    console.log("Response to be sent:", response);
+
+    // Send the response message
+    callSendAPI(sender_psid, response);    
+}
+
 
 
 // Function to handle postback events
 function handlePostback(sender_psid, received_postback) {
     let response;
     // let payload = received_postback.payload;
-    let payload = received_postback.postback.payload;
+    let payload = received_postback.payload;
    // Set the response based on the postback payload
    if (payload.toLowerCase() === 'yes') {
     response = { "text": "Thanks!" };
