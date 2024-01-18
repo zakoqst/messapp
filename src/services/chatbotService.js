@@ -2,15 +2,12 @@ const dotenv =require("dotenv").config();
 const request = require("request");
 const homepageService = require("../services/homepageService");
 const templateMessage = require("../services/templateMessage");
-const chatBotController =require("../controllers/chatBotController")
 // import request from "request";
 // import homepageService from "./homepageService";
 // import templateMessage from "./templateMessage";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const SECONDARY_RECEIVER_ID = process.env.SECONDARY_RECEIVER_ID;
 const PRIMARY_RECEIVER_ID = process.env.FACEBOOK_APP_ID;
-
-
 
 let sendMessageWelcomeNewUser = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
@@ -73,21 +70,17 @@ let sendMessageWelcomeNewUser = (sender_psid) => {
     });
 };
 
-
-
-let sendMessage = (sender_psid, response,receivedMessage) => {
+let sendMessage = (sender_psid, response) => {
     return new Promise(async (resolve, reject) => {
         try {
             await homepageService.markMessageRead(sender_psid);
             await homepageService.sendTypingOn(sender_psid);
-            await homepageService.handleMessage(sender_psid, receivedMessage)
             // Construct the message body
             let request_body = {
                 "recipient": {
                     "id": sender_psid
                 },
                 "message": response
-                
             };
 
             // Send the HTTP request to the Messenger Platform

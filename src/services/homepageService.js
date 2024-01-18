@@ -1,6 +1,4 @@
-// const dotenv =require("dotenv").config();
-require("dotenv").config();
-
+const dotenv =require("dotenv").config();
 const request = require("request");
 // // require('dotenv').config();
 
@@ -75,64 +73,6 @@ let handleSetupProfileAPI = () => {
         }
     });
 };
-
-
-// Handles messages events
-let handleMessage = (senderPsid, receivedMessage) => {
-    return new Promise((resolve, reject) => {
-      let response;
-  
-      // Checks if the message contains text
-      if (receivedMessage.text) {
-        // Create the payload for a basic text message, which
-        // will be added to the body of your request to the Send API
-        response = {
-          'text': `You sent the message: '${receivedMessage.text}'. Now send me an attachment!`
-        };
-      } else if (receivedMessage.attachments) {
-  
-        // Get the URL of the message attachment
-        let attachmentUrl = receivedMessage.attachments[0].payload.url;
-        response = {
-          'attachment': {
-            'type': 'template',
-            'payload': {
-              'template_type': 'generic',
-              'elements': [{
-                'title': 'Is this the right picture?',
-                'subtitle': 'Tap a button to answer.',
-                'image_url': attachmentUrl,
-                'buttons': [
-                  {
-                    'type': 'postback',
-                    'title': 'Yes!',
-                    'payload': 'yes',
-                  },
-                  {
-                    'type': 'postback',
-                    'title': 'No!',
-                    'payload': 'no',
-                  },
-                  {
-                    'type': 'postback',
-                    'title': 'foofoo!',
-                    'payload': 'fa',
-                  }
-                ],
-              }]
-            }
-          }
-        };
-      }
-  
-      // Send the response message
-      callSendAPI(senderPsid, response);
-  
-      // Resolve the promise to indicate successful execution
-      resolve();
-    });
-  };
-  
 
 let getFacebookUsername = (sender_psid) => {
     return new Promise((resolve, reject) => {
@@ -222,6 +162,5 @@ module.exports = {
     handleSetupProfileAPI: handleSetupProfileAPI,
     getFacebookUsername: getFacebookUsername,
     markMessageRead: markMessageRead,
-    sendTypingOn: sendTypingOn,
-    handleMessage:handleMessage
+    sendTypingOn: sendTypingOn
 };

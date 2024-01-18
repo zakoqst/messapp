@@ -78,7 +78,7 @@ function handleMessage(senderPsid, receivedMessage) {
       // Create the payload for a basic text message, which
       // will be added to the body of your request to the Send API
       response = {
-        'text': `You sent the message: '${receivedMessage.text}'. Now send me an attachment!`
+        'text': `You sent the message: '${receivedMessage.text}'. Now send me an attachment! cd`
       };
     } else if (receivedMessage.attachments) {
   
