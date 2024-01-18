@@ -101,6 +101,11 @@ function handleMessage(senderPsid, receivedMessage) {
                   'type': 'postback',
                   'title': 'No!',
                   'payload': 'no',
+                },
+                {
+                  'type': 'postback',
+                  'title': 'foofoo!',
+                  'payload': 'fa',
                 }
               ],
             }]
@@ -123,8 +128,8 @@ function handlePostback(senderPsid, receivedPostback) {
     let payload = receivedPostback.payload;
   console.log(payload);
     // Set the response based on the postback payload
-    if (payload === 'yes') {
-      response = { 'text': 'Thanks!' };
+    if (payload === 'fa') {
+      response = { 'text': 'bla!' };
     } else if (payload === 'no') {
       response = { 'text': 'Oops, try sending another image.' };
     }

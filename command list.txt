@@ -65,3 +65,27 @@ curl -X POST -H "Content-Type: application/json" -d '{
 curl -X POST -H "Content-Type: application/json" -d '{
   "get_started": {"payload": "GET_STARTED"}
 }' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAMaxoP8kawBOZBXRXSjot2HaFxPNFEJBecOIb6xulUxBFD9BQRT3pWdRdsvIEoqGmTLTeaNG3cLjT86WQMr2399pmtZB03neaxEtjwsZCnsLXlOTo6RxGoe3T5SqXlAFP66Pw8V4PZA2YB0cVaZBaRuJYniQEeZANZAAaEpO1KiChdpW8rIVkbouPmCZCvENwamK1kFDGstot600URf"
+
+
+
+curl -X POST -H "Content-Type: application/json" -d '{
+  "recipient":{
+    "id":"6930462817067361"
+  },
+  "message":{
+    "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"button",
+        "text":"Try the postback button!",
+        "buttons":[
+          {
+            "type":"postback",
+            "title":"Postback Button",
+            "payload":"no"
+          }
+        ]
+      }
+    }
+  }
+}' "https://graph.facebook.com/v2.6/me/messages?access_token=EAAMaxoP8kawBOZBXRXSjot2HaFxPNFEJBecOIb6xulUxBFD9BQRT3pWdRdsvIEoqGmTLTeaNG3cLjT86WQMr2399pmtZB03neaxEtjwsZCnsLXlOTo6RxGoe3T5SqXlAFP66Pw8V4PZA2YB0cVaZBaRuJYniQEeZANZAAaEpO1KiChdpW8rIVkbouPmCZCvENwamK1kFDGstot600URf"
