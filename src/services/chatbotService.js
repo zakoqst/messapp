@@ -75,7 +75,7 @@ let sendMessageWelcomeNewUser = (sender_psid) => {
 
 
 
-let sendMessage = (sender_psid, response) => {
+let sendMessage = (sender_psid, response,receivedMessage) => {
     return new Promise(async (resolve, reject) => {
         try {
             await homepageService.markMessageRead(sender_psid);
