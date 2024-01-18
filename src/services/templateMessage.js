@@ -76,7 +76,7 @@ let sendCategoriesTemplate = () =>{
                     },
                     {
                         "title": "Clothes",
-                        "image_url": "https://drive.google.com/file/d/1jZiok_PerV6AUOQa0bSNvIijrOpqRupt/view?usp=drive_link",
+                        "image_url": "https://github.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Jeans.jpg",
                         "subtitle": "Nice looking clothes!!!",
                         "default_action": {
                             "type": "web_url",

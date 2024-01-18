@@ -252,7 +252,7 @@ let handlePostback = async (sender_psid, received_postback) => {
             await chatbotService.backToMainMenu(sender_psid);
             break;
         case "SHOW_CLOTHES":
-            await chatbotService.clouthes(sender_psid);
+            await chatbotService.showClothes(sender_psid);
             break;
         case "no":
             await chatbotService.handlePostback(sender_psid, received_postback);
