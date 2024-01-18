@@ -1,71 +1,61 @@
-const dotenv =require("dotenv").config();
-const express =require("express");
-// require('dotenv').config();
-// import express from "express";
+const dotenv = require("dotenv").config();
+const express = require("express");
 const configViewEngine = require("./config/viewEngine");
 const initWebRoutes = require("./routes/web");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const http = require('http');
+const httpProxy = require('http-proxy');
 
-// import configViewEngine from "./config/viewEngine_1";
-// import initWebRoutes from "./routes/web_1";
-const bodyParser =require("body-parser");
-// import bodyParser from "body-parser";
+const proxy = httpProxy.createProxyServer({});
+const app = express();
 
-let app = express();
+// Enable CORS for specific routes
+app.use('/webhook', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://messenger-app-7fl9.onrender.com');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
-//config body-parser to post data
+// Enable global CORS for all routes
+app.use(cors());
+
+// Config body-parser to post data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//config view engine
+// Config view engine
 configViewEngine(app);
 
-//config web routes
+// Config web routes
 initWebRoutes(app);
+
+// Handle proxy requests
+app.use((req, res, next) => {
+  // Your logic for deciding whether to proxy the request or handle it locally
+  const shouldProxy = true;
+
+  if (shouldProxy) {
+    // Proxy the request
+    proxy.web(req, res, { target: 'https://www.facebook.com' });
+  } else {
+    // Handle the request locally
+    // Your local logic goes here
+    next();
+  }
+});
+
+// Error handling for proxy requests
+proxy.on('error', (err, req, res) => {
+  res.writeHead(500, {
+    'Content-Type': 'text/plain'
+  });
+  res.end('Proxy Error');
+});
 
 let port = process.env.PORT || 8080;
 
 app.listen(port, () => {
     console.log(`Messenger bot is running at the port ${port}`);
 });
-
-
-
-
-
-
-
-
-// // const { config } = require("dotenv");
-// const dotenv =require("dotenv").config();
-// const express =require("express")
-// // import express from "express";
-// // import configViewEngine from "./config/viewEngine";
-// const configViewEngine = require("./config/viewEngine")
-// const initWebRoutes = require("./routes/web")
-// // import initWebRoutes from "./routes/web";
-
-
-// // import bodyParser from "body-parser";
-// const bodyParser = require("body-parser")
-
-
-// const app = express();
-
-
-
-
-
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-
-// //config view engine
-// configViewEngine(app);
-
-// //init web routes
-// initWebRoutes(app);
-
-// let port = process.env.PORT || 8080;
-
-// app.listen(port, () => {
-//     console.log(`Messenger Jisr bot is running at the port ${port}`);
-// });
