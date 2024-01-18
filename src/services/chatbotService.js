@@ -2,7 +2,7 @@ const dotenv =require("dotenv").config();
 const request = require("request");
 const homepageService = require("../services/homepageService");
 const templateMessage = require("../services/templateMessage");
-const handlePostback =require("../controllers/chatBotController")
+const chatBotController =require("../controllers/chatBotController")
 // import request from "request";
 // import homepageService from "./homepageService";
 // import templateMessage from "./templateMessage";
