@@ -16,6 +16,7 @@ const homepageService = require("../services/homepageService");
 const chatbotService = require("../services/chatbotService");
 const templateMessage = require("../services/templateMessage");
 const path = require('path');
+const { response } = require("express");
 
 // const bodyParser = require("body-parser");
 // require("dotenv").config();
@@ -248,15 +249,13 @@ let handlePostback = async (sender_psid, received_postback) => {
         case "BACK_TO_MAIN_MENU":
             await chatbotService.backToMainMenu(sender_psid);
             break;
+        case "no":
+            response = { 'text': 'bla!' };
         default:
             console.log("run default switch case")
 
     }
-    if (payload === 'fa') {
-        response = { 'text': 'bla!' };
-      } else if (payload === 'no') {
-        response = { 'text': 'Oops, try sending another image.' };
-      }
+   
 };
 
 let handleSetupProfile = async (req, res) => {
