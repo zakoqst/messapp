@@ -247,7 +247,7 @@ let sendLookupOrder = (sender_psid) => {
     });
 };
 
-let clouthes = (sender_psid) => {
+let showClothes = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
             let response = templateMessage.sendClothesTemplate();
@@ -356,6 +356,6 @@ module.exports = {
     passThreadControl: passThreadControl,
     takeControlConversation: takeControlConversation,
     handlePostback:handlePostback,
-    clouthes:clouthes
+    showClothes:showClothes
     // sendProductTemplate:sendProductTemplate
 };
