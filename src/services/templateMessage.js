@@ -74,6 +74,27 @@ let sendCategoriesTemplate = () =>{
                             }
                         ]
                     },
+                    {
+                        "title": "Clothes",
+                        "image_url": "https://drive.google.com/file/d/1jZiok_PerV6AUOQa0bSNvIijrOpqRupt/view?usp=drive_link",
+                        "subtitle": "Nice looking clothes!!!",
+                        "default_action": {
+                            "type": "web_url",
+                            "url": "https://drive.google.com/file/d/1jZiok_PerV6AUOQa0bSNvIijrOpqRupt/view?usp=drive_link",
+                            "webview_height_ratio": "tall",
+                        },
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": "https://bit.ly/webPlaystation",
+                                "title": "View on Website"
+                            }, {
+                                "type": "postback",
+                                "title": "Show Clothes",
+                                "payload": "SHOW_CLOTHES"
+                            }
+                        ]
+                    },
                 ]
             }
         }
@@ -88,19 +109,51 @@ let sendClothesTemplate = () => {
                 "template_type": "generic",
                 "elements": [
                     {
+                        "title": `Jean-Vert`,
+                        "image_url": "https://drive.google.com/file/d/1jZiok_PerV6AUOQa0bSNvIijrOpqRupt/view?usp=sharing",
+                        "subtitle": `Size: Taille 42\nPrice: 3500 DA`,
+                        "default_action": {
+                            "type": "web_url",
+                            "url": "https://bit.ly/viewHeadphone1",
+                            "webview_height_ratio": "tall",
+                        },
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": "https://bit.ly/viewHeadphone1",
+                                "title": "Order now"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "Back to categories",
+                                "payload": "BACK_TO_CATEGORIES"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "Main menu",
+                                "payload": "BACK_TO_MAIN_MENU"
+                            }
+                        ]
+                    },
+                    {
                         "title": `Pull - Noir`,
                         "image_url": "https://drive.google.com/file/d/1foodfl1MEPLNI3sOREOPaoXewY0Dq09s/view?usp=drive_link",
                         "subtitle": `Size: Taille L\nPrice: 2000 DA`,
                         "buttons": [
                             {
                                 "type": "postback",
-                                "title": "More Details",
-                                "payload": `Pull_Noir_DETAILS_PAYLOAD`
+                                "url": "https://bit.ly/viewHeadphone1",
+                                "title": "Order now"
                             },
                             {
-                                "type": "web_url",
-                                "url": `https://example.com/buy_Pull-Noir`,
-                                "title": "Buy Now"
+                                "type": "postback",
+                                "title": "Back to categories",
+                                "payload": "BACK_TO_CATEGORIES"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "Main menu",
+                                "payload": "BACK_TO_MAIN_MENU"
                             }
                         ]
                     },
@@ -111,33 +164,22 @@ let sendClothesTemplate = () => {
                         "buttons": [
                             {
                                 "type": "postback",
-                                "title": "More Details",
-                                "payload": `Vest_Gris_DETAILS_PAYLOAD`
+                                "url": "https://bit.ly/viewHeadphone1",
+                                "title": "Order now"
                             },
-                            {
-                                "type": "web_url",
-                                "url": `https://example.com/buy_Vest_Gris`,
-                                "title": "Buy Now"
-                            }
-                        ]
-                    },
-                    {
-                        "title": `Jean-Vert`,
-                        "image_url": "https://drive.google.com/file/d/1jZiok_PerV6AUOQa0bSNvIijrOpqRupt/view?usp=sharing",
-                        "subtitle": `Size: Taille 42\nPrice: 3500 DA`,
-                        "buttons": [
                             {
                                 "type": "postback",
-                                "title": "More Details",
-                                "payload": `Jean_Vert_DETAILS_PAYLOAD`
+                                "title": "Back to categories",
+                                "payload": "BACK_TO_CATEGORIES"
                             },
                             {
-                                "type": "web_url",
-                                "url": `https://example.com/buy_Jean_Vert`,
-                                "title": "Buy Now"
+                                "type": "postback",
+                                "title": "Main menu",
+                                "payload": "BACK_TO_MAIN_MENU"
                             }
                         ]
                     }
+                    
                     
                     
                    
