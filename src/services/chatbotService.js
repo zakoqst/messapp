@@ -10,6 +10,8 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const SECONDARY_RECEIVER_ID = process.env.SECONDARY_RECEIVER_ID;
 const PRIMARY_RECEIVER_ID = process.env.FACEBOOK_APP_ID;
 
+
+
 let sendMessageWelcomeNewUser = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -78,7 +80,7 @@ let sendMessage = (sender_psid, response) => {
         try {
             await homepageService.markMessageRead(sender_psid);
             await homepageService.sendTypingOn(sender_psid);
-            await chatBotController.handlePostback(sender_psid, webhook_event.postback)
+            await homepageService.handleMessage(sender_psid, receivedMessage)
             // Construct the message body
             let request_body = {
                 "recipient": {
