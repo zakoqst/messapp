@@ -76,11 +76,11 @@ let sendCategoriesTemplate = () =>{
                     },
                     {
                         "title": "Clothes",
-                        "image_url": "https://github.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Jeans.jpg",
+                        "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/master/src/public/assets/productimages/Jeans.jpg",
                         "subtitle": "Nice looking clothes!!!",
                         "default_action": {
                             "type": "web_url",
-                            "url": "https://drive.google.com/file/d/1jZiok_PerV6AUOQa0bSNvIijrOpqRupt/view?usp=drive_link",
+                            "url": "https://raw.githubusercontent.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Jeans.jpg",
                             "webview_height_ratio": "tall",
                         },
                         "buttons": [
@@ -343,10 +343,11 @@ let backToMainMenuTemplate = ()=>{
         "text": "What can I do to help you today?",
         "quick_replies": [
             {
-                "content_type": "text",
-                "title": "أدوية",
-                "payload": "الأدوية",
+                "type": "postback",
+                "title": "Main menu",
+                "payload": "BACK_TO_MAIN_MENU"
             },
+ 
             {
                 "content_type": "text",
                 "title": "Lookup Order",
