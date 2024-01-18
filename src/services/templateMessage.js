@@ -1,3 +1,6 @@
+
+
+
 let sendCategoriesTemplate = () =>{
     return {
         "attachment": {
@@ -5,6 +8,57 @@ let sendCategoriesTemplate = () =>{
             "payload": {
                 "template_type": "generic",
                 "elements": [
+                    {
+                        "title": `Pull - Noir`,
+                        "image_url": "https://drive.google.com/file/d/1foodfl1MEPLNI3sOREOPaoXewY0Dq09s/view?usp=drive_link",
+                        "subtitle": `Size: Taille L\nPrice: 2000 DA`,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "More Details",
+                                "payload": `Pull_Noir_DETAILS_PAYLOAD`
+                            },
+                            {
+                                "type": "web_url",
+                                "url": `https://example.com/buy_Pull-Noir`,
+                                "title": "Buy Now"
+                            }
+                        ]
+                    },
+                    {
+                        "title": `Vest-Gris`,
+                        "image_url": "https://drive.google.com/file/d/1PB8UwDs9UjQdRVt7IFZBO9XzTgecGGUd/view?usp=sharing",
+                        "subtitle": `Size: Taille L\nPrice: 5000 DA`,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "More Details",
+                                "payload": `Vest_Gris_DETAILS_PAYLOAD`
+                            },
+                            {
+                                "type": "web_url",
+                                "url": `https://example.com/buy_Vest_Gris`,
+                                "title": "Buy Now"
+                            }
+                        ]
+                    },
+                    {
+                        "title": `Jean-Vert`,
+                        "image_url": "https://drive.google.com/file/d/1jZiok_PerV6AUOQa0bSNvIijrOpqRupt/view?usp=sharing",
+                        "subtitle": `Size: Taille 42\nPrice: 3500 DA`,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "More Details",
+                                "payload": `Jean_Vert_DETAILS_PAYLOAD`
+                            },
+                            {
+                                "type": "web_url",
+                                "url": `https://example.com/buy_Jean_Vert`,
+                                "title": "Buy Now"
+                            }
+                        ]
+                    },
                     {
                         "title": "Headphones",
                         "image_url": "https://bit.ly/imageHeadphones",
@@ -45,6 +99,28 @@ let sendCategoriesTemplate = () =>{
                                 "type": "postback",
                                 "title": "Show TVs",
                                 "payload": "SHOW_TV"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Vest",
+                        "image_url": "https://drive.google.com/file/d/1foodfl1MEPLNI3sOREOPaoXewY0Dq09s/view?usp=sharing",
+                        "subtitle": "Color: Gris (Gray)\nSize: Taille 52\nPrice: 7500 DA",
+                        "default_action": {
+                            "type": "web_url",
+                            "url": "https://example.com/vest_details",
+                            "webview_height_ratio": "tall",
+                        },
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": "https://example.com/buy_vest",
+                                "title": "Buy Now"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "More Details",
+                                "payload": "VEST_DETAILS_PAYLOAD"
                             }
                         ]
                     },
@@ -272,5 +348,6 @@ module.exports = {
     sendLookupOrderTemplate: sendLookupOrderTemplate,
     backToMainMenuTemplate: backToMainMenuTemplate,
     setInfoOrderTemplate: setInfoOrderTemplate,
-    sendSureveyTemplate:sendSureveyTemplate
+    sendSureveyTemplate:sendSureveyTemplate,
+    createProductTemplate:createProductTemplate
 };
