@@ -181,10 +181,12 @@ let handleMessage = async (sender_psid, received_message) => {
             }
         }
     }
+    callSendAPI(sender_psid, response);
+
 
     // Sends the response message
     // try {
-        await chatbotService.sendMessage(sender_psid, response);
+        // await chatbotService.sendMessage(sender_psid, response);
     //     callSendAPI(sender_psid, response);
      
     // } catch (e) {
@@ -195,28 +197,28 @@ let handleMessage = async (sender_psid, received_message) => {
     
 };
 
-// let callSendAPI = (sender_psid, response) => {
-//     // Construct the message body
-//     let request_body = {
-//         "recipient": {
-//             "id": sender_psid
-//         },
-//         "message": response
-//     };
-//     // Send the HTTP request to the Messenger Platform
-//     request({
-//         "uri": "https://graph.facebook.com/v15.0/me/messages",
-//         "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
-//         "method": "POST",
-//         "json": request_body
-//     }, (err, res, body) => {
-//         if (!err) {
-//             console.log('message sent!')
-//         } else {
-//             console.error("Unable to send message:" + err);
-//         }
-//     });
-// };
+    let callSendAPI = (sender_psid, response) => {
+        // Construct the message body
+        let request_body = {
+            "recipient": {
+                "id": sender_psid
+            },
+            "message": response
+        };
+        // Send the HTTP request to the Messenger Platform
+        request({
+            "uri": "https://graph.facebook.com/v15.0/me/messages",
+            "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
+            "method": "POST",
+            "json": request_body
+        }, (err, res, body) => {
+            if (!err) {
+                console.log('message sent!')
+            } else {
+                console.error("Unable to send message:" + err);
+            }
+        });
+    };
 // Handles messaging_postbacks events
 let handlePostback = async (sender_psid, received_postback) => {
     // Get the payload for the postback
@@ -250,6 +252,11 @@ let handlePostback = async (sender_psid, received_postback) => {
             console.log("run default switch case")
 
     }
+    if (payload === 'fa') {
+        response = { 'text': 'bla!' };
+      } else if (payload === 'no') {
+        response = { 'text': 'Oops, try sending another image.' };
+      }
 };
 
 let handleSetupProfile = async (req, res) => {
