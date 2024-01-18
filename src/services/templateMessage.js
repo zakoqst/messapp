@@ -110,7 +110,7 @@ let sendClothesTemplate = () => {
                 "elements": [
                     {
                         "title": `Jean-Vert`,
-                        "image_url": "https://drive.google.com/file/d/1jZiok_PerV6AUOQa0bSNvIijrOpqRupt/view?usp=sharing",
+                        "image_url": "https://github.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Jeans.jpg",
                         "subtitle": `Size: Taille 42\nPrice: 3500 DA`,
                         "default_action": {
                             "type": "web_url",
@@ -137,7 +137,7 @@ let sendClothesTemplate = () => {
                     },
                     {
                         "title": `Pull - Noir`,
-                        "image_url": "https://drive.google.com/file/d/1foodfl1MEPLNI3sOREOPaoXewY0Dq09s/view?usp=drive_link",
+                        "image_url": "https://github.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Pull.jpg",
                         "subtitle": `Size: Taille L\nPrice: 2000 DA`,
                         "buttons": [
                             {
@@ -159,7 +159,7 @@ let sendClothesTemplate = () => {
                     },
                     {
                         "title": `Vest-Gris`,
-                        "image_url": "https://drive.google.com/file/d/1PB8UwDs9UjQdRVt7IFZBO9XzTgecGGUd/view?usp=sharing",
+                        "image_url": "https://github.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Blazer.jpg",
                         "subtitle": `Size: Taille L\nPrice: 5000 DA`,
                         "buttons": [
                             {
