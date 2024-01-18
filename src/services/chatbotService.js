@@ -2,6 +2,7 @@ const dotenv =require("dotenv").config();
 const request = require("request");
 const homepageService = require("../services/homepageService");
 const templateMessage = require("../services/templateMessage");
+const handlePostback =require("../controllers/chatBotController")
 // import request from "request";
 // import homepageService from "./homepageService";
 // import templateMessage from "./templateMessage";
@@ -70,11 +71,14 @@ let sendMessageWelcomeNewUser = (sender_psid) => {
     });
 };
 
+
+
 let sendMessage = (sender_psid, response) => {
     return new Promise(async (resolve, reject) => {
         try {
             await homepageService.markMessageRead(sender_psid);
             await homepageService.sendTypingOn(sender_psid);
+            await chatBotController.handlePostback(sender_psid, webhook_event.postback)
             // Construct the message body
             let request_body = {
                 "recipient": {

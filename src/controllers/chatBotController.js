@@ -273,6 +273,7 @@ function firstTrait(nlp, name) {
 // Function to send a template message
 module.exports = {
   postWebhook: postWebhook,
-  getWebhook: getWebhook
+  getWebhook: getWebhook,
+  handlePostback:handlePostback
 };
 
