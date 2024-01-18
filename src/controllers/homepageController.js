@@ -169,6 +169,11 @@ let handleMessage = async (sender_psid, received_message) => {
                                 "type": "postback",
                                 "title": "no",
                                 "payload": "no",
+                            },
+                            {
+                                "type": "postback",
+                                "title": "no",
+                                "payload": "no",
                             }
                         ],
                     }]
