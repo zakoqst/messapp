@@ -67,121 +67,103 @@ let getWebhook = (req, res) => {
 
 
   
-// function handleMessage(sender_psid, received_message) {
-//     let response;
-
-//     console.log("Received message:", received_message);
-
-//     // Check if the message contains text
-//     if (received_message.text) {
-//         console.log("Message contains text:", received_message.text);
-
-//         // Simple text-based logic instead of NLP
-//         const messageText = received_message.text.toLowerCase();
-//         console.log("Processed message text:", messageText);
-
-//         if (messageText.includes("hello") || messageText.includes("hi")) {
-//             response = { "text": "Hi there! How can I help you today?" };
-//         } else if (messageText.includes("thank you") || messageText.includes("thanks")) {
-//             response = { "text": "You're welcome! Let me know if there's anything else I can do for you." };
-//         } else if (messageText.includes("bye")) {
-//             response = { "text": "Goodbye! Have a great day!" };
-//         } else {
-//             // Default response for unhandled messages
-//             response = { "text": "I'm not sure how to respond to that. Can you try asking something else?" };
-//         }
-//     } else if (received_message.attachments) {
-//         // Handle message with attachment
-//         console.log("Message contains attachments:", received_message.attachments);
-
-//         let attachment_url = received_message.attachments[0].payload.url;
-//         response = {
-//             "attachment": {
-//                 "type": "template",
-//                 "payload": {
-//                     "template_type": "generic",
-//                     "elements": [{
-//                         "title": "Is this the right picture?",
-//                         "subtitle": "Tap a button to answer.",
-//                         "image_url": attachment_url,
-//                         "buttons": [
-//                             {
-//                                 "type": "postback",
-//                                 "title": "Yes!",
-//                                 "payload": "yes",
-//                             },
-//                             {
-//                                 "type": "postback",
-//                                 "title": "No!",
-//                                 "payload": "no",
-//                             }
-//                         ],
-//                     }]
-//                 }
-//             }
-//         };
-//     } else {
-//         // Log if no text or attachment is found in the message
-//         console.log("Message does not contain text or attachments.");
-//     }
-    
-//     // Log the response that will be sent
-//     console.log("Response to be sent:", response);
-
-//     // Send the response message
-//     callSendAPI(sender_psid, response);    
-// }
-
-
-
+// Handles messages events
+function handleMessage(senderPsid, receivedMessage) {
+    let response;
+  
+    // Checks if the message contains text
+    if (receivedMessage.text) {
+      // Create the payload for a basic text message, which
+      // will be added to the body of your request to the Send API
+      response = {
+        'text': `You sent the message: '${receivedMessage.text}'. Now send me an attachment!`
+      };
+    } else if (receivedMessage.attachments) {
+  
+      // Get the URL of the message attachment
+      let attachmentUrl = receivedMessage.attachments[0].payload.url;
+      response = {
+        'attachment': {
+          'type': 'template',
+          'payload': {
+            'template_type': 'generic',
+            'elements': [{
+              'title': 'Is this the right picture?',
+              'subtitle': 'Tap a button to answer.',
+              'image_url': attachmentUrl,
+              'buttons': [
+                {
+                  'type': 'postback',
+                  'title': 'Yes!',
+                  'payload': 'yes',
+                },
+                {
+                  'type': 'postback',
+                  'title': 'No!',
+                  'payload': 'no',
+                }
+              ],
+            }]
+          }
+        }
+      };
+    }
+  
+    // Send the response message
+    callSendAPI(senderPsid, response);
+  }
+  
 // Function to handle postback events
 
-function handlePostback(sender_psid, received_postback) {
+// Handles messaging_postbacks events
+function handlePostback(senderPsid, receivedPostback) {
     let response;
-
+  
     // Get the payload for the postback
-    let payload = received_postback.payload;
-
+    let payload = receivedPostback.payload;
+  
     // Set the response based on the postback payload
     if (payload === 'yes') {
-        response = { "text": "Thanks!" }
+      response = { 'text': 'Thanks!' };
     } else if (payload === 'no') {
-        response = { "text": "Oops, try sending another image." }
+      response = { 'text': 'Oops, try sending another image.' };
     }
     // Send the message to acknowledge the postback
-    callSendAPI(sender_psid, response);
-}
+    callSendAPI(senderPsid, response);
+  }
+  
 
 
 
 
+// Sends response messages via the Send API
+function callSendAPI(senderPsid, response) {
 
-
-function callSendAPI(sender_psid, response) {
+    // The page access token we have generated in your app settings
+    const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+  
     // Construct the message body
-    let request_body = {
-        "recipient": {
-            "id": sender_psid
-        },
-        "message": { "text": response }
+    let requestBody = {
+      'recipient': {
+        'id': senderPsid
+      },
+      'message': response
     };
-
+  
     // Send the HTTP request to the Messenger Platform
     request({
-        "uri": "https://graph.facebook.com/v7.0/me/messages",
-        "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
-        "method": "POST",
-        "json": request_body
-    }, (err, res, body) => {
-        if (!err) {
-            console.log('message sent!');
-        } else {
-            console.error("Unable to send message:" + err);
-        }
+      'uri': 'https://graph.facebook.com/v2.6/me/messages',
+      'qs': { 'access_token': PAGE_ACCESS_TOKEN },
+      'method': 'POST',
+      'json': requestBody
+    }, (err, _res, _body) => {
+      if (!err) {
+        console.log('Message sent!');
+      } else {
+        console.error('Unable to send message:' + err);
+      }
     });
-}
-
-
+  }
 // Function to extract the first trait of an entity
 function firstTrait(nlp, name) {
     return nlp && nlp.entities && nlp.traits[name] && nlp.traits[name][0];
@@ -197,91 +179,91 @@ function firstTrait(nlp, name) {
 
 
 
-function handleMessage(sender_psid, message) {
-    //handle message for react, like press like button
-    // id like button: sticker_id 369239263222822
+// function handleMessage(sender_psid, message) {
+//     //handle message for react, like press like button
+//     // id like button: sticker_id 369239263222822
 
-    if( message && message.attachments && message.attachments[0].payload){
-        callSendAPI(sender_psid, "Thank you for watching my video !!!");
-        callSendAPIWithTemplate(sender_psid);
-        return;
-    }
+//     if( message && message.attachments && message.attachments[0].payload){
+//         callSendAPI(sender_psid, "Thank you for watching my video !!!");
+//         callSendAPIWithTemplate(sender_psid);
+//         return;
+//     }
 
-    let entitiesArr = [ "wit$greetings", "wit$thanks", "wit$bye" ];
-    let entityChosen = "";
-    entitiesArr.forEach((name) => {
-        let entity = firstTrait(message.nlp, name);
-        if (entity && entity.confidence > 0.8) {
-            entityChosen = name;
-        }
-    });
+//     let entitiesArr = [ "wit$greetings", "wit$thanks", "wit$bye" ];
+//     let entityChosen = "";
+//     entitiesArr.forEach((name) => {
+//         let entity = firstTrait(message.nlp, name);
+//         if (entity && entity.confidence > 0.8) {
+//             entityChosen = name;
+//         }
+//     });
 
-    if(entityChosen === ""){
-        //default
-        callSendAPI(sender_psid,`The bot is needed more training, try to say "thanks a lot" or "hi" to the bot` );
-    }else{
-       if(entityChosen === "wit$greetings"){
-           //send greetings message
-           callSendAPI(sender_psid,'Hi there! This bot is created by Hary Pham. Watch more videos on HaryPhamDev Channel!');
-       }
-       if(entityChosen === "wit$thanks"){
-           //send thanks message
-           callSendAPI(sender_psid,`You 're welcome!`);
-       }
-        if(entityChosen === "wit$bye"){
-            //send bye message
-            callSendAPI(sender_psid,'bye-bye!');
-        }
-    }
-}
-
-
+//     if(entityChosen === ""){
+//         //default
+//         callSendAPI(sender_psid,`The bot is needed more training, try to say "thanks a lot" or "hi" to the bot` );
+//     }else{
+//        if(entityChosen === "wit$greetings"){
+//            //send greetings message
+//            callSendAPI(sender_psid,'Hi there! This bot is created by Hary Pham. Watch more videos on HaryPhamDev Channel!');
+//        }
+//        if(entityChosen === "wit$thanks"){
+//            //send thanks message
+//            callSendAPI(sender_psid,`You 're welcome!`);
+//        }
+//         if(entityChosen === "wit$bye"){
+//             //send bye message
+//             callSendAPI(sender_psid,'bye-bye!');
+//         }
+//     }
+// }
 
 
-let callSendAPIWithTemplate = (sender_psid) => {
-    // document fb message template
-    // https://developers.facebook.com/docs/messenger-platform/send-messages/templates
-    let body = {
-        "recipient": {
-            "id": sender_psid
-        },
-        "message": {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": "generic",
-                    "elements": [
-                        {
-                            "title": "Want to build sth awesome?",
-                            "image_url": "https://www.nexmo.com/wp-content/uploads/2018/10/build-bot-messages-api-768x384.png",
-                            "subtitle": "Watch more videos on my youtube channel ^^",
-                            "buttons": [
-                                {
-                                    "type": "web_url",
-                                    "url": "https://bit.ly/subscribe-haryphamdev",
-                                    "title": "Watch now"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            }
-        }
-    };
 
-    request({
-        "uri": "https://graph.facebook.com/v6.0/me/messages",
-        "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
-        "method": "POST",
-        "json": body
-    }, (err, res, body) => {
-        if (!err) {
-            // console.log('message sent!')
-        } else {
-            console.error("Unable to send message:" + err);
-        }
-    });
-};
+
+// let callSendAPIWithTemplate = (sender_psid) => {
+//     // document fb message template
+//     // https://developers.facebook.com/docs/messenger-platform/send-messages/templates
+//     let body = {
+//         "recipient": {
+//             "id": sender_psid
+//         },
+//         "message": {
+//             "attachment": {
+//                 "type": "template",
+//                 "payload": {
+//                     "template_type": "generic",
+//                     "elements": [
+//                         {
+//                             "title": "Want to build sth awesome?",
+//                             "image_url": "https://www.nexmo.com/wp-content/uploads/2018/10/build-bot-messages-api-768x384.png",
+//                             "subtitle": "Watch more videos on my youtube channel ^^",
+//                             "buttons": [
+//                                 {
+//                                     "type": "web_url",
+//                                     "url": "https://bit.ly/subscribe-haryphamdev",
+//                                     "title": "Watch now"
+//                                 }
+//                             ]
+//                         }
+//                     ]
+//                 }
+//             }
+//         }
+//     };
+
+//     request({
+//         "uri": "https://graph.facebook.com/v6.0/me/messages",
+//         "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
+//         "method": "POST",
+//         "json": body
+//     }, (err, res, body) => {
+//         if (!err) {
+//             // console.log('message sent!')
+//         } else {
+//             console.error("Unable to send message:" + err);
+//         }
+//     });
+// };
 
 // Function to send a template message
 module.exports = {
