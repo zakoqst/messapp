@@ -247,6 +247,18 @@ let sendLookupOrder = (sender_psid) => {
     });
 };
 
+let clouthes = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let response = templateMessage.sendClothesTemplate();
+            await sendMessage(sender_psid, response);
+            resolve("done");
+        } catch (e) {
+            reject(e);
+        }
+    })
+};
+
 let showHeadphones = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -297,26 +309,6 @@ let backToMainMenu = (sender_psid) => {
 
 
 
-let sendProductTemplate = (sender_psid, productName, color, size, price) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let response = templateMessage.createProductTemplate(productName, color, size, price);
-            await sendMessage(sender_psid, response);  // Assuming sendMessage is a function to send messages
-            resolve("done");
-        } catch (e) {
-            reject(e);
-        }
-    });
-};
-// Example usage for the black pull in size L
-let blackPullTemplateL = createProductTemplate("Pull", "Noir", "L", 2000);
-
-// Example usage for the grey vest in size L
-let greyVestTemplateL = createProductTemplate("Vest", "Gris", "L", 5000);
-
-// Example usage for the green jean in size 42
-let greenJeanTemplate = createProductTemplate("Jean", "Vert", "42", 3500);
-
 let takeControlConversation = (sender_psid) =>{
     return new Promise((resolve, reject) => {
         try {
@@ -364,5 +356,6 @@ module.exports = {
     passThreadControl: passThreadControl,
     takeControlConversation: takeControlConversation,
     handlePostback:handlePostback,
-    sendProductTemplate:sendProductTemplate
+    clouthes:clouthes
+    // sendProductTemplate:sendProductTemplate
 };

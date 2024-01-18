@@ -220,6 +220,8 @@ let handleMessage = async (sender_psid, received_message) => {
             }
         });
     };
+
+
 // Handles messaging_postbacks events
 let handlePostback = async (sender_psid, received_postback) => {
     // Get the payload for the postback
@@ -248,6 +250,9 @@ let handlePostback = async (sender_psid, received_postback) => {
             break;
         case "BACK_TO_MAIN_MENU":
             await chatbotService.backToMainMenu(sender_psid);
+            break;
+        case "CLOTHES":
+            await chatbotService.clouthes(sender_psid);
             break;
         case "no":
             await chatbotService.handlePostback(sender_psid, received_postback);

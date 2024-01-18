@@ -8,6 +8,85 @@ let sendCategoriesTemplate = () =>{
             "payload": {
                 "template_type": "generic",
                 "elements": [
+                    
+                    {
+                        "title": "Headphones",
+                        "image_url": "https://bit.ly/imageHeadphones",
+                        "subtitle": "Bose Noise Cancelling Wireless Bluetooth Headphones",
+                        "default_action": {
+                            "type": "web_url",
+                            "url": "https://bit.ly/webHeadphones",
+                            "webview_height_ratio": "tall",
+                        },
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": "https://bit.ly/webHeadphones",
+                                "title": "View on Website"
+                            },
+                            {
+                                "type": "postback",
+                                "title": "Show Headphones",
+                                "payload": "SHOW_HEADPHONES"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "TV",
+                        "image_url": "https://bit.ly/imageTV",
+                        "subtitle": "Master of quality & Incredible clarity",
+                        "default_action": {
+                            "type": "web_url",
+                            "url": "https://bit.ly/webTelevision",
+                            "webview_height_ratio": "tall",
+                        },
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": "https://bit.ly/webTelevision",
+                                "title": "View on Website"
+                            }, {
+                                "type": "postback",
+                                "title": "Show TVs",
+                                "payload": "SHOW_TV"
+                            }
+                        ]
+                    },
+                    
+                    {
+                        "title": "Playstation",
+                        "image_url": "https://bit.ly/imagePlaystation",
+                        "subtitle": "Incredible games & Endless entertainment",
+                        "default_action": {
+                            "type": "web_url",
+                            "url": "https://bit.ly/webPlaystation",
+                            "webview_height_ratio": "tall",
+                        },
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": "https://bit.ly/webPlaystation",
+                                "title": "View on Website"
+                            }, {
+                                "type": "postback",
+                                "title": "Show Playstation",
+                                "payload": "SHOW_PLAYSTATION"
+                            }
+                        ]
+                    },
+                ]
+            }
+        }
+    };
+};
+
+let sendClothesTemplate = () => {
+    return {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
                     {
                         "title": `Pull - Noir`,
                         "image_url": "https://drive.google.com/file/d/1foodfl1MEPLNI3sOREOPaoXewY0Dq09s/view?usp=drive_link",
@@ -58,98 +137,16 @@ let sendCategoriesTemplate = () =>{
                                 "title": "Buy Now"
                             }
                         ]
-                    },
-                    {
-                        "title": "Headphones",
-                        "image_url": "https://bit.ly/imageHeadphones",
-                        "subtitle": "Bose Noise Cancelling Wireless Bluetooth Headphones",
-                        "default_action": {
-                            "type": "web_url",
-                            "url": "https://bit.ly/webHeadphones",
-                            "webview_height_ratio": "tall",
-                        },
-                        "buttons": [
-                            {
-                                "type": "web_url",
-                                "url": "https://bit.ly/webHeadphones",
-                                "title": "View on Website"
-                            },
-                            {
-                                "type": "postback",
-                                "title": "Show Headphones",
-                                "payload": "SHOW_HEADPHONES"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "TV",
-                        "image_url": "https://bit.ly/imageTV",
-                        "subtitle": "Master of quality & Incredible clarity",
-                        "default_action": {
-                            "type": "web_url",
-                            "url": "https://bit.ly/webTelevision",
-                            "webview_height_ratio": "tall",
-                        },
-                        "buttons": [
-                            {
-                                "type": "web_url",
-                                "url": "https://bit.ly/webTelevision",
-                                "title": "View on Website"
-                            }, {
-                                "type": "postback",
-                                "title": "Show TVs",
-                                "payload": "SHOW_TV"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Vest",
-                        "image_url": "https://drive.google.com/file/d/1foodfl1MEPLNI3sOREOPaoXewY0Dq09s/view?usp=sharing",
-                        "subtitle": "Color: Gris (Gray)\nSize: Taille 52\nPrice: 7500 DA",
-                        "default_action": {
-                            "type": "web_url",
-                            "url": "https://example.com/vest_details",
-                            "webview_height_ratio": "tall",
-                        },
-                        "buttons": [
-                            {
-                                "type": "web_url",
-                                "url": "https://example.com/buy_vest",
-                                "title": "Buy Now"
-                            },
-                            {
-                                "type": "postback",
-                                "title": "More Details",
-                                "payload": "VEST_DETAILS_PAYLOAD"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Playstation",
-                        "image_url": "https://bit.ly/imagePlaystation",
-                        "subtitle": "Incredible games & Endless entertainment",
-                        "default_action": {
-                            "type": "web_url",
-                            "url": "https://bit.ly/webPlaystation",
-                            "webview_height_ratio": "tall",
-                        },
-                        "buttons": [
-                            {
-                                "type": "web_url",
-                                "url": "https://bit.ly/webPlaystation",
-                                "title": "View on Website"
-                            }, {
-                                "type": "postback",
-                                "title": "Show Playstation",
-                                "payload": "SHOW_PLAYSTATION"
-                            }
-                        ]
-                    },
+                    }
+                    
+                    
+                   
                 ]
             }
         }
     };
-};
+
+}
 
 let sendHeadphonesTemplate = () =>{
     return {
@@ -349,5 +346,6 @@ module.exports = {
     backToMainMenuTemplate: backToMainMenuTemplate,
     setInfoOrderTemplate: setInfoOrderTemplate,
     sendSureveyTemplate:sendSureveyTemplate,
+    sendClothesTemplate:sendClothesTemplate
     // createProductTemplate:createProductTemplate
 };
