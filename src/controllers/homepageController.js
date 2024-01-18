@@ -250,7 +250,8 @@ let handlePostback = async (sender_psid, received_postback) => {
             await chatbotService.backToMainMenu(sender_psid);
             break;
         case "no":
-            response = { 'text': 'bla!' };
+            await chatbotService.handlePostback(sender_psid, received_postback);
+            break;
         default:
             console.log("run default switch case")
 

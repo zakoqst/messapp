@@ -70,6 +70,63 @@ let sendMessageWelcomeNewUser = (sender_psid) => {
     });
 };
 
+// Handles messaging_postbacks events
+let handlePostback = (senderPsid, receivedPostback) => {
+    return new Promise(async (resolve, reject) => {
+      let response;
+  
+      // Get the payload for the postback
+      let payload = receivedPostback.payload;
+      console.log(payload);
+  
+      // Set the response based on the postback payload
+      if (payload === 'fa') {
+        response = { 'text': 'bla!' };
+      } else if (payload === 'no') {
+        response = { 'text': 'Oops, try sending another image.' };
+      }
+  
+      // Send the message to acknowledge the postback
+      await callSendAPI(senderPsid, response);
+  
+      // Resolve the promise to indicate successful execution
+      resolve();
+    });
+  };
+  
+
+// Sends response messages via the Send API
+let callSendAPI = (senderPsid, response) => {
+    return new Promise((resolve, reject) => {
+      // The page access token we have generated in your app settings
+      const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+  
+      // Construct the message body
+      let requestBody = {
+        'recipient': {
+          'id': senderPsid
+        },
+        'message': response
+      };
+  
+      // Send the HTTP request to the Messenger Platform
+      request({
+        'uri': 'https://graph.facebook.com/v2.6/me/messages',
+        'qs': { 'access_token': PAGE_ACCESS_TOKEN },
+        'method': 'POST',
+        'json': requestBody
+      }, (err, _res, _body) => {
+        if (!err) {
+          console.log('Message sent!');
+          resolve(); // Resolve the promise on success
+        } else {
+          console.error('Unable to send message:' + err);
+          reject(err); // Reject the promise on error
+        }
+      });
+    });
+  };
+  
 let sendMessage = (sender_psid, response) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -283,5 +340,6 @@ module.exports = {
     backToCategories: backToCategories,
     backToMainMenu: backToMainMenu,
     passThreadControl: passThreadControl,
-    takeControlConversation: takeControlConversation
+    takeControlConversation: takeControlConversation,
+    handlePostback:handlePostback
 };
