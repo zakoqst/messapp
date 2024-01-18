@@ -349,5 +349,5 @@ module.exports = {
     backToMainMenuTemplate: backToMainMenuTemplate,
     setInfoOrderTemplate: setInfoOrderTemplate,
     sendSureveyTemplate:sendSureveyTemplate,
-    createProductTemplate:createProductTemplate
+    // createProductTemplate:createProductTemplate
 };
