@@ -80,8 +80,8 @@ let sendMessage = (sender_psid, response) => {
                 "recipient": {
                     "id": sender_psid
                 },
-                "message": "zzzz"
-                // "message": response
+                "message": response
+                
             };
 
             // Send the HTTP request to the Messenger Platform
