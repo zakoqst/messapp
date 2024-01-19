@@ -100,7 +100,6 @@ let sendCategoriesTemplate = () =>{
         }
     };
 };
-
 let sendClothesTemplate = () => {
     return {
         "attachment": {
@@ -109,19 +108,19 @@ let sendClothesTemplate = () => {
                 "template_type": "generic",
                 "elements": [
                     {
-                        "title": `Jean-Vert`,
-                        "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Jeans.jpg",
-                        "subtitle": `Size: Taille 42\nPrice: 3500 DA`,
+                        "title": "Jean-Vert",
+                        "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/master/src/public/assets/productimages/Jeans.jpg",
+                        "subtitle": "Size: Taille 42\nPrice: 3500 DA",
                         "default_action": {
                             "type": "web_url",
-                            "url": "https://bit.ly/viewHeadphone1",
+                            "url": "https://bit.ly/viewJeanVert",
                             "webview_height_ratio": "tall",
                         },
                         "buttons": [
                             {
-                                "type": "web_url",
-                                "url": "https://bit.ly/viewHeadphone1",
-                                "title": "Order now"
+                                "type": "postback",
+                                "title": "Order now",
+                                "payload": "ORDER_JEAN_VERT"
                             },
                             {
                                 "type": "postback",
@@ -136,14 +135,19 @@ let sendClothesTemplate = () => {
                         ]
                     },
                     {
-                        "title": `Pull - Noir`,
-                        "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Pull.jpg",
-                        "subtitle": `Size: Taille L\nPrice: 2000 DA`,
+                        "title": "Pull - Noir",
+                        "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/master/src/public/assets/productimages/Pull.jpg",
+                        "subtitle": "Size: Taille L\nPrice: 2000 DA",
+                        "default_action": {
+                            "type": "web_url",
+                            "url": "https://bit.ly/viewPullNoir",
+                            "webview_height_ratio": "tall",
+                        },
                         "buttons": [
                             {
                                 "type": "postback",
-                                "url": "https://bit.ly/viewHeadphone1",
-                                "title": "Order now"
+                                "title": "Order now",
+                                "payload": "ORDER_PULL_NOIR"
                             },
                             {
                                 "type": "postback",
@@ -158,14 +162,19 @@ let sendClothesTemplate = () => {
                         ]
                     },
                     {
-                        "title": `Vest-Gris`,
-                        "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Blazer.jpg",
-                        "subtitle": `Size: Taille L\nPrice: 5000 DA`,
+                        "title": "Vest-Gris",
+                        "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/master/src/public/assets/productimages/Blazer.jpg",
+                        "subtitle": "Size: Taille L\nPrice: 5000 DA",
+                        "default_action": {
+                            "type": "web_url",
+                            "url": "https://bit.ly/viewVestGris",
+                            "webview_height_ratio": "tall",
+                        },
                         "buttons": [
                             {
                                 "type": "postback",
-                                "url": "https://bit.ly/viewHeadphone1",
-                                "title": "Order now"
+                                "title": "Order now",
+                                "payload": "ORDER_VEST_GRIS"
                             },
                             {
                                 "type": "postback",
@@ -179,18 +188,13 @@ let sendClothesTemplate = () => {
                             }
                         ]
                     }
-                    
-                    
-                    
-                   
                 ]
             }
         }
     };
-
 }
 
-let sendHeadphonesTemplate = () =>{
+let sendHeadphonesTemplate = () => {
     return {
         "attachment": {
             "type": "template",
@@ -209,7 +213,7 @@ let sendHeadphonesTemplate = () =>{
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": "https://bit.ly/viewHeadphone1",
+                                "url": "https://bit.ly/orderHeadphone1",
                                 "title": "Order now"
                             },
                             {
@@ -226,17 +230,17 @@ let sendHeadphonesTemplate = () =>{
                     },
                     {
                         "title": "Jean-Vert",
-                        "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Jeans.jpg",
+                        "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/master/src/public/assets/productimages/Jeans.jpg",
                         "subtitle": "3500 DA",
                         "default_action": {
                             "type": "web_url",
-                            "url": "https://raw.githubusercontent.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Jeans.jpg",
+                            "url": "https://bit.ly/viewHeadphone2",
                             "webview_height_ratio": "tall",
                         },
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": "https://bit.ly/viewHeadphone2",
+                                "url": "https://bit.ly/orderHeadphone2",
                                 "title": "Order now"
                             },
                             {
@@ -263,7 +267,7 @@ let sendHeadphonesTemplate = () =>{
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": "https://bit.ly/viewHeadphone3",
+                                "url": "https://bit.ly/orderHeadphone3",
                                 "title": "Order now"
                             },
                             {
@@ -277,12 +281,13 @@ let sendHeadphonesTemplate = () =>{
                                 "payload": "BACK_TO_MAIN_MENU"
                             }
                         ]
-                    },
+                    }
                 ]
             }
         }
     };
 };
+
 
 let sendLookupOrderTemplate = () =>{
     return {
