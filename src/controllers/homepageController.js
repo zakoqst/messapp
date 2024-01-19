@@ -121,6 +121,9 @@ let handleMessage = async (sender_psid, received_message) => {
         } else if (payload === "LOOKUP_ORDER") {
             await chatbotService.sendLookupOrder(sender_psid);
 
+        } else if (payload === "PASS_ORDER") {
+            await chatbotService.sendpassOrder(sender_psid);
+
         } else if (payload === "TALK_AGENT") {
             await chatbotService.requestTalkToAgent(sender_psid);
         } else if (payload === "LOOKUP_SURVEY") {

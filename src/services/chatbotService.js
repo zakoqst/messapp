@@ -313,16 +313,10 @@ let backToCategories = (sender_psid) => {
     sendCategories(sender_psid)
 };
 
+
 let backToMainMenu = (sender_psid) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let response = templateMessage.backToMainMenuTemplate();
-            await sendMessage(sender_psid, response);
-            resolve("done");
-        } catch (e) {
-            reject(e);
-        }
-    });
+
+    sendMessageWelcomeNewUser(sender_psid)
 };
 
 

@@ -100,6 +100,7 @@ let sendCategoriesTemplate = () =>{
         }
     };
 };
+
 let sendClothesTemplate = () => {
     return {
         "attachment": {
