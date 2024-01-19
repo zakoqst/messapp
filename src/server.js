@@ -55,7 +55,7 @@ app.use((req, res, next) => {
 //   res.end('Proxy Error');
 // });
 
-let port = process.env.PORT || 80;
+let port = process.env.PORT || 8080;
 
 app.listen(port, () => {
     console.log(`Messenger bot is running at the port ${port}`);

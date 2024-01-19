@@ -53,6 +53,9 @@ let initWebRoutes = (app)=> {
     router.get("/info-order", homepageController.getInfoOrderPage);
     router.post('/set-info-order', homepageController.setInfoOrder);
     
+    router.get("/get-order-form", homepageController.getOrderProductPage);
+    router.post('/post-order-order', homepageController.setInfoOrder);
+    
 
     return app.use("/",router);
 };

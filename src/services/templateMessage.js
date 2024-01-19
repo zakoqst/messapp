@@ -387,6 +387,27 @@ let setInfoOrderTemplate = ()=>{
     };
 };
 
+
+
+let setProductOrderTemplate = ()=>{
+    return {
+        "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text":"set up your order." +
+                    "\nThank you!",
+                "buttons":[
+                    {
+                        "type": "postback",
+                        "title": "Main menu",
+                        "payload": "BACK_TO_MAIN_MENU"
+                    }
+                ]
+            }
+        }
+    };
+};
 module.exports = {
     sendCategoriesTemplate: sendCategoriesTemplate,
     sendHeadphonesTemplate: sendHeadphonesTemplate,
@@ -394,6 +415,7 @@ module.exports = {
     backToMainMenuTemplate: backToMainMenuTemplate,
     setInfoOrderTemplate: setInfoOrderTemplate,
     sendSureveyTemplate:sendSureveyTemplate,
-    sendClothesTemplate:sendClothesTemplate
+    sendClothesTemplate:sendClothesTemplate,
+    setProductOrderTemplate:setProductOrderTemplate
     // createProductTemplate:createProductTemplate
 };

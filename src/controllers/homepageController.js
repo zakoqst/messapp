@@ -277,6 +277,71 @@ let getSetupProfilePage = (req, res) => {
     return res.render("profile.ejs");
 };
 
+
+let getOrderProductPage = (req, res) => {
+    let facebookAppId = process.env.FACEBOOK_APP_ID;
+    return res.render("productOrder.ejs", {
+        facebookAppId: facebookAppId
+    });
+};
+
+
+
+
+let setProductOrder = async (req, res) => {
+    try {
+        let name = req.body.name;
+        let psid=req.body.psid;
+        let order_number=req.body.order_number;
+        let email=req.body.email;
+        let product=req.body.product;
+        let quantity =req.body.quantity;
+        let comments = req.body.comments;
+        // let customer = "";
+        // if (req.body.customer === "") {
+        //     customer = "Empty";
+        // } else customer = req.body.customer;
+        
+    
+        console.log(name, psid, order_number, email, product,quantity,comments)
+        // I demo response with sample text
+        // you can check database for customer order's status
+
+        // let response1= { "text": `Customer name: ${customer}`}
+        
+     
+
+     
+        let response1 = {
+            "text": `---Info about your lookup order---
+            \nName: ${req.body.name}
+            \nPSID: ${req.body.psid}
+            \nproduct: ${product}
+            \nEmail address: ${req.body.email}
+            \nquantity: ${req.body.quantity}
+            \ncomments: ${req.body.comments}
+            `
+        };
+        console.log(response1);
+      
+        let response2 = templateMessage.setProductOrderTemplate();
+
+        // await callSendAPI(psid,{text:response1})
+        // await callSendAPI(psid,{text:response2})
+        await chatbotService.sendMessage(req.body.psid, {text:response1});
+        await chatbotService.sendMessage(req.body.psid, response2);
+
+        return res.status(200).json({
+            message: "ok"
+        });
+    } catch (e) {
+        // reject(ER);
+        console.log(e);
+    }
+};
+
+
+
 let getInfoOrderPage = (req, res) => {
     let facebookAppId = process.env.FACEBOOK_APP_ID;
     return res.render("infoOrder.ejs", {
@@ -339,5 +404,7 @@ module.exports = {
     handleSetupProfile: handleSetupProfile,
     getSetupProfilePage: getSetupProfilePage,
     getInfoOrderPage: getInfoOrderPage,
-    setInfoOrder: setInfoOrder
+    setInfoOrder: setInfoOrder,
+    setProductOrder:setProductOrder,
+    getOrderProductPage:getOrderProductPage
 };

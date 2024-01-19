@@ -235,6 +235,18 @@ let sendCategories = (sender_psid) => {
     });
 };
 
+let sendpassOrder = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let response = templateMessage.senPassOrderTemplate();
+            await sendMessage(sender_psid, response);
+            resolve("done");
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
 let sendLookupOrder = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -246,6 +258,7 @@ let sendLookupOrder = (sender_psid) => {
         }
     });
 };
+
 
 let showClothes = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
@@ -356,6 +369,8 @@ module.exports = {
     passThreadControl: passThreadControl,
     takeControlConversation: takeControlConversation,
     handlePostback:handlePostback,
-    showClothes:showClothes
+    showClothes:showClothes,
+    sendpassOrder:sendpassOrder
+    
     // sendProductTemplate:sendProductTemplate
 };
