@@ -120,7 +120,7 @@ let sendClothesTemplate = () => {
                             {
                                 "type": "postback",
                                 "title": "Order now",
-                                "payload": "ORDER_JEAN_VERT"
+                                "payload": "ORDER"
                             },
                             {
                                 "type": "postback",
@@ -147,7 +147,7 @@ let sendClothesTemplate = () => {
                             {
                                 "type": "postback",
                                 "title": "Order now",
-                                "payload": "ORDER_PULL_NOIR"
+                                "payload": "ORDER"
                             },
                             {
                                 "type": "postback",
@@ -174,7 +174,7 @@ let sendClothesTemplate = () => {
                             {
                                 "type": "postback",
                                 "title": "Order now",
-                                "payload": "ORDER_VEST_GRIS"
+                                "payload": "ORDER"
                             },
                             {
                                 "type": "postback",
@@ -316,6 +316,34 @@ let sendLookupOrderTemplate = () =>{
 };
 
 
+
+let senPassOrderTemplate = () =>{
+    return {
+        "attachment":{
+            "type":"template",
+            "payload":{
+                "template_type":"button",
+                "text":"OK. Let's set info about your order, so I won't need to ask for them in the future.",
+                "buttons":[
+                    {
+                        "type": "web_url",
+                        "url": `${process.env.URL_WEB_VIEW_ORDER_2}`,
+                        "title": "Set info",
+                        "webview_height_ratio": "tall",
+                        "messenger_extensions": true //false: open the webview in new tab
+                    },
+                    {
+                        "type": "postback",
+                        "title": "Main menu",
+                        "payload": "BACK_TO_MAIN_MENU"
+                    }
+                ]
+            }
+        }
+    };
+};
+
+
 let sendSureveyTemplate = () =>{
     return {
         "attachment":{
@@ -416,6 +444,7 @@ module.exports = {
     setInfoOrderTemplate: setInfoOrderTemplate,
     sendSureveyTemplate:sendSureveyTemplate,
     sendClothesTemplate:sendClothesTemplate,
-    setProductOrderTemplate:setProductOrderTemplate
+    setProductOrderTemplate:setProductOrderTemplate,
+    senPassOrderTemplate:senPassOrderTemplate
     // createProductTemplate:createProductTemplate
 };

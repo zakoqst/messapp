@@ -52,7 +52,8 @@ let handleSetupProfileAPI = () => {
                 ],
                 "whitelisted_domains": [
                     "https://https://messenger-app-7fl9.onrender.com/info-order",
-                    "https://www.facebook.com/"
+                    "https://www.facebook.com/",
+                    "https://https://messenger-app-7fl9.onrender.com/get-order-form"
                 ]
             };
             // Send the HTTP request to the Messenger Platform
