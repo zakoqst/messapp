@@ -1,15 +1,4 @@
-// const dotenv =require("dotenv").config();
-// // require("dotenv").config();
-// const request =require("request");
-// // import request from "request";
-// const homepageService = require("../services/homepageService")
-// // import homepageService_1 from "../services/homepageService";
-// // import homepageService from "../services/homepageService";
-// const { GoogleSpreadsheet } = require('google-spreadsheet');
 
-
-
-// const { config } = require("dotenv");
 const dotenv =require("dotenv").config();
 const request = require("request");
 const homepageService = require("../services/homepageService");
@@ -190,7 +179,7 @@ let handleMessage = async (sender_psid, received_message) => {
 
     // Sends the response message
     // try {
-        // await chatbotService.sendMessage(sender_psid, response);
+        await chatbotService.sendMessage(sender_psid, response);
     //     callSendAPI(sender_psid, response);
      
     // } catch (e) {
@@ -329,8 +318,8 @@ let setProductOrder = async (req, res) => {
       
         let response2 = templateMessage.setProductOrderTemplate();
 
-        // await callSendAPI(psid,{text:response1})
-        // await callSendAPI(psid,{text:response2})
+        await callSendAPI(psid,{text:response1})
+        await callSendAPI(psid,{text:response2})
         await chatbotService.sendMessage(req.body.psid, {text:response1});
         await chatbotService.sendMessage(req.body.psid, response2);
 
@@ -386,8 +375,8 @@ let setInfoOrder = async (req, res) => {
       
         let response2 = templateMessage.setInfoOrderTemplate();
 
-        // await callSendAPI(psid,{text:response1})
-        // await callSendAPI(psid,{text:response2})
+        await callSendAPI(psid,{text:response1})
+        await callSendAPI(psid,{text:response2})
         await chatbotService.sendMessage(req.body.psid, {text:response1});
         await chatbotService.sendMessage(req.body.psid, response2);
 

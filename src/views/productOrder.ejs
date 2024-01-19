@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Order Form</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- <!-- Load custom Javascript and CSS -->
- <link rel="stylesheet" href="/css/style_product_oder.css">
- <script>
-    let facebookAppId = "873864850346412";
-</script>
-<script type="text/javascript" src="/js/order.js"></script>
-
-
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Load custom Javascript and CSS -->
+    <link rel="stylesheet" href="/css/style_product_oder.css">
+    <script>
+        const facebookAppId = "873864850346412";
+    </script>
+    <script type="text/javascript" src="/js/order.js"></script>
 </head>
 
 <body>
@@ -25,7 +24,7 @@
         window.fbMessengerPlugins = window.fbMessengerPlugins || {
             init: function () {
                 FB.init({
-                    appId: '873864850346412', // Replace with your Facebook App ID
+                    appId: facebookAppId,
                     autoLogAppEvents: true,
                     xfbml: true,
                     version: 'v2.10'
@@ -54,26 +53,12 @@
         }, 0);
     </script>
 
-    <script>
-        // Code copied from Facebook to load and initialize Messenger extensions
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {
-                return;
-            }
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'Messenger'));
-
-    </script>
-
-
     <h1>Product Order Form</h1>
 
-    <form action="/submit_order" method="post">
+    <form id="order_form" action="/submit_order" method="post">
         <!-- User Information -->
+        <input type="text" id="psid" name="psid" hidden>
+
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
 
@@ -101,5 +86,55 @@
         <button type="submit">Submit Order</button>
     </form>
 
+    <script>
+        window.extAsyncInit = async function () {
+            console.log('Messenger extensions are ready');
+
+            try {
+                const thread_context = await new Promise((resolve, reject) => {
+                    MessengerExtensions.getContext(facebookAppId,
+                        function success(thread_context) {
+                            resolve(thread_context);
+                        },
+                        function error(err) {
+                            reject(err);
+                        }
+                    );
+                });
+
+                console.log(thread_context);
+                const userPSID = thread_context.psid;
+                document.getElementById("psid").value = userPSID;
+
+                $("#order_form").submit(async function (event) {
+                    event.preventDefault();
+                    const data = {
+                        psid: userPSID,
+                        name: $("#name").val(),
+                        email: $("#email").val(),
+                        product: $("#product").val(),
+                        quantity: $("#quantity").val(),
+                        comments: $("#comments").val()
+                    };
+
+                    try {
+                        await $.post(`${window.location.origin}/set-product-order`, data);
+                        MessengerExtensions.requestCloseBrowser(function () {
+                            console.log('Window will be closed');
+                        }, function (error) {
+                            console.log('There is an error');
+                            console.log(error);
+                        });
+                    } catch (error) {
+                        console.error('Error submitting data:', error);
+                    }
+                });
+
+            } catch (error) {
+                console.error('Error initializing Messenger extensions:', error);
+            }
+        }
+    </script>
 </body>
+
 </html>

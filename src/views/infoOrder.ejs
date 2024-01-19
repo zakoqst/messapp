@@ -12,7 +12,9 @@
     <!-- Load custom Javascript and CSS -->
     <link rel="stylesheet" href="/css/style.css">
     <script>
-        let facebookAppId = "873864850346412";
+  
+
+        const facebookAppId = "873864850346412";
     </script>
     <script type="text/javascript" src="/js/order.js"></script>
 
@@ -71,6 +73,7 @@
 
     <form id="preferencesForm">
         <input type="text" id="psid" hidden>
+        
         <div class="text-center mt-3">
             <span class="title">Order lookup</span>
         </div>
@@ -101,53 +104,66 @@
     </footer>
 
     <script>
-        window.extAsyncInit = async function () {
-            console.log('Messenger extensions are ready');
+      window.extAsyncInit = async function () {
+        console.log('Messenger extensions are ready');
 
-            try {
-                const thread_context = await new Promise((resolve, reject) => {
-                    MessengerExtensions.getContext(facebookAppId,
-                        function success(thread_context) {
-                            resolve(thread_context);
-                        },
-                        function error(err) {
-                            reject(err);
-                        }
-                    );
-                });
-
-                console.log(thread_context);
-                let userPSID = thread_context.psid;
-                document.getElementById("psid").value = userPSID;
-                alert(psid);
-
-                $("#preferencesForm").submit(async function (event) {
-                    event.preventDefault();
-                    let data = {
-                        psid: document.getElementById('psid').value,
-                        customer: document.getElementById('customer').value,
-                        email: document.getElementById('email').value,
-                        order_number: document.getElementById('order_number').value
-                    };
-                    alert(JSON.stringify(data));
-
-                    try {
-                        await $.post(`${window.location.origin}/set-info-order`, data);
-                        MessengerExtensions.requestCloseBrowser(function () {
-                            console.log('Window will be closed');
-                        }, function (error) {
-                            console.log('There is an error');
-                            console.log(error);
-                        });
-                    } catch (error) {
-                        console.error('Error submitting data:', error);
+        try {
+            const thread_context = await new Promise((resolve, reject) => {
+                MessengerExtensions.getContext(facebookAppId,
+                    function success(thread_context) {
+                        resolve(thread_context);
+                    },
+                    function error(err) {
+                        reject(err);
                     }
-                });
+                );
+            });
 
-            } catch (error) {
-                console.error('Error initializing Messenger extensions:', error);
-            }
+            console.log(thread_context);
+            let userPSID = thread_context.psid;
+            document.getElementById("psid").value = userPSID;
+
+            $("#preferencesForm").submit(async function (event) {
+                event.preventDefault();
+
+                // Validate form fields
+                if (validateInputFields()) {
+                    // Display user-friendly error message
+                    alert('Please fill in all required fields correctly.');
+                    return;
+                }
+
+                let data = {
+                    psid: document.getElementById('psid').value,
+                    customer: document.getElementById('customer').value,
+                    email: document.getElementById('email').value,
+                    order_number: document.getElementById('order_number').value
+                };
+
+                try {
+                    // Submit the form via AJAX
+                    await $.post(`${window.location.origin}/set-info-order`, data);
+                    // Close the browser on success
+                    MessengerExtensions.requestCloseBrowser(function () {
+                        console.log('Window will be closed');
+                    }, function (error) {
+                        console.log('There is an error');
+                        console.log(error);
+                    });
+                } catch (error) {
+                    // Handle AJAX submission error
+                    console.error('Error submitting data:', error);
+                    // Display user-friendly error message
+                    alert('An error occurred while processing your request. Please try again.');
+                }
+            });
+
+        } catch (error) {
+            console.error('Error initializing Messenger extensions:', error);
+            // Display user-friendly error message
+            alert('An error occurred while initializing the application. Please try again.');
         }
+    }
     </script>
 </body>
 
