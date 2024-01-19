@@ -56,3 +56,19 @@ button:hover {
         width: 90%; /* Adjusted width for smaller screens */
     }
 }
+/* Heading */
+h1{
+    transform:translatex(297px) translatey(-319px);
+   }
+   
+   /* Order form */
+   #order_form{
+    transform:translatex(-78px) translatey(0px);
+   }
+   
+   /* Button */
+   #order_form button{
+    transform:translatex(0px) translatey(-9px);
+   }
+   
+   
