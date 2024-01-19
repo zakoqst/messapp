@@ -80,7 +80,7 @@ let sendCategoriesTemplate = () =>{
                         "subtitle": "Nice looking clothes!!!",
                         "default_action": {
                             "type": "web_url",
-                            "url": "https://raw.githubusercontent.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Jeans.jpg",
+                            "url": "https://raw.githubusercontent.com/zakoqst/messapp/master/src/public/assets/productimages/Jeans.jpg",
                             "webview_height_ratio": "tall",
                         },
                         "buttons": [
@@ -110,7 +110,7 @@ let sendClothesTemplate = () => {
                 "elements": [
                     {
                         "title": `Jean-Vert`,
-                        "image_url": "https://github.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Jeans.jpg",
+                        "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Jeans.jpg",
                         "subtitle": `Size: Taille 42\nPrice: 3500 DA`,
                         "default_action": {
                             "type": "web_url",
@@ -137,7 +137,7 @@ let sendClothesTemplate = () => {
                     },
                     {
                         "title": `Pull - Noir`,
-                        "image_url": "https://github.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Pull.jpg",
+                        "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Pull.jpg",
                         "subtitle": `Size: Taille L\nPrice: 2000 DA`,
                         "buttons": [
                             {
@@ -159,7 +159,7 @@ let sendClothesTemplate = () => {
                     },
                     {
                         "title": `Vest-Gris`,
-                        "image_url": "https://github.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Blazer.jpg",
+                        "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Blazer.jpg",
                         "subtitle": `Size: Taille L\nPrice: 5000 DA`,
                         "buttons": [
                             {
@@ -225,12 +225,12 @@ let sendHeadphonesTemplate = () =>{
                         ]
                     },
                     {
-                        "title": "Sony WI-1000XM2 Industry Leading Noise Canceling Wireless Behind-Neck",
-                        "image_url": "https://bit.ly/imageHeadphone1b",
-                        "subtitle": "$298.00",
+                        "title": "Jean-Vert",
+                        "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Jeans.jpg",
+                        "subtitle": "3500 DA",
                         "default_action": {
                             "type": "web_url",
-                            "url": "https://bit.ly/viewHeadphone2",
+                            "url": "https://raw.githubusercontent.com/zakoqst/messapp/blob/master/src/public/assets/productimages/Jeans.jpg",
                             "webview_height_ratio": "tall",
                         },
                         "buttons": [
