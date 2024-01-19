@@ -47,13 +47,13 @@ app.use((req, res, next) => {
   }
 });
 
-// // Error handling for proxy requests
-// proxy.on('error', (err, req, res) => {
-//   res.writeHead(500, {
-//     'Content-Type': 'text/plain'
-//   });
-//   res.end('Proxy Error');
-// });
+// Error handling for proxy requests
+proxy.on('error', (err, req, res) => {
+  res.writeHead(500, {
+    'Content-Type': 'text/plain'
+  });
+  res.end('Proxy Error');
+});
 
 let port = process.env.PORT || 8080;
 

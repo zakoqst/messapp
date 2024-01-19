@@ -26,6 +26,8 @@ let getHomePage = (req, res) => {
     })
 };
 
+
+
 let getWebhook = (req, res) => {
     // Your verify token. Should be a random string.
     let VERIFY_TOKEN = MY_VERIFY_TOKEN;
@@ -270,9 +272,9 @@ let getSetupProfilePage = (req, res) => {
 
 
 let getOrderProductPage = (req, res) => {
-    let facebookAppId = process.env.FACEBOOK_APP_ID;
+    // let facebookAppId = process.env.FACEBOOK_APP_ID;
     return res.render("productOrder.ejs", {
-        facebookAppId: facebookAppId
+        // facebookAppId: facebookAppId
     });
 };
 
