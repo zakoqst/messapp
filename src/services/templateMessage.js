@@ -174,8 +174,11 @@ let sendClothesTemplate = () => {
                         "buttons": [
                             {
                                 "type": "postback",
-                                "title": "Order now",
-                                "payload": "ORDER"
+                                "url": `${process.env.URL_WEB_VIEW_ORDER_2}`,
+                                "webview_height_ratio": "tall",
+                                "messenger_extensions": true,  //false: open the webview in new tab
+                                "title": "Order now"
+                                
                             },
                             {
                                 "type": "postback",
