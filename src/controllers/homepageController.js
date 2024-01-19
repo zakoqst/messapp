@@ -1,5 +1,4 @@
-
-const dotenv =require("dotenv").config();
+require('dotenv').config();
 const request = require("request");
 const homepageService = require("../services/homepageService");
 const chatbotService = require("../services/chatbotService");
