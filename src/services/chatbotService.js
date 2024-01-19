@@ -48,6 +48,11 @@ let sendMessageWelcomeNewUser = (sender_psid) => {
                     },
                     {
                         "content_type": "text",
+                        "title": "Create Order",
+                        "payload": "PASS_ORDER",
+                    },
+                    {
+                        "content_type": "text",
                         "title": "Talk to an agent",
                         "payload": "TALK_AGENT",
                     },
