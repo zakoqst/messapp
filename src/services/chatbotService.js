@@ -268,14 +268,30 @@ let sendLookupOrder = (sender_psid) => {
 let showClothes = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let response = templateMessage.sendClothesTemplate();
+            let response =await templateMessage.sendClothesTemplate();
             await sendMessage(sender_psid, response);
-            resolve("done");
+            resolve("Clothes displayed");
         } catch (e) {
             reject(e);
         }
     })
 };
+
+
+
+// let showClothes = (sender_psid) => {
+//     return new Promise(async (resolve, reject) => {
+//       try {
+//         // Send clothes product template
+//         let response = await templateMessage.sendClothesTemplate();
+//         await sendMessage(sender_psid, response);
+        
+//         resolve("Clothes displayed");
+//       } catch (e) {
+//         reject(e); 
+//       }
+//     })
+//   }
 
 let showHeadphones = (sender_psid) => {
     return new Promise(async (resolve, reject) => {

@@ -5,96 +5,192 @@ const fs = require('fs');
 // Load credentials from a JSON key file (replace 'path/to/your/credentials.json' with the actual path)
 const credentials = require('../../EcommerceApiKey.json');
 
-// Set up authentication
-const auth = new google.auth.JWT(
-  credentials.client_email,
-  null,
-  credentials.private_key,
-  ['https://www.googleapis.com/auth/spreadsheets']
-);
-let sendClothesTemplate = async () => {
-    const fetchDataFromGoogleSheet = async () => {
-        const sheets = google.sheets('v4');
-        const spreadsheetId = '1CIpG37NsKjCMdUuyHWMMOd6migG8JxJoFL9yafeVRKc';
-        const range = 'Test Catalogue produit!A:I'; // Update with the correct sheet name and range
+// // Set up authentication
+// let sendClothesTemplate = async (senderPsid) => {
+//     const fetchDataFromGoogleSheet = async () => {
+//         const sheets = google.sheets('v4');
+//         const spreadsheetId = '1CIpG37NsKjCMdUuyHWMMOd6migG8JxJoFL9yafeVRKc';
+//         const range = 'Test Catalogue produit!A:I'; // Update with the correct sheet name and range
 
-        // Assuming you have already authenticated and obtained the access token
-        // const auth = {
-        //     // Your auth credentials
-        //     // ...
-        // };
+//         // Assuming you have already authenticated and obtained the access token
+//         // const auth = {
+//         //     // Your auth credentials
+//         //     // ...
+//         // };
+//         const auth = new google.auth.JWT(
+//             credentials.client_email,
+//             null,
+//             credentials.private_key,
+//             ['https://www.googleapis.com/auth/spreadsheets']
+//           );
+          
+//         const response = await sheets.spreadsheets.values.get({
+//             auth,
+//             spreadsheetId,
+//             range,
+//         });
 
-        const response = await sheets.spreadsheets.values.get({
-            auth,
-            spreadsheetId,
-            range,
-        });
+//         const values = response.data.values;
 
-        const values = response.data.values;
+//         // Assuming the first row contains headers and the data starts from the second row
+//         const data = values.slice(1).map(row => {
+//             return {
+//                 productName: row[1],
+//                 imageURL: row[7],
+//                 productSize: row[4],  // Assuming size is in the third column
+//                 productPrice: row[5], // Assuming price is in the fourth column
+//                 // productUrl: row[4],   // Assuming product URL is in the fifth column
+//                 // productAction: row[5], // Assuming product action is in the sixth column
+//             };
+//         });
 
-        // Assuming the first row contains headers and the data starts from the second row
-        const data = values.slice(1).map(row => {
-            return {
-                productName: row[1],
-                imageURL: row[7],
-                productSize: row[4],  // Assuming size is in the third column
-                productPrice: row[5], // Assuming price is in the fourth column
-                // productUrl: row[4],   // Assuming product URL is in the fifth column
-                // productAction: row[5], // Assuming product action is in the sixth column
-            };
-        });
+//         return data;
+//     };
+//  // Fetch data from Google Sheet
+//  const productsData = await fetchDataFromGoogleSheet();
 
-        return data;
+//  // Create elements for the template using fetched data
+//  const elements = productsData.map(product => {
+//      return {
+//          title: product.productName,
+//          image_url: product.imageURL,
+//          subtitle: `Size: ${product.productSize}\nPrice: ${product.productPrice} DA`,
+//          default_action: {
+//              type: 'web_url',
+//              url: product.imageURL,
+//              webview_height_ratio: 'tall',
+//          },
+//          buttons: [
+//              {
+//                  type: 'web_url',
+//                  url: process.env.URL_WEB_VIEW_ORDER_2,
+//                  webview_height_ratio: 'tall',
+//                  messenger_extensions: true,
+//                  title: 'Order now',
+//              },
+//              {
+//                  type: 'postback',
+//                  title: 'Back to categories',
+//                  payload: 'BACK_TO_CATEGORIES',
+//              },
+//              {
+//                  type: 'postback',
+//                  title: 'Main menu',
+//                  payload: 'BACK_TO_MAIN_MENU',
+//              },
+//          ],
+//      };
+//  });
+
+//  // Complete template structure
+//  const template = {
+//      attachment: {
+//          type: 'template',
+//          payload: {
+//              template_type: 'generic',
+//              elements: elements,
+//          },
+//      },
+//  };
+
+//  return template;
+// };
+
+
+
+
+
+
+
+
+
+// const spreadsheetId = '1CIpG37NsKjCMdUuyHWMMOd6migG8JxJoFL9yafeVRKc';
+// const range = 'Test Catalogue produit!A:I'; // Update with the correct sheet name and range
+
+// Google Sheets params
+const SHEET_ID = '1CIpG37NsKjCMdUuyHWMMOd6migG8JxJoFL9yafeVRKc';
+const SHEET_RANGE = 'Test Catalogue produit!A:I';
+
+// Show clothes 
+const sendClothesTemplate = async (senderPsid) => {
+
+  // Fetch data from sheet
+  const clothingData = await fetchClothingData();
+  
+  // Map clothing data to template elements
+  const elements = clothingData.map(item => {
+    return {
+      title: item.name,
+      image_url: item.imageUrl,
+      subtitle: `Size: ${item.size}\nPrice: ${item.price}`,
+      buttons: [
+        { 
+          type: 'web_url',
+          url: 'https://example.com/order',
+          title: 'Order Now'
+        },
+        {
+          type: 'postback',
+          title: 'Back to Categories',
+          payload: 'CATEGORIES' 
+        }
+      ]  
     };
- // Fetch data from Google Sheet
- const productsData = await fetchDataFromGoogleSheet();
+  });
 
- // Create elements for the template using fetched data
- const elements = productsData.map(product => {
-     return {
-         title: product.productName,
-         image_url: product.imageURL,
-         subtitle: `Size: ${product.productSize}\nPrice: ${product.productPrice} DA`,
-         default_action: {
-             type: 'web_url',
-             url: product.imageURL,
-             webview_height_ratio: 'tall',
-         },
-         buttons: [
-             {
-                 type: 'web_url',
-                 url: product.productAction,
-                 webview_height_ratio: 'tall',
-                 messenger_extensions: true,
-                 title: 'Order now',
-             },
-             {
-                 type: 'postback',
-                 title: 'Back to categories',
-                 payload: 'BACK_TO_CATEGORIES',
-             },
-             {
-                 type: 'postback',
-                 title: 'Main menu',
-                 payload: 'BACK_TO_MAIN_MENU',
-             },
-         ],
-     };
- });
+  // Create template
+  const template = {
+    attachment: {
+      type: 'template',
+      payload: {
+        template_type: 'generic',
+        elements: elements
+      }
+    }
+  };  
 
- // Complete template structure
- const template = {
-     attachment: {
-         type: 'template',
-         payload: {
-             template_type: 'generic',
-             elements: elements,
-         },
-     },
- };
+  // Send template message  
+//   await sendMessage(senderPsid, template);
 
- return template;
 };
+
+
+
+
+
+// Fetch rows from sheet 
+const fetchClothingData = async () => {
+
+    // Auth
+    const auth = new google.auth.GoogleAuth({
+        credentials
+    });
+  
+    // Fetch rows from sheet 
+    const sheets = google.sheets({version: 'v4', auth}); 
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: SHEET_ID,
+      range: SHEET_RANGE
+    });
+  
+    // Return clothing data
+    return response.data.values; 
+  
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Call the function
 // sendClothesTemplate();
