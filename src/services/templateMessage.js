@@ -607,7 +607,7 @@ module.exports = {
     backToMainMenuTemplate: backToMainMenuTemplate,
     setInfoOrderTemplate: setInfoOrderTemplate,
     sendSureveyTemplate:sendSureveyTemplate,
-    sendClothesTemplate:sendClothesTemplate,
+    // sendClothesTemplate:sendClothesTemplate,
     setProductOrderTemplate:setProductOrderTemplate,
     senPassOrderTemplate:senPassOrderTemplate,
     fetchClothingData:fetchClothingData,
