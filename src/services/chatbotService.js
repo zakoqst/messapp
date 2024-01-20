@@ -131,39 +131,38 @@ let callSendAPI = (senderPsid, response) => {
       });
     });
   };
+  
+let sendMessage = (sender_psid, response) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            await homepageService.markMessageRead(sender_psid);
+            await homepageService.sendTypingOn(sender_psid);
+            // Construct the message body
+            let request_body = {
+                "recipient": {
+                    "id": sender_psid
+                },
+                "message": response
+            };
 
-  const sendMessage = async (sender_psid, response) => {
-    try {
-        // Mark message as read
-        await homepageService.markMessageRead(sender_psid);
-
-        // Send typing indicator
-        await homepageService.sendTypingOn(sender_psid);
-
-        // Construct the message body
-        const request_body = {
-            "recipient": {
-                "id": sender_psid
-            },
-            "message": response
-        };
-
-        // Send the HTTP request to the Messenger Platform
-        const apiResponse = await request({
-            uri: "https://graph.facebook.com/v15.0/me/messages",
-            qs: { "access_token": PAGE_ACCESS_TOKEN },
-            method: "POST",
-            json: request_body
-        });
-
-        console.log('Message sent successfully:', apiResponse);
-        return apiResponse;
-    } catch (error) {
-        console.error('Error sending message:', error.message);
-        throw error;
-    }
+            // Send the HTTP request to the Messenger Platform
+            request({
+                "uri": "https://graph.facebook.com/v15.0/me/messages",
+                "qs": { "access_token": PAGE_ACCESS_TOKEN },
+                "method": "POST",
+                "json": request_body
+            }, (err, res, body) => {
+                if (!err) {
+                    resolve('message sent!')
+                } else {
+                    reject("Unable to send message:" + err);
+                }
+            });
+        } catch (e) {
+            reject(e);
+        }
+    });
 };
-
 
 let requestTalkToAgent = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
@@ -265,46 +264,18 @@ let sendLookupOrder = (sender_psid) => {
     });
 };
 
-// Usage example
-const showClothes = async (sender_psid) => {
-    try {
-        console.log('Received request to show clothes.');
-        console.log('Preparing to show clothes...');
 
-        // Fetch clothing data
-        const clothingData = await templateMessage.fetchClothingData();
-
-        // Generate clothes template
-        const clothesTemplate =templateMessage.generateProductTemplate(clothingData);
-
-        console.log('Clothes template created:', clothesTemplate);
-
-        // Send clothes template
-        console.log('Preparing to send message...');
-        await sendMessage(sender_psid, clothesTemplate);
-
-        console.log('Clothes displayed successfully.');
-        return 'Clothes displayed';
-    } catch (error) {
-        console.error('Error displaying clothes:', error.message);
-        throw error;
-    }
+let showClothes = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let response = templateMessage.sendClothesTemplate();
+            await sendMessage(sender_psid, response);
+            resolve("done");
+        } catch (e) {
+            reject(e);
+        }
+    })
 };
-
-
-// let showClothes = (sender_psid) => {
-//     return new Promise(async (resolve, reject) => {
-//       try {
-//         // Send clothes product template
-//         let response = await templateMessage.sendClothesTemplate();
-//         await sendMessage(sender_psid, response);
-        
-//         resolve("Clothes displayed");
-//       } catch (e) {
-//         reject(e); 
-//       }
-//     })
-//   }
 
 let showHeadphones = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
