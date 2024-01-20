@@ -274,19 +274,32 @@ let sendLookupOrder = (sender_psid) => {
     });
 };
 
+// Usage example
 const showClothes = async (sender_psid) => {
     try {
+        console.log('Received request to show clothes.');
         console.log('Preparing to show clothes...');
-        let response = await templateMessage.sendClothesTemplate();
-        console.log('Clothes response:', response);
-        await sendMessage(sender_psid, response);
+
+        // Fetch clothing data
+        const clothingData = await fetchClothingData();
+
+        // Generate clothes template
+        const clothesTemplate = generateProductTemplate(clothingData);
+
+        console.log('Clothes template created:', clothesTemplate);
+
+        // Send clothes template
+        console.log('Preparing to send message...');
+        await sendMessage(sender_psid, clothesTemplate);
+
         console.log('Clothes displayed successfully.');
-        return "Clothes displayed";
+        return 'Clothes displayed';
     } catch (error) {
-        console.error('Error showing clothes:', error);
+        console.error('Error displaying clothes:', error.message);
         throw error;
     }
 };
+
 
 // let showClothes = (sender_psid) => {
 //     return new Promise(async (resolve, reject) => {
