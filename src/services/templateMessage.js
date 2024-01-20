@@ -29,9 +29,9 @@ const sendClothesTemplate = async (senderPsid) => {
         },
       buttons: [
         {
-         type: "postback",
-         title: "Order now",
-         payload: "ORDER"
+         type: "web_url",
+         url: "https://bit.ly/viewJeanVert",
+         title: "Order now"
         },
         {
           type: 'postback',
