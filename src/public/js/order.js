@@ -1,4 +1,4 @@
-const templateMessage = require("../services/templateMessage");
+// const templateMessage = require("../services/templateMessage");
 
 // const supportOrder = require("../src/public/js/supportOrder");
 
@@ -135,7 +135,7 @@ function handleOrderNowClick(element) {
     });
   });
 
-  
+
 // let webContents = window.webContents;
 // let window = new BrowserWindow();
 

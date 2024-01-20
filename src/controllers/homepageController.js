@@ -54,6 +54,7 @@ let getWebhook = (req, res) => {
     }
 };
 
+
 let postWebhook = (req, res) => {
     let body = req.body;
 
@@ -61,6 +62,7 @@ let postWebhook = (req, res) => {
     if (body.object === 'page') {
         // Iterates over each entry - there may be multiple if batched
         body.entry.forEach(function (entry) {
+      
             //check the incoming message from primary app or not; if secondary app, exit
             if (entry.standby) {
                 //if user's message is "back" or "exit", return the conversation to the bot
@@ -88,6 +90,10 @@ let postWebhook = (req, res) => {
             if (webhook_event.message) {
                 handleMessage(sender_psid, webhook_event.message);
             } else if (webhook_event.postback) {
+                if(webhook_event.postback.payload === 'order-now-button') {
+                    handleOrderNowClick(webhook_event);
+                    return;
+                  }
                 handlePostback(sender_psid, webhook_event.postback);
             }
         });
@@ -100,6 +106,49 @@ let postWebhook = (req, res) => {
     }
 };
 
+function handleOrderNowClick(messaging) {
+
+    // Get data from template
+    let title = messaging.message.attachment.payload.elements[0].title;
+    let subtitle = messaging.message.attachment.payload.elements[0].subtitle;
+    
+    // Split subtitle into size and price 
+    const subtitleParts = subtitle.split('\n');
+    const size = subtitleParts[0];
+    const price = subtitleParts[1];
+  
+    // Populate form fields
+    document.getElementById('product').value = title;
+    // document.getElementById('size').value = size;
+    // document.getElementById('price').value = price;
+  
+    // Get PSID 
+    const psid = messaging.sender.id;
+    document.getElementById('psid').value = psid;
+  
+    // Submit form
+    document.getElementById('order_form').submit();
+    
+    // Send confirmation message
+    chatbotService.sendMessage(psid, `Thank you, your order for ${title} has been received!`);
+  
+  }
+  
+  // Helper function to send text message
+  function sendTextMessage(psid, message) {
+  
+    // Send confirmation text message
+    request({
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+      method: 'POST',
+      json: {
+        recipient: {id: psid},
+        message: {text: message}
+      }
+    });
+  
+  }
 // Handles messages events
 let handleMessage = async (sender_psid, received_message) => {
     //check the incoming message is a quick reply?
