@@ -106,41 +106,36 @@ function handleClickButtonFindOrder() {
             }) 
 }
 
+// Handler for "Order now" button click
+function handleOrderNowClick(element) {
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Add click event listener to the "Order now" button
-    document.querySelector("button[type='submit']").addEventListener("click", function (event) {
-        event.preventDefault();
-
-        // Extracting data from the "Order now" button data attributes
-        const psid = document.getElementById("psid").value;
-        // const name = document.getElementById("name").value;
-        // const email = document.getElementById("email").value;
-        document.getElementById("name").value = "John Doe";
-document.getElementById("email").value = "john@example.com";
-        const product = document.getElementById("product").value;
-        const quantity = document.getElementById("quantity").value;
-        const comments = document.getElementById("comments").value;
-
-        // Use the extracted data to submit the form or process it as needed
-        console.log("PSID:", psid);
-        console.log("Name:", name);
-        console.log("Email:", email);
-        console.log("Product:", product);
-        console.log("Quantity:", quantity);
-        console.log("Comments:", comments);
+    // Get title and subtitle from template element
+    const title = element.title; 
+    const subtitle = element.subtitle;
+  
+    // Split subtitle into size and price
+    const subtitleParts = subtitle.split('\n');
+    const size = subtitleParts[0]; 
+    const price = subtitleParts[1];
+  
+    // Populate form fields
+    document.getElementById('product').value = title;
+    document.getElementById('size').value = size; 
+    document.getElementById('price').value = price;
+  
+    // Submit form
+    document.getElementById('order_form').submit();
+  }
+  
+  // Attach handler to Order now buttons
+  const orderButtons = document.querySelectorAll('.template-element button.order-now');
+  orderButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      handleOrderNowClick(button.parentElement); 
     });
+  });
 
-    // Assuming 'sendClothesTemplate' returns the template data
-    const templateData = sendClothesTemplate();
-    const orderButton = document.querySelector("button[type='submit']");
-
-    // Set data attributes on the "Order now" button based on the template data
-    orderButton.setAttribute("data-psid", "{PSID_PLACEHOLDER}"); // Replace with dynamic PSID
-    orderButton.setAttribute("data-title", templateData.attachment.payload.elements[0].title);
-    orderButton.setAttribute("data-subtitle", templateData.attachment.payload.elements[0].subtitle);
-});
-
+  
 // let webContents = window.webContents;
 // let window = new BrowserWindow();
 

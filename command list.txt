@@ -89,3 +89,15 @@ curl -X POST -H "Content-Type: application/json" -d '{
     }
   }
 }' "https://graph.facebook.com/v2.6/me/messages?access_token=EAAMaxoP8kawBOZBXRXSjot2HaFxPNFEJBecOIb6xulUxBFD9BQRT3pWdRdsvIEoqGmTLTeaNG3cLjT86WQMr2399pmtZB03neaxEtjwsZCnsLXlOTo6RxGoe3T5SqXlAFP66Pw8V4PZA2YB0cVaZBaRuJYniQEeZANZAAaEpO1KiChdpW8rIVkbouPmCZCvENwamK1kFDGstot600URf"
+
+
+
+curl -X GET "localhost:8080/webhook?hub.verify_token=itsJustaRandomString123456&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
+
+
+ID
+cr_2bCrdEkFmpWi2V8HlNVuU3EwL10
+Description
+Tunnel Authtoken for "Zakaria Houdache"
+Created
+Jan 20th, 2024 05:53:06 UTC
