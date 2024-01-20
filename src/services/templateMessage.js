@@ -70,8 +70,8 @@ const fetchClothingData = async () => {
     // Fetch rows from sheet for clothes
     const sheets = google.sheets({ version: 'v4', auth });
     const response = await sheets.spreadsheets.values.get({
-        spreadsheetId: CLOTHES_SHEET_ID,
-        range: CLOTHES_SHEET_RANGE,
+        spreadsheetId: SHEET_ID,
+        range: SHEET_RANGE,
     });
 
     // Return clothing data
