@@ -135,10 +135,10 @@ let callSendAPI = (senderPsid, response) => {
   const sendMessage = async (sender_psid, response) => {
     try {
         // Mark message as read
-        await markMessageRead(sender_psid);
+        await homepageService.markMessageRead(sender_psid);
 
         // Send typing indicator
-        await sendTypingOn(sender_psid);
+        await homepageService.sendTypingOn(sender_psid);
 
         // Construct the message body
         const request_body = {
