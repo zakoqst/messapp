@@ -106,7 +106,7 @@ let postWebhook = (req, res) => {
     }
 };
 
-function handleOrderNowClick(messaging) {
+let handleOrderNowClick = async (messaging) =>{
 
     // Get data from template
     let title = messaging.message.attachment.payload.elements[0].title;
@@ -130,25 +130,10 @@ function handleOrderNowClick(messaging) {
     document.getElementById('order_form').submit();
     
     // Send confirmation message
-    chatbotService.sendMessage(psid, `Thank you, your order for ${title} has been received!`);
+    await chatbotService.sendMessage(psid, `Thank you, your order for ${title} has been received!`);
   
   }
   
-  // Helper function to send text message
-  function sendTextMessage(psid, message) {
-  
-    // Send confirmation text message
-    request({
-      url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-      method: 'POST',
-      json: {
-        recipient: {id: psid},
-        message: {text: message}
-      }
-    });
-  
-  }
 // Handles messages events
 let handleMessage = async (sender_psid, received_message) => {
     //check the incoming message is a quick reply?
