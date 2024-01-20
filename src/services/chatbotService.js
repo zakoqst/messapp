@@ -131,12 +131,19 @@ let callSendAPI = (senderPsid, response) => {
       });
     });
   };
-  
-let sendMessage = (sender_psid, response) => {
+  let sendMessage = (sender_psid, response) => {
     return new Promise(async (resolve, reject) => {
         try {
+            console.log('Preparing to send message...');
+            
+            // Mark message as read
             await homepageService.markMessageRead(sender_psid);
+            console.log('Message marked as read.');
+
+            // Send typing indicator
             await homepageService.sendTypingOn(sender_psid);
+            console.log('Typing indicator sent.');
+
             // Construct the message body
             let request_body = {
                 "recipient": {
@@ -153,12 +160,15 @@ let sendMessage = (sender_psid, response) => {
                 "json": request_body
             }, (err, res, body) => {
                 if (!err) {
-                    resolve('message sent!')
+                    console.log('Message sent successfully.');
+                    resolve('Message sent!');
                 } else {
+                    console.error("Unable to send message:", err);
                     reject("Unable to send message:" + err);
                 }
             });
         } catch (e) {
+            console.error('Error in sendMessage:', e);
             reject(e);
         }
     });
@@ -266,14 +276,17 @@ let sendLookupOrder = (sender_psid) => {
 
 const showClothes = async (sender_psid) => {
     try {
+        console.log('Preparing to show clothes...');
         let response = await templateMessage.sendClothesTemplate();
+        console.log('Clothes response:', response);
         await sendMessage(sender_psid, response);
+        console.log('Clothes displayed successfully.');
         return "Clothes displayed";
-    } catch (e) {
-        throw e;
+    } catch (error) {
+        console.error('Error showing clothes:', error);
+        throw error;
     }
 };
-
 
 // let showClothes = (sender_psid) => {
 //     return new Promise(async (resolve, reject) => {
