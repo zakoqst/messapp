@@ -16,29 +16,29 @@ let sendClothesTemplate = async () => {
     // Map clothing data to template elements
     const elements = clothingData.map(item => {
         return {
-            title: item.name,
-            image_url: item.imageUrl,
-            subtitle: `${item.price} DA`,
-            default_action: {
-                type: "web_url",
-                url: item.viewUrl,
-                webview_height_ratio: "tall",
+            "title": item.name,
+            "image_url": item.imageUrl,
+            "subtitle": `${item.price} DA`,
+            "default_action": {
+                "type": "web_url",
+                "url": item.viewUrl,
+                "webview_height_ratio": "tall",
             },
-            buttons: [
+            "buttons": [
                 {
-                    type: "web_url",
-                    url: item.orderUrl,
-                    title: "Order now",
+                    "type": "web_url",
+                    "url": item.orderUrl,
+                    "title": "Order now",
                 },
                 {
-                    type: "postback",
-                    title: "Back to categories",
-                    payload: "BACK_TO_CATEGORIES",
+                    "type": "postback",
+                    "title": "Back to categories",
+                    "payload": "BACK_TO_CATEGORIES",
                 },
                 {
-                    type: "postback",
-                    title: "Main menu",
-                    payload: "BACK_TO_MAIN_MENU",
+                    "type": "postback",
+                    "title": "Main menu",
+                    "payload": "BACK_TO_MAIN_MENU",
                 },
             ],
         };
@@ -46,11 +46,11 @@ let sendClothesTemplate = async () => {
 
     // Create template
     const template = {
-        attachment: {
-            type: "template",
-            payload: {
-                template_type: "generic",
-                elements: elements,
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": elements,
             },
         },
     };
