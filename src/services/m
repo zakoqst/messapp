@@ -1,0 +1,112 @@
+// const { google } = require('googleapis');
+
+// let sendClothesTemplate = async () => {
+//     const fetchDataFromGoogleSheet = async () => {
+//         const sheets = google.sheets('v4');
+//         const spreadsheetId = 'YOUR_SPREADSHEET_ID';
+//         const range = 'Sheet1!A:D'; // Update with the correct sheet name and range
+
+//         // Assuming you have already authenticated and obtained the access token
+//         const auth = {
+//             // Your auth credentials
+//             // ...
+//         };
+
+//         const response = await sheets.spreadsheets.values.get({
+//             auth,
+//             spreadsheetId,
+//             range,
+//         });
+
+//         const values = response.data.values;
+
+//         // Assuming the first row contains headers and the data starts from the second row
+//         const data = values.slice(1).map(row => {
+//             return {
+//                 productName: row[0],
+//                 imageURL: row[1],
+//                 productSize: row[2],  // Assuming size is in the third column
+//                 productPrice: row[3], // Assuming price is in the fourth column
+//             };
+//         });
+
+//         return data;
+//     };
+
+//     // Fetch data from Google Sheet
+//     const productsData = await fetchDataFromGoogleSheet();
+
+//     // Create elements for the template using fetched data
+//     const elements = productsData.map(product => {
+//         return {
+//             title: product.productName,
+//             image_url: product.imageURL,
+//             subtitle: `Size: ${product.productSize}\nPrice: ${product.productPrice} DA`,
+//             default_action: {
+//                 type: 'web_url',
+//                 url: `https://bit.ly/view${encodeURIComponent(product.productName)}`,
+//                 webview_height_ratio: 'tall',
+//             },
+//             buttons: [
+//                 {
+//                     type: 'web_url',
+//                     url: `${process.env.URL_WEB_VIEW_ORDER_2}`,
+//                     webview_height_ratio: 'tall',
+//                     messenger_extensions: true,
+//                     title: 'Order now',
+//                 },
+//                 {
+//                     type: 'postback',
+//                     title: 'Back to categories',
+//                     payload: 'BACK_TO_CATEGORIES',
+//                 },
+//                 {
+//                     type: 'postback',
+//                     title: 'Main menu',
+//                     payload: 'BACK_TO_MAIN_MENU',
+//                 },
+//             ],
+//         };
+
+// let sendClothesTemplate = () => {
+//     return {
+//         "attachment": {
+//             "type": "template",
+//             "payload": {
+//                 "template_type": "generic",
+//                 "elements": [
+//                     {
+//                         "title": "Vest-Gris",
+//                         "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/master/src/public/assets/productimages/Blazer.jpg",
+//                         "subtitle": "Size: Taille L\nPrice: 5000 DA",
+//                         "default_action": {
+//                             "type": "web_url",
+//                             "url": "https://bit.ly/viewVestGris",
+//                             "webview_height_ratio": "tall",
+//                         },
+//                         "buttons": [
+//                             {
+//                                 "type": "web_url",
+//                                 "url": `${process.env.URL_WEB_VIEW_ORDER_2}`,
+//                                 "webview_height_ratio": "tall",
+//                                 "messenger_extensions": true,  //false: open the webview in new tab
+//                                 "title": "Order now"
+                                
+//                             },
+//                             {
+//                                 "type": "postback",
+//                                 "title": "Back to categories",
+//                                 "payload": "BACK_TO_CATEGORIES"
+//                             },
+//                             {
+//                                 "type": "postback",
+//                                 "title": "Main menu",
+//                                 "payload": "BACK_TO_MAIN_MENU"
+//                             }
+//                         ]
+//                     }
+//                 ]
+//             }
+//         }
+//     };
+// }

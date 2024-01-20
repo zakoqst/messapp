@@ -1,4 +1,103 @@
+const { google } = require('googleapis');
+// const {GoolgleSpreadsheet} = require('google-spreadsheet');
+const fs = require('fs');
 
+// Load credentials from a JSON key file (replace 'path/to/your/credentials.json' with the actual path)
+const credentials = require('../../EcommerceApiKey.json');
+
+// Set up authentication
+const auth = new google.auth.JWT(
+  credentials.client_email,
+  null,
+  credentials.private_key,
+  ['https://www.googleapis.com/auth/spreadsheets']
+);
+let sendClothesTemplate = async () => {
+    const fetchDataFromGoogleSheet = async () => {
+        const sheets = google.sheets('v4');
+        const spreadsheetId = '1CIpG37NsKjCMdUuyHWMMOd6migG8JxJoFL9yafeVRKc';
+        const range = 'Sheet1!A:I'; // Update with the correct sheet name and range
+
+        // Assuming you have already authenticated and obtained the access token
+        // const auth = {
+        //     // Your auth credentials
+        //     // ...
+        // };
+
+        const response = await sheets.spreadsheets.values.get({
+            auth,
+            spreadsheetId,
+            range,
+        });
+
+        const values = response.data.values;
+
+        // Assuming the first row contains headers and the data starts from the second row
+        const data = values.slice(1).map(row => {
+            return {
+                productName: row[1],
+                imageURL: row[7],
+                productSize: row[4],  // Assuming size is in the third column
+                productPrice: row[5], // Assuming price is in the fourth column
+                // productUrl: row[4],   // Assuming product URL is in the fifth column
+                // productAction: row[5], // Assuming product action is in the sixth column
+            };
+        });
+
+        return data;
+    };
+ // Fetch data from Google Sheet
+ const productsData = await fetchDataFromGoogleSheet();
+
+ // Create elements for the template using fetched data
+ const elements = productsData.map(product => {
+     return {
+         title: product.productName,
+         image_url: product.imageURL,
+         subtitle: `Size: ${product.productSize}\nPrice: ${product.productPrice} DA`,
+         default_action: {
+             type: 'web_url',
+             url: product.imageURL,
+             webview_height_ratio: 'tall',
+         },
+         buttons: [
+             {
+                 type: 'web_url',
+                 url: product.productAction,
+                 webview_height_ratio: 'tall',
+                 messenger_extensions: true,
+                 title: 'Order now',
+             },
+             {
+                 type: 'postback',
+                 title: 'Back to categories',
+                 payload: 'BACK_TO_CATEGORIES',
+             },
+             {
+                 type: 'postback',
+                 title: 'Main menu',
+                 payload: 'BACK_TO_MAIN_MENU',
+             },
+         ],
+     };
+ });
+
+ // Complete template structure
+ const template = {
+     attachment: {
+         type: 'template',
+         payload: {
+             template_type: 'generic',
+             elements: elements,
+         },
+     },
+ };
+
+ return template;
+};
+
+// Call the function
+// sendClothesTemplate();
 
 
 let sendCategoriesTemplate = () =>{
@@ -102,103 +201,103 @@ let sendCategoriesTemplate = () =>{
 };
 
 
-let sendClothesTemplate = () => {
-    return {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [
-                    {
-                        "title": "Jean-Vert",
-                        "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/master/src/public/assets/productimages/Jeans.jpg",
-                        "subtitle": "Size: Taille 42\nPrice: 3500 DA",
-                        "default_action": {
-                            "type": "web_url",
-                            "url": "https://bit.ly/viewJeanVert",
-                            "webview_height_ratio": "tall",
-                        },
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "Order now",
-                                "payload": "ORDER"
-                            },
-                            {
-                                "type": "postback",
-                                "title": "Back to categories",
-                                "payload": "BACK_TO_CATEGORIES"
-                            },
-                            {
-                                "type": "postback",
-                                "title": "Main menu",
-                                "payload": "BACK_TO_MAIN_MENU"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Pull - Noir",
-                        "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/master/src/public/assets/productimages/Pull.jpg",
-                        "subtitle": "Size: Taille L\nPrice: 2000 DA",
-                        "default_action": {
-                            "type": "web_url",
-                            "url": "https://bit.ly/viewPullNoir",
-                            "webview_height_ratio": "tall",
-                        },
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "Order now",
-                                "payload": "ORDER"
-                            },
-                            {
-                                "type": "postback",
-                                "title": "Back to categories",
-                                "payload": "BACK_TO_CATEGORIES"
-                            },
-                            {
-                                "type": "postback",
-                                "title": "Main menu",
-                                "payload": "BACK_TO_MAIN_MENU"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Vest-Gris",
-                        "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/master/src/public/assets/productimages/Blazer.jpg",
-                        "subtitle": "Size: Taille L\nPrice: 5000 DA",
-                        "default_action": {
-                            "type": "web_url",
-                            "url": "https://bit.ly/viewVestGris",
-                            "webview_height_ratio": "tall",
-                        },
-                        "buttons": [
-                            {
-                                "type": "web_url",
-                                "url": `${process.env.URL_WEB_VIEW_ORDER_2}`,
-                                "webview_height_ratio": "tall",
-                                "messenger_extensions": true,  //false: open the webview in new tab
-                                "title": "Order now"
-                                // "id": "order-now-button" 
+// let sendClothesTemplate = () => {
+//     return {
+//         "attachment": {
+//             "type": "template",
+//             "payload": {
+//                 "template_type": "generic",
+//                 "elements": [
+//                     {
+//                         "title": "Jean-Vert",
+//                         "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/master/src/public/assets/productimages/Jeans.jpg",
+//                         "subtitle": "Size: Taille 42\nPrice: 3500 DA",
+//                         "default_action": {
+//                             "type": "web_url",
+//                             "url": "https://bit.ly/viewJeanVert",
+//                             "webview_height_ratio": "tall",
+//                         },
+//                         "buttons": [
+//                             {
+//                                 "type": "postback",
+//                                 "title": "Order now",
+//                                 "payload": "ORDER"
+//                             },
+//                             {
+//                                 "type": "postback",
+//                                 "title": "Back to categories",
+//                                 "payload": "BACK_TO_CATEGORIES"
+//                             },
+//                             {
+//                                 "type": "postback",
+//                                 "title": "Main menu",
+//                                 "payload": "BACK_TO_MAIN_MENU"
+//                             }
+//                         ]
+//                     },
+//                     {
+//                         "title": "Pull - Noir",
+//                         "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/master/src/public/assets/productimages/Pull.jpg",
+//                         "subtitle": "Size: Taille L\nPrice: 2000 DA",
+//                         "default_action": {
+//                             "type": "web_url",
+//                             "url": "https://bit.ly/viewPullNoir",
+//                             "webview_height_ratio": "tall",
+//                         },
+//                         "buttons": [
+//                             {
+//                                 "type": "postback",
+//                                 "title": "Order now",
+//                                 "payload": "ORDER"
+//                             },
+//                             {
+//                                 "type": "postback",
+//                                 "title": "Back to categories",
+//                                 "payload": "BACK_TO_CATEGORIES"
+//                             },
+//                             {
+//                                 "type": "postback",
+//                                 "title": "Main menu",
+//                                 "payload": "BACK_TO_MAIN_MENU"
+//                             }
+//                         ]
+//                     },
+//                     {
+//                         "title": "Vest-Gris",
+//                         "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/master/src/public/assets/productimages/Blazer.jpg",
+//                         "subtitle": "Size: Taille L\nPrice: 5000 DA",
+//                         "default_action": {
+//                             "type": "web_url",
+//                             "url": "https://bit.ly/viewVestGris",
+//                             "webview_height_ratio": "tall",
+//                         },
+//                         "buttons": [
+//                             {
+//                                 "type": "web_url",
+//                                 "url": `${process.env.URL_WEB_VIEW_ORDER_2}`,
+//                                 "webview_height_ratio": "tall",
+//                                 "messenger_extensions": true,  //false: open the webview in new tab
+//                                 "title": "Order now"
+//                                 // "id": "order-now-button" 
                                 
-                            },
-                            {
-                                "type": "postback",
-                                "title": "Back to categories",
-                                "payload": "BACK_TO_CATEGORIES"
-                            },
-                            {
-                                "type": "postback",
-                                "title": "Main menu",
-                                "payload": "BACK_TO_MAIN_MENU"
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    };
-}
+//                             },
+//                             {
+//                                 "type": "postback",
+//                                 "title": "Back to categories",
+//                                 "payload": "BACK_TO_CATEGORIES"
+//                             },
+//                             {
+//                                 "type": "postback",
+//                                 "title": "Main menu",
+//                                 "payload": "BACK_TO_MAIN_MENU"
+//                             }
+//                         ]
+//                     }
+//                 ]
+//             }
+//         }
+//     };
+// }
 
 let sendHeadphonesTemplate = () => {
     return {
