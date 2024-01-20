@@ -264,19 +264,15 @@ let sendLookupOrder = (sender_psid) => {
     });
 };
 
-
-let showClothes = (sender_psid) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let response =await templateMessage.sendClothesTemplate();
-            await sendMessage(sender_psid, response);
-            resolve("Clothes displayed");
-        } catch (e) {
-            reject(e);
-        }
-    })
+const showClothes = async (sender_psid) => {
+    try {
+        let response = await templateMessage.sendClothesTemplate();
+        await sendMessage(sender_psid, response);
+        return "Clothes displayed";
+    } catch (e) {
+        throw e;
+    }
 };
-
 
 
 // let showClothes = (sender_psid) => {
