@@ -8,55 +8,64 @@ const credentials = require('../../EcommerceApiKey.json');
 
 // Google Sheets params
 const SHEET_ID = '1CIpG37NsKjCMdUuyHWMMOd6migG8JxJoFL9yafeVRKc';
-const SHEET_RANGE = 'Test Catalogue produit!A:I';
-let sendClothesTemplate = async () => {
-    // Fetch clothing data
-    const clothingData = await fetchClothingData();
+const SHEET_RANGE = 'Test Catalogue produit!A:I';let sendClothesTemplate = async () => {
+    try {
+        console.log('Preparing to send clothes template...');
 
-    // Map clothing data to template elements
-    const elements = clothingData.map(item => {
-        return {
-            "title": item.name,
-            "image_url": item.imageUrl,
-            "subtitle": `${item.price} DA`,
-            "default_action": {
-                "type": "web_url",
-                "url": item.viewUrl,
-                "webview_height_ratio": "tall",
-            },
-            "buttons": [
-                {
+        // Fetch clothing data
+        const clothingData = await fetchClothingData();
+        console.log('Fetched clothing data:', clothingData);
+
+        // Map clothing data to template elements
+        const elements = clothingData.map(item => {
+            return {
+                "title": item.name,
+                "image_url": item.imageUrl,
+                "subtitle": `${item.price} DA`,
+                "default_action": {
                     "type": "web_url",
-                    "url": item.orderUrl,
-                    "title": "Order now",
+                    "url": item.viewUrl,
+                    "webview_height_ratio": "tall",
                 },
-                {
-                    "type": "postback",
-                    "title": "Back to categories",
-                    "payload": "BACK_TO_CATEGORIES",
-                },
-                {
-                    "type": "postback",
-                    "title": "Main menu",
-                    "payload": "BACK_TO_MAIN_MENU",
-                },
-            ],
-        };
-    });
+                "buttons": [
+                    {
+                        "type": "web_url",
+                        "url": item.orderUrl,
+                        "title": "Order now",
+                    },
+                    {
+                        "type": "postback",
+                        "title": "Back to categories",
+                        "payload": "BACK_TO_CATEGORIES",
+                    },
+                    {
+                        "type": "postback",
+                        "title": "Main menu",
+                        "payload": "BACK_TO_MAIN_MENU",
+                    },
+                ],
+            };
+        });
 
-    // Create template
-    const template = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": elements,
+        // Create template
+        const template = {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "generic",
+                    "elements": elements,
+                },
             },
-        },
-    };
+        };
 
-    return template;
+        console.log('Clothes template created:', template);
+        return template;
+    } catch (error) {
+        console.error('Error in sendClothesTemplate:', error);
+        throw error;
+    }
 };
+
 
 // Fetch rows from sheet for clothes
 const fetchClothingData = async () => {
