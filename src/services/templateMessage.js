@@ -5,7 +5,8 @@ const fs = require('fs');
 // Load credentials from a JSON key file (replace 'path/to/your/credentials.json' with the actual path)
 const credentials = require('../../EcommerceApiKey.json');
 
-
+SHEET_ID="1CIpG37NsKjCMdUuyHWMMOd6migG8JxJoFL9yafeVRKc";
+SHEET_RANGE='Test Catalogue produit!A:I';
 
 // let sendClothesTemplate = async () => {
 //     try {
