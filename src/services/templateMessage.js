@@ -16,7 +16,7 @@ let sendClothesTemplate = async () => {
     const fetchDataFromGoogleSheet = async () => {
         const sheets = google.sheets('v4');
         const spreadsheetId = '1CIpG37NsKjCMdUuyHWMMOd6migG8JxJoFL9yafeVRKc';
-        const range = 'Sheet1!A:I'; // Update with the correct sheet name and range
+        const range = 'Test Catalogue produit!A:I'; // Update with the correct sheet name and range
 
         // Assuming you have already authenticated and obtained the access token
         // const auth = {
