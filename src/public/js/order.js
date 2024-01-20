@@ -114,8 +114,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Extracting data from the "Order now" button data attributes
         const psid = document.getElementById("psid").value;
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
+        // const name = document.getElementById("name").value;
+        // const email = document.getElementById("email").value;
+        document.getElementById("name").value = "John Doe";
+document.getElementById("email").value = "john@example.com";
         const product = document.getElementById("product").value;
         const quantity = document.getElementById("quantity").value;
         const comments = document.getElementById("comments").value;
