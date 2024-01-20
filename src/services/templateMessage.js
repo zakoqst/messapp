@@ -161,10 +161,23 @@ const sendClothesTemplate = async (senderPsid) => {
 // Fetch rows from sheet 
 const fetchClothingData = async () => {
 
+
+            const auth = new google.auth.JWT(
+            credentials.client_email,
+            null,
+            credentials.private_key,
+            ['https://www.googleapis.com/auth/spreadsheets']
+          );
+          
+        // const response = await sheets.spreadsheets.values.get({
+        //     auth,
+        //     spreadsheetId,
+        //     range,
+        // });
+
+        // const values = response.data.values;
     // Auth
-    const auth = new google.auth.GoogleAuth({
-        credentials
-    });
+
   
     // Fetch rows from sheet 
     const sheets = google.sheets({version: 'v4', auth}); 
