@@ -131,48 +131,39 @@ let callSendAPI = (senderPsid, response) => {
       });
     });
   };
-  let sendMessage = (sender_psid, response) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            console.log('Preparing to send message...');
-            
-            // Mark message as read
-            await homepageService.markMessageRead(sender_psid);
-            console.log('Message marked as read.');
 
-            // Send typing indicator
-            await homepageService.sendTypingOn(sender_psid);
-            console.log('Typing indicator sent.');
+  const sendMessage = async (sender_psid, response) => {
+    try {
+        // Mark message as read
+        await markMessageRead(sender_psid);
 
-            // Construct the message body
-            let request_body = {
-                "recipient": {
-                    "id": sender_psid
-                },
-                "message": response
-            };
+        // Send typing indicator
+        await sendTypingOn(sender_psid);
 
-            // Send the HTTP request to the Messenger Platform
-            request({
-                "uri": "https://graph.facebook.com/v15.0/me/messages",
-                "qs": { "access_token": PAGE_ACCESS_TOKEN },
-                "method": "POST",
-                "json": request_body
-            }, (err, res, body) => {
-                if (!err) {
-                    console.log('Message sent successfully.');
-                    resolve('Message sent!');
-                } else {
-                    console.error("Unable to send message:", err);
-                    reject("Unable to send message:" + err);
-                }
-            });
-        } catch (e) {
-            console.error('Error in sendMessage:', e);
-            reject(e);
-        }
-    });
+        // Construct the message body
+        const request_body = {
+            "recipient": {
+                "id": sender_psid
+            },
+            "message": response
+        };
+
+        // Send the HTTP request to the Messenger Platform
+        const apiResponse = await request({
+            uri: "https://graph.facebook.com/v15.0/me/messages",
+            qs: { "access_token": PAGE_ACCESS_TOKEN },
+            method: "POST",
+            json: request_body
+        });
+
+        console.log('Message sent successfully:', apiResponse);
+        return apiResponse;
+    } catch (error) {
+        console.error('Error sending message:', error.message);
+        throw error;
+    }
 };
+
 
 let requestTalkToAgent = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
@@ -281,10 +272,10 @@ const showClothes = async (sender_psid) => {
         console.log('Preparing to show clothes...');
 
         // Fetch clothing data
-        const clothingData = await fetchClothingData();
+        const clothingData = await templateMessage.fetchClothingData();
 
         // Generate clothes template
-        const clothesTemplate = generateProductTemplate(clothingData);
+        const clothesTemplate =templateMessage.generateProductTemplate(clothingData);
 
         console.log('Clothes template created:', clothesTemplate);
 
