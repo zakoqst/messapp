@@ -1,3 +1,5 @@
+const templateMessage = require("../services/templateMessage");
+
 // const supportOrder = require("../src/public/js/supportOrder");
 
 // const { BrowserWindow } = require('electron');
@@ -103,6 +105,39 @@ function handleClickButtonFindOrder() {
         
             }) 
 }
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Add click event listener to the "Order now" button
+    document.querySelector("button[type='submit']").addEventListener("click", function (event) {
+        event.preventDefault();
+
+        // Extracting data from the "Order now" button data attributes
+        const psid = document.getElementById("psid").value;
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const product = document.getElementById("product").value;
+        const quantity = document.getElementById("quantity").value;
+        const comments = document.getElementById("comments").value;
+
+        // Use the extracted data to submit the form or process it as needed
+        console.log("PSID:", psid);
+        console.log("Name:", name);
+        console.log("Email:", email);
+        console.log("Product:", product);
+        console.log("Quantity:", quantity);
+        console.log("Comments:", comments);
+    });
+
+    // Assuming 'sendClothesTemplate' returns the template data
+    const templateData = sendClothesTemplate();
+    const orderButton = document.querySelector("button[type='submit']");
+
+    // Set data attributes on the "Order now" button based on the template data
+    orderButton.setAttribute("data-psid", "{PSID_PLACEHOLDER}"); // Replace with dynamic PSID
+    orderButton.setAttribute("data-title", templateData.attachment.payload.elements[0].title);
+    orderButton.setAttribute("data-subtitle", templateData.attachment.payload.elements[0].subtitle);
+});
 
 // let webContents = window.webContents;
 // let window = new BrowserWindow();
