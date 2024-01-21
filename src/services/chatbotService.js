@@ -269,7 +269,7 @@ let sendLookupOrder = (sender_psid) => {
 let showClothes = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let response = sheetService.sendClothesTemplate();
+            let response = await sheetService.generateMessengerTemplate();
             await sendMessage(sender_psid, response);
             resolve("done");
         } catch (e) {
