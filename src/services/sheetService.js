@@ -45,7 +45,7 @@ const auth = new google.auth.JWT(
           default_action: {
             type: 'web_url',
             url: row[7],
-            webview_height_ratio: 'tall',
+            webview_height_ratio: 'tall'
           },
           buttons: [
             {
@@ -53,17 +53,17 @@ const auth = new google.auth.JWT(
               url: `https://messenger-app-7fl9.onrender.com/get-order-form`,
               webview_height_ratio: 'tall',
               messenger_extensions: true,
-              title: 'Order now',
+              title: 'Order now'
             },
             {
               type: 'postback',
               title: 'Back to categories',
-              payload: 'BACK_TO_CATEGORIES',
+              payload: 'BACK_TO_CATEGORIES'
             },
             {
               type: 'postback',
               title: 'Main menu',
-              payload: 'BACK_TO_MAIN_MENU',
+              payload: 'BACK_TO_MAIN_MENU'
             },
           ],
         };

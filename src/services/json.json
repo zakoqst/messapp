@@ -1,0 +1,97 @@
+{
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": [
+          {
+            "title": "Vest",
+            "image_url": "https://static.reserved.com/media/catalog/product/3/3/3371C-80P-002-1-776659.jpg",
+            "subtitle": "Size: L|XL|XXL\nPrice: 5800 DA",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://static.reserved.com/media/catalog/product/3/3/3371C-80P-002-1-776659.jpg",
+              "webview_height_ratio": "tall"
+            },
+            "buttons": [
+              {
+                "type": "web_url",
+                "url": "https://messenger-app-7fl9.onrender.com/get-order-form",
+                "webview_height_ratio": "tall",
+                "messenger_extensions": true,
+                "title": "Order now"
+              },
+              {
+                "type": "postback",
+                "title": "Back to categories",
+                "payload": "BACK_TO_CATEGORIES"
+              },
+              {
+                "type": "postback",
+                "title": "Main menu",
+                "payload": "BACK_TO_MAIN_MENU"
+              }
+            ]
+          },
+          {
+            "title": "Pantalon jean",
+            "image_url": "https://static.reserved.com/media/catalog/product/7/5/7576H-09J-001-1-758775_1.jpg",
+            "subtitle": "Size: 32|34|36\nPrice: 3200 DA",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://static.reserved.com/media/catalog/product/7/5/7576H-09J-001-1-758775_1.jpg",
+              "webview_height_ratio": "tall"
+            },
+            "buttons": [
+              {
+                "type": "web_url",
+                "url": "https://messenger-app-7fl9.onrender.com/get-order-form",
+                "webview_height_ratio": "tall",
+                "messenger_extensions": true,
+                "title": "Order now"
+              },
+              {
+                "type": "postback",
+                "title": "Back to categories",
+                "payload": "BACK_TO_CATEGORIES"
+              },
+              {
+                "type": "postback",
+                "title": "Main menu",
+                "payload": "BACK_TO_MAIN_MENU"
+              }
+            ]
+          },
+          {
+            "title": "T-SHIRT",
+            "image_url": "https://static.reserved.com/media/catalog/product/8/8/8881N-99X-002-1-776970_1.jpg",
+            "subtitle": "Size: L\nPrice: 2800 DA",
+            "default_action": {
+              "type": "web_url",
+              "url": "https://static.reserved.com/media/catalog/product/8/8/8881N-99X-002-1-776970_1.jpg",
+              "webview_height_ratio": "tall"
+            },
+            "buttons": [
+              {
+                "type": "web_url",
+                "url": "https://messenger-app-7fl9.onrender.com/get-order-form",
+                "webview_height_ratio": "tall",
+                "messenger_extensions": true,
+                "title": "Order now"
+              },
+              {
+                "type": "postback",
+                "title": "Back to categories",
+                "payload": "BACK_TO_CATEGORIES"
+              },
+              {
+                "type": "postback",
+                "title": "Main menu",
+                "payload": "BACK_TO_MAIN_MENU"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
