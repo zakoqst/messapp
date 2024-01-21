@@ -1,44 +1,36 @@
-const { google } = require('googleapis');
+const { GoogleSpreadsheet } = require('google-spreadsheet');
 const keyFile = require('../../EcommerceApiKey.json');
 
 const SPREADSHEET_ID = '1CIpG37NsKjCMdUuyHWMMOd6migG8JxJoFL9yafeVRKc';
 
 // Authentication using a service account key file
-const auth = new google.auth.GoogleAuth({
-  keyFile: keyFile,
-  scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
-});
+const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
+doc.useServiceAccountAuth(keyFile);
 
 // Read data from Google Sheets and generate Messenger template
 async function generateMessengerTemplate() {
   try {
-    // Log the auth object for inspection
-    console.log(auth);
+    // Load the document
+    await doc.loadInfo();
 
-    // Get the authorized client
-    const client = await auth.getClient();
+    // Access the specific sheet
+    const sheet = doc.sheetsByTitle['Test Catalogue produit'];
 
-    // Make the API request
-    const sheetsResponse = await client.request({
-      method: 'GET',
-      url: 'https://sheets.googleapis.com/v4/spreadsheets/' + SPREADSHEET_ID + '/values/Test%20Catalogue%20produit!A:F',
-    });
-
-    const rows = sheetsResponse.data.values;
+    // Get the rows
+    const rows = await sheet.getRows();
 
     if (rows.length === 0) {
       console.log('No data found.');
       return null;
     }
 
-    const headers = rows[0];
-    const products = rows.slice(1).map(row => {
-      const product = {};
-      headers.forEach((header, index) => {
-        product[header] = row[index];
-      });
-      return product;
-    });
+    const products = rows.map(row => ({
+      Title: row.Title,
+      ImageURL: row.ImageURL,
+      Taille: row.Taille,
+      Prix: row.Prix,
+      DetailsURL: row.DetailsURL,
+    }));
 
     const elements = products.map(product => ({
       "title": product.Title,
