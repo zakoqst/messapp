@@ -28,7 +28,7 @@ const auth = new google.auth.JWT(
 
     // Assuming the data is in the second sheet
     const sheet = response.data.values;
-console.log(sheet);
+// console.log(sheet);
     // Get header values and rows from the sheet
     // const headerValues = sheet.data[0].rowData[0].values.map((value) => value.formattedValue);
     // const rows = sheet.data[0].rowData.slice(1);
@@ -38,9 +38,9 @@ console.log(sheet);
       // Check if row.values exists before accessing properties
       if (row.values) {
         return {
-          title: row[1],
-          image_url: row[7],
-          subtitle: `Size: ${row[4]}\nPrice: ${row[5]} DA`,
+            title: row.values[sheet.indexOf('Nom Produit')],
+            image_url: row.values[sheet.indexOf('Image URL')],
+            subtitle: `Size: ${row.values[sheet.indexOf('Taill Produit')]}\nPrice: ${row.values[sheet.indexOf('Prix Produit')]} DA`,
           default_action: {
             type: 'web_url',
             url: row[7],
@@ -72,18 +72,18 @@ console.log(sheet);
         return null;
       }
     });
-console.log(elements)
+// console.log(elements)
     const template = {
       attachment: {
         type: 'template',
         payload: {
           template_type: 'generic',
-          elements: elements.filter((element) => element !== null), // Remove null elements
+          elements // Remove null elements
         },
       },
     };
-    console.log(template)
-    return (template);
+    // console.log(template)
+    return JSON.stringify(template, null, 2);;
   } catch (error) {
     console.error('Error generating Messenger template:', error.message);
     return null;
