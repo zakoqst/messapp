@@ -1,5 +1,4 @@
 const { google } = require('googleapis');
-const sheets = google.sheets('v4');
 const keyFile = require('../../EcommerceApiKey.json');
 
 const SPREADSHEET_ID = '1CIpG37NsKjCMdUuyHWMMOd6migG8JxJoFL9yafeVRKc';
@@ -12,19 +11,27 @@ const auth = new google.auth.GoogleAuth({
 
 let generateMessengerTemplate = async () => {
   try {
+    // Verify authentication
+    console.log(auth);
+
+    // Create sheets instance
+    const sheetsInstance = google.sheets({ version: 'v4', auth });
+
     // Read data from Google Sheets
-    const sheetsResponse = await sheets.spreadsheets.values.get({
-      auth,
+    const sheetsResponse = await sheetsInstance.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
       range: 'Test Catalogue produit!A:F',
     });
 
     const rows = sheetsResponse.data.values;
 
-    if (rows.length === 0) {
+    if (!rows || rows.length === 0) {
       console.log('No data found.');
       return null;
     }
+
+    // Logging the retrieved data
+    console.log('Retrieved data from Sheets:', rows);
 
     const headers = rows[0];
     const products = rows.slice(1).map(row => {
@@ -34,6 +41,9 @@ let generateMessengerTemplate = async () => {
       });
       return product;
     });
+
+    // Logging the parsed products array
+    console.log('Parsed products:', products);
 
     // Generate Messenger template
     const elements = products.map(product => ({
@@ -65,6 +75,12 @@ let generateMessengerTemplate = async () => {
         },
       ],
     }));
+
+    // Validate the template structure
+    if (!elements || elements.length === 0) {
+      console.error('Invalid template structure.');
+      return null;
+    }
 
     const template = {
       "attachment": {
