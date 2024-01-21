@@ -21,7 +21,7 @@ async function generateMessengerTemplate() {
     // Make the API request
     const sheetsResponse = await client.request({
       method: 'GET',
-      url: `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Test%20Catalogue%20produit!A:F`,
+      url: 'https://sheets.googleapis.com/v4/spreadsheets/' + SPREADSHEET_ID + '/values/Test%20Catalogue%20produit!A:F',
     });
 
     const rows = sheetsResponse.data.values;
