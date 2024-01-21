@@ -2,6 +2,7 @@ const dotenv =require("dotenv").config();
 const request = require("request");
 const homepageService = require("../services/homepageService");
 const templateMessage = require("../services/templateMessage");
+const sheetService = require("./sheetService");
 // import request from "request";
 // import homepageService from "./homepageService";
 // import templateMessage from "./templateMessage";
@@ -268,7 +269,7 @@ let sendLookupOrder = (sender_psid) => {
 let showClothes = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let response = templateMessage.sendClothesTemplate();
+            let response = sheetService.sendClothesTemplate();
             await sendMessage(sender_psid, response);
             resolve("done");
         } catch (e) {

@@ -11,86 +11,86 @@ const auth = new google.auth.JWT(
     null,
     privateKey.replace(/\\n/g, '\n'),
     ['https://www.googleapis.com/auth/spreadsheets']
-  );
-  
-  // Create a Google Sheets instance
-  
-  const generateMessengerTemplate = async () => {
-  try {
-    const sheets =  google.sheets({ version: 'v4', auth });
-  
-    // Use sheets.spreadsheets.get to load the document properties
-    const response = await sheets.spreadsheets.values.get({
-        auth: auth,
-      spreadsheetId: googleSheetId,
-      range: `${googleSheetPage}!A2:I`
-    });
+);
 
-    // Assuming the data is in the second sheet
-    const sheet = response.data.values;
-// console.log(sheet);
-    // Get header values and rows from the sheet
-    // const headerValues = sheet.data[0].rowData[0].values.map((value) => value.formattedValue);
-    // const rows = sheet.data[0].rowData.slice(1);
+// Create a Google Sheets instance
 
-    // Process rows and generate Messenger template
-    const elements = sheet.map((row) => {
-      // Check if row.values exists before accessing properties
-      if (row.values) {
-        // console.log(row[1]);
-        return {
-            title: row[1],
-            image_url: row[7],
-            subtitle: `Size: ${row[4]}\nPrice: ${row[5]} DA`,
-          default_action: {
-            type: 'web_url',
-            url: row[7],
-            webview_height_ratio: 'tall'
-          },
-          buttons: [
-            {
-              type: 'web_url',
-              url: `https://messenger-app-7fl9.onrender.com/get-order-form`,
-              webview_height_ratio: 'tall',
-              messenger_extensions: true,
-              title: 'Order now'
+const generateMessengerTemplate = async () => {
+    try {
+        const sheets = google.sheets({ version: 'v4', auth });
+
+        // Use sheets.spreadsheets.get to load the document properties
+        const response = await sheets.spreadsheets.values.get({
+            auth: auth,
+            spreadsheetId: googleSheetId,
+            range: `${googleSheetPage}!A2:I`
+        });
+
+        // Assuming the data is in the second sheet
+        const sheet = response.data.values;
+        // console.log(sheet);
+        // Get header values and rows from the sheet
+        // const headerValues = sheet.data[0].rowData[0].values.map((value) => value.formattedValue);
+        // const rows = sheet.data[0].rowData.slice(1);
+
+        // Process rows and generate Messenger template
+        const elements = sheet.map((row) => {
+            // Check if row.values exists before accessing properties
+            if (row.values) {
+                // console.log(row[1]);
+                return {
+                    title: row[1],
+                    image_url: row[7],
+                    subtitle: `Size: ${row[4]}\nPrice: ${row[5]} DA`,
+                    default_action: {
+                        type: 'web_url',
+                        url: row[7],
+                        webview_height_ratio: 'tall'
+                    },
+                    buttons: [
+                        {
+                            type: 'web_url',
+                            url: `https://messenger-app-7fl9.onrender.com/get-order-form`,
+                            webview_height_ratio: 'tall',
+                            messenger_extensions: true,
+                            title: 'Order now'
+                        },
+                        {
+                            type: 'postback',
+                            title: 'Back to categories',
+                            payload: 'BACK_TO_CATEGORIES'
+                        },
+                        {
+                            type: 'postback',
+                            title: 'Main menu',
+                            payload: 'BACK_TO_MAIN_MENU'
+                        },
+                    ],
+                };
+            } else {
+                // Handle the case when row.values is undefined
+                console.error('Error: Row values are undefined.');
+                return null;
+            }
+        });
+        // console.log(elements)
+        const template = {
+            attachment: {
+                type: 'template',
+                payload: {
+                    template_type: 'generic',
+                    elements // Remove null elements
+                },
             },
-            {
-              type: 'postback',
-              title: 'Back to categories',
-              payload: 'BACK_TO_CATEGORIES'
-            },
-            {
-              type: 'postback',
-              title: 'Main menu',
-              payload: 'BACK_TO_MAIN_MENU'
-            },
-          ],
         };
-      } else {
-        // Handle the case when row.values is undefined
-        console.error('Error: Row values are undefined.');
+        console.log(template)
+        return JSON.stringify(template, null, 2);
+    } catch (error) {
+        console.error('Error generating Messenger template:', error.message);
         return null;
-      }
-    });
-// console.log(elements)
-    const template = {
-      attachment: {
-        type: 'template',
-        payload: {
-          template_type: 'generic',
-          elements // Remove null elements
-        },
-      },
-    };
-     console.log( JSON.stringify(template, null, 2))
-    return JSON.stringify(template, null, 2);
-  } catch (error) {
-    console.error('Error generating Messenger template:', error.message);
-    return null;
-  }
+    }
 };
-  
-  
-  generateMessengerTemplate();
-  module.exports = { generateMessengerTemplate };
+
+
+generateMessengerTemplate();
+module.exports = { generateMessengerTemplate };
