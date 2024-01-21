@@ -12,8 +12,14 @@ const auth = new google.auth.GoogleAuth({
 // Read data from Google Sheets and generate Messenger template
 async function generateMessengerTemplate() {
   try {
+    // Log the auth object for inspection
+    console.log(auth);
+
+    // Get the authorized client
+    const client = await auth.getClient();
+
     // Make the API request
-    const sheetsResponse = await auth.getClient().request({
+    const sheetsResponse = await client.request({
       method: 'GET',
       url: `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Test%20Catalogue%20produit!A:F`,
     });
