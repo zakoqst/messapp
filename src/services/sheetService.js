@@ -11,7 +11,7 @@ const auth = new google.auth.GoogleAuth({
 });
 
 
-const sheetsResponse = await sheets.spreadsheets.values.get({
+const sheetsResponse =  sheets.spreadsheets.values.get({
     auth,
     spreadsheetId: SPREADSHEET_ID,
     range: 'Test Catalogue produit!A:F',
@@ -34,7 +34,7 @@ const sheetsResponse = await sheets.spreadsheets.values.get({
   });
 
 // Read data from Google Sheets and generate Messenger template
-async function generateMessengerTemplate() {
+let generateMessengerTemplate  = async ()=> {
   try {
   
     const elements = products.map(product => ({
