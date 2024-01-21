@@ -11,7 +11,7 @@ let sendCategoriesTemplate = () =>{
                 "elements": [
                     
                     {
-                        "title": "Headphones",
+                        "title": "p",
                         "image_url": "https://bit.ly/imageHeadphones",
                         "subtitle": "Bose Noise Cancelling Wireless Bluetooth Headphones",
                         "default_action": {
