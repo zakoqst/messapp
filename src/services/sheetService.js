@@ -37,10 +37,11 @@ const auth = new google.auth.JWT(
     const elements = sheet.map((row) => {
       // Check if row.values exists before accessing properties
       if (row.values) {
+        // console.log(row[1]);
         return {
-            title: row.values[sheet.indexOf('Nom Produit')],
-            image_url: row.values[sheet.indexOf('Image URL')],
-            subtitle: `Size: ${row.values[sheet.indexOf('Taill Produit')]}\nPrice: ${row.values[sheet.indexOf('Prix Produit')]} DA`,
+            title: row[1],
+            image_url: row[7],
+            subtitle: `Size: ${row[4]}\nPrice: ${row[5]} DA`,
           default_action: {
             type: 'web_url',
             url: row[7],
@@ -49,7 +50,7 @@ const auth = new google.auth.JWT(
           buttons: [
             {
               type: 'web_url',
-              url: `${process.env.URL_WEB_VIEW_ORDER_2}`,
+              url: `https://messenger-app-7fl9.onrender.com/get-order-form`,
               webview_height_ratio: 'tall',
               messenger_extensions: true,
               title: 'Order now',
@@ -82,8 +83,8 @@ const auth = new google.auth.JWT(
         },
       },
     };
-    // console.log(template)
-    return JSON.stringify(template, null, 2);;
+     console.log( JSON.stringify(template, null, 2))
+    return JSON.stringify(template, null, 2);
   } catch (error) {
     console.error('Error generating Messenger template:', error.message);
     return null;
