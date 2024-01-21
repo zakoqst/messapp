@@ -20,6 +20,7 @@
   "homepage": "https://github.com/zakhoudache/Jisr-Messenger-App#readme",
   "dependencies": {
     "@babel/node": "^7.20.7",
+    "@google-cloud/local-auth": "^3.0.1",
     "body-parser": "^1.20.1",
     "browserify": "^17.0.0",
     "cors": "^2.8.5",

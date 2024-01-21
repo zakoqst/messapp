@@ -102,9 +102,9 @@ let sendCategoriesTemplate = () =>{
     };
 };
 
-let sendClothesTemplate  =async () => {
+let sendClothesTemplate  = () => {
 
-   await sheetService.generateMessengerTemplate();
+    sheetService.generateMessengerTemplate();
     // return {
     //     "attachment": {
     //         "type": "template",
