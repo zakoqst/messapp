@@ -10,33 +10,32 @@ const auth = new google.auth.GoogleAuth({
   scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
 });
 
-
-const sheetsResponse =  sheets.spreadsheets.values.get({
-    auth,
-    spreadsheetId: SPREADSHEET_ID,
-    range: 'Test Catalogue produit!A:F',
-  });
-
-  const rows = sheetsResponse.data.values;
-
-  if (rows.length === 0) {
-    console.log('No data found.');
-    return null;
-  }
-
-  const headers = rows[0];
-  const products = rows.slice(1).map(row => {
-    const product = {};
-    headers.forEach((header, index) => {
-      product[header] = row[index];
-    });
-    return product;
-  });
-
-// Read data from Google Sheets and generate Messenger template
-let generateMessengerTemplate  = async ()=> {
+let generateMessengerTemplate = async () => {
   try {
-  
+    // Read data from Google Sheets
+    const sheetsResponse = await sheets.spreadsheets.values.get({
+      auth,
+      spreadsheetId: SPREADSHEET_ID,
+      range: 'Test Catalogue produit!A:F',
+    });
+
+    const rows = sheetsResponse.data.values;
+
+    if (rows.length === 0) {
+      console.log('No data found.');
+      return null;
+    }
+
+    const headers = rows[0];
+    const products = rows.slice(1).map(row => {
+      const product = {};
+      headers.forEach((header, index) => {
+        product[header] = row[index];
+      });
+      return product;
+    });
+
+    // Generate Messenger template
     const elements = products.map(product => ({
       "title": product.Title,
       "image_url": product.ImageURL,
@@ -52,19 +51,19 @@ let generateMessengerTemplate  = async ()=> {
           "url": `${process.env.URL_WEB_VIEW_ORDER_2}`,
           "webview_height_ratio": "tall",
           "messenger_extensions": true,
-          "title": "Order now"
+          "title": "Order now",
         },
         {
           "type": "postback",
           "title": "Back to categories",
-          "payload": "BACK_TO_CATEGORIES"
+          "payload": "BACK_TO_CATEGORIES",
         },
         {
           "type": "postback",
           "title": "Main menu",
-          "payload": "BACK_TO_MAIN_MENU"
-        }
-      ]
+          "payload": "BACK_TO_MAIN_MENU",
+        },
+      ],
     }));
 
     const template = {
@@ -72,9 +71,9 @@ let generateMessengerTemplate  = async ()=> {
         "type": "template",
         "payload": {
           "template_type": "generic",
-          "elements": elements
-        }
-      }
+          "elements": elements,
+        },
+      },
     };
 
     return template;
@@ -82,6 +81,6 @@ let generateMessengerTemplate  = async ()=> {
     console.error('Error reading data from Google Sheets:', err.message);
     return null;
   }
-}
+};
 
-module.exports = {generateMessengerTemplate:generateMessengerTemplate};
+module.exports = { generateMessengerTemplate: generateMessengerTemplate };
