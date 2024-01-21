@@ -10,31 +10,33 @@ const auth = new google.auth.GoogleAuth({
   scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
 });
 
+
+const sheetsResponse = await sheets.spreadsheets.values.get({
+    auth,
+    spreadsheetId: SPREADSHEET_ID,
+    range: 'Test Catalogue produit!A:F',
+  });
+
+  const rows = sheetsResponse.data.values;
+
+  if (rows.length === 0) {
+    console.log('No data found.');
+    return null;
+  }
+
+  const headers = rows[0];
+  const products = rows.slice(1).map(row => {
+    const product = {};
+    headers.forEach((header, index) => {
+      product[header] = row[index];
+    });
+    return product;
+  });
+
 // Read data from Google Sheets and generate Messenger template
-async function sendClothesTemplate() {
+async function generateMessengerTemplate() {
   try {
-    const sheetsResponse = await sheets.spreadsheets.values.get({
-      auth,
-      spreadsheetId: SPREADSHEET_ID,
-      range: 'Test Catalogue produit!A:F',
-    });
-
-    const rows = sheetsResponse.data.values;
-
-    if (rows.length === 0) {
-      console.log('No data found.');
-      return null;
-    }
-
-    const headers = rows[0];
-    const products = rows.slice(1).map(row => {
-      const product = {};
-      headers.forEach((header, index) => {
-        product[header] = row[index];
-      });
-      return product;
-    });
-
+  
     const elements = products.map(product => ({
       "title": product.Title,
       "image_url": product.ImageURL,
@@ -82,4 +84,4 @@ async function sendClothesTemplate() {
   }
 }
 
-module.exports = {sendClothesTemplate:sendClothesTemplate};
+module.exports = {generateMessengerTemplate:generateMessengerTemplate};
