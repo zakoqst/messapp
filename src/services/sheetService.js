@@ -83,7 +83,7 @@ const auth = new google.auth.JWT(
         },
       },
     };
-     console.log( JSON.stringify(template, null, 2))
+    //  console.log( JSON.stringify(template, null, 2))
     return JSON.stringify(template, null, 2);
   } catch (error) {
     console.error('Error generating Messenger template:', error.message);

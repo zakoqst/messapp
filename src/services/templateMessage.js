@@ -103,8 +103,10 @@ let sendCategoriesTemplate = () =>{
 };
 
 let sendClothesTemplate  = () => {
+    return sheetService.generateMessengerTemplate();
 
-    sheetService.generateMessengerTemplate();
+
+   
     // return {
     //     "attachment": {
     //         "type": "template",
