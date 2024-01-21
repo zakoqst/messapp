@@ -56,9 +56,9 @@ https://m.facebook.com/?tbua=1
 
 curl -X POST -H "Content-Type: application/json" -d '{
   "whitelisted_domains":[
-    "https://jisr-messenger-app.onrender.com/"
+    "https://messenger-app-7fl9.onrender.com"
   ]
-}' "https://graph.facebook.com/v15.0/me/messenger_profile?access_token=EAATrmhCRFboBAA4HgyAlM5spUaMMjh6J4SmAET1xBS24j8ZBUbSZBA9RCuBmp5nVio7HpdWPRwjXeFRE8ZCyD7rTOkDoAtpmE2WZCRrAeIED81kLGBXV5XEtTXhwcsruXYWk6enHl3AiPdSQUgER3ZAmjcwCajiGruZA9xt9PwAekWMDuhbsBP5UlNk0UIQRtjTIKGp3gZBHQZDZD"
+}' "https://graph.facebook.com/v15.0/me/messenger_profile?access_token=EAAMaxoP8kawBOZBXRXSjot2HaFxPNFEJBecOIb6xulUxBFD9BQRT3pWdRdsvIEoqGmTLTeaNG3cLjT86WQMr2399pmtZB03neaxEtjwsZCnsLXlOTo6RxGoe3T5SqXlAFP66Pw8V4PZA2YB0cVaZBaRuJYniQEeZANZAAaEpO1KiChdpW8rIVkbouPmCZCvENwamK1kFDGstot600URf"
 
 
 
@@ -101,3 +101,8 @@ Description
 Tunnel Authtoken for "Zakaria Houdache"
 Created
 Jan 20th, 2024 05:53:06 UTC
+
+
+
+CODESEE_SECRET_NAME=CODESEE_ARCH_DIAG_API_TOKEN
+CODESEE_API_TOKEN=CodeSee:2:20222:Dy9O3wM2BloeBdEsBLVdlRpamLKV6RfraLCvCgP9hyI=
