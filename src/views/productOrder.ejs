@@ -55,7 +55,7 @@
 
     <h1>Product Order Form</h1>
 
-    <form id="order_form" action="/post-order-order" method="post">
+    <form id="order_form" action="/post-order-form" method="post">
         <!-- User Information -->
         <input type="text" id="psid" name="psid" hidden>
 
@@ -85,7 +85,20 @@
         <!-- Submit Button -->
         <button type="submit">Submit Order</button>
     </form>
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+    
+            // Pre-fill product name
+            const productName = urlParams.get("product");
+            if (productName) {
+                document.getElementById("product").value = productName;
+            }
+    
+            // Add similar lines to pre-fill other form fields (size, price, etc.)
+        });
+    </script>
+    
     <script>
         window.extAsyncInit = async function () {
             console.log('Messenger extensions are ready');

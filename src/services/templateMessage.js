@@ -174,7 +174,7 @@ let sendClothesTemplate = () => {
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": `${process.env.URL_WEB_VIEW_ORDER_2}`,
+                                "url": `${process.env.URL_WEB_VIEW_ORDER_2}?product=Vest-Gris&size=L&price=5000`,
                                 "webview_height_ratio": "tall",
                                 "messenger_extensions": true,  //false: open the webview in new tab
                                 "title": "Order now",
