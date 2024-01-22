@@ -110,10 +110,10 @@ const getProductById = async (id) => {
     try {
 
         // Use sheets.spreadsheets.get to load the document properties
-        const response = await getData(googleSheetPageName, `A${id+1}:I${id+1}`);
-
-        // Assuming the data is in the second sheet
+        const response = await getData(googleSheetPageName, `A${Number(id)+1}:I${Number(id)+1}`);
         const product = response.data.values[0];
+        console.log(`A${id+1}:I${id+1}`);
+        // Assuming the data is in the second sheet
         return {
             id: product[0],
             title: product[1],
@@ -131,5 +131,5 @@ const getProductById = async (id) => {
         return null;
     }
 };
-
+getProductById(2)
 module.exports = { generateMessengerTemplate, getMessengerTemplateData, getProductById };
