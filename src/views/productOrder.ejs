@@ -81,10 +81,13 @@
     <!-- Submit Button -->
     <button type="button" onclick="submitOrder()">Submit Order</button>
 </form>
-<script src="/src/services/templateMessage.js"></script>
+
+
 
 <!-- JavaScript Code -->
 <script>
+
+    
     document.addEventListener("DOMContentLoaded", function () {
         const urlParams = new URLSearchParams(window.location.search);
         // Pre-fill product name
@@ -99,45 +102,6 @@
         });
     });
     
-    function handleOrderNowClick(element) {
-        // Get title and subtitle from template element
-        const title = element.querySelector('h2').innerText;
-        const subtitle = element.querySelector('.subtitle').innerText;
-    
-        // Split subtitle into size and price
-        const subtitleParts = subtitle.split('\n');
-        const size = subtitleParts[0];
-        const price = subtitleParts[1];
-    
-        // Populate form fields
-        document.getElementById('product').value = title;
-        document.getElementById('size').value = size;
-        document.getElementById('price').value = price;
-    
-        // Trigger the form submission manually
-        submitOrder();
-    }
-    function submitOrder() {
-        // Collect form data
-        const formData = {
-            psid: document.getElementById('psid').value,
-            email: document.getElementById('email').value,
-            nom: document.getElementById('nom').value,
-            adresse: document.getElementById('adresse').value,
-            numéro_t: document.getElementById('numéro_t').value,
-            product: document.getElementById('product').value,
-            size: document.getElementById('size').value,
-            price: document.getElementById('price').value
-        };
-
-        // Call the function from the external file to generate the sendRecipient template with the collected data
-        const recipientTemplate = sendRecipient(formData);
-
-        // Assuming there is a function to send the template to the user, replace it with your actual function
-        // sendTemplateToUser(recipientTemplate);
-        console.log(recipientTemplate);
-    }
-
     
     
 </script>
