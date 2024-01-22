@@ -29,7 +29,8 @@ const getMessengerTemplateData = async (req, res) => {
 };
 
 const generateTemplate = (column) => {
-    if (column.values.length) {
+    console.log(column)
+    if (column) {
         return {
             title: column[1],
             image_url: column[7],
@@ -109,11 +110,22 @@ const getProductById = async (id) => {
     try {
 
         // Use sheets.spreadsheets.get to load the document properties
-        const response = await getData(googleSheetPageName, `A${id}:I${id}`);
+        const response = await getData(googleSheetPageName, `A${id+1}:I${id+1}`);
 
         // Assuming the data is in the second sheet
-        console.log(response.data.values);
-        return response.data.values[0];
+        const product = response.data.values[0];
+        return {
+            id: product[0],
+            title: product[1],
+            category: product[2], 
+            color: product[3],
+            size: product[4] || 'standard',
+            price: product[5],
+            stock: product[6],
+            image: product[7],
+            brand: product[8]
+            
+        }
     } catch (error) {
         console.error('Error generating Messenger template:', error.message);
         return null;
