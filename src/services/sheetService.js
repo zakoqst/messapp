@@ -53,8 +53,8 @@ const generateMessengerTemplate = async () => {
                             url: `https://messenger-app-7fl9.onrender.com/get-order-form`,
                             webview_height_ratio: 'tall',
                             messenger_extensions: true,
-                            title: 'Order now',
-                            class: "order-now" 
+                            title: 'Order now'
+                           
                         },
                         {
                             type: 'postback',
