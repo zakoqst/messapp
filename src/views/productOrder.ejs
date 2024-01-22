@@ -15,6 +15,7 @@
         const facebookAppId = "873864850346412";
     </script>
     <script type="text/javascript" src="/js/order.js"></script>
+    <script type="text/javascript" src="../services/sheetService.js"></script>
 </head>
 
 <body>
@@ -86,7 +87,6 @@
     
     <!-- JavaScript Code -->
     <script>
-
         document.addEventListener("DOMContentLoaded", async () => {
             // Fetch the product data from your backend API or service
           
@@ -96,18 +96,22 @@
             // const data = await response.json();
     
             // Log the received data for debugging
-            const url = new URL(window.location.href);
-            const query = url.searchParams;
-            console.log(url, query)
+            
             // Assuming 'data' has the necessary information
             // const title = data.title || 'Sample Product';
             // const subtitle = data.subtitle || 'Size: Sample Size\nPrice: $20';
             // const imageUrl = data.image_url || 'https://example.com/sample-image.jpg';
     
             // Populate form fields with the retrieved data
-            document.getElementById('product').value = query.get("product");
-            document.getElementById('size').value = query.get("size"); // Assuming subtitle contains size information
-            document.getElementById('price').value = query.get("price"); // Assuming 'data' has a 'price' property
+            const url = new URL(window.location.href);
+            const id = url.searchParams.get("id");
+            const product = await getProductById(id);
+
+            console.log(product);
+            
+            document.getElementById('product').value = product.title;
+            document.getElementById('size').value = product.size; // Assuming subtitle contains size information
+            document.getElementById('price').value = product.price; // Assuming 'data' has a 'price' property
     
             // Log the imageUrl for simplicity
          //   console.log('Image URL:', imageUrl);
