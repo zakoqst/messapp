@@ -86,7 +86,7 @@ const generateMessengerTemplate = async () => {
         // const rows = sheet.data[0].rowData.slice(1);
 
         // Process rows and generate Messenger template
-        const elements = sheet.map(generateTemplate(column));
+        const elements = sheet.map(column => generateTemplate(column));
         // console.log(elements)
         const template = {
             attachment: {
