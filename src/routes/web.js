@@ -58,6 +58,11 @@ let initWebRoutes = (app)=> {
     router.post("/post-order-form", homepageController.setInfoOrder);
     
     router.get("/get-messenger-template", sheetService.getMessengerTemplateData);
+    router.get("/get-product/:id", async (req, res, next) => {
+        const result = await sheetService.getProductById(req.params.id);
+        console.log('----------',result);
+        res.json(result);
+    });
 
     return app.use("/",router);
 };

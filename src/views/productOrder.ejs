@@ -15,7 +15,6 @@
         const facebookAppId = "873864850346412";
     </script>
     <script type="text/javascript" src="/js/order.js"></script>
-    <script type="text/javascript" src="../services/sheetService.js"></script>
 </head>
 
 <body>
@@ -87,14 +86,12 @@
     
     <!-- JavaScript Code -->
     <script>
+        
         document.addEventListener("DOMContentLoaded", async () => {
             // Fetch the product data from your backend API or service
           
     
             // Fetch Messenger template data from the server
-            // const response = await fetch('/get-messenger-template'); // Use the correct endpoint
-            // const data = await response.json();
-    
             // Log the received data for debugging
             
             // Assuming 'data' has the necessary information
@@ -105,7 +102,9 @@
             // Populate form fields with the retrieved data
             const url = new URL(window.location.href);
             const id = url.searchParams.get("id");
-            const product = await getProductById(id);
+            console.log("product.ejs----------------------");
+            const response = await fetch('https://messenger-app-7fl9.onrender.com/get-product/'+id); // Use the correct endpoint
+            const product = await response.json();
 
             console.log(product);
             

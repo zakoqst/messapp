@@ -9,7 +9,9 @@ const httpProxy = require('http-proxy');
 
 const proxy = httpProxy.createProxyServer({});
 const app = express();
-
+app.use(express.static('public', {
+  extensions: ['html', 'htm', 'txt', 'js']
+}));
 // Enable CORS for specific routes
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'https://helpful-daily-lemur.ngrok-free.app');
