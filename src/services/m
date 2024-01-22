@@ -1,112 +1,301 @@
-// const { google } = require('googleapis');
-
-// let sendClothesTemplate = async () => {
-//     const fetchDataFromGoogleSheet = async () => {
-//         const sheets = google.sheets('v4');
-//         const spreadsheetId = 'YOUR_SPREADSHEET_ID';
-//         const range = 'Sheet1!A:D'; // Update with the correct sheet name and range
-
-//         // Assuming you have already authenticated and obtained the access token
-//         const auth = {
-//             // Your auth credentials
-//             // ...
-//         };
-
-//         const response = await sheets.spreadsheets.values.get({
-//             auth,
-//             spreadsheetId,
-//             range,
-//         });
-
-//         const values = response.data.values;
-
-//         // Assuming the first row contains headers and the data starts from the second row
-//         const data = values.slice(1).map(row => {
-//             return {
-//                 productName: row[0],
-//                 imageURL: row[1],
-//                 productSize: row[2],  // Assuming size is in the third column
-//                 productPrice: row[3], // Assuming price is in the fourth column
-//             };
-//         });
-
-//         return data;
-//     };
-
-//     // Fetch data from Google Sheet
-//     const productsData = await fetchDataFromGoogleSheet();
-
-//     // Create elements for the template using fetched data
-//     const elements = productsData.map(product => {
-//         return {
-//             title: product.productName,
-//             image_url: product.imageURL,
-//             subtitle: `Size: ${product.productSize}\nPrice: ${product.productPrice} DA`,
-//             default_action: {
-//                 type: 'web_url',
-//                 url: `https://bit.ly/view${encodeURIComponent(product.productName)}`,
-//                 webview_height_ratio: 'tall',
+// {
+//     "attachment":
+//      {
+//       "type": "template",
+//       "payload": {
+//         "template_type": "generic",
+//         "elements": [
+//           {
+//             "title": "Robe seweat Liela",
+//             "image_url": "https://dzscarf.vip/wp-content/uploads/2024/01/2_20240119_023146_0001-630x630.png",
+//             "subtitle": "Size: ملابس الشتاء\nPrice: د.ج 4.200 DA",
+//             "default_action": {
+//               "type": "web_url",
+//               "url": "https://dzscarf.vip/wp-content/uploads/2024/01/2_20240119_023146_0001-630x630.png",
+//               "webview_height_ratio": "tall"
 //             },
-//             buttons: [
-//                 {
-//                     type: 'web_url',
-//                     url: `${process.env.URL_WEB_VIEW_ORDER_2}`,
-//                     webview_height_ratio: 'tall',
-//                     messenger_extensions: true,
-//                     title: 'Order now',
-//                 },
-//                 {
-//                     type: 'postback',
-//                     title: 'Back to categories',
-//                     payload: 'BACK_TO_CATEGORIES',
-//                 },
-//                 {
-//                     type: 'postback',
-//                     title: 'Main menu',
-//                     payload: 'BACK_TO_MAIN_MENU',
-//                 },
-//             ],
-//         };
-
-// let sendClothesTemplate = () => {
-//     return {
-//         "attachment": {
-//             "type": "template",
-//             "payload": {
-//                 "template_type": "generic",
-//                 "elements": [
-//                     {
-//                         "title": "Vest-Gris",
-//                         "image_url": "https://raw.githubusercontent.com/zakoqst/messapp/master/src/public/assets/productimages/Blazer.jpg",
-//                         "subtitle": "Size: Taille L\nPrice: 5000 DA",
-//                         "default_action": {
-//                             "type": "web_url",
-//                             "url": "https://bit.ly/viewVestGris",
-//                             "webview_height_ratio": "tall",
-//                         },
-//                         "buttons": [
-//                             {
-//                                 "type": "web_url",
-//                                 "url": `${process.env.URL_WEB_VIEW_ORDER_2}`,
-//                                 "webview_height_ratio": "tall",
-//                                 "messenger_extensions": true,  //false: open the webview in new tab
-//                                 "title": "Order now"
-                                
-//                             },
-//                             {
-//                                 "type": "postback",
-//                                 "title": "Back to categories",
-//                                 "payload": "BACK_TO_CATEGORIES"
-//                             },
-//                             {
-//                                 "type": "postback",
-//                                 "title": "Main menu",
-//                                 "payload": "BACK_TO_MAIN_MENU"
-//                             }
-//                         ]
-//                     }
-//                 ]
-//             }
-//         }
-//     };
-// }
+//             "buttons": [
+//               {
+//                 "type": "web_url",
+//                 "url": "https://messenger-app-7fl9.onrender.com/get-order-form",
+//                 "webview_height_ratio": "tall",
+//                 "messenger_extensions": true,
+//                 "title": "Order now"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Back to categories",
+//                 "payload": "BACK_TO_CATEGORIES"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Main menu",
+//                 "payload": "BACK_TO_MAIN_MENU"
+//               }
+//             ]
+//           },
+//           {
+//             "title": "ensemble juliette jupe gilet",
+//             "image_url": "https://dzscarf.vip/wp-content/uploads/2024/01/Design-sans-titre-630x630.jpg",
+//             "subtitle": "Size: ملابس الشتاء\nPrice: د.ج 7.500 DA",
+//             "default_action": {
+//               "type": "web_url",
+//               "url": "https://dzscarf.vip/wp-content/uploads/2024/01/Design-sans-titre-630x630.jpg",
+//               "webview_height_ratio": "tall"
+//             },
+//             "buttons": [
+//               {
+//                 "type": "web_url",
+//                 "url": "https://messenger-app-7fl9.onrender.com/get-order-form",
+//                 "webview_height_ratio": "tall",
+//                 "messenger_extensions": true,
+//                 "title": "Order now"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Back to categories",
+//                 "payload": "BACK_TO_CATEGORIES"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Main menu",
+//                 "payload": "BACK_TO_MAIN_MENU"
+//               }
+//             ]
+//           },
+//           {
+//             "title": "jupe longue tissu la cote",
+//             "image_url": "https://dzscarf.vip/wp-content/uploads/2024/01/416605100_357947656850738_5687690329267506253_n-630x630.jpg",
+//             "subtitle": "Size: ملابس الشتاء\nPrice: د.ج 3.200 DA",
+//             "default_action": {
+//               "type": "web_url",
+//               "url": "https://dzscarf.vip/wp-content/uploads/2024/01/416605100_357947656850738_5687690329267506253_n-630x630.jpg",
+//               "webview_height_ratio": "tall"
+//             },
+//             "buttons": [
+//               {
+//                 "type": "web_url",
+//                 "url": "https://messenger-app-7fl9.onrender.com/get-order-form",
+//                 "webview_height_ratio": "tall",
+//                 "messenger_extensions": true,
+//                 "title": "Order now"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Back to categories",
+//                 "payload": "BACK_TO_CATEGORIES"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Main menu",
+//                 "payload": "BACK_TO_MAIN_MENU"
+//               }
+//             ]
+//           },
+//           {
+//             "title": "Robe évasée elInes",
+//             "image_url": "https://dzscarf.vip/wp-content/uploads/2024/01/Robe-evasee-elInes-630x630.jpg",
+//             "subtitle": "Size: ملابس الشتاء\nPrice: د.ج 3.600|د.ج 3.900 DA",
+//             "default_action": {
+//               "type": "web_url",
+//               "url": "https://dzscarf.vip/wp-content/uploads/2024/01/Robe-evasee-elInes-630x630.jpg",
+//               "webview_height_ratio": "tall"
+//             },
+//             "buttons": [
+//               {
+//                 "type": "web_url",
+//                 "url": "https://messenger-app-7fl9.onrender.com/get-order-form",
+//                 "webview_height_ratio": "tall",
+//                 "messenger_extensions": true,
+//                 "title": "Order now"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Back to categories",
+//                 "payload": "BACK_TO_CATEGORIES"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Main menu",
+//                 "payload": "BACK_TO_MAIN_MENU"
+//               }
+//             ]
+//           },
+//           {
+//             "title": "ensemble liquette hoddy + pantalon",
+//             "image_url": "https://dzscarf.vip/wp-content/uploads/2024/01/ensemble-liquette-hoddy-pantalon-630x630.jpg",
+//             "subtitle": "Size: ملابس الشتاء\nPrice: د.ج 5.400|د.ج 6.500 DA",
+//             "default_action": {
+//               "type": "web_url",
+//               "url": "https://dzscarf.vip/wp-content/uploads/2024/01/ensemble-liquette-hoddy-pantalon-630x630.jpg",
+//               "webview_height_ratio": "tall"
+//             },
+//             "buttons": [
+//               {
+//                 "type": "web_url",
+//                 "url": "https://messenger-app-7fl9.onrender.com/get-order-form",
+//                 "webview_height_ratio": "tall",
+//                 "messenger_extensions": true,
+//                 "title": "Order now"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Back to categories",
+//                 "payload": "BACK_TO_CATEGORIES"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Main menu",
+//                 "payload": "BACK_TO_MAIN_MENU"
+//               }
+//             ]
+//           },
+//           {
+//             "title": "Robe evasé ElInes",
+//             "image_url": "https://dzscarf.vip/wp-content/uploads/2024/01/Robe-a-volant-630x630.jpg",
+//             "subtitle": "Size: ملابس الخريف\nPrice: د.ج 4.500 DA",
+//             "default_action": {
+//               "type": "web_url",
+//               "url": "https://dzscarf.vip/wp-content/uploads/2024/01/Robe-a-volant-630x630.jpg",
+//               "webview_height_ratio": "tall"
+//             },
+//             "buttons": [
+//               {
+//                 "type": "web_url",
+//                 "url": "https://messenger-app-7fl9.onrender.com/get-order-form",
+//                 "webview_height_ratio": "tall",
+//                 "messenger_extensions": true,
+//                 "title": "Order now"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Back to categories",
+//                 "payload": "BACK_TO_CATEGORIES"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Main menu",
+//                 "payload": "BACK_TO_MAIN_MENU"
+//               }
+//             ]
+//           },
+//           {
+//             "title": "enseble el amira liquette jupe",
+//             "image_url": "https://dzscarf.vip/wp-content/uploads/2023/11/346473354_3608832166002717_5421630600972372097_n-1-630x630.jpg",
+//             "subtitle": "Size: ملابس صيفية\nPrice: د.ج 4.900|د.ج 7.500 DA",
+//             "default_action": {
+//               "type": "web_url",
+//               "url": "https://dzscarf.vip/wp-content/uploads/2023/11/346473354_3608832166002717_5421630600972372097_n-1-630x630.jpg",
+//               "webview_height_ratio": "tall"
+//             },
+//             "buttons": [
+//               {
+//                 "type": "web_url",
+//                 "url": "https://messenger-app-7fl9.onrender.com/get-order-form",
+//                 "webview_height_ratio": "tall",
+//                 "messenger_extensions": true,
+//                 "title": "Order now"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Back to categories",
+//                 "payload": "BACK_TO_CATEGORIES"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Main menu",
+//                 "payload": "BACK_TO_MAIN_MENU"
+//               }
+//             ]
+//           },
+//           {
+//             "title": "T-shirt à manches longues et col roulé à rayures",
+//             "image_url": "https://dzscarf.vip/wp-content/uploads/2023/11/20231113_182511-2-630x630.jpg",
+//             "subtitle": "Size: ملابس الخريف\nPrice: د.ج 1.700|د.ج 2.200 DA",
+//             "default_action": {
+//               "type": "web_url",
+//               "url": "https://dzscarf.vip/wp-content/uploads/2023/11/20231113_182511-2-630x630.jpg",
+//               "webview_height_ratio": "tall"
+//             },
+//             "buttons": [
+//               {
+//                 "type": "web_url",
+//                 "url": "https://messenger-app-7fl9.onrender.com/get-order-form",
+//                 "webview_height_ratio": "tall",
+//                 "messenger_extensions": true,
+//                 "title": "Order now"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Back to categories",
+//                 "payload": "BACK_TO_CATEGORIES"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Main menu",
+//                 "payload": "BACK_TO_MAIN_MENU"
+//               }
+//             ]
+//           },
+//           {
+//             "title": "T-shirt à manches longues et col roulé à rayures",
+//             "image_url": "https://dzscarf.vip/wp-content/uploads/2023/11/20231113_182511-2-630x630.jpg",
+//             "subtitle": "Size: ملابس الخريف\nPrice: د.ج 1.700|د.ج 2.200 DA",
+//             "default_action": {
+//               "type": "web_url",
+//               "url": "https://dzscarf.vip/wp-content/uploads/2023/11/20231113_182511-2-630x630.jpg",
+//               "webview_height_ratio": "tall"
+//             },
+//             "buttons": [
+//               {
+//                 "type": "web_url",
+//                 "url": "https://messenger-app-7fl9.onrender.com/get-order-form",
+//                 "webview_height_ratio": "tall",
+//                 "messenger_extensions": true,
+//                 "title": "Order now"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Back to categories",
+//                 "payload": "BACK_TO_CATEGORIES"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Main menu",
+//                 "payload": "BACK_TO_MAIN_MENU"
+//               }
+//             ]
+//           },
+//           {
+//             "title": "T-shirt à manches longues et col roulé à rayures",
+//             "image_url": "https://dzscarf.vip/wp-content/uploads/2023/11/20231113_182511-2-630x630.jpg",
+//             "subtitle": "Size: ملابس الخريف\nPrice: د.ج 1.700|د.ج 2.200 DA",
+//             "default_action": {
+//               "type": "web_url",
+//               "url": "https://dzscarf.vip/wp-content/uploads/2023/11/20231113_182511-2-630x630.jpg",
+//               "webview_height_ratio": "tall"
+//             },
+//             "buttons": [
+//               {
+//                 "type": "web_url",
+//                 "url": "https://messenger-app-7fl9.onrender.com/get-order-form",
+//                 "webview_height_ratio": "tall",
+//                 "messenger_extensions": true,
+//                 "title": "Order now"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Back to categories",
+//                 "payload": "BACK_TO_CATEGORIES"
+//               },
+//               {
+//                 "type": "postback",
+//                 "title": "Main menu",
+//                 "payload": "BACK_TO_MAIN_MENU"
+//               }
+//             ]
+//           }
+//         ]
+//       }
+//     }
+//   }

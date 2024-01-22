@@ -355,6 +355,48 @@ let takeControlConversation = (sender_psid) =>{
     });
 };
 
+
+
+
+let sendReciep = (sender_psid) =>{
+    return new Promise((resolve, reject) => {
+        try {
+            // Construct the message body
+            let request_body = {
+                "recipient": {
+                    "id": sender_psid
+                },
+                message: {
+                    attachment: {
+                      type: 'template',
+                      payload: templateMessage.sendRecipient() 
+                    } 
+                  }
+                         };
+
+            // Send the HTTP request to the Messenger Platform
+            request({
+                "uri": "https://graph.facebook.com/v7.0/me/take_thread_control",
+                "qs": { "access_token": PAGE_ACCESS_TOKEN },
+                "method": "POST",
+                "json": request_body
+            }, async (err, res, body) => {
+                if (!err) {
+                    //send messages
+                    // await sendMessage(sender_psid, {"text": "The super bot came back !!!"});
+                    // await backToMainMenu(sender_psid);
+                    resolve('message sent!')
+                } else {
+                    reject("Unable to send message:" + err);
+                }
+            });
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
+
 module.exports = {
     sendMessage: sendMessage,
     sendMessageWelcomeNewUser: sendMessageWelcomeNewUser,
@@ -370,7 +412,7 @@ module.exports = {
     takeControlConversation: takeControlConversation,
     handlePostback:handlePostback,
     showClothes:showClothes,
-    sendpassOrder:sendpassOrder
-    
+    sendpassOrder:sendpassOrder,
+    sendReciep:sendReciep
     // sendProductTemplate:sendProductTemplate
 };

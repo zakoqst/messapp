@@ -325,7 +325,42 @@ let sendLookupOrderTemplate = () =>{
     };
 };
 
+let sendRecipient= () =>{
 
+    return {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": 'receipt',
+            "recipient_name": 'John Doe', // Replace with actual recipient name
+            "order_number": '123456', // Replace with actual order number
+            "currency": 'DA',
+            "payment_method": 'Visa 1234', // Replace with actual payment method
+            "timestamp": Date.now(),
+            "elements": elements,
+            "address": {
+              "street_1": '123 Main St',
+              "city": 'Cityville',
+              "postal_code": '12345',
+              "state": 'CA',
+              "country": 'US',
+            },
+            "summary": {
+              "subtotal": elements.reduce((sum, item) => sum + item.price, 0),
+              "shipping_cost": 5,
+              "total_tax": 5,
+              "total_cost": elements.reduce((sum, item) => sum + item.price, 0) + 10, // Replace with actual total cost calculation
+            },
+            "adjustments": [
+              {
+                "name": 'Discount',
+                "amount": 5,
+              },
+            ],
+          },
+        },
+      };
+}
 
 let senPassOrderTemplate = () =>{
     return {
@@ -455,6 +490,8 @@ module.exports = {
     sendSureveyTemplate:sendSureveyTemplate,
     sendClothesTemplate:sendClothesTemplate,
     setProductOrderTemplate:setProductOrderTemplate,
-    senPassOrderTemplate:senPassOrderTemplate
+    senPassOrderTemplate:senPassOrderTemplate,
+    sendRecipient:sendRecipient
+
     // createProductTemplate:createProductTemplate
 };

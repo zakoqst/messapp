@@ -1,4 +1,4 @@
-require('dotenv').config();
+    require('dotenv').config();
 const request = require("request");
 const homepageService = require("../services/homepageService");
 const chatbotService = require("../services/chatbotService");
@@ -6,21 +6,12 @@ const templateMessage = require("../services/templateMessage");
 const path = require('path');
 const { response } = require("express");
 
-// const bodyParser = require("body-parser");
-// require("dotenv").config();
-// import homepageService from "../services/homepageService";
-// import chatbotService from "../services/chatbotService";
-// import templateMessage from "../services/templateMessage";
 
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 
 let getHomePage = (req, res) => {
     let facebookAppId = process.env.FACEBOOK_APP_ID;
-        // Construct the path to your HTML file
-        // const filePath = path.join(__dirname, 'abc.html');
-    
-        // return res.sendFile(filePath);
-    // return res.sendFile("/Jisr_App_Messenger/src/views/abc.html")
+
     return res.render("homepage.ejs", {
         facebookAppId: facebookAppId
     })
@@ -106,33 +97,7 @@ let postWebhook = (req, res) => {
     }
 };
 
-let handleOrderNowClick = async (messaging) =>{
 
-    // Get data from template
-    let title = messaging.message.attachment.payload.elements[0].title;
-    let subtitle = messaging.message.attachment.payload.elements[0].subtitle;
-    
-    // Split subtitle into size and price 
-    const subtitleParts = subtitle.split('\n');
-    const size = subtitleParts[0];
-    const price = subtitleParts[1];
-  
-    // Populate form fields
-    document.getElementById('product').value = title;
-    // document.getElementById('size').value = size;
-    // document.getElementById('price').value = price;
-  
-    // Get PSID 
-    const psid = messaging.sender.id;
-    document.getElementById('psid').value = psid;
-  
-    // Submit form
-    document.getElementById('order_form').submit();
-    
-    // Send confirmation message
-    await chatbotService.sendMessage(psid, `Thank you, your order for ${title} has been received!`);
-  
-  }
   
 // Handles messages events
 let handleMessage = async (sender_psid, received_message) => {
@@ -152,15 +117,7 @@ let handleMessage = async (sender_psid, received_message) => {
             await chatbotService.requestTalkToAgent(sender_psid);
         } else if (payload === "LOOKUP_SURVEY") {
             await chatbotService.requestTalkToAgent(sender_psid);
-        // }
-        // if (payload.toLowerCase() === 'yes') {
-        //     response = { "text": "Thanks!" };
-        //     callSendAPI(sender_psid, response);
-        //     console.log("Matched yes");
-        //   } else if (payload.toLowerCase() === 'no') {
-        //     response = { "text": "Oops, try sending another image." };
-        //     callSendAPI(sender_psid, response);  
-        //     console.log("Matched no");
+
           }
         
         return;
@@ -212,15 +169,8 @@ let handleMessage = async (sender_psid, received_message) => {
     callSendAPI(sender_psid, response);
 
 
-    // Sends the response message
-    // try {
         await chatbotService.sendMessage(sender_psid, response);
-    //     callSendAPI(sender_psid, response);
-     
-    // } catch (e) {
-    //     console.log(e);
-    // }
-    
+
 
     
 };
@@ -325,19 +275,8 @@ let setProductOrder = async (req, res) => {
         let product=req.body.product;
         let quantity =req.body.quantity;
         let comments = req.body.comments;
-        // let customer = "";
-        // if (req.body.customer === "") {
-        //     customer = "Empty";
-        // } else customer = req.body.customer;
-        
-    
-        console.log(name, psid, order_number, email, product,quantity,comments)
-        // I demo response with sample text
-        // you can check database for customer order's status
 
-        // let response1= { "text": `Customer name: ${customer}`}
-        
-     
+        console.log(name, psid, order_number, email, product,quantity,comments)
 
      
         let response1 = {
@@ -383,20 +322,9 @@ let setInfoOrder = async (req, res) => {
         let psid=req.body.psid;
         let order_number=req.body.order_number;
         let email=req.body.email;
-        // let customer = "";
-        // if (req.body.customer === "") {
-        //     customer = "Empty";
-        // } else customer = req.body.customer;
-        
-    
+
         console.log(customer,order_number,email);
 
-        // I demo response with sample text
-        // you can check database for customer order's status
-
-        // let response1= { "text": `Customer name: ${customer}`}
-        
-     
 
      
         let response1 = {

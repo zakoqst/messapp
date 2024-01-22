@@ -106,6 +106,8 @@ function handleClickButtonFindOrder() {
             }) 
 }
 
+
+
 // Handler for "Order now" button click
 function handleOrderNowClick(element) {
 
