@@ -32,28 +32,28 @@ configViewEngine(app);
 // Config web routes
 initWebRoutes(app);
 
-// Handle proxy requests
-app.use((req, res, next) => {
-  // Your logic for deciding whether to proxy the request or handle it locally
-  const shouldProxy = true;
+// // Handle proxy requests
+// app.use((req, res, next) => {
+//   // Your logic for deciding whether to proxy the request or handle it locally
+//   const shouldProxy = true;
 
-  if (shouldProxy) {
-    // Proxy the request
-    proxy.web(req, res, { target: 'https://www.facebook.com' });
-  } else {
-    // Handle the request locally
-    // Your local logic goes here
-    next();
-  }
-});
+//   if (shouldProxy) {
+//     // Proxy the request
+//     proxy.web(req, res, { target: 'http://localhost:8080/get-messenger-template' });
+//   } else {
+//     // Handle the request locally
+//     // Your local logic goes here
+//     next();
+//   }
+// });
 
-// Error handling for proxy requests
-proxy.on('error', (err, req, res) => {
-  res.writeHead(500, {
-    'Content-Type': 'text/plain'
-  });
-  res.end('Proxy Error');
-});
+// // Error handling for proxy requests
+// proxy.on('error', (err, req, res) => {
+//   res.writeHead(500, {
+//     'Content-Type': 'text/plain'
+//   });
+//   res.end('Proxy Error');
+// });
 
 let port = process.env.PORT || 8080;
 

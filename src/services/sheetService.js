@@ -15,6 +15,17 @@ const auth = new google.auth.JWT(
 
 // Create a Google Sheets instance
 
+// New route handler to provide Messenger template data
+const getMessengerTemplateData = async (req, res) => {
+    try {
+        const templateData = await generateMessengerTemplate();
+        res.json(templateData);
+    } catch (error) {
+        console.error('Error generating Messenger template data:', error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
 const generateMessengerTemplate = async () => {
     try {
         const sheets = google.sheets({ version: 'v4', auth });
@@ -50,7 +61,7 @@ const generateMessengerTemplate = async () => {
                     buttons: [
                         {
                             type: 'web_url',
-                            url: `https://messenger-app-7fl9.onrender.com/get-order-form`,
+                            url: `https://messenger-app-7fl9.onrender.com/get-order-form?product=${row[1]}&size=${row[4]}&price=${row[5]}`,
                             webview_height_ratio: 'tall',
                             messenger_extensions: true,
                             title: 'Order now'
@@ -94,4 +105,5 @@ const generateMessengerTemplate = async () => {
 
 
 generateMessengerTemplate();
-module.exports = { generateMessengerTemplate };
+module.exports = { generateMessengerTemplate :generateMessengerTemplate,
+    getMessengerTemplateData:getMessengerTemplateData};

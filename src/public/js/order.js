@@ -1,96 +1,96 @@
 // const templateMessage = require("../services/templateMessage");
 
-    function handleOrderNowClick(element) {
-        // Get title and subtitle from template element
-        const title = element.querySelector('h2').innerText;
-        const subtitle = element.querySelector('.subtitle').innerText;
+    // function handleOrderNowClick(element) {
+    //     // Get title and subtitle from template element
+    //     const title = element.querySelector('h2').innerText;
+    //     const subtitle = element.querySelector('.subtitle').innerText;
     
-        // Split subtitle into size and price
-        const subtitleParts = subtitle.split('\n');
-        const size = subtitleParts[0];
-        const price = subtitleParts[1];
+    //     // Split subtitle into size and price
+    //     const subtitleParts = subtitle.split('\n');
+    //     const size = subtitleParts[0];
+    //     const price = subtitleParts[1];
     
-        // Populate form fields
-        document.getElementById('product').value = title;
-        document.getElementById('size').value = size;
-        document.getElementById('price').value = price;
+    //     // Populate form fields
+    //     document.getElementById('product').value = title;
+    //     document.getElementById('size').value = size;
+    //     document.getElementById('price').value = price;
     
-        // Trigger the form submission manually
-        submitOrder();
-    }
-    function submitOrder() {
-        // Collect form data
-        const formData = {
-            psid: document.getElementById('psid').value,
-            email: document.getElementById('email').value,
-            nom: document.getElementById('nom').value,
-            adresse: document.getElementById('adresse').value,
-            numéro_t: document.getElementById('numéro_t').value,
-            product: document.getElementById('product').value,
-            size: document.getElementById('size').value,
-            price: document.getElementById('price').value
-        };
+    //     // Trigger the form submission manually
+    //     submitOrder();
+    // }
+    // function submitOrder() {
+    //     // Collect form data
+    //     const formData = {
+    //         psid: document.getElementById('psid').value,
+    //         email: document.getElementById('email').value,
+    //         nom: document.getElementById('nom').value,
+    //         adresse: document.getElementById('adresse').value,
+    //         numéro_t: document.getElementById('numéro_t').value,
+    //         product: document.getElementById('product').value,
+    //         size: document.getElementById('size').value,
+    //         price: document.getElementById('price').value
+    //     };
 
 
-        // HTML page
+    //     // HTML page
 
 
-        const recipientTemplate = sendRecipient(formData);
-        // Call the function from the external file to generate the sendRecipient template with the collected data
+    //     const recipientTemplate = sendRecipient(formData);
+    //     // Call the function from the external file to generate the sendRecipient template with the collected data
  
 
-        // Assuming there is a function to send the template to the user, replace it with your actual function
-        // sendTemplateToUser(recipientTemplate);
-        console.log(recipientTemplate);
-    }
+    //     // Assuming there is a function to send the template to the user, replace it with your actual function
+    //     // sendTemplateToUser(recipientTemplate);
+    //     console.log(recipientTemplate);
+    // }
 
 
 
-    function sendRecipient(formData) {
-        // Use the formData object to construct the sendRecipient template
-        return {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": 'receipt',
-                    "recipient_name": formData.nom, // Replace with actual recipient name
-                    "order_number": '123456', // Replace with actual order number
-                    "currency": 'DA',
-                    "payment_method": 'Visa 1234', // Replace with actual payment method
-                    "timestamp": Date.now(),
-                    "elements": [
-                        {
-                            // Use formData to populate the elements array
-                            "title": formData.product,
-                            "subtitle": `Size: ${formData.size}\nPrice: ${formData.price} DA`,
-                            // Add other necessary fields based on your data structure
-                        }
-                    ],
-                    "address": {
-                        // Use formData to populate address fields
-                        "street_1": formData.adresse,
-                        "city": 'RéGHAIA',
-                        "postal_code": '12345',
-                        "state": 'ALG',
-                        "country": 'ALG',
-                    },
-                    "summary": {
-                        // Replace with actual total cost calculation
-                        "subtotal": parseFloat(formData.price),
-                        "shipping_cost": 5,
-                        "total_tax": 5,
-                        "total_cost": parseFloat(formData.price) + 10,
-                    },
-                    "adjustments": [
-                        {
-                            "name": 'Discount',
-                            "amount": 5,
-                        },
-                    ],
-                },
-            },
-        };
-    }
+    // function sendRecipient(formData) {
+    //     // Use the formData object to construct the sendRecipient template
+    //     return {
+    //         "attachment": {
+    //             "type": "template",
+    //             "payload": {
+    //                 "template_type": 'receipt',
+    //                 "recipient_name": formData.nom, // Replace with actual recipient name
+    //                 "order_number": '123456', // Replace with actual order number
+    //                 "currency": 'DA',
+    //                 "payment_method": 'Visa 1234', // Replace with actual payment method
+    //                 "timestamp": Date.now(),
+    //                 "elements": [
+    //                     {
+    //                         // Use formData to populate the elements array
+    //                         "title": formData.product,
+    //                         "subtitle": `Size: ${formData.size}\nPrice: ${formData.price} DA`,
+    //                         // Add other necessary fields based on your data structure
+    //                     }
+    //                 ],
+    //                 "address": {
+    //                     // Use formData to populate address fields
+    //                     "street_1": formData.adresse,
+    //                     "city": 'RéGHAIA',
+    //                     "postal_code": '12345',
+    //                     "state": 'ALG',
+    //                     "country": 'ALG',
+    //                 },
+    //                 "summary": {
+    //                     // Replace with actual total cost calculation
+    //                     "subtotal": parseFloat(formData.price),
+    //                     "shipping_cost": 5,
+    //                     "total_tax": 5,
+    //                     "total_cost": parseFloat(formData.price) + 10,
+    //                 },
+    //                 "adjustments": [
+    //                     {
+    //                         "name": 'Discount',
+    //                         "amount": 5,
+    //                     },
+    //                 ],
+    //             },
+    //         },
+    //     };
+    // }
     
 
 // const supportOrder = require("../src/public/js/supportOrder");

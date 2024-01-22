@@ -39,7 +39,7 @@
             });
             window.fbMessengerPlugins.init();
         };
-        setTimeout(function () {
+        setTimeout(() => {
             (function (d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) {
@@ -54,59 +54,107 @@
     </script>
 
     <h1>Product Order Form</h1>
-<!-- Your HTML Form -->
-<h1>Product Order Form</h1>
-<form id="order_form" action="/post-order-form" method="post">
+    <form id="order_form" action="/post-order-form" method="post">
+        <!-- User Information -->
+        <input type="text" id="psid" name="psid" hidden>
     
-    <!-- User Information -->
-    <input type="text" id="psid" name="psid" hidden>
-
-    <!-- Additional form fields for product information -->
-    <input type="text" id="product" name="product" hidden>
-    <input type="text" id="size" name="size" hidden>
-    <input type="text" id="price" name="price" hidden>
-
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-
-    <label for="nom">Nom et prénom:</label>
-    <input type="nom" id="nom" name="nom" required>
-
-    <label for="adresse">Adresse:</label>
-    <input type="adresse" id="adresse" name="adresse" required>
-
-    <label for="numéro_t">Numéro de téléphone:</label>
-    <input type="numéro_t" id="numéro_t" name="numéro_t" required>
-
-    <!-- Submit Button -->
-    <button type="button" onclick="submitOrder()">Submit Order</button>
-</form>
-
-
-
-<!-- JavaScript Code -->
-<script>
-
+        <!-- Form inputs for product information -->
+        <label for="product">Product:</label>
+        <input type="text" id="product" name="product" readonly>
     
-    document.addEventListener("DOMContentLoaded", function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        // Pre-fill product name
+        <label for="size">Size:</label>
+        <input type="text" id="size" name="size" readonly>
     
-        // Attach handler to Order now buttons
-        const orderButtons = document.querySelectorAll('.template-element button.order-now');
-        orderButtons.forEach(button => {
-            button.addEventListener('click', (event) => {
-                event.preventDefault(); // Prevent default form submission
-                handleOrderNowClick(button.parentElement);
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price" readonly>
+    
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+    
+        <label for="nom">Nom et prénom:</label>
+        <input type="text" id="nom" name="nom" required>
+    
+        <label for="adresse">Adresse:</label>
+        <input type="text" id="adresse" name="adresse" required>
+    
+        <label for="numéro_t">Numéro de téléphone:</label>
+        <input type="text" id="numéro_t" name="numéro_t" required>
+    
+        <!-- Submit Button -->
+        <button type="button" onclick="submitOrder()">Order Now</button>
+    </form>
+    
+    <!-- JavaScript Code -->
+    <script>
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            // Fetch the product data from your backend API or service
+          
+    
+            // Fetch Messenger template data from the server
+            // const response = await fetch('/get-messenger-template'); // Use the correct endpoint
+            // const data = await response.json();
+    
+            // Log the received data for debugging
+            const url = new URL(window.location.href);
+            const query = url.searchParams;
+            console.log(url, query)
+            // Assuming 'data' has the necessary information
+            // const title = data.title || 'Sample Product';
+            // const subtitle = data.subtitle || 'Size: Sample Size\nPrice: $20';
+            // const imageUrl = data.image_url || 'https://example.com/sample-image.jpg';
+    
+            // Populate form fields with the retrieved data
+            document.getElementById('product').value = query.get("product");
+            document.getElementById('size').value = query.get("size"); // Assuming subtitle contains size information
+            document.getElementById('price').value = query.get("price"); // Assuming 'data' has a 'price' property
+    
+            // Log the imageUrl for simplicity
+         //   console.log('Image URL:', imageUrl);
+    
+            // Attach handler to Order Now button
+            const orderButton = document.querySelector('button');
+            orderButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                submitOrder();
             });
         });
-    });
     
+       
     
+        function submitOrder() {
+            // Collect form data
+            const formData = {
+                psid: document.getElementById('psid').value,
+                email: document.getElementById('email').value,
+                nom: document.getElementById('nom').value,
+                adresse: document.getElementById('adresse').value,
+                numéro_t: document.getElementById('numéro_t').value,
+                product: document.getElementById('product').value,
+                size: document.getElementById('size').value,
+                price: document.getElementById('price').value
+            };
     
-</script>
-
+            // Assuming your backend URL
+            const backendUrl = 'https://messenger-app-7fl9.onrender.com/post-order-form';
     
+            fetch(backendUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ formData }),
+            })
+            .then(response => response.json())
+            .then(data_ => {
+                // Handle the response from the backend
+                console.log(data_);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
     <script>
         window.extAsyncInit = async function () {
             console.log('Messenger extensions are ready');

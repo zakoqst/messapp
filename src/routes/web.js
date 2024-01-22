@@ -35,7 +35,8 @@
 const express =require("express")
 // // import express from "express";
 // // import homepageController from "../controllers/homepageController";
-const homepageController =require("../controllers/homepageController")
+const homepageController =require("../controllers/homepageController");
+const sheetService = require("../services/sheetService");
 
 let router = express.Router();
 
@@ -50,12 +51,13 @@ let initWebRoutes = (app)=> {
     // router.get('/get-survey', homepageController.handleGetSurveyPage); //webview
     // router.post('/post-survey', homepageController.handlePostSurvey);
     
-    router.get("/info-order", homepageController.getInfoOrderPage);
+    router.get("/ ", homepageController.getInfoOrderPage);
     router.post('/set-info-order', homepageController.setInfoOrder);
     
     router.get("/get-order-form", homepageController.getOrderProductPage);
     router.post("/post-order-form", homepageController.setInfoOrder);
     
+    router.get("/get-messenger-template", sheetService.getMessengerTemplateData);
 
     return app.use("/",router);
 };

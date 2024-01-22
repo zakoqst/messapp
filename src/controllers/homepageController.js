@@ -354,13 +354,13 @@ let setInfoOrder = async (req, res) => {
 };
 
 module.exports = {
-    getHomePage: getHomePage,
-    getWebhook: getWebhook,
-    postWebhook: postWebhook,
-    handleSetupProfile: handleSetupProfile,
-    getSetupProfilePage: getSetupProfilePage,
-    getInfoOrderPage: getInfoOrderPage,
-    setInfoOrder: setInfoOrder,
-    setProductOrder:setProductOrder,
-    getOrderProductPage:getOrderProductPage
+    getHomePage,
+    getWebhook,
+    postWebhook,
+    handleSetupProfile,
+    getSetupProfilePage,
+    getInfoOrderPage,
+    setInfoOrder,
+    setProductOrder,
+    getOrderProductPage
 };
