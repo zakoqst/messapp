@@ -298,7 +298,8 @@ let sendHeadphonesTemplate = () => {
     };
 };
 
-console.log(sendHeadphonesTemplate);
+// console.log(sendHeadphonesTemplate);
+
 let sendLookupOrderTemplate = () =>{          
     return {
         "attachment":{
@@ -324,42 +325,50 @@ let sendLookupOrderTemplate = () =>{
         }
     };
 };
-
-let sendRecipient= () =>{
-
+function sendRecipient(formData) {
+    // Use the formData object to construct the sendRecipient template
     return {
         "attachment": {
-          "type": "template",
-          "payload": {
-            "template_type": 'receipt',
-            "recipient_name": 'John Doe', // Replace with actual recipient name
-            "order_number": '123456', // Replace with actual order number
-            "currency": 'DA',
-            "payment_method": 'Visa 1234', // Replace with actual payment method
-            "timestamp": Date.now(),
-            "elements": elements,
-            "address": {
-              "street_1": '123 Main St',
-              "city": 'Cityville',
-              "postal_code": '12345',
-              "state": 'CA',
-              "country": 'US',
+            "type": "template",
+            "payload": {
+                "template_type": 'receipt',
+                "recipient_name": formData.nom, // Replace with actual recipient name
+                "order_number": '123456', // Replace with actual order number
+                "currency": 'DA',
+                "payment_method": 'Visa 1234', // Replace with actual payment method
+                "timestamp": Date.now(),
+                "elements": [
+                    {
+                        // Use formData to populate the elements array
+                        "title": formData.product,
+                        "subtitle": `Size: ${formData.size}\nPrice: ${formData.price} DA`,
+                        // Add other necessary fields based on your data structure
+                    }
+                ],
+                "address": {
+                    // Use formData to populate address fields
+                    "street_1": formData.adresse,
+                    "city": 'RéGHAIA',
+                    "postal_code": '12345',
+                    "state": 'ALG',
+                    "country": 'ALG',
+                },
+                "summary": {
+                    // Replace with actual total cost calculation
+                    "subtotal": parseFloat(formData.price),
+                    "shipping_cost": 5,
+                    "total_tax": 5,
+                    "total_cost": parseFloat(formData.price) + 10,
+                },
+                "adjustments": [
+                    {
+                        "name": 'Discount',
+                        "amount": 5,
+                    },
+                ],
             },
-            "summary": {
-              "subtotal": elements.reduce((sum, item) => sum + item.price, 0),
-              "shipping_cost": 5,
-              "total_tax": 5,
-              "total_cost": elements.reduce((sum, item) => sum + item.price, 0) + 10, // Replace with actual total cost calculation
-            },
-            "adjustments": [
-              {
-                "name": 'Discount',
-                "amount": 5,
-              },
-            ],
-          },
         },
-      };
+    };
 }
 
 let senPassOrderTemplate = () =>{
