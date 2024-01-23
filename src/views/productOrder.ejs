@@ -14,11 +14,29 @@
     <script>
         const facebookAppId = "873864850346412";
     </script>
+    <script type="text/javascript" src="/js/MessengerExtenssion.js"></script>
+    
     <script type="text/javascript" src="/js/order.js"></script>
 </head>
 
 <body>
+    
+    
+    
+    <script>
+        window.addEventListener('MessengerExtensionsReady', function () {
+            // Now MessengerExtensions is available
+            const MessengerExtensions = window.MessengerExtensions;
 
+            // Close the browser window when MessengerExtensions is ready
+            MessengerExtensions.requestCloseBrowser(function () {
+                console.log('Window will be closed');
+            }, function (error) {
+                console.log('There is an error');
+                console.log(error);
+            });
+        });
+    </script>
     <!-- Load Facebook Messenger Extensions -->
     <script>
         window.fbMessengerPlugins = window.fbMessengerPlugins || {
@@ -51,162 +69,134 @@
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         }, 0);
+
+
+
+
+
+        
     </script>
+    
 
     <h1>Product Order Form</h1>
     <form id="order_form" action="/post-order-form" method="post">
         <!-- User Information -->
         <input type="text" id="psid" name="psid" hidden>
-    
+
         <!-- Form inputs for product information -->
         <label for="product">Product:</label>
         <input type="text" id="product" name="product" readonly>
-    
+
         <label for="size">Size:</label>
         <input type="text" id="size" name="size" readonly>
-    
+
         <label for="price">Price:</label>
         <input type="text" id="price" name="price" readonly>
-    
+
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
-    
+
         <label for="nom">Nom et prénom:</label>
         <input type="text" id="nom" name="nom" required>
-    
+
         <label for="adresse">Adresse:</label>
         <input type="text" id="adresse" name="adresse" required>
-    
+
         <label for="numéro_t">Numéro de téléphone:</label>
         <input type="text" id="numéro_t" name="numéro_t" required>
-    
+
         <!-- Submit Button -->
         <button type="button" onclick="submitOrder()">Order Now</button>
     </form>
-    
+
     <!-- JavaScript Code -->
-    <script>
-        
-        document.addEventListener("DOMContentLoaded", async () => {
-            // Fetch the product data from your backend API or service
-          
-    
-            // Fetch Messenger template data from the server
-            // Log the received data for debugging
-            
-            // Assuming 'data' has the necessary information
-            // const title = data.title || 'Sample Product';
-            // const subtitle = data.subtitle || 'Size: Sample Size\nPrice: $20';
-            // const imageUrl = data.image_url || 'https://example.com/sample-image.jpg';
-    
-            // Populate form fields with the retrieved data
-            const url = new URL(window.location.href);
-            const id = url.searchParams.get("id");
-            console.log("product.ejs----------------------");
-            const response = await fetch('https://messenger-app-7fl9.onrender.com/get-product/'+id); // Use the correct endpoint
+    <script> async function fetchProduct() {
+        // Fetch product data 
+        try {
+            const response = await fetch('https://messenger-app-7fl9.onrender.com/get-product/1'); // Use the correct endpoint
             const product = await response.json();
 
             console.log(product);
-            
+
             document.getElementById('product').value = product.title;
-            document.getElementById('size').value = product.size; // Assuming subtitle contains size information
-            document.getElementById('price').value = product.price; // Assuming 'data' has a 'price' property
-    
-            // Log the imageUrl for simplicity
-         //   console.log('Image URL:', imageUrl);
-    
-            // Attach handler to Order Now button
+            document.getElementById('size').value = product.size;
+            document.getElementById('price').value = product.price;
+        } catch (error) {
+            console.error('Error fetching product data:', error);
+        }
+    }
+
+    function closeBrowserWindow() {
+        try {
+            const MessengerExtensions = window.MessengerExtensions;
+            if (typeof MessengerExtensions !== 'undefined') {
+                MessengerExtensions.requestCloseBrowser(function () {
+                    console.log('Window will be closed');
+                }, function (error) {
+                    console.log('There is an error');
+                    console.log(error);
+                });
+            } else {
+                console.warn('MessengerExtensions is not defined');
+            }
+        } catch (error) {
+            console.error('Error closing browser window:', error);
+        }
+    }
+
+    window.extAsyncInit = async function () {
+        console.log('Messenger extensions are ready');
+
+        await fetchProduct();
+
+        try {
+            const thread_context = await MessengerExtensions.getContext(facebookAppId);
+            console.log(thread_context);
+            const userPSID = thread_context.psid;
+            document.getElementById("psid").value = userPSID;
+
+            // Move the event listener assignment inside extAsyncInit
             const orderButton = document.querySelector('button');
             orderButton.addEventListener('click', (event) => {
                 event.preventDefault();
                 submitOrder();
             });
-        });
-    
-       
-    
-        function submitOrder() {
-            // Collect form data
-            const formData = {
-                psid: document.getElementById('psid').value,
-                email: document.getElementById('email').value,
-                nom: document.getElementById('nom').value,
-                adresse: document.getElementById('adresse').value,
-                numéro_t: document.getElementById('numéro_t').value,
-                product: document.getElementById('product').value,
-                size: document.getElementById('size').value,
-                price: document.getElementById('price').value
-            };
-    
-            // Assuming your backend URL
-            const backendUrl = 'https://messenger-app-7fl9.onrender.com/post-order-form';
-    
-            fetch(backendUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ formData }),
-            })
+
+        } catch (error) {
+            console.error('Error initializing Messenger extensions:', error);
+        }
+    }
+
+    function submitOrder() {
+        const formData = {
+            psid: document.getElementById('psid').value,
+            email: document.getElementById('email').value,
+            nom: document.getElementById('nom').value,
+            adresse: document.getElementById('adresse').value,
+            numéro_t: document.getElementById('numéro_t').value,
+            product: document.getElementById('product').value,
+            size: document.getElementById('size').value,
+            price: document.getElementById('price').value
+        };
+
+        const backendUrl = 'https://messenger-app-7fl9.onrender.com/post-order-form';
+
+        fetch(backendUrl, {
+            method: 'POST',
+            body: new FormData(document.getElementById('order_form')),
+        })
             .then(response => response.json())
             .then(data_ => {
-                // Handle the response from the backend
                 console.log(data_);
+                // Close the browser window after successful order submission
+                closeBrowserWindow();
             })
             .catch(error => {
                 console.error('Error:', error);
             });
-        }
+    }
     </script>
-    <script>
-        window.extAsyncInit = async function () {
-            console.log('Messenger extensions are ready');
 
-            try {
-                const thread_context = await new Promise((resolve, reject) => {
-                    MessengerExtensions.getContext(facebookAppId,
-                        function success(thread_context) {
-                            resolve(thread_context);
-                        },
-                        function error(err) {
-                            reject(err);
-                        }
-                    );
-                });
-
-                console.log(thread_context);
-                const userPSID = thread_context.psid;
-                document.getElementById("psid").value = userPSID;
-
-                $("#order_form").submit(async function (event) {
-                    event.preventDefault();
-                    const data = {
-                        psid: userPSID,
-                        name: $("#name").val(),
-                        email: $("#email").val(),
-                        product: $("#product").val(),
-                        quantity: $("#quantity").val(),
-                        comments: $("#comments").val()
-                    };
-
-                    try {
-                        await $.post(`${window.location.origin}/set-product-order`, data);
-                        MessengerExtensions.requestCloseBrowser(function () {
-                            console.log('Window will be closed');
-                        }, function (error) {
-                            console.log('There is an error');
-                            console.log(error);
-                        });
-                    } catch (error) {
-                        console.error('Error submitting data:', error);
-                    }
-                });
-
-            } catch (error) {
-                console.error('Error initializing Messenger extensions:', error);
-            }
-        }
-    </script>
 </body>
 
 </html>
