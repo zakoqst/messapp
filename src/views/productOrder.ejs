@@ -152,15 +152,22 @@
         try {
             const thread_context = await MessengerExtensions.getContext(facebookAppId);
             console.log(thread_context);
-            const userPSID = thread_context.psid;
-            document.getElementById("psid").value = userPSID;
 
-            // Move the event listener assignment inside extAsyncInit
-            const orderButton = document.querySelector('button');
-            orderButton.addEventListener('click', (event) => {
-                event.preventDefault();
-                submitOrder();
-            });
+            if (thread_context && thread_context.psid) {
+                const userPSID = thread_context.psid;
+                document.getElementById("psid").value = userPSID;
+
+                // Move the event listener assignment inside extAsyncInit
+                const orderButton = document.querySelector('button');
+                orderButton.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    submitOrder();
+                });
+            } else {
+                console.warn('Thread context or psid is undefined');
+            }
+            
+           
 
         } catch (error) {
             console.error('Error initializing Messenger extensions:', error);
