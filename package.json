@@ -33,6 +33,7 @@
     "googleapis": "^131.0.0",
     "http": "^0.0.1-security",
     "http-proxy": "^1.18.1",
+    "http-proxy-middleware": "^2.0.6",
     "nodemon": "^3.0.3",
     "parse": "^4.3.1",
     "request": "^2.88.2",

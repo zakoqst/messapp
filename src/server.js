@@ -3,26 +3,9 @@ const express = require("express");
 const configViewEngine = require("./config/viewEngine");
 const initWebRoutes = require("./routes/web");
 const bodyParser = require("body-parser");
-const cors = require("cors");
-const http = require('http');
-const httpProxy = require('http-proxy');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
-const proxy = httpProxy.createProxyServer({});
 const app = express();
-app.use(express.static('public', {
-  extensions: ['html', 'htm', 'txt', 'js']
-}));
-// Enable CORS for specific routes
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://helpful-daily-lemur.ngrok-free.app');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
-  });
-
-// Enable global CORS for all routes
-app.use(cors());
 
 // Config body-parser to post data
 app.use(bodyParser.json());
@@ -34,31 +17,18 @@ configViewEngine(app);
 // Config web routes
 initWebRoutes(app);
 
-// // Handle proxy requests
-// app.use((req, res, next) => {
-//   // Your logic for deciding whether to proxy the request or handle it locally
-//   const shouldProxy = true;
+// Use the http-proxy-middleware to proxy requests to Facebook SDK
+app.use('/plugins/customer_chat', createProxyMiddleware({
+  target: 'https://www.facebook.com',
+  changeOrigin: true,
+  headers: {
+    'Access-Control-Allow-Origin': 'http://localhost:8080',
+    'Access-Control-Allow-Credentials': true,
+  },
+}));
 
-//   if (shouldProxy) {
-//     // Proxy the request
-//     proxy.web(req, res, { target: 'http://localhost:8080/get-messenger-template' });
-//   } else {
-//     // Handle the request locally
-//     // Your local logic goes here
-//     next();
-//   }
-// });
-
-// // Error handling for proxy requests
-// proxy.on('error', (err, req, res) => {
-//   res.writeHead(500, {
-//     'Content-Type': 'text/plain'
-//   });
-//   res.end('Proxy Error');
-// });
-
-let port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
-    console.log(`Messenger bot is running at the port ${port}`);
+  console.log(`Messenger bot is running at the port ${port}`);
 });
