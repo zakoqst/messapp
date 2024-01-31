@@ -46,6 +46,14 @@ let initWebRoutes = (app)=> {
     router.get("/webhook", homepageController.getWebhook);
     router.post("/webhook", homepageController.postWebhook);
     router.post("/set-up-profile", homepageController.handleSetupProfile);
+    router.post('/hook', (req, res) => {
+        // Log the incoming data to the console
+        console.log('Webhook Received:', req.body);
+      
+        // Respond to the incoming request
+        res.status(200).send('Webhook received successfully.');
+      });
+      
         // router.post('/setup', homepageController.handleSetupInfor); //set up the persistent menu & get started button
     router.get("/set-up-profile", homepageController.getSetupProfilePage);
     // router.get('/get-survey', homepageController.handleGetSurveyPage); //webview
