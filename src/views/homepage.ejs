@@ -76,3 +76,93 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+$session.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+$session.Cookies.Add((New-Object System.Net.Cookie("visitorId", "797ff8e0-cbf0-4a3d-a079-86319577abe6", "/", ".manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("mc_lp_analytics_allowed", "true", "/", ".manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("_fbp", "fb.1.1705696099666.539947144", "/", ".manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("_hjSessionUser_959213", "eyJpZCI6ImJmM2VkMWYyLWRmMzctNThjNy04NzRkLTMwMjQ4N2EyMDYxMCIsImNyZWF0ZWQiOjE3MDU2OTYwOTk5OTIsImV4aXN0aW5nIjp0cnVlfQ==", "/", ".manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("mchtClientId", "797ff8e0-cbf0-4a3d-a079-86319577abe6", "/", ".manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("intercom-device-id-bt6uj1lk", "ca2690f0-58bb-4b64-81b0-246a9cf3bb96", "/", ".manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("NPS_2c18fff6_last_seen", "1705698299723", "/", "manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("mc_old_accounts_questionnaire_show_counter-164245683449375", "2", "/", "manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("_hjSessionUser_2533088", "eyJpZCI6IjA1YzcxMWFiLTY1NjMtNTgwZi05NjJjLTc4M2FjZGY4ODRhOSIsImNyZWF0ZWQiOjE3MDU5OTkxNzIwMzUsImV4aXN0aW5nIjp0cnVlfQ==", "/", ".manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("__ddg1_", "vKHO4g2tjHN1S3ABIKyM", "/", ".manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("mc_old_accounts_questionnaire_show_counter-102972546066790", "1", "/", "manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("mc_old_accounts_questionnaire_show_counter-209240648941071", "1", "/", "manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("_ga_BB8728WKW2", "GS1.1.1706476288.6.0.1706476288.60.0.0", "/", ".manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("_ga_KKCYW207HG", "GS1.1.1706476288.6.0.1706476288.60.0.0", "/", ".manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("_gid", "GA1.2.1667498921.1706606316", "/", ".manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("_ga_NWMMHP97RW", "GS1.1.1706615617.1.0.1706615621.56.0.0", "/", ".manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("fblo_532160876956612", "y", "/", "manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("NPS_2c18fff6_throttle", "1706730486175", "/", "manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("_ga_VGZ9EKDJD9", "GS1.1.1706696773.20.0.1706696773.60.0.0", "/", ".manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("_ga", "GA1.2.777000413.1705696093", "/", ".manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("_hjSession_959213", "eyJpZCI6IjJkN2QxMDhlLWZmZTgtNDVhMS1hNzNmLTIxNTdkM2Y0ZDY1YyIsImMiOjE3MDY3MDc4ODAwNjIsInMiOjAsInIiOjAsInNiIjowLCJzciI6MCwic2UiOjEsImZzIjowLCJzcCI6MX0=", "/", ".manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("mc_production-main", "bqkpjg7vis6qv05d8j14fb82ia", "/", ".manychat.com")))
+$session.Cookies.Add((New-Object System.Net.Cookie("intercom-session-bt6uj1lk", "bWdyNHBLZXh5ZmJodjhiblRsYlU3c0laZ0NtWnZyakF2MDdTNWdpRjdsQVFwenNUSXdOOENhc2dPVXZ4ODRVQy0tWnpTSkdIMkpYSXg0ci8xTHpXWGx6Zz09--659184a91011a4b9eb34796df85495698848652c", "/", ".manychat.com")))
+Invoke-WebRequest -UseBasicParsing -Uri "https://manychat.com/fb164245683449375/accountApps/getAppAction?app_id=210&action_name=generate_webview_2_groups" `
+-WebSession $session `
+-Headers @{
+"authority"="manychat.com"
+  "method"="GET"
+  "path"="/fb164245683449375/accountApps/getAppAction?app_id=210&action_name=generate_webview_2_groups"
+  "scheme"="https"
+  "accept"="*/*"
+  "accept-encoding"="gzip, deflate, br"
+  "accept-language"="fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7,ar;q=0.6"
+  "baggage"="sentry-environment=production,sentry-release=3027457b576f39fffb90e64ff2be808147ce5f25,sentry-public_key=2e97b4daccb443d4aa97ccedea318be3,sentry-trace_id=56da8d9d93cb45cd92a91f193bbe434a"
+  "referer"="https://manychat.com/fb164245683449375/cms/files/22820185--22820188--content20240130070151_763147/edit"
+  "sec-ch-ua"="`"Not A(Brand`";v=`"99`", `"Google Chrome`";v=`"121`", `"Chromium`";v=`"121`""
+  "sec-ch-ua-mobile"="?0"
+  "sec-ch-ua-platform"="`"Windows`""
+  "sec-fetch-dest"="empty"
+  "sec-fetch-mode"="cors"
+  "sec-fetch-site"="same-origin"
+  "sentry-trace"="56da8d9d93cb45cd92a91f193bbe434a-ae56f7e13f054f41-0"
+  "x-csrf-token"="d2f4d12a977c23a185af"
+  "x-frontend-bundle"="25284"
+  "x-requested-with"="XMLHttpRequest"
+}
